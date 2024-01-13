@@ -1,3 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.smhrd.mapper.ArtworksMapper"></mapper>
+<mapper namespace="kr.smhrd.mapper.ArtworksMapper">
+<insert id="artRegi" parameterType="kr.smhrd.entity.Artworks">
+insert into ARTWORKS (user_email, category_seq, aw_name, aw_price, aw_type) values (#{user_email}, #{category_seq}, #{aw_name}, #{aw_price}, #{aw_type})
+</insert>
+
+<select id="getAwSeq" parameterType="kr.smhrd.entity.Artworks" resultType="int">
+select aw_seq from ARTWORKS where user_email=#{user_email} and category_seq=#{category_seq} and aw_name=#{aw_name} and aw_price=#{aw_price} and aw_type = #{aw_type}
+</select>
+
+<insert id="imgRegi" parameterType="kr.smhrd.entity.IMAGES">
+insert into IMAGES (aw_seq, img_filename, img_rgb, img_type, aw_desc) values (#{aw_seq}, #{img_filename}, #{img_rgb}, #{img_type}, #{aw_desc})
+</insert>
+
+<insert id="auctionRegi" parameterType="kr.smhrd.entity.AUCTIONS">
+insert into AUCTIONS (aw_seq, auc_ended_at) values (#{aw_seq}, #{auc_ended_at})
+</insert>
+
+<update id="auctionUpdate" parameterType="int">
+update ARTWORKS set aw_status='경매' where aw_seq = #{aw_seq}
+</update>
+
+<select id="getimges" parameterType="kr.smhrd.entity.Artworks" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where aw_seq = #{aw_seq}
+</select>
+
+</mapper>
