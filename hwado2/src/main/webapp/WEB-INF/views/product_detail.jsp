@@ -1,3 +1,7 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.smhrd.entity.IMAGES"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.smhrd.entity.Artworks"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -173,26 +177,26 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     
                 </script>
 
+<!-- 데이터 가져오기 -->
+<%
+	Artworks art = (Artworks)request.getAttribute("art");
+	List<IMAGES> images = (List<IMAGES>)request.getAttribute("images");
+	ArrayList<String> similar_img_list = (ArrayList<String>)request.getAttribute("similar_img_list");
+	ArrayList<Artworks> similar_art = (ArrayList<Artworks>)request.getAttribute("similar_art");
+	String savePath= "./resources/artworks";
+%>
+
 <div class="centered-container">
     <section class="product-detail">
         <div class="product-grid">
             <div class="product-image">
-                <img src="/assets/명화/11.jpg" alt="상품 이미지">
+                <img src="<%=savePath+"/"+images.get(0).getImg_filename() %>" alt="상품 이미지">
             </div>
             <div class="product-info">
-                <h1>범인은 파란색 피부를 가진 아저씨</h1><br><br>
-                <h2>작가 - 장 바뎅</h2><br><br>
-                <p class="description">죽는 날까지 하늘을 우러러
-                    한 점 부끄럼이 없기를,
-                    잎새에 이는 바람에도
-                    나는 괴로워했다.
-                    별을 노래하는 마음으로
-                    모든 죽어 가는 것을 사랑해야지
-                    그리고 나한테 주어진 길을
-                    걸어가야겠다.
-                    
-                    오늘 밤에도 별이 바람에 스치운다.</p>
-                <p class="price">가격: ₩00,000</p>
+                <h1><%=art.getAw_name() %></h1><br><br>
+                <h2>작가 - <%=art.getUser_email() %></h2><br><br>
+                <p class="description"><%=images.get(0).getAw_desc() %></p>
+                <p class="price">가격: ₩<%=art.getAw_price() %></p>
                 <button class="buy-button">구매하기</button>
                 <button class="cart-button">장바구니에 추가</button>
                 <button class="heart-button"><i class="glyphicon glyphicon-heart-empty"></i></button>
@@ -201,75 +205,29 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         <hr class="separator">
         <p class="cart_name" style="font-size: 20px;">❝ 범인은 파란색 피부를 가진 아저씨 ❞ 와 유사한 작품들</p>
         <div class="works-gallery">
+        	<% for(int i = 0; i<= similar_img_list.size(); i++){ %>
             <div class="artwork-container">
-                <a>
-                <img src="/assets/명화/1.jpg" alt="Work 1" class="artwork"></a>
-                <div class="artwork-title">소녀</div>
+                <a href="product_detail?aw_seq=<%=similar_art.get(i).getAw_seq() %>">
+                <img src="<%=savePath+"/"+similar_img_list.get(i) %>" alt="Work 1" class="artwork"></a>
+                <div class="artwork-title"><%=similar_art.get(i).getAw_name() %></div>
             </div>
-            <div class="artwork-container">
-                <a>
-                <img src="/assets/명화/16.jpg" alt="Work 2" class="artwork"></a>
-                <div class="artwork-title">두더지</div>
-            </div>
-            <div class="artwork-container">
-
-               <a> <img src="/assets/명화/18.jpg" alt="Work 2" class="artwork"></a>
-                <div class="artwork-title">뒤에 곰돌이 푸</div>
-            </div>
-            <div class="artwork-container">
-                <a> <img src="/assets/명화/14.jpg" alt="Work 2" class="artwork"></a>
-                <div class="artwork-title">코난 범인</div>
-            </div>
-            <div class="artwork-container">
-                <a> <img src="/assets/명화/3.jpg" alt="Work 2" class="artwork"></a>
-                <div class="artwork-title">잠옷입은 소녀</div>
-            </div>
+            <%} %>
            
             </div>
         <hr class="separator">
         <p class="cart_name">상세 이미지</p>
         
         <div class="detailed-images">
+        
+        <% if(images.size()>=2){
+        	for(int i = 1; i<images.size(); i++){ 	%>
+        
             <div class="image-desc-container">
-            <img src="/assets/명화/12.jpg" alt="상세이미지">
-            <h3 class="desc">죽는 날까지 하늘을 우러러
-                한 점 부끄럼이 없기를,
-                잎새에 이는 바람에도
-                나는 괴로워했다.
-                별을 노래하는 마음으로
-                모든 죽어 가는 것을 사랑해야지
-                그리고 나한테 주어진 길을
-                걸어가야겠다.
-                
-                오늘 밤에도 별이 바람에 스치운다.</h3>
+            <img src="<%=savePath+"/"+images.get(i).getImg_filename() %>" alt="상세이미지">
+            <h3 class="desc"><%=images.get(i).getAw_desc() %></h3>
                 </div>
-
-                <div class="image-desc-container">
-            <img src="/assets/명화/13.jpg" alt="상세이미지">
-            <h3 class="desc">죽는 날까지 하늘을 우러러
-                한 점 부끄럼이 없기를,
-                잎새에 이는 바람에도
-                나는 괴로워했다.
-                별을 노래하는 마음으로
-                모든 죽어 가는 것을 사랑해야지
-                그리고 나한테 주어진 길을
-                걸어가야겠다.
-                
-                오늘 밤에도 별이 바람에 스치운다.</h3></div>
-
-                <div class="image-desc-container">
-            <img src="/assets/명화/14.jpg" alt="상세이미지">
-            <h3 class="desc">죽는 날까지 하늘을 우러러
-                한 점 부끄럼이 없기를,
-                잎새에 이는 바람에도
-                나는 괴로워했다.
-                별을 노래하는 마음으로
-                모든 죽어 가는 것을 사랑해야지
-                그리고 나한테 주어진 길을
-                걸어가야겠다.
-                
-                오늘 밤에도 별이 바람에 스치운다.</h3>
-            </div>
+		<%}} %>
+               
         </div>
     </section>
 </div>

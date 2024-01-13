@@ -25,4 +25,20 @@ update ARTWORKS set aw_status='경매' where aw_seq = #{aw_seq}
 select * from IMAGES where aw_seq = #{aw_seq}
 </select>
 
+<select id="artList" resultType="kr.smhrd.entity.Artworks">
+select * from ARTWORKS
+</select>
+
+<select id="imgList" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where img_type='0'
+</select>
+
+<select id="getArt" parameterType="int"  resultType="kr.smhrd.entity.Artworks">
+select * from ARTWORKS where aw_seq=#{aw_seq}
+</select>
+
+<select id="showImg" parameterType="int"  resultType="String">
+select img_filename from IMAGES where aw_seq=#{aw_seq}
+</select>
+
 </mapper>
