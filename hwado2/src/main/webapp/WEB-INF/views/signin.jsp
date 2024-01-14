@@ -31,7 +31,7 @@
 <div class="login-page" ng-app="">
    <div class="login-content login-content-signin" ng-hide="showSignIn">
       <div>
-         <img src="/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
+         <img src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
             style="display: block; margin: 0 auto;">
          <form class="wrapper-box" role="form" ng-submit="login()"
             action="LoginService.do" method="post">
@@ -55,7 +55,7 @@
       <div class="modal-content">
          <span class="close" onclick="closeModal()">&times;</span>
          <!-- 비밀번호 찾기에 관련된 폼 요소들을 추가하세요 -->
-         <img src="/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
+         <img src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
             style="display: block; margin: 0 auto;">
          <form>
             <!-- 비밀번호 찾기에 필요한 입력 필드들을 추가하세요 -->
@@ -79,7 +79,7 @@
    <div id="forgotIdModal" class="modal">
       <div class="modal-content">
          <span class="close" onclick="closeIdModal()">&times;</span> <img
-            src="/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
+            src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
             style="display: block; margin: 0 auto;">
          <form>
             <div class="form-group">
@@ -142,7 +142,7 @@
          ng-show="showSignIn">
          <div>
             <a href="main.html">
-            <img src="/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
+            <img src="resources//assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
                style="display: block; margin: 0 auto;"></a>
                
             <form class="wrapper-box" role="form" ng-submit="register()"

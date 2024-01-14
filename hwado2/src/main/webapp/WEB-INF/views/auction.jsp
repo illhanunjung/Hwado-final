@@ -119,7 +119,7 @@
     <div class="flex-container">
         <div class="top-section">
             <a class="site-title" href="index.html">
-                <img src="assets/img/logo.png" class="logo">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
 
