@@ -23,10 +23,11 @@
 <input type="submit">
 </form>
 
-<form action="product_detail">
-상품 상세 이동
+<form action="auction_page">
+경매 상품 출력 이동
 <input type="submit">
 </form>
+
 
 </body>
 </html>

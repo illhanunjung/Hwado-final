@@ -26,10 +26,18 @@ select * from IMAGES where aw_seq = #{aw_seq}
 </select>
 
 <select id="artList" resultType="kr.smhrd.entity.Artworks">
-select * from ARTWORKS
+select * from ARTWORKS where aw_type='일반'
 </select>
 
 <select id="imgList" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_type='일반')
+</select>
+
+<select id="artAllList" resultType="kr.smhrd.entity.Artworks">
+select * from ARTWORKS
+</select>
+
+<select id="imgAllList" resultType="kr.smhrd.entity.IMAGES">
 select * from IMAGES where img_type='0'
 </select>
 
@@ -39,6 +47,21 @@ select * from ARTWORKS where aw_seq=#{aw_seq}
 
 <select id="showImg" parameterType="int"  resultType="String">
 select img_filename from IMAGES where aw_seq=#{aw_seq}
+</select>
+
+<select id="auctionList" resultType="kr.smhrd.entity.Artworks">
+select * from ARTWORKS where aw_type='경매'
+</select>
+
+<select id="auctionImgList" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_type='경매')
+</select>
+<select id="auctioninfo" resultType="kr.smhrd.entity.AUCTIONS">
+select * from AUCTIONS
+</select>
+
+<select id="getAuction" parameterType="int"  resultType="kr.smhrd.entity.AUCTIONS">
+select * from AUCTIONS where aw_seq=#{aw_seq}
 </select>
 
 </mapper>

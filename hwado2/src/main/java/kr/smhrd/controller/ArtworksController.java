@@ -46,7 +46,7 @@ public class ArtworksController {
 	}
 	
 	
-	//경매 페이지 이동
+	//경매 등록 페이지 이동
 	@RequestMapping("/auction_regi_page")
 	public String auction_regi_page() {
 		return "auction_registration";
@@ -54,16 +54,36 @@ public class ArtworksController {
 	
 	// 일반 작품 출력 페이지 이동
 	@RequestMapping("/product_page")
-	public String product_page( HttpSession session) {
+	public String product_page(@RequestParam(value = "page", defaultValue = "0") int page , Model model) {
 		
 		List<Artworks> artList = mapper.artList();
 		List<IMAGES> imgList = mapper.imgList();
 		
-		session.setAttribute("artList", artList);
-		session.setAttribute("imgList", imgList);
+		model.addAttribute("artList", artList);
+		model.addAttribute("imgList", imgList);
 		
 		System.out.println(artList.size());
 		System.out.println(imgList.size());
+		
+		int maxpage = 0;
+		
+		if (imgList.size() %16 == 0) {
+			maxpage = imgList.size()/16-1;
+		} else {
+			maxpage = imgList.size()/16 ;
+		}
+		
+		System.out.println("maxpage : "+maxpage);
+		System.out.println("page : " + page);
+		if(page < 0) {
+			page = 0;
+		} else if (page > maxpage) {
+			page = maxpage;
+		}
+		
+		System.out.println("page : " + page);
+		
+		model.addAttribute("pageN", page);
 		
 		return "product";
 	}
@@ -290,7 +310,7 @@ public class ArtworksController {
 	
 	// 상품 상세 보기
 	@RequestMapping("/product_detail")
-	public String product_detail(@RequestParam("aw_seq") int aw_seq ,Model model, HttpSession session) {
+	public String product_detail(@RequestParam("aw_seq") int aw_seq ,Model model) {
 		String similar_images = "";
 		System.out.println("성공");
 		Artworks art = mapper.getArt(aw_seq);
@@ -308,7 +328,7 @@ public class ArtworksController {
 	            String serverUrl = "http://211.227.224.159:9001/get_similar_images";
 
 	            // 요청을 위한 JSON 데이터 설정
-	            String jsonData = "{\"query_image_path\": \"C:/eGovFrame-4.0.0/workspace.edu/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/hwado3/resources/artworks/"+images.get(0).getImg_filename()+"\"}";
+	            String jsonData = "{\"query_image_path\": \"C:/eGovFrame-4.0.0/workspace.edu/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/hwado4/resources/artworks/"+images.get(0).getImg_filename()+"\"}";
 
 	            // 연결 생성
 	            URL url = new URL(serverUrl);
@@ -373,26 +393,34 @@ public class ArtworksController {
          
          // 현재 보고 있는 작품 이미지 제거
          ArrayList<String> similar_img_list = new ArrayList<String>();
-         List<Artworks> artList = (List<Artworks>) session.getAttribute("artList");
-     	 List<IMAGES> imgList = (List<IMAGES>) session.getAttribute("imgList");
+         List<Artworks> artList = mapper.artAllList();
+     	 List<IMAGES> imgList = mapper.imgAllList();
         		 
          for(String i : similar_img_all) {
         	 i = i.replace("\"", "");
-        	 int k = 0;
-        	 for(int j = 0; j < showArtImg.size(); j++) {
-        		 if(!i.equals(showArtImg.get(j))) {
-        			 k++;
+        	 
+        	for (IMAGES img : imgList) {
+        		int k = 0;
+        			for(int j = 0; j < showArtImg.size(); j++) {
+	        			 if(!i.equals(showArtImg.get(j))) {
+	            			 k++;
+	            		 }
         		 }
-        		 
-        		 if(k==showArtImg.size()) {
-        			 
-        			 similar_img_list.add(i);
-        		 }
-        		 
-        		 if(similar_img_list.size() == 5) {
-        			 break;
-        		 }
-        	 }
+        		if(k==showArtImg.size() && i.equals(img.getImg_filename())) {
+           			 
+           			 similar_img_list.add(i);
+           		 }
+        		
+        		if(similar_img_list.size() == 5) {
+       			 
+       			 break;
+       		 }
+        	}
+        	 
+        	 if(similar_img_list.size() == 5) {
+    			 
+    			 break;
+    		 }
         	 
          }
          
@@ -402,7 +430,7 @@ public class ArtworksController {
          for(String i : similar_img_list) {
         	 
         	 for(IMAGES img : imgList) {
-        		 if(i.equals(img.getImg_filename())) {
+        		 if(i.equals(img.getImg_filename())) {;
         			 similar_art.add(mapper.getArt(img.getAw_seq()));
         		 }
         		 
@@ -419,4 +447,185 @@ public class ArtworksController {
 		return "product_detail";
 	}
 
+	//경매 페이지 이동
+	@RequestMapping("/auction_page")
+	public String auction_page(@RequestParam(value = "page", defaultValue = "0") int page , Model model) {
+		List<Artworks> auctionList = mapper.auctionList();
+		List<IMAGES> auctionImgList = mapper.auctionImgList();
+		List<AUCTIONS> auctioninfo = mapper.auctioninfo();
+		
+		model.addAttribute("auctionList", auctionList);
+		model.addAttribute("auctionImgList", auctionImgList);
+		model.addAttribute("auctioninfo", auctioninfo);
+		
+		System.out.println(auctionList.size());
+		System.out.println(auctionImgList.size());
+		System.out.println(auctioninfo.size());
+		
+		int maxpage = 0;
+		
+		if (auctionImgList.size() %16 == 0) {
+			maxpage = auctionImgList.size()/16-1;
+		} else {
+			maxpage = auctionImgList.size()/16 ;
+		}
+		
+		System.out.println("maxpage : "+maxpage);
+		System.out.println("page : " + page);
+		if(page < 0) {
+			page = 0;
+		} else if (page > maxpage) {
+			page = maxpage;
+		}
+		
+		System.out.println("page : " + page);
+		
+		model.addAttribute("pageN", page);
+		
+		return "auction";
+	}
+	
+	// 경매 상세 페이지
+	@RequestMapping("/auction_detail")
+	public String auction_detail(@RequestParam("aw_seq") int aw_seq ,Model model) {
+		String similar_images = "";
+		System.out.println("성공");
+		
+		Artworks art = mapper.getArt(aw_seq);
+		model.addAttribute("art", art);
+		
+		// 상품 이미지 불러오기
+		List<IMAGES> images = mapper.getimges(art);
+		model.addAttribute("images", images);
+		
+		// 경매 불러오기
+		AUCTIONS auction = mapper.getAuction(aw_seq);
+		model.addAttribute("auction", auction);
+		
+		
+		
+		// 추천 이미지
+		 try {
+	            // 파이썬 Flask 서버의 URL 지정
+	            String serverUrl = "http://211.227.224.159:9001/get_similar_images";
+
+	            // 요청을 위한 JSON 데이터 설정
+	            String jsonData = "{\"query_image_path\": \"C:/eGovFrame-4.0.0/workspace.edu/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/hwado4/resources/artworks/"+images.get(0).getImg_filename()+"\"}";
+
+	            // 연결 생성
+	            URL url = new URL(serverUrl);
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	            connection.setRequestMethod("POST");
+	            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+	            
+	            connection.setDoOutput(true);
+
+	            // JSON 데이터를 요청에 기록
+	            try (OutputStream os = connection.getOutputStream()) {
+	                byte[] input = jsonData.getBytes(StandardCharsets.UTF_8);
+	                os.write(input, 0, input.length);
+	            }
+	            
+
+	            // 응답 받기
+	            int responseCode = connection.getResponseCode();
+	            if (responseCode == HttpURLConnection.HTTP_OK) {
+	                // 응답 처리
+	                System.out.println("응답: " + connection.getResponseMessage());
+	                
+	             // 응답을 읽어옴
+	                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+	                    String inputLine;
+	                    StringBuilder response = new StringBuilder();
+
+	                    while ((inputLine = in.readLine()) != null) {
+	                        response.append(inputLine);
+	                    }
+
+	                    // 응답 내용 출력
+	                    similar_images = response.toString();
+	                    similar_images = StringEscapeUtils.unescapeJava(similar_images);
+	                    
+	                    
+	                    
+	                }
+	            } else {
+	                System.out.println("HTTP 요청이 오류 코드와 함께 실패했습니다: " + responseCode);
+	            }
+
+	            // 연결 닫기
+	            connection.disconnect();
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		
+		 System.out.println(similar_images);
+         
+         
+		 similar_images = similar_images.split("\\[")[1];
+		 similar_images = similar_images.split("\\]")[0];
+         System.out.println(similar_images);
+         
+         // 비슷한 이미지 20개
+         String[] similar_img_all = similar_images.split(",");
+         
+         // 상세 이미지 최대 3개 가져오기
+         List<String> showArtImg = mapper.showImg(aw_seq);
+         
+         // 현재 보고 있는 작품 이미지 제거
+         ArrayList<String> similar_img_list = new ArrayList<String>();
+         List<Artworks> artList = mapper.artAllList();
+     	 List<IMAGES> imgList = mapper.imgAllList();
+        		 
+         for(String i : similar_img_all) {
+        	 i = i.replace("\"", "");
+        	 
+        	for (IMAGES img : imgList) {
+        		int k = 0;
+        			for(int j = 0; j < showArtImg.size(); j++) {
+	        			 if(!i.equals(showArtImg.get(j))) {
+	            			 k++;
+	            		 }
+        		 }
+        		if(k==showArtImg.size() && i.equals(img.getImg_filename())) {
+           			 
+           			 similar_img_list.add(i);
+           		 }
+        		
+        		if(similar_img_list.size() == 5) {
+       			 
+       			 break;
+       		 }
+        	}
+        	 
+        	 if(similar_img_list.size() == 5) {
+    			 
+    			 break;
+    		 }
+        	 
+         }
+         
+         ArrayList<Artworks> similar_art = new ArrayList<Artworks>();
+         
+         
+         for(String i : similar_img_list) {
+        	 
+        	 for(IMAGES img : imgList) {
+        		 if(i.equals(img.getImg_filename())) {;
+        			 similar_art.add(mapper.getArt(img.getAw_seq()));
+        		 }
+        		 
+        	 }
+         }
+         
+         System.out.println(similar_img_list.size());
+         System.out.println(similar_art.size());
+         
+        
+         model.addAttribute("similar_img_list", similar_img_list);
+        model.addAttribute("similar_art", similar_art);
+		return "auction_detail";
+	}
+	
 }
