@@ -1,0 +1,193 @@
+/* 기본 스타일 및 색상 팔레트 */
+:root {
+    --primary-color: rgba(0,0,0, 0.7); /* 주 색상: 밝은 보라색 */
+    --secondary-color: #FFC107; /* 보조 색상: 밝은 노란색 */
+    --text-color: #333; /* 텍스트 색상: 어두운 회색 */
+    --background-color: #FFF; /* 배경 색상: 흰색 */
+    --font-family: 'Pretendard-Regular'
+}
+
+
+
+/* 아티스트 프로필 컨테이너 */
+.artist-profile-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background: var(--background-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    font-family: 'Pretendard-Regular';
+}
+
+.artist-profile-container:hover {
+    transform: translateY(-10px);
+}
+
+/* 헤더 스타일 */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-title {
+    font-size: 28px;
+    color: var(--primary-color);
+}
+
+.profile-edit-button {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    outline: none;
+    margin-right: 80px;
+}
+
+.profile-edit-button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+
+/* 프로필 이미지 스타일 */
+.profile-picture .profile-img, .profile-picture .profile-initials {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 20px auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+   
+}
+
+.profile-picture{
+    text-align: center;
+}
+
+.profile-information{
+    text-align: center;
+}
+
+.profile-header{
+    text-align: center;
+}
+
+/* 텍스트 스타일 */
+.artist-name {
+    font-size: 22px;
+    margin-top: 10px;
+    color: var(--primary-color);
+}
+
+.artist-email {
+    color: var(--text-color);
+    margin-top: 5px;
+}
+
+.artist-about, .artist-works {
+    
+    text-align: center;
+}
+
+.artist-about{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* 작품 갤러리 스타일 */
+.artist-works .works-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.artist-works .artwork {
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    object-fit: cover;
+}
+
+.artist-works .artwork:hover {
+    transform: scale(1.03);
+}
+
+.artwork-container {
+    text-align: center; /* 이미지와 제목을 중앙에 배치 */
+    margin-bottom: 20px; /* 컨테이너 간 간격 */
+    
+}
+
+.artwork-title {
+    margin-top: 8px; /* 이미지와 제목 간 간격 */
+    font-size: 16px; /* 제목 크기 */
+    color: var(--text-color); /* 제목 색상 */
+}
+
+
+
+
+
+/* 하트 스타일 */
+.heart-button {
+    border: none;
+    background: none;
+    font-size: 24px; /* 아이콘 크기 조정 */
+    cursor: pointer;
+
+}
+
+
+.heart-button:focus {
+    outline: none; /* 버튼 클릭 시 테두리 제거 */
+}
+
+/* 채워진 하트 스타일 */
+.heart-button.filled {
+    color: red;
+}
+
+.artwork-display {
+    display: grid;
+    align-items: center; /* 세로 축 중앙 정렬 */
+    justify-content: center; /* 요소들을 양 끝에 배치 */
+    /* 요소 사이의 간격 설정 */
+}
+
+.artwork-display2 {
+    display: flex;
+    align-items: center; /* 세로 축 중앙 정렬 */
+    justify-content: center; /* 요소들을 양 끝에 배치 */
+    margin-top: 20px;
+
+    /* 요소 사이의 간격 설정 */
+}
+
+
+.exhibit-btn {
+    padding: 10px 20px; /* 버튼 크기 조정 */
+    background-color: transparent;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.exhibit-btn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+

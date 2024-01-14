@@ -1,0 +1,193 @@
+/* 메인 컨테이너 스타일링: 플렉스, 세로 중앙 정렬, 최소 높이 설정, 배경색, 패딩 */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* 화면 높이만큼의 최소 높이 */
+  background-color: #f3f4f6; /* 회색 배경색 */
+  padding: 1.5rem; /* 모든 방향에 대한 패딩 */
+}
+
+/* 콘텐츠 그리드 스타일링: 그리드 레이아웃, 단일 열, 간격, 최대 너비, 자동 마진, 패딩 */
+.content-grid {
+  display: grid;
+  width: 1700px;
+  height: 3000px;
+  grid-template-columns: repeat(1, 1fr); /* 단일 열 */
+  gap: 1.5rem; /* 항목 간 간격 */
+  max-width: 300rem; /* 최대 너비 */
+  margin: 0 auto; /* 수평 중앙 정렬 */
+  padding: 1.5rem; /* 패딩 */
+}
+
+/* 미디어 쿼리: 너비 768px 이상일 때 그리드 열과 간격 변경 */
+@media (min-width: 768px) {
+  .content-grid {
+    grid-template-columns: repeat(5, 1fr); /* 5열 그리드 */
+    gap: 2rem; /* 간격 증가 */
+  }
+}
+
+/* 카테고리 열 스타일링: 그리드 열 지정 */
+.category-column {
+  grid-column: span 1 / span 1; /* 한 열 차지 */
+}
+
+/* 미디어 쿼리: 너비 1024px 이상일 때 카테고리 열 스타일 유지 */
+@media (min-width: 1024px) {
+  .category-column {
+    grid-column: span 1 / span 1; /* 한 열 차지 */
+  }
+}
+
+/* 카테고리 컨테이너 스타일링: 플렉스, 세로 정렬, 항목 간 간격 */
+.category-container {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* 항목 간 간격 */
+}
+
+/* 카테고리 제목 스타일링: 굵은 글씨, 크기, 중앙 정렬 */
+.category-title {
+  font-weight: 600; /* 굵은 글씨 */
+  font-size: 2.5rem; /* 크기 */
+  text-align: center; /* 중앙 정렬 */
+}
+
+/* 미디어 쿼리: 너비 768px 이상일 때 카테고리 제목 글꼴 크기 변경 */
+@media (min-width: 768px) {
+  .category-title {
+    font-size: 2.5rem; /* 크기 증가 */
+  }
+}
+
+/* 카테고리 카드 및 아트워크 카드 스타일링: 모서리 둥글게, 테두리, 배경색, 글자색, 그림자 */
+.category-card,
+.artwork-card {
+  border-radius: 0.5rem; /* 둥근 모서리 */
+  border: 1px solid; /* 테두리 */
+  background-color: #ffffff; /* 배경색 */
+  color: #ffffff; /* 글자색 */
+  box-shadow: #ffffff; /* 그림자 */
+}
+
+/* 카드 콘텐츠 스타일링: 패딩 */
+.card-content {
+  padding: 1.5rem; /* 패딩 */
+}
+
+/* 카테고리 리스트 스타일링: 상단 여백 */
+.category-list {
+  margin-top: 0.5rem; /* 상단 여백 */
+}
+
+/* 카테고리 항목 스타일링: 테두리, 패딩, 둥근 모서리 */
+.category-item {
+  position: relative;
+  right: 15%;
+  border: 1px solid; /* 테두리 */
+  padding: 0.5rem; /* 패딩 */
+  border-radius: 0.375rem; /* 둥근 모서리 */
+}
+
+/* 카테고리 링크 스타일링: 글꼴 크기, 굵기 */
+.category-link {
+  font-size: 1.5rem; /* 글꼴 크기 */
+  font-weight: 500; /* 굵은 글씨 */
+}
+
+/* 갤러리 열 스타일링: 그리드 열 지정 */
+.gallery-column {
+  grid-column: span 4 / span 4; /* 네 열 차지 */
+}
+
+/* 미디어 쿼리: 너비 1024px 이상일 때 갤러리 열 스타일 유지 */
+@media (min-width: 1024px) {
+  .gallery-column {
+    grid-column: span 4 / span 4; /* 네 열 차지 */
+  }
+}
+
+/* 갤러리 헤더 스타일링: 플렉스, 상단 정렬, 항목 간 간격 */
+.gallery-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem; /* 항목 간 간격 */
+}
+
+/* 갤러리 제목 스타일링: 굵은 글씨, 크기 */
+.gallery-title {
+  font-weight: 600; /* 굵은 글씨 */
+  font-size: 1.125rem; /* 크기 */
+}
+
+/* 미디어 쿼리: 너비 768px 이상일 때 갤러리 제목 글꼴 크기 변경 */
+@media (min-width: 768px) {
+  .gallery-title {
+    font-size: 2.5rem; /* 크기 증가 */
+  }
+}
+
+/* 아트워크 그리드 스타일링: 그리드 레이아웃, 단일 열, 간격 */
+.artwork-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 단일 열 */
+  gap: 1.5rem; /* 항목 간 간격 */
+  margin-top: 2rem; /* 상단 마진 */
+  margin-bottom: 2rem; /* 하단 마진 */
+}
+
+/* 미디어 쿼리: 너비 768px 이상일 때 아트워크 그리드 열 변경 */
+@media (min-width: 768px) {
+  .artwork-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4열 그리드 */
+  }
+}
+
+/* 아트워크 이미지 스타일링: 크기, 오브젝트 피팅, 둥근 모서리 */
+.artwork-image {
+  width: 300px; /* 너비 */
+  height: 300px; /* 높이 */
+  object-fit: cover; /* 커버 맞춤 */
+  border-radius: 0.375rem; /* 둥근 모서리 */
+}
+
+/* 아트워크 정보 스타일링: 상단 여백 */
+.artwork-info {
+  margin-top: 0.5rem; /* 상단 여백 */
+}
+
+/* 아트워크 제목 스타일링: 굵은 글씨, 크기 */
+.artwork-title {
+  font-weight: 600; /* 굵은 글씨 */
+  font-size: 1.7rem; /* 크기 */
+}
+
+/* 아티스트 이름 , 아트워트 가격 스타일링: 글꼴 크기, 색상 */
+.artist-name, .artwork-price {
+    margin-top: 0; /* 마진 제거 */
+    font-size: 1.4rem; /* 글꼴 크기 */
+    color: #6b7280; /* 색상 */
+}
+.heart-button {
+    color: rgba(0, 0, 0, 0.3);
+    border: none;
+    background: none;
+    font-size: 24px; /* 아이콘 크기 조정 */
+    cursor: pointer;
+    margin-top: 20px; /* 상단에 여백 추가 */
+    margin-left: -10px; /* 왼쪽으로 조금 이동 */
+}
+
+
+
+.heart-button:focus {
+    outline: none; /* 버튼 클릭 시 테두리 제거 */
+}
+
+/* 채워진 하트 스타일 */
+.heart-button.filled {
+    color: red;
+}

@@ -1,0 +1,98 @@
+.exhibition-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.88);
+}
+
+.artwork-image img {
+    padding-top: 150px;
+    max-width: 100%;
+    height: auto;
+}
+
+.artwork-info {
+    margin-left: 20px;
+}
+
+
+
+.glyphicon-menu-left, .glyphicon-menu-right {
+    border: none;
+    background: transparent;
+    font-size: 45px; /* 아이콘 크기 조정 */
+    cursor: pointer;
+    color: white;
+    padding: 100px;
+    position: relative;
+    top: 70px;
+}
+
+/* 추가적인 스타일링 필요 */
+body{
+   
+    width: auto;
+    height: auto;
+}
+
+.slider-container {
+    padding-top: 100px !important;
+    width: 100%;
+    overflow: hidden; /* 슬라이더 밖의 이미지 숨기기 */
+    background-color: rgba(0, 0, 0, 0.88);
+}
+
+.artist_info{
+    
+    font-size: 30px;
+    color: white;
+    position: relative;
+    text-align: center;
+    padding-top: 50PX;
+    background-color: rgba(0, 0, 0, 0.88) ;
+    font-family: 'Pretendard-Regular';
+    
+   
+}
+
+.back_returns{
+    position: relative;
+    text-align: right;
+    color: white;
+    font-size: 15px;
+    background-color: rgba(0, 0, 0, 0.88) ;
+    padding-right: 50px;
+    padding-top: 50px;
+    font-family: 'Pretendard-Regular';
+    
+}
+
+
+.image-slider img {
+    width: 200px;
+    height: 300px;
+    display: block;
+    margin-right: 30px;
+    object-fit: cover;
+    border-radius: 2%;
+}
+
+
+.artwork-title{
+    font-family: 'Pretendard-Regular';
+    color: white;
+    font-size: 50px;
+    padding-top: 10px;
+    position: relative;
+    text-align: center;
+}
+
+
+.artwork-description{
+    font-family: 'Pretendard-Regular';
+    padding-top: 20px;
+    padding-bottom: 200px;
+    font-size: 25px;
+    position: relative;
+    text-align: center;
+}

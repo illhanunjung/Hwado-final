@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>로그인/회원가입 페이지</title>
-<link rel="stylesheet" type="text/css" href="/assets/css/signin.css">
+<link rel="stylesheet" type="text/css" href="resources/assets/css/signin.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <!-- External JavaScript -->
@@ -16,7 +16,7 @@
 
 <style>
 .login-page {
-    background-image: url('/assets/img/background.png');
+    background-image: url('resources/assets/img/land5.jpg');
     background-size: cover; /* 이미지를 화면에 맞게 조절 */
     background-repeat: no-repeat; /* 이미지 반복 없이 한 번만 표시 */
     background-position: center;

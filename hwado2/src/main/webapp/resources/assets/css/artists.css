@@ -1,0 +1,70 @@
+.container{
+    font-family: 'Pretendard-Regular';
+}
+
+
+.text-left{
+font-family: 'Pretendard-Regular';
+    font-size: 10px;
+    margin-left: 100px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    color: rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+
+.img-res{
+    border-radius: 2%;
+}
+
+.artistName1{
+ font-family: 'Pretendard-Regular';
+    font-size: 30px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+
+    margin-top: 50px;
+}
+
+
+
+/* 하트 스타일 */
+.heart-button {
+    border: none;
+    background: none;
+    font-size: 24px; /* 아이콘 크기 조정 */
+    cursor: pointer;
+    align-items: center;
+    
+}
+
+
+.heart-button:focus {
+    outline: none; /* 버튼 클릭 시 테두리 제거 */
+}
+
+/* 채워진 하트 스타일 */
+.heart-button.filled {
+    color: red;
+}
+
+.artwork-display {
+    display: grid;
+    align-items: center; /* 세로 축 중앙 정렬 */
+    justify-content: center; /* 요소들을 양 끝에 배치 */
+    /* 요소 사이의 간격 설정 */
+}
+
+.artwork-display2 {
+    display: flex;
+    align-items: center; /* 세로 축 중앙 정렬 */
+    justify-content: center; /* 요소들을 양 끝에 배치 */
+    margin-top: 20px;
+
+    /* 요소 사이의 간격 설정 */
+}
+
+
+

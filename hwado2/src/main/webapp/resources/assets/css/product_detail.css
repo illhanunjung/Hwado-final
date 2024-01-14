@@ -1,0 +1,215 @@
+/* 기본 설정 */
+body {
+    font-family: 'Pretendard-Regular';
+    line-height: 1.6;
+    background: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Pretendard-Regular'
+}
+
+.product-detail {
+    background: #fff;
+    width: 80%;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* 그리드 컬럼 비율 조정 */
+    gap: 20px;
+}
+
+.product-image img {
+    width: 100%; /* 이미지 너비 조절 */
+    height: auto;
+    border-radius: 8px;
+}
+
+
+
+/* 버튼 및 기타 스타일은 이전과 동일 */
+
+
+
+
+.product-info{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 50px;
+    width: 80%;
+    height: auto;
+}
+/* 상품 정보 스타일 */
+.product-detail .product-info h1 {
+    color: #333;
+    font-size: 2em;
+}
+
+.product-detail .product-info h2 {
+    color: #777;
+    font-size: 1.2em;
+}
+
+.product-detail .description {
+    margin: 20px 0;
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 150px;
+}
+
+.product-detail .price {
+    color: black;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+/* 버튼 스타일 */
+.product-detail .buy-button, .product-detail .cart-button {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.product-detail .buy-button {
+    background-color: black;
+    color: white;
+}
+
+.product-detail .buy-button:hover {
+    background-color: #45a049;
+}
+
+.product-detail .cart-button {
+    background-color: black;
+    color: white;
+}
+
+.product-detail .cart-button:hover {
+    background-color: #d73833;
+}
+
+/* 상세 이미지 스타일 */
+.product-detail{
+    align-items: center;
+}
+
+.product-detail .detailed-images img {
+    width: 45%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    
+}
+
+
+.cart_name{
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Pretendard-Regular';
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+
+.heart-button {
+    position: absolute;
+    border: none;
+    background: none;
+    font-size: 30px; /* 아이콘 크기 조정 */
+    cursor: pointer;
+   
+}
+
+.heart-button:focus {
+    outline: none; /* 버튼 클릭 시 테두리 제거 */
+}
+
+/* 채워진 하트 스타일 */
+.heart-button.filled {
+    color: red;
+}
+
+
+
+
+.heart-button {
+    margin-left: 10px; /* 버튼과 제목 사이 간격 */
+   
+}
+
+
+
+.detailed-images .image-desc-container {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin-bottom: 20px; /* 각 이미지-설명 컨테이너 사이의 간격 */
+}
+
+.detailed-images img {
+    width: 45%; /* 이미지 너비 */
+    height: auto;
+    margin: 20px auto; /* 상하 마진과 자동 가로 마진으로 중앙 정렬 */
+    display: block; /* 블록 레벨 요소로 설정 */
+    border-radius: 8px;
+}
+
+.desc {
+    /* 설명 글 스타일 (필요에 따라 조정) */
+    margin-top: 30px; /* 이미지와의 간격 */
+    margin-bottom: 100px;
+}
+
+.detailed-images h3{
+    width: 70%;
+    padding-left: 400px;
+    font-size: 20px;
+}
+
+
+
+.works-gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.artwork {
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    object-fit: cover;
+}
+
+.artwork:hover {
+    transform: scale(1.03);
+}
+
+.artwork-container {
+    text-align: center; /* 이미지와 제목을 중앙에 배치 */
+    margin-bottom: 20px; /* 컨테이너 간 간격 */
+    
+}
+
+.artwork-title {
+    margin-top: 8px; /* 이미지와 제목 간 간격 */
+    font-size: 16px; /* 제목 크기 */
+    color: var(--text-color); /* 제목 색상 */
+}
