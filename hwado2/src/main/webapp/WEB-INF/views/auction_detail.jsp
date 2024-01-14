@@ -2,6 +2,7 @@
 <%@page import="kr.smhrd.entity.IMAGES"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.smhrd.entity.Artworks"%>
+<%@page import="kr.smhrd.entity.AUCTIONS"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>상품상세페이지</title>
+    <title>경매상세페이지</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -31,20 +32,20 @@
     <!-- Favicon
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
+    <link rel="icon" type="image/png" sizes="15x15" href="assets/img/logo.png">
 
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="resources/assets/css/product_detail.css" rel="stylesheet">
-    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
-    <link href="resources/assets/css/style.css" rel="stylesheet">
-    <link href="resources/assets/css/responsive.css" rel="stylesheet">
-    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
+    <link href="assets/css/auction_detail.css" rel="stylesheet">
+    <link href="assets/css/font_bold.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
+    <link href="assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -181,6 +182,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <%
 	Artworks art = (Artworks)request.getAttribute("art");
 	List<IMAGES> images = (List<IMAGES>)request.getAttribute("images");
+	AUCTIONS auction = (AUCTIONS)request.getAttribute("auction");
 	ArrayList<String> similar_img_list = (ArrayList<String>)request.getAttribute("similar_img_list");
 	ArrayList<Artworks> similar_art = (ArrayList<Artworks>)request.getAttribute("similar_art");
 	String savePath= "./resources/artworks";
@@ -190,6 +192,56 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 	
 %>
 
+	<script>
+		// 타이머 선언
+
+            function parseDate(dateStr) {
+                let parts = dateStr.split(" ");
+                let dateParts = parts[0].split("-");
+                let timeParts = parts[1].split(":");
+
+                // Date의 월은 0부터 시작하므로 1을 빼줍니다.
+                let year = parseInt(dateParts[0], 10);
+                let month = parseInt(dateParts[1], 10) - 1;
+                let day = parseInt(dateParts[2], 10);
+
+                let hour = parseInt(timeParts[0], 10);
+                let minute = parseInt(timeParts[1], 10);
+                let second = parseInt(timeParts[2], 10);
+
+                return new Date(year, month, day, hour, minute, second);
+            }
+  
+            function updateTimer(timer) {
+               let countDownDate = parseDate(timer.getAttribute('data-countdown'));
+               let now = new Date().getTime();
+               let distance = countDownDate - now;
+
+                if (distance > 0) {
+                	let day = Math.floor((distance / (1000 * 60 * 60 * 24)));
+                	let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                	let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                	let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    timer.innerHTML ="종료 남은 시간: " + day + "일 " + hours + "시간 " + minutes + "분 " + seconds + "초 ";
+                } else {
+                    timer.innerHTML = "타이머 종료";
+                }
+            }
+
+            function updateAllTimers() {
+            	let timers = document.getElementsByClassName("countdown-timer");
+                for (let i = 0; i < timers.length; i++) {
+                    updateTimer(timers[i]);
+                }
+            }
+
+            // 1초마다 모든 타이머 업데이트
+            setInterval(updateAllTimers, 1000);
+
+           
+        </script>
+
 <div class="centered-container">
     <section class="product-detail">
         <div class="product-grid">
@@ -197,11 +249,16 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                 <img src="<%=savePath+"/"+images.get(0).getImg_filename() %>" alt="상품 이미지">
             </div>
             <div class="product-info">
-                <h1><%=art.getAw_name() %></h1><br><br>
+                
+    
+    <h1><%=art.getAw_name() %></h1>
+    
+
                 <h2>작가 - <%=art.getUser_email() %></h2><br><br>
                 <p class="description"><%=images.get(0).getAw_desc() %></p>
-                <p class="price">가격: ₩<%=art.getAw_price() %></p>
-                <button class="buy-button">구매하기</button>
+                <p class="price countdown-timer" data-countdown="<%=auction.getAuc_ended_at()%>"></p>
+                <p class="price">가격: ₩<%=art.getAw_price() %></p><br>
+                <button class="buy-button">입찰하기</button>
                 <button class="cart-button">장바구니에 추가</button>
                 <button class="heart-button"><i class="glyphicon glyphicon-heart-empty"></i></button>
             </div>
@@ -210,31 +267,77 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         <p class="cart_name" style="font-size: 20px;">❝ <%=art.getAw_name() %> ❞ 와 유사한 작품들</p>
         <div class="works-gallery">
         	<% for(int i = 0; i< similar_img_list.size(); i++){  	%>
-	            <div class="artwork-container">
-	                <a href="product_detail?aw_seq=<%=similar_art.get(i).getAw_seq() %>">
-	                <img src="<%=savePath+"/"+similar_img_list.get(i) %>" alt="Work 1" class="artwork"></a>
-	                <div class="artwork-title"><%=similar_art.get(i).getAw_name() %></div>
-	            </div>
+            <div class="artwork-container">
+                <a href="auction_detail?aw_seq=<%=similar_art.get(i).getAw_seq() %>">
+                <img src="<%=savePath+"/"+similar_img_list.get(i) %>" alt="Work 1" class="artwork"></a>
+                <div class="artwork-title"><%=similar_art.get(i).getAw_name() %></div>
+            </div>
             <%} %>
            
             </div>
         <hr class="separator">
         <p class="cart_name">상세 이미지</p>
-        
         <div class="detailed-images">
         
-        <% if(images.size()>1){
+         <% if(images.size()>1){
         	for(int i = 1; i<images.size(); i++){ 	%>
-        
+        	
             <div class="image-desc-container">
-            <img src="<%=savePath+"/"+images.get(i).getImg_filename() %>" alt="상세이미지">
-            <h3 class="desc"><%=images.get(i).getAw_desc() %></h3>
-                </div>
-		<%  }}  %>
-               
+                <img src="<%=savePath+"/"+images.get(i).getImg_filename() %>" alt="상세이미지">
+                <h3 class="desc"><%=images.get(i).getAw_desc() %></h3>
+                    </div>
+    		<%  }}  %>
+                    
         </div>
     </section>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

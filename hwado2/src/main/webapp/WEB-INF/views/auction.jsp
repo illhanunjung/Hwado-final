@@ -1,3 +1,4 @@
+<%@page import="kr.smhrd.entity.AUCTIONS"%>
 <%@page import="kr.smhrd.entity.IMAGES"%>
 <%@page import="kr.smhrd.entity.Artworks"%>
 <%@page import="java.util.List"%>
@@ -7,14 +8,12 @@
 <html lang="en">
 
 <head>
-    <!-- 부트스트랩 아이콘 사용하기 위한 링크 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- Basic Page Needs
     ================================================== -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>작품페이지</title>
+    <title>경매페이지</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -32,19 +31,19 @@
     <!-- Favicon
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
+    <link rel="icon" type="image/png" sizes="15x15" href="assets/img/logo.png">
 
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="resources/assets/css/style.css" rel="stylesheet">
-    <link href="resources/assets/css/responsive.css" rel="stylesheet">
-    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
-    <link rel="stylesheet" type="text/css" href="resources/assets/css/product.css">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
+    <link href="assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/auction.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -161,12 +160,84 @@
 
         </script>
 
+        <script>
+           /*  // 타이머 업데이트 함수
+            function updateTimer(timers, countDownDate) {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
 
+                // 모든 타이머 업데이트
+                for (var i = 0; i < timers.length; i++) {
+                    if (distance > 0) {
+                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+                        timers[i].innerHTML = hours + "시간 " + minutes + "분 " + seconds + "초 ";
+                    } else {
+                        timers[i].innerHTML = "타이머 종료";
+                    }
+                }
+            } */
 
+            // 타이머 요소를 선택하고 종료 시간 설정
+           /*  var timers = document.getElementsByClassName("countdown-timer"); */
+           /*  var countDownDate = new Date().getTime() + 3 * 60 * 60 * 1000; // 현재로부터 3시간 후 */
+           
 
+            // 1초마다 타이머 업데이트
+            /* var interval = setInterval(function () {
+                updateTimer(timers, countDownDate);
+            }, 1000); */
+           
+            function parseDate(dateStr) {
+                let parts = dateStr.split(" ");
+                let dateParts = parts[0].split("-");
+                let timeParts = parts[1].split(":");
 
+                // Date의 월은 0부터 시작하므로 1을 빼줍니다.
+                let year = parseInt(dateParts[0], 10);
+                let month = parseInt(dateParts[1], 10) - 1;
+                let day = parseInt(dateParts[2], 10);
 
+                let hour = parseInt(timeParts[0], 10);
+                let minute = parseInt(timeParts[1], 10);
+                let second = parseInt(timeParts[2], 10);
+
+                return new Date(year, month, day, hour, minute, second);
+            }
+  
+            function updateTimer(timer) {
+               let countDownDate = parseDate(timer.getAttribute('data-countdown'));
+               let now = new Date().getTime();
+               let distance = countDownDate - now;
+               
+               console.log("countDownDate : "+timer.getAttribute('data-countdown'));
+
+                if (distance > 0) {
+                	let day = Math.floor((distance / (1000 * 60 * 60 * 24)));
+                	let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                	let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                	let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    timer.innerHTML =day + "일 " + hours + "시간 " + minutes + "분 " + seconds + "초 ";
+                } else {
+                    timer.innerHTML = "타이머 종료";
+                }
+            }
+
+            function updateAllTimers() {
+            	let timers = document.getElementsByClassName("countdown-timer");
+                for (let i = 0; i < timers.length; i++) {
+                    updateTimer(timers[i]);
+                }
+            }
+
+            // 1초마다 모든 타이머 업데이트
+            setInterval(updateAllTimers, 1000);
+
+           
+        </script>
         <!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
 
         <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
@@ -185,31 +256,6 @@
         </div>
 
         <hr class="separator">
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // 모든 하트 버튼을 선택
-                var heartButtons = document.querySelectorAll('.heart-button');
-
-                // 각 버튼에 대해 이벤트 리스너 추가
-                heartButtons.forEach(function (button) {
-                    button.addEventListener('click', function () {
-                        if (button.classList.contains('filled')) {
-                            // 이미 채워진 하트라면 빈 하트로 변경
-                            button.innerHTML = '<i class="glyphicon glyphicon-heart-empty"></i>';
-                            button.classList.remove('filled');
-                        } else {
-                            // 빈 하트라면 채워진 하트로 변경
-                            button.innerHTML = '<i class="glyphicon glyphicon-heart"></i>';
-                            button.classList.add('filled');
-                        }
-                    });
-                });
-            });
-
-        </script>
-
-
 
         <!-- 메인 컨테이너 시작 -->
         <div class="main-container">
@@ -264,29 +310,30 @@
                     <!-- 아트워크 그리드 시작 -->
                     <div class="artwork-grid">
                     
-                    <!-- 모델에 있는 작품 가져오기 -->
+                    <!-- 데이터 가져오기 -->
                     <%
-                   		List<Artworks> artList = (List<Artworks>) request.getAttribute("artList");
-                    	List<IMAGES> imgList = (List<IMAGES>) request.getAttribute("imgList");
-                    	
-                    	// 저장소 위치
-                    	String savePath = "./resources/artworks";
-                    	
-                    	// 페이지
-                    	int pageN = (int)request.getAttribute("pageN");
-                    	int item = 16;
-                    	
-                    	int start = pageN * item;
-                    	int end = start+item;
-                    	
-                    	if(end > imgList.size()){
-                    		end = imgList.size();
-                    	} else if (end < item){
+	                    List<Artworks> artList = (List<Artworks>) request.getAttribute("auctionList");
+	                	List<IMAGES> imgList = (List<IMAGES>) request.getAttribute("auctionImgList");
+	                	List<AUCTIONS> auctioninfo = (List<AUCTIONS>) request.getAttribute("auctioninfo");
+	                	
+	                	// 저장소 위치
+	                	String savePath = "./resources/artworks";
+	                	
+	                	// 페이지
+	                	int pageN = (int)request.getAttribute("pageN");
+	                	int item = 16;
+	                	
+	                	int start = pageN * item;
+	                	int end = start+item;
+	                	
+	                	if(end > imgList.size()){
+	                		end = imgList.size();
+	                	} else if (end < item){
 	                		end = imgList.size();
 	                	}
-                    	
-                    	System.out.println("start : " + start);
-                    	System.out.println("end : " + end);
+	                	
+	                	System.out.println("start : " + start);
+	                	System.out.println("end : " + end);
                     
                     %>
                     
@@ -295,8 +342,11 @@
                         <div class="artwork-card">
                             <!-- 카드 콘텐츠 시작 -->
                             <div class="card-content">
+                                <h2 class="countdown-title">경매 남은 시간</h2>
+                                <!-- 경매 남은 시간 -->
+                                <div id="countdown" class="countdown-timer" data-countdown="<%=auctioninfo.get(i).getAuc_ended_at()%>"></div>
                                 <!-- 아트워크 이미지 -->
-                                <a href="product_detail?aw_seq=<%=artList.get(i).getAw_seq() %>" alt="상세페이지">
+                                <a href="auction_detail?aw_seq=<%=artList.get(i).getAw_seq() %>" alt="상세페이지">
                                     <img src="<%=savePath+"/"+imgList.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
                                 </a>
                                 <!-- 아트워크 정보 시작 -->
@@ -306,41 +356,23 @@
                                     <!-- 아티스트 이름 -->
                                     <p class="artist-name"><%=artList.get(i).getUser_email() %></p>
                                     <p class="artwork-price"><%=artList.get(i).getAw_price() %></p>
-                                    <button class="heart-button"><i
-                                            class="glyphicon glyphicon-heart-empty"></i></button>
                                 </div> <!-- 아트워크 정보 종료 -->
                             </div> <!-- 카드 콘텐츠 종료 -->
                         </div> <!-- 아트워크 카드 종료 -->
                         
-                        <%} %>
+                    <%} %>
                     </div> <!-- 아트워크 그리드 종료 -->
-                    <!-- 네비게이션 버튼들을 포함하는 컨테이너 -->
                     <div class="navigation-buttons">
-                    		<a href="product_page?page=<%=pageN-1 %>"><button class="nav-button" ><i
-                                class="bi bi-caret-left"></i></button></a>
-                    		<a href="product_page?page=<%=pageN+1 %>"><button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button></a>
                         <!-- 이전 페이지로 이동하는 버튼 -->
-                        <!-- <button class="nav-button" onclick="loadPage('previousPageUrl')"><i
-                                class="bi bi-caret-left"></i></button> -->
+                        <a href="auction_page?page=<%=pageN-1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
                         <!-- 다음 페이지로 이동하는 버튼 -->
-                        <!-- <button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button> -->
+                        <a href="auction_page?page=<%=pageN+1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
                     </div>
                 </div> <!-- 갤러리 열 종료 -->
             </div> <!-- 콘텐츠 그리드 종료 -->
         </div> <!-- 메인 컨테이너 종료 -->
 
-        <script>
-            function loadPage(url) {
-                fetch(url)
-                    .then(response => response.text())
-                    .then(data => {
-                        // 여기서 'content'는 업데이트하고자 하는 페이지의 부분의 ID입니다.
-                        document.getElementById('content').innerHTML = data;
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-            
-        </script>
+
 
 
 
