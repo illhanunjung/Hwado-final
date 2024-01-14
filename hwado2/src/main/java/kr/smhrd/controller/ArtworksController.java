@@ -10,16 +10,21 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mysql.cj.Session;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -33,6 +38,36 @@ public class ArtworksController {
 	
 	@Autowired
 	private ArtworksMapper mapper;
+	
+	// 상품 등록 페이지 이동
+	@RequestMapping("/prd_regi_page")
+	public String prd_regi_page() {
+		return "product_registration";
+	}
+	
+	
+	//경매 페이지 이동
+	@RequestMapping("/auction_regi_page")
+	public String auction_regi_page() {
+		return "auction_registration";
+	}
+	
+	// 일반 작품 출력 페이지 이동
+	@RequestMapping("/product_page")
+	public String product_page( HttpSession session) {
+		
+		List<Artworks> artList = mapper.artList();
+		List<IMAGES> imgList = mapper.imgList();
+		
+		session.setAttribute("artList", artList);
+		session.setAttribute("imgList", imgList);
+		
+		System.out.println(artList.size());
+		System.out.println(imgList.size());
+		
+		return "product";
+	}
+	
 	
 	//일반 상품 등록
 	@RequestMapping("/prd_regi")
@@ -132,7 +167,7 @@ public class ArtworksController {
 		
 		System.out.println("성공");
 		
-		return null;
+		return "Test";
 	}
 	
 	
@@ -250,15 +285,15 @@ public class ArtworksController {
 		
 		System.out.println("성공");
 		
-		return null;
+		return "Test";
 	}
 	
 	// 상품 상세 보기
 	@RequestMapping("/product_detail")
-	public String product_detail(Model model) {
+	public String product_detail(@RequestParam("aw_seq") int aw_seq ,Model model, HttpSession session) {
 		String similar_images = "";
-		
-		Artworks art = new Artworks(2, "admin", 1, "별이 빛나는 밤에", 1000000, "심사대기", "2024-01-12 12:11:32", "일반");
+		System.out.println("성공");
+		Artworks art = mapper.getArt(aw_seq);
 		model.addAttribute("art", art);
 		
 		// 상품 이미지 불러오기
@@ -270,7 +305,7 @@ public class ArtworksController {
 		// 추천 이미지
 		 try {
 	            // 파이썬 Flask 서버의 URL 지정
-	            String serverUrl = "http://211.227.224.159:9000/get_similar_images";
+	            String serverUrl = "http://211.227.224.159:9001/get_similar_images";
 
 	            // 요청을 위한 JSON 데이터 설정
 	            String jsonData = "{\"query_image_path\": \"C:/eGovFrame-4.0.0/workspace.edu/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/hwado3/resources/artworks/"+images.get(0).getImg_filename()+"\"}";
@@ -279,7 +314,7 @@ public class ArtworksController {
 	            URL url = new URL(serverUrl);
 	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 	            connection.setRequestMethod("POST");
-	            connection.setRequestProperty("Content-Type", "application/json");
+	            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 	            
 	            connection.setDoOutput(true);
 
@@ -294,13 +329,10 @@ public class ArtworksController {
 	            int responseCode = connection.getResponseCode();
 	            if (responseCode == HttpURLConnection.HTTP_OK) {
 	                // 응답 처리
-	                // ...
-
-	                // 예를 들어, 콘솔에 응답 출력
 	                System.out.println("응답: " + connection.getResponseMessage());
 	                
 	             // 응답을 읽어옴
-	                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+	                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
 	                    String inputLine;
 	                    StringBuilder response = new StringBuilder();
 
@@ -310,6 +342,7 @@ public class ArtworksController {
 
 	                    // 응답 내용 출력
 	                    similar_images = response.toString();
+	                    similar_images = StringEscapeUtils.unescapeJava(similar_images);
 	                    
 	                    
 	                    
@@ -332,13 +365,56 @@ public class ArtworksController {
 		 similar_images = similar_images.split("\\]")[0];
          System.out.println(similar_images);
          
-         String[] similar_index = similar_images.split(",");
+         // 비슷한 이미지 20개
+         String[] similar_img_all = similar_images.split(",");
          
-        for(String i : similar_index) {
-     	   System.out.println(i);
-        }
+         // 상세 이미지 최대 3개 가져오기
+         List<String> showArtImg = mapper.showImg(aw_seq);
+         
+         // 현재 보고 있는 작품 이미지 제거
+         ArrayList<String> similar_img_list = new ArrayList<String>();
+         List<Artworks> artList = (List<Artworks>) session.getAttribute("artList");
+     	 List<IMAGES> imgList = (List<IMAGES>) session.getAttribute("imgList");
+        		 
+         for(String i : similar_img_all) {
+        	 i = i.replace("\"", "");
+        	 int k = 0;
+        	 for(int j = 0; j < showArtImg.size(); j++) {
+        		 if(!i.equals(showArtImg.get(j))) {
+        			 k++;
+        		 }
+        		 
+        		 if(k==showArtImg.size()) {
+        			 
+        			 similar_img_list.add(i);
+        		 }
+        		 
+        		 if(similar_img_list.size() == 5) {
+        			 break;
+        		 }
+        	 }
+        	 
+         }
+         
+         ArrayList<Artworks> similar_art = new ArrayList<Artworks>();
+         
+         
+         for(String i : similar_img_list) {
+        	 
+        	 for(IMAGES img : imgList) {
+        		 if(i.equals(img.getImg_filename())) {
+        			 similar_art.add(mapper.getArt(img.getAw_seq()));
+        		 }
+        		 
+        	 }
+         }
+         
+         System.out.println(similar_img_list.size());
+         System.out.println(similar_art.size());
+         
         
-        model.addAttribute("similar_index", similar_index);
+         model.addAttribute("similar_img_list", similar_img_list);
+        model.addAttribute("similar_art", similar_art);
 		
 		return "product_detail";
 	}

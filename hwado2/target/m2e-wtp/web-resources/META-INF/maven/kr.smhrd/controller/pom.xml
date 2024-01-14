@@ -185,6 +185,13 @@
 			<artifactId>cos</artifactId>
 			<version>2020.4</version>
 		</dependency>
+		
+		<!-- 플라스크 데이터 인코딩 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.12.0</version>
+		</dependency>
 
 	</dependencies>
 	<build>

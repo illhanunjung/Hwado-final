@@ -29,6 +29,17 @@ public interface ArtworksMapper {
 	// 작품 상세보기 이미지 불러오기
 	public List<IMAGES> getimges(Artworks art);
 
+	// 작품 불러오기
+	public List<Artworks> artList();
+
+	// 작품 이미지 불러오기
+	public List<IMAGES> imgList();
+
+	// 상세 작품 불러오기
+	public Artworks getArt(int aw_seq);
+
+	public List<String> showImg(int aw_seq);
+
 	
 
 
