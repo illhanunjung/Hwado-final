@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,7 +91,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                         <li><a href="artists.html">작가</a></li>
                         <li><a href="contact.html">갤러리</a></li>
                         <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="userSelect">로그인</a></li>
+                        <li><a href="signin">로그인</a></li>
 
                     </ul>
 
