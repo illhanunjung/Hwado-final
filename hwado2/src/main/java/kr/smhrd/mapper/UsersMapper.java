@@ -1,8 +1,11 @@
 package kr.smhrd.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.smhrd.entity.Users;
+import kr.smhrd.entity.WISHLIST;
 
 @Mapper
 public interface UsersMapper {
@@ -11,5 +14,7 @@ public interface UsersMapper {
 	public Users emailCheck(String inputE);
 
 	public Users userSelect(Users users);
+
+	public List<WISHLIST> getWish(Users userLogin);
 
 }
