@@ -685,4 +685,58 @@ public class ArtworksController {
 		}
 		
 	}
+	
+		// 관심 작품 페이지
+		@RequestMapping("/wishPage")
+		public String wishPage(HttpSession session, Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+			Users userLogin = (Users)session.getAttribute("userLogin");
+			List<WISHLIST>wishList = usersMapper.getWish(userLogin.getUser_email());
+			session.setAttribute("wishList", wishList);
+			
+			ArrayList<Artworks> wishArtList = new ArrayList<Artworks>();
+			ArrayList<IMAGES> wishImgList = new ArrayList<IMAGES>();
+			ArrayList<Users> artistList = new ArrayList<Users>();
+			
+			if(wishList != null) {
+				System.out.println("들어옴1");
+				for(WISHLIST wish : wishList) {
+					System.out.println("들어옴2");
+					wishArtList.add(mapper.getArt(wish.getAw_seq()));
+					wishImgList.add(mapper.getWishImg(wish.getAw_seq()));
+				}
+				
+				for(Artworks art : wishArtList) {
+					artistList.add(mapper.getArtist(art.getUser_email()));
+				}
+			}
+			
+			model.addAttribute("wishArtList", wishArtList);
+			model.addAttribute("wishImgList", wishImgList);
+			model.addAttribute("artistList", artistList);
+			
+			int maxpage = 0;
+			
+			if(wishImgList.size() == 0) {
+				maxpage = 0;
+				
+			} else if (wishImgList.size() %16 == 0) {
+				maxpage = wishImgList.size()/16-1;
+			} else {
+				maxpage = wishImgList.size()/16 ;
+			}
+			
+			System.out.println("maxpage : "+maxpage);
+			System.out.println("page : " + page);
+			if(page < 0) {
+				page = 0;
+			} else if (page > maxpage) {
+				page = maxpage;
+			}
+			
+			System.out.println("page : " + page);
+			
+			model.addAttribute("pageN", page);
+			
+			return "favorite_products";
+		}
 }

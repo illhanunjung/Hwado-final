@@ -80,4 +80,8 @@ delete from WISHLIST  where user_email = #{user_email} and aw_seq = #{aw_seq}
 select * from USERS where user_email = #{user_email}
 </select>
 
+<select id="getWishImg" parameterType="int" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where img_type='0' and aw_seq = #{aw_seq}
+</select>
+
 </mapper>

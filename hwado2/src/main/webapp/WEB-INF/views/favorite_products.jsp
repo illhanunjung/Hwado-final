@@ -1,4 +1,12 @@
+<%@page import="kr.smhrd.entity.WISHLIST"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@page import="kr.smhrd.entity.IMAGES"%>
+<%@page import="kr.smhrd.entity.Users"%>
+<%@page import="kr.smhrd.entity.Artworks"%>
+<%@page import="java.util.ArrayList"%>
 <html lang="en">
 
 <head>
@@ -26,20 +34,20 @@
 
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="15x15" href="assets/img/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/favorite_products.css">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/favorite_products.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -172,7 +180,35 @@
 
         <hr class="separator">
 
+<%
+	Users userLogin = (Users)session.getAttribute("userLogin");
+	List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
 
+	ArrayList<Artworks> wishArtList = (ArrayList<Artworks>)request.getAttribute("wishArtList");
+	ArrayList<IMAGES> wishImgList = (ArrayList<IMAGES>)request.getAttribute("wishImgList");
+	ArrayList<Users> artistList = (ArrayList<Users>)request.getAttribute("artistList");
+	
+	String savePath = "./resources/artworks";
+	
+	//페이지
+	int pageN = (int)request.getAttribute("pageN");
+	int item = 16;
+	
+	int start = pageN * item;
+	int end = start+item;
+	
+	if(wishImgList != null){
+		if(end > wishImgList.size()){
+			end = wishImgList.size();
+		} else if (end < item){
+			end = wishImgList.size();
+		}
+	}
+	
+	
+	System.out.println("start : " + start);
+	System.out.println("end : " + end);
+%>
 
 
 
@@ -189,304 +225,33 @@
                     </div> <!-- 갤러리 헤더 종료 -->
                     <!-- 아트워크 그리드 시작 -->
                     <div class="artwork-grid">
+                    <% if(wishImgList != null && wishArtList != null){ 
+                    for(int i = start; i < end; i++){ %>
                         <!-- 아트워크 카드 시작 -->
                         <div class="artwork-card">
                             <!-- 카드 콘텐츠 시작 -->
                             <div class="card-content">
                                 <!-- 아트워크 이미지 -->
                                 <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
+                                    <img src="<%=savePath+"/"+wishImgList.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
                                 </a>
                                 <!-- 아트워크 정보 시작 -->
                                 <div class="artwork-info">
                                     <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
+                                    <h2 class="artwork-title"><%=wishArtList.get(i).getAw_name() %></h2>
                                     <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
+                                    <p class="artist-name"><%=artistList.get(i).getUser_nick() %></p>
+                                    <button class="heart-button filled" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-aw_seq="<%=wishArtList.get(i).getAw_seq() %>"><i class="glyphicon glyphicon-heart"></i></button>
                                 </div> <!-- 아트워크 정보 종료 -->
                             </div> <!-- 카드 콘텐츠 종료 -->
                         </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 다른 아트워크 카드들도 같은 구조로 반복 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
-                                    <img src="./assets/명화/1.jpg" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title">Artwork Title</h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name">Artist Name</p>
-                                    <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        
+                         <%}} %>
+                    </div>   
                     <!-- 네비게이션 버튼들을 포함하는 컨테이너 -->
                     <div class="navigation-buttons">
-                        <!-- 이전 페이지로 이동하는 버튼 -->
-                        <button class="nav-button" onclick="loadPage('previousPageUrl')"><i
-                                class="bi bi-caret-left"></i></button>
-                        <!-- 다음 페이지로 이동하는 버튼 -->
-                        <button class="nav-button" onclick="loadPage('nextPageUrl')"><i
-                                class="bi bi-caret-right"></i></button>
+                        <a href="wishPage?page=<%=pageN-1 %>"><button class="nav-button" ><i
+                                class="bi bi-caret-left"></i></button></a>
+                    		<a href="wishPage?page=<%=pageN+1 %>"><button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button></a>
                     </div>
                 </div> <!-- 갤러리 열 종료 -->
             </div> <!-- 콘텐츠 그리드 종료 -->
@@ -549,6 +314,41 @@
         });
     });
 });
+           
+           
+           function likeTF(buttonElement) {
+               var userEmail = buttonElement.getAttribute('data-user_email');
+               var awSeq = buttonElement.getAttribute('data-aw_seq');
+
+               console.log('User Email:', userEmail);
+               console.log('AW Seq:', awSeq);
+
+               $.ajax({ //json 형식 -> {key : value, key : value}
+					// 어디로 요청할 것인지(요청 url)
+					url : 'whishList',
+					
+					// 요청 데이터
+					data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
+					
+					// 요청 방식
+					type : 'get',
+					
+					// 요청-응답 성공
+					success : function(data){
+						if(data){
+							console.log(data)
+						} else{
+							console.log(data)
+						}
+						
+					},
+					
+					// 요청-응답 실패
+					error : function(){
+						console.log("통신실패")
+					}
+				})
+           }
         </script>
 
 

@@ -9,6 +9,7 @@ import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
+import lombok.NonNull;
 
 @Mapper
 public interface ArtworksMapper {
@@ -71,6 +72,8 @@ public interface ArtworksMapper {
 
 	// 예술가 정보 가져오기
 	public Users getArtist(String user_email);
+
+	public IMAGES getWishImg(@NonNull int aw_seq);
 
 	
 
