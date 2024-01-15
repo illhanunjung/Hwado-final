@@ -44,7 +44,7 @@
     <link href="resources/assets/css/responsive.css" rel="stylesheet">
     <link href="resources/assets/css/mypage1.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
-    <link rel="stylesheet" type="text/css" href="resources/assets/css/product.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/auction.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
