@@ -197,6 +197,8 @@ List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
 	System.out.println(images.size());
 	System.out.println(similar_art.size());
 	
+	Users artist = (Users) request.getAttribute("artist");
+	
 %>
 
 	<script>
@@ -261,7 +263,7 @@ List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
     <h1><%=art.getAw_name() %></h1>
     
 
-                <h2>작가 - <%=art.getUser_email() %></h2><br><br>
+                <h2>작가 - <%=artist.getUser_nick() %></h2><br><br>
                 <p class="description"><%=images.get(0).getAw_desc() %></p>
                 <p class="price countdown-timer" data-countdown="<%=auction.getAuc_ended_at()%>"></p>
                 <p class="price">가격: ₩<%=art.getAw_price() %></p><br>

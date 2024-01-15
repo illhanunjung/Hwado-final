@@ -223,6 +223,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 	Artworks art = (Artworks)request.getAttribute("art");
 	List<IMAGES> images = (List<IMAGES>)request.getAttribute("images");
+	Users artist = (Users)request.getAttribute("artist");
 	ArrayList<String> similar_img_list = (ArrayList<String>)request.getAttribute("similar_img_list");
 	ArrayList<Artworks> similar_art = (ArrayList<Artworks>)request.getAttribute("similar_art");
 	String savePath= "./resources/artworks";
@@ -240,7 +241,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
             </div>
             <div class="product-info">
                 <h1><%=art.getAw_name() %></h1><br><br>
-                <h2>작가 - <%=art.getUser_email() %></h2><br><br>
+                <h2>작가 - <%=artist.getUser_nick() %></h2><br><br>
                 <p class="description"><%=images.get(0).getAw_desc() %></p>
                 <p class="price">가격: ₩<%=art.getAw_price() %></p>
                 <button class="buy-button">구매하기</button>

@@ -76,4 +76,8 @@ insert into WISHLIST (user_email, aw_seq) values (#{user_email}, #{aw_seq})
 delete from WISHLIST  where user_email = #{user_email} and aw_seq = #{aw_seq} 
 </delete>
 
+<select id="getArtist" parameterType="String" resultType="kr.smhrd.entity.Users">
+select * from USERS where user_email = #{user_email}
+</select>
+
 </mapper>

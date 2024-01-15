@@ -33,6 +33,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.smhrd.entity.AUCTIONS;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 import kr.smhrd.mapper.ArtworksMapper;
 import kr.smhrd.mapper.UsersMapper;
@@ -71,6 +72,16 @@ public class ArtworksController {
 		
 		System.out.println(artList.size());
 		System.out.println(imgList.size());
+		
+		ArrayList<Users> artistList = new ArrayList<Users>();
+		
+		for(Artworks art : artList) {
+			artistList.add(mapper.getArtist(art.getUser_email()));
+		}
+		
+		System.out.println(artistList.size());
+		
+		model.addAttribute("artistList", artistList);
 		
 		int maxpage = 0;
 		
@@ -327,7 +338,9 @@ public class ArtworksController {
 		List<IMAGES> images = mapper.getimges(art);
 		model.addAttribute("images", images);
 		
-		
+		// 작가 정보
+		Users artist = mapper.getArtist(art.getUser_email());
+		model.addAttribute("artist", artist);
 		
 		// 추천 이미지
 		 try {
@@ -465,6 +478,14 @@ public class ArtworksController {
 		model.addAttribute("auctionImgList", auctionImgList);
 		model.addAttribute("auctioninfo", auctioninfo);
 		
+		ArrayList<Users> artistList = new ArrayList<Users>();
+		
+		for(Artworks art : auctionList) {
+			artistList.add(mapper.getArtist(art.getUser_email()));
+		}
+		
+		model.addAttribute("artistList", artistList);
+		
 		System.out.println(auctionList.size());
 		System.out.println(auctionImgList.size());
 		System.out.println(auctioninfo.size());
@@ -509,6 +530,9 @@ public class ArtworksController {
 		AUCTIONS auction = mapper.getAuction(aw_seq);
 		model.addAttribute("auction", auction);
 		
+		// 작가 정보
+		Users artist = mapper.getArtist(art.getUser_email());
+		model.addAttribute("artist", artist);
 		
 		
 		// 추천 이미지

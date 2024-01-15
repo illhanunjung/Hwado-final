@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import kr.smhrd.entity.AUCTIONS;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 
 @Mapper
@@ -53,15 +54,23 @@ public interface ArtworksMapper {
 	// 경매 상품 이미지 불러오기
 	public List<IMAGES> auctionImgList();
 
+	// 경매 리스트
 	public List<AUCTIONS> auctioninfo();
 
+	// 경매 정보 가져오기
 	public AUCTIONS getAuction(int aw_seq);
 
+	// 관심 상품 추가
 	public int wishList(WISHLIST wish);
 
+	// 관심 등록 체크
 	public int wishCheck(WISHLIST wish);
 
+	// 관심 작품 제거
 	public int deleteWish(WISHLIST wish);
+
+	// 예술가 정보 가져오기
+	public Users getArtist(String user_email);
 
 	
 

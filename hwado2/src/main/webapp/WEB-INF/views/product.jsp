@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="kr.smhrd.entity.WISHLIST"%>
 <%@page import="kr.smhrd.entity.Users"%>
 <%@page import="kr.smhrd.entity.IMAGES"%>
@@ -312,6 +313,7 @@
                     	// 작품 데이터 불러오기
                    		List<Artworks> artList = (List<Artworks>) request.getAttribute("artList");
                     	List<IMAGES> imgList = (List<IMAGES>) request.getAttribute("imgList");
+                    	ArrayList<Users> artistList = (ArrayList<Users>) request.getAttribute("artistList");
                     	
                     	// 저장소 위치
                     	String savePath = "./resources/artworks";
@@ -348,7 +350,7 @@
                                     <!-- 아트워크 제목 -->
                                     <h2 class="artwork-title"><%=artList.get(i).getAw_name() %></h2>
                                     <!-- 아티스트 이름 -->
-                                    <p class="artist-name"><%=artList.get(i).getUser_email() %></p>
+                                    <p class="artist-name"><%=artistList.get(i).getUser_nick() %></p>
                                     <p class="artwork-price"><%=artList.get(i).getAw_price() %></p>
                                     
 									<% boolean isWished = false; %>
