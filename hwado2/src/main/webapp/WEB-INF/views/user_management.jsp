@@ -219,7 +219,24 @@
 						
 						<tbody class="table-body">
 							<!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->
-						<% List<Users> list = (List<Users>)request.getAttribute("list"); %>
+						<% List<Users> list = (List<Users>)request.getAttribute("list"); 
+						
+						 int pageN = (int)request.getAttribute("pageN");
+	                    	int item = 9;
+	                    	
+	                    	int start = pageN * item;
+	                    	int end = start+item;
+	                    	
+	                    	if(end > list.size()){
+	                    		end = list.size();
+	                    	} else if (end < item){
+		                		end = list.size();
+		                	}
+	                    	
+	                    	System.out.println("start : " + start);
+	                    	System.out.println("end : " + end);
+						
+						%>
 
 							<c:forEach items="${list}" var="users" varStatus="status">
 								<tr class="table-row">
@@ -251,13 +268,8 @@
 			</div>
 			<div class="navigation-buttons">
 				<!-- 이전 페이지로 이동하는 버튼 -->
-				<button class="nav-button" onclick="loadPage('previousPageUrl')">
-					<i class="bi bi-caret-left"></i>
-				</button>
-				<!-- 다음 페이지로 이동하는 버튼 -->
-				<button class="nav-button" onclick="loadPage('nextPageUrl')">
-					<i class="bi bi-caret-right"></i>
-				</button>
+				<a href="user_management?page=<%= pageN - 1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
+    <a href="user_management?page=<%= pageN + 1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
 			</div>
 
 		</main>
