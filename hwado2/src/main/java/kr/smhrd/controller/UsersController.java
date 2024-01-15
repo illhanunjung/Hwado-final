@@ -19,6 +19,11 @@ public class UsersController {
 	@Autowired 
 	private UsersMapper usersMapper;
 	
+	@RequestMapping("/")
+	public String mainPage() {
+		return "main";
+	}
+	
 	@RequestMapping("/signin")
 	public String signin() {
 		return "signin";
