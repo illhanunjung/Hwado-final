@@ -32,12 +32,12 @@
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -123,7 +123,7 @@ function closeSearchPopup() {
 
    
             <a class="site-title">
-                <img src="assets/img/logo.png" class="logo">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         
     
@@ -144,27 +144,27 @@ function closeSearchPopup() {
 
     <hr class="separator">
 
-    <img class="mainback" src="/assets/img/land3.jpg">
+    <img class="mainback" src="resources/assets/img/land3.jpg">
     
     <hr class="separator">
     
     <div class="slider-container">
       <div class="image-slider">
-          <img src="/assets/명화/11.jpg" alt="이미지 1">
-          <img src="/assets/명화/12.jpg" alt="이미지 2">
-          <img src="/assets/명화/13.jpg" alt="이미지 3">
-          <img src="/assets/명화/14.jpg" alt="이미지 1">
-          <img src="/assets/명화/15.jpg" alt="이미지 1">
-          <img src="/assets/명화/16.jpg" alt="이미지 1">
-          <img src="/assets/명화/17.jpg" alt="이미지 1">
-          <img src="/assets/명화/18.jpg" alt="이미지 1">
-          <img src="/assets/명화/1.jpg" alt="이미지 1">
-          <img src="/assets/명화/2.jpg" alt="이미지 1">
-          <img src="/assets/명화/3.jpg" alt="이미지 1">
-          <img src="/assets/명화/4.jpg" alt="이미지 1">
-          <img src="/assets/명화/5.jpg" alt="이미지 1">
-          <img src="/assets/명화/6.jpg" alt="이미지 1">
-          <img src="/assets/명화/7.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/11.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/12.jpg" alt="이미지 2">
+          <img src="resources/assets/명화/13.jpg" alt="이미지 3">
+          <img src="resources/assets/명화/14.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/15.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/16.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/17.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/18.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/1.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/2.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/3.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/4.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/5.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/6.jpg" alt="이미지 1">
+          <img src="resources/assets/명화/7.jpg" alt="이미지 1">
           <!-- 더 많은 이미지를 추가할 수 있습니다 -->
       </div>
   </div>

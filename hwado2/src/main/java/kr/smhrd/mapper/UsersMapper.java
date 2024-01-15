@@ -17,4 +17,10 @@ public interface UsersMapper {
 
 	public List<WISHLIST> getWish(Users userLogin);
 
+	List<Users> user_management();
+
+	void stopUser(String email);
+
+	void unfreezeUser(String email);
+	
 }

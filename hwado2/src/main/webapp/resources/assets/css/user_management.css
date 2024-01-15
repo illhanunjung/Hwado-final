@@ -151,10 +151,15 @@ p {
   /* 기존 스타일 유지 */
   margin-right: 10px; /* 필요에 따라 조절 */
 }
+
 .glyphicon-search{
-  right: 930px;
-  font-size: 24px;
+  position: absolute !important;
+  right: 1380px !important;
+  top: 300px !important;
+  font-size: 24px !important;
 }
+
+
 body {
   font-family: "Pretendard-Regular";
 }

@@ -81,5 +81,39 @@ public class UsersController {
     }
 	
 	
+
+	// 회원관리 페이지로 이동 - 바로 회원관리 수정하는 곳으로 감
+	@RequestMapping("/user_management") 
+	public String user_management(Model model) {
+		List<Users> list = usersMapper.user_management();
+		model.addAttribute("list",list);
+		return "user_management";
+	}
+	
+	
+	// 회원영구정지 시키기
+		@RequestMapping("/stopUser")
+		public String stopUser(@RequestParam("email") String email) {
+			usersMapper.stopUser(email);
+			return "redirect:/user_management";
+		}	
+	
+	// 회원영구정지풀기
+		@RequestMapping("/unfreezeUser")
+		public String unfreezeUser(@RequestParam("email") String email) {
+			usersMapper.unfreezeUser(email);
+			return "redirect:/user_management";
+		}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }//class

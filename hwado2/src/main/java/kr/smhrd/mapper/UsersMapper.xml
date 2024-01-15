@@ -20,4 +20,19 @@
 select * from WISHLIST where user_email = #{user_email}
 </select>
 
+<select id="user_management" resultType="kr.smhrd.entity.Users">
+		select * from USERS where not(user_email='admin')
+	</select>
+	
+	<update id="stopUser" parameterType="String">
+		UPDATE USERS SET user_role = "3" WHERE user_email=#{email}
+	</update>
+	
+	<update id="unfreezeUser" parameterType="String">
+		UPDATE USERS SET user_role = "1" WHERE user_email=#{email}
+	</update>
+
+
+
+
 </mapper>
