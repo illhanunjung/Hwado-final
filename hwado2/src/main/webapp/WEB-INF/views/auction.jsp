@@ -1,3 +1,5 @@
+<%@page import="kr.smhrd.entity.WISHLIST"%>
+<%@page import="kr.smhrd.entity.Users"%>
 <%@page import="kr.smhrd.entity.AUCTIONS"%>
 <%@page import="kr.smhrd.entity.IMAGES"%>
 <%@page import="kr.smhrd.entity.Artworks"%>
@@ -163,34 +165,6 @@
         </script>
 
         <script>
-           /*  // 타이머 업데이트 함수
-            function updateTimer(timers, countDownDate) {
-                var now = new Date().getTime();
-                var distance = countDownDate - now;
-
-                // 모든 타이머 업데이트
-                for (var i = 0; i < timers.length; i++) {
-                    if (distance > 0) {
-                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                        timers[i].innerHTML = hours + "시간 " + minutes + "분 " + seconds + "초 ";
-                    } else {
-                        timers[i].innerHTML = "타이머 종료";
-                    }
-                }
-            } */
-
-            // 타이머 요소를 선택하고 종료 시간 설정
-           /*  var timers = document.getElementsByClassName("countdown-timer"); */
-           /*  var countDownDate = new Date().getTime() + 3 * 60 * 60 * 1000; // 현재로부터 3시간 후 */
-           
-
-            // 1초마다 타이머 업데이트
-            /* var interval = setInterval(function () {
-                updateTimer(timers, countDownDate);
-            }, 1000); */
            
             function parseDate(dateStr) {
                 let parts = dateStr.split(" ");
@@ -314,6 +288,11 @@
                     
                     <!-- 데이터 가져오기 -->
                     <%
+                    
+	                 // 유저정보, 관심 작품 불러오기
+	                	Users userLogin = (Users)session.getAttribute("userLogin");
+	                	List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
+                    
 	                    List<Artworks> artList = (List<Artworks>) request.getAttribute("auctionList");
 	                	List<IMAGES> imgList = (List<IMAGES>) request.getAttribute("auctionImgList");
 	                	List<AUCTIONS> auctioninfo = (List<AUCTIONS>) request.getAttribute("auctioninfo");

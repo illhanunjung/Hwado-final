@@ -35,12 +35,16 @@ import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.WISHLIST;
 import kr.smhrd.mapper.ArtworksMapper;
+import kr.smhrd.mapper.UsersMapper;
 
 @Controller
 public class ArtworksController {
 	
 	@Autowired
 	private ArtworksMapper mapper;
+	
+	@Autowired 
+	private UsersMapper usersMapper;
 	
 	// 상품 등록 페이지 이동
 	@RequestMapping("/prd_regi_page")
@@ -634,7 +638,7 @@ public class ArtworksController {
 	// 관심 등록
 	@ResponseBody
 	@RequestMapping("/whishList")
-	public boolean whishList(@RequestParam("userEmail") String userEmail, @RequestParam("awSeq") int awSeq) {
+	public boolean whishList(@RequestParam("userEmail") String userEmail, @RequestParam("awSeq") int awSeq, HttpSession session) {
 		WISHLIST wish = new WISHLIST(userEmail, awSeq);
 		// 관심 등록 확인
 		int TF = mapper.wishCheck(wish);
@@ -647,7 +651,8 @@ public class ArtworksController {
 			cnt = mapper.wishList(wish);
 		}
 		
-		
+		List<WISHLIST> wishList = usersMapper.getWish(userEmail);
+		session.setAttribute("wishList", wishList);
 		
 		if(cnt >= 0) {
 			return true;

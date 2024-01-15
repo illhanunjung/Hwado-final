@@ -1,3 +1,5 @@
+<%@page import="kr.smhrd.entity.WISHLIST"%>
+<%@page import="kr.smhrd.entity.Users"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.smhrd.entity.IMAGES"%>
 <%@page import="java.util.List"%>
@@ -175,10 +177,50 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         });
     });
     
+    function likeTF(buttonElement) {
+        var userEmail = buttonElement.getAttribute('data-user_email');
+        var awSeq = buttonElement.getAttribute('data-aw_seq');
+
+        console.log('User Email:', userEmail);
+        console.log('AW Seq:', awSeq);
+
+        $.ajax({ //json 형식 -> {key : value, key : value}
+			// 어디로 요청할 것인지(요청 url)
+			url : 'whishList',
+			
+			// 요청 데이터
+			data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
+			
+			// 요청 방식
+			type : 'get',
+			
+			// 요청-응답 성공
+			success : function(data){
+				if(data){
+					console.log(data)
+				} else{
+					console.log(data)
+				}
+				
+				
+			},
+			
+			// 요청-응답 실패
+			error : function(){
+				console.log("통신실패")
+			}
+		})
+    }
+    
                 </script>
 
 <!-- 데이터 가져오기 -->
 <%
+
+	//유저정보, 관심 작품 불러오기
+	Users userLogin = (Users)session.getAttribute("userLogin");
+	List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
+
 	Artworks art = (Artworks)request.getAttribute("art");
 	List<IMAGES> images = (List<IMAGES>)request.getAttribute("images");
 	ArrayList<String> similar_img_list = (ArrayList<String>)request.getAttribute("similar_img_list");
@@ -203,7 +245,18 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                 <p class="price">가격: ₩<%=art.getAw_price() %></p>
                 <button class="buy-button">구매하기</button>
                 <button class="cart-button">장바구니에 추가</button>
-                <button class="heart-button"><i class="glyphicon glyphicon-heart-empty"></i></button>
+                <% boolean isWished = false; %>
+			    <% if(wishList != null) { %>
+			        <% for(WISHLIST wish : wishList) { %>
+			            <% if(wish.getAw_seq() == art.getAw_seq()) { %>
+			                <% isWished = true; %>
+			            <% break; } %>
+			        <% } %>
+			    <% } %>
+			
+			    <button class="heart-button <%= isWished ? "filled" : "" %>" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-aw_seq="<%=art.getAw_seq() %>">
+			        <i class="<%= isWished ? "glyphicon glyphicon-heart" : "glyphicon glyphicon-heart-empty" %>"></i>
+			    </button>
             </div>
         </div>
         <hr class="separator">

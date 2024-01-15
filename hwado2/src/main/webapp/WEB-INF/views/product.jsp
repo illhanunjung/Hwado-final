@@ -1,3 +1,5 @@
+<%@page import="kr.smhrd.entity.WISHLIST"%>
+<%@page import="kr.smhrd.entity.Users"%>
 <%@page import="kr.smhrd.entity.IMAGES"%>
 <%@page import="kr.smhrd.entity.Artworks"%>
 <%@page import="java.util.List"%>
@@ -302,6 +304,12 @@
                     
                     <!-- 모델에 있는 작품 가져오기 -->
                     <%
+                    	// 유저정보, 관심 작품 불러오기
+                    	Users userLogin = (Users)session.getAttribute("userLogin");
+                    	List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
+                    	
+                    
+                    	// 작품 데이터 불러오기
                    		List<Artworks> artList = (List<Artworks>) request.getAttribute("artList");
                     	List<IMAGES> imgList = (List<IMAGES>) request.getAttribute("imgList");
                     	
@@ -342,8 +350,20 @@
                                     <!-- 아티스트 이름 -->
                                     <p class="artist-name"><%=artList.get(i).getUser_email() %></p>
                                     <p class="artwork-price"><%=artList.get(i).getAw_price() %></p>
-                                    <button class="heart-button" onclick="likeTF(this)" data-user_email="pochaco3@mail.com" data-aw_seq="<%=artList.get(i).getAw_seq() %>"><i
-                                            class="glyphicon glyphicon-heart-empty"></i></button>
+                                    
+									<% boolean isWished = false; %>
+								    <% if(wishList != null) { %>
+								        <% for(WISHLIST wish : wishList) { %>
+								            <% if(wish.getAw_seq() == artList.get(i).getAw_seq()) { %>
+								                <% isWished = true; %>
+								            <% break; } %>
+								        <% } %>
+								    <% } %>
+								
+								    <button class="heart-button <%= isWished ? "filled" : "" %>" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-aw_seq="<%=artList.get(i).getAw_seq() %>">
+								        <i class="<%= isWished ? "glyphicon glyphicon-heart" : "glyphicon glyphicon-heart-empty" %>"></i>
+								    </button>
+								                                    
                                 </div> <!-- 아트워크 정보 종료 -->
                             </div> <!-- 카드 콘텐츠 종료 -->
                         </div> <!-- 아트워크 카드 종료 -->

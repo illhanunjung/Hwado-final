@@ -1,3 +1,4 @@
+<%@page import="kr.smhrd.entity.Users"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -170,7 +171,10 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <hr class="separator">
 
 
+<%
+Users userLogin = (Users)session.getAttribute("userLogin");
 
+%>
    
 <main class="auction-container">
     <form class="auction-form" action="auction_regi" method="post" enctype="multipart/form-data">
@@ -181,7 +185,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         <div class="form-section">
         
         	<!-- 예술가 이메일 히든 속성 -->
-        	<input type="hidden" value="admin" name="user_email">
+        	<input type="hidden" value="<%=userLogin.getUser_email() %>" name="user_email">
         	
             <!-- 작품 파일 입력 필드 -->
             <div class="input-group">

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
+import lombok.NonNull;
 
 @Mapper
 public interface UsersMapper {
@@ -15,7 +16,7 @@ public interface UsersMapper {
 
 	public Users userSelect(Users users);
 
-	public List<WISHLIST> getWish(Users userLogin);
+	public List<WISHLIST> getWish(String user_email);
 
 	List<Users> user_management();
 

@@ -16,7 +16,7 @@
     SELECT * FROM USERS WHERE user_email = #{user_email} AND user_pw = MD5(#{user_pw})
 </select>
 
-<select id="getWish" parameterType="kr.smhrd.entity.Users" resultType="kr.smhrd.entity.WISHLIST">
+<select id="getWish" parameterType="String" resultType="kr.smhrd.entity.WISHLIST">
 select * from WISHLIST where user_email = #{user_email}
 </select>
 

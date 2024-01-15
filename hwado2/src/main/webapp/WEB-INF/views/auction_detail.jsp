@@ -1,3 +1,5 @@
+<%@page import="kr.smhrd.entity.WISHLIST"%>
+<%@page import="kr.smhrd.entity.Users"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.smhrd.entity.IMAGES"%>
 <%@page import="java.util.List"%>
@@ -180,6 +182,11 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 <!-- 데이터 가져오기 -->
 <%
+
+//유저정보, 관심 작품 불러오기
+Users userLogin = (Users)session.getAttribute("userLogin");
+List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
+
 	Artworks art = (Artworks)request.getAttribute("art");
 	List<IMAGES> images = (List<IMAGES>)request.getAttribute("images");
 	AUCTIONS auction = (AUCTIONS)request.getAttribute("auction");
@@ -260,7 +267,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                 <p class="price">가격: ₩<%=art.getAw_price() %></p><br>
                 <button class="buy-button">입찰하기</button>
                 <button class="cart-button">장바구니에 추가</button>
-                <button class="heart-button"><i class="glyphicon glyphicon-heart-empty"></i></button>
             </div>
         </div>
         <hr class="separator">

@@ -69,8 +69,8 @@ public class UsersController {
         	System.out.println(userLogin.toString());
             session.setAttribute("userLogin", userLogin);
             
-            // 관심 작품 불러오기
-            List<WISHLIST> wishList = usersMapper.getWish(userLogin);
+         // 관심 작품 불러오기
+            List<WISHLIST> wishList = usersMapper.getWish(userLogin.getUser_email());
             session.setAttribute("wishList", wishList);
             System.out.println(wishList.toString());
             
