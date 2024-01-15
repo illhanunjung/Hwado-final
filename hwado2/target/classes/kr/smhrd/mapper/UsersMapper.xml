@@ -11,6 +11,9 @@
 <select id="emailCheck" resultType="kr.smhrd.entity.Users">
 	SELECT * FROM USERS WHERE user_email = #{user_email}
 </select>
-	
+
+<select id="userSelect" parameterType="kr.smhrd.entity.Users" resultType="kr.smhrd.entity.Users">
+    SELECT * FROM USERS WHERE user_email = #{user_email} AND user_pw = MD5(#{user_pw})
+</select>
 
 </mapper>

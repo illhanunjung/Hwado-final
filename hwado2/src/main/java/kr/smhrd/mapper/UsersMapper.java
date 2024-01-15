@@ -6,8 +6,10 @@ import kr.smhrd.entity.Users;
 
 @Mapper
 public interface UsersMapper {
-	void usersInsert(Users users);
+	public void usersInsert(Users users);
 
-	Users emailCheck(String inputE);
+	public Users emailCheck(String inputE);
+
+	public Users userSelect(Users users);
 
 }
