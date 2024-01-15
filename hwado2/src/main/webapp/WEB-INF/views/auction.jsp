@@ -8,6 +8,8 @@
 <html lang="en">
 
 <head>
+	<!-- 부트스트랩 아이콘 사용하기 위한 링크 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- Basic Page Needs
     ================================================== -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
