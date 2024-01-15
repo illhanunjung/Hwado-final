@@ -37,15 +37,15 @@
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/auction_detail.css" rel="stylesheet">
-    <link href="assets/css/font_bold.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
+    <link href="resources/assets/css/auction_detail.css" rel="stylesheet">
+    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
