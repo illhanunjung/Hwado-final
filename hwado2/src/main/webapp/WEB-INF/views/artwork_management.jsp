@@ -253,6 +253,12 @@
                                     </td>						
 									<td class="data-cell"><p><%=artworkList.get(i).getAw_price() %></p></td>
 									<td class="data-cell"><p><%=artworkList.get(i).getUser_email() %></p></td>
+									<td class="data-cell">
+                                  
+                                   <a href="approvalAw?aw_seq=<%= artworkList.get(i).getAw_seq() %>"> <button class="button">승인</button></a>
+                                   
+                                   <a href="refuseAw?aw_seq=<%= artworkList.get(i).getAw_seq() %>"> <button class="button">거절</button></a>
+                                </td>
 									</tr>
 										<%} %>	
 					

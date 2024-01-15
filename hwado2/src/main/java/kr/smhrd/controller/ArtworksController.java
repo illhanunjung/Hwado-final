@@ -779,6 +779,23 @@ public class ArtworksController {
 			return "favorite_products";
 		}
 
+		
+		
+		// 작품승인 버튼
+				@RequestMapping("/approvalAw")
+				public String approvalAw(@RequestParam("aw_seq") String aw_seq) {
+					mapper.approvalAw(aw_seq);
+					return "redirect:/artwork_management";
+				}	
+				
+				
+				 // 작품거절 버튼
+				  
+				  @RequestMapping("/refuseAw") 
+				  public String refuseAw(@RequestParam("aw_seq") String aw_seq) { 
+					  mapper.refuseAw(aw_seq); 
+					  return "redirect:/artwork_management"; 
+					  }
 
 		
 }

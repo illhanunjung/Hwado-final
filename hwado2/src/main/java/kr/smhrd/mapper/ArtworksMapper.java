@@ -82,6 +82,10 @@ public interface ArtworksMapper {
 	// 심사대기 작품 이미지 불러오기
 	public List<IMAGES> imgsList();
 
-	
+	// 작품 승인 
+		public void approvalAw(String aw_seq);
+
+		// 작품 거절
+		public void refuseAw(String aw_seq);
 
 }

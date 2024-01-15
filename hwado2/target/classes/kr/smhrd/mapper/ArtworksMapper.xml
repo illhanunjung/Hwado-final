@@ -96,4 +96,16 @@ select * from IMAGES where img_type='0' and aw_seq = #{aw_seq}
 </select>
 
 
+<update id="approvalAw" parameterType="String">
+		UPDATE ARTWORKS SET aw_status = "판매중" WHERE aw_seq=#{aw_seq}
+	</update>
+
+<update id="refuseAw" parameterType="String">
+		UPDATE ARTWORKS SET aw_status = "판매거절" WHERE aw_seq=#{aw_seq}
+	</update>
+
+
+
+
+
 </mapper>
