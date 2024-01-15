@@ -64,4 +64,16 @@ select * from AUCTIONS
 select * from AUCTIONS where aw_seq=#{aw_seq}
 </select>
 
+<select id="wishCheck" parameterType="kr.smhrd.entity.WISHLIST" resultType="int">
+select count(*) from WISHLIST where user_email = #{user_email} and aw_seq = #{aw_seq}
+</select>
+
+<insert id="wishList" parameterType="kr.smhrd.entity.WISHLIST">
+insert into WISHLIST (user_email, aw_seq) values (#{user_email}, #{aw_seq})
+</insert>
+
+<delete id="deleteWish" parameterType="kr.smhrd.entity.WISHLIST">
+delete from WISHLIST  where user_email = #{user_email} and aw_seq = #{aw_seq} 
+</delete>
+
 </mapper>

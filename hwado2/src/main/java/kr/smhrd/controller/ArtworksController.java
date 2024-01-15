@@ -21,8 +21,10 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.cj.Session;
 import com.oreilly.servlet.MultipartRequest;
@@ -31,6 +33,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.smhrd.entity.AUCTIONS;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.WISHLIST;
 import kr.smhrd.mapper.ArtworksMapper;
 
 @Controller
@@ -628,4 +631,29 @@ public class ArtworksController {
 		return "auction_detail";
 	}
 	
+	// 관심 등록
+	@ResponseBody
+	@RequestMapping("/whishList")
+	public boolean whishList(@RequestParam("userEmail") String userEmail, @RequestParam("awSeq") int awSeq) {
+		WISHLIST wish = new WISHLIST(userEmail, awSeq);
+		// 관심 등록 확인
+		int TF = mapper.wishCheck(wish);
+		
+		int cnt = 0;
+		
+		if (TF > 0) {
+			cnt = mapper.deleteWish(wish);
+		} else {
+			cnt = mapper.wishList(wish);
+		}
+		
+		
+		
+		if(cnt >= 0) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 }

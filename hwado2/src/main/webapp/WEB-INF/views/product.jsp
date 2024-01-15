@@ -207,6 +207,42 @@
                 });
             });
 
+            
+            function likeTF(buttonElement) {
+                var userEmail = buttonElement.getAttribute('data-user_email');
+                var awSeq = buttonElement.getAttribute('data-aw_seq');
+
+                console.log('User Email:', userEmail);
+                console.log('AW Seq:', awSeq);
+
+                $.ajax({ //json 형식 -> {key : value, key : value}
+					// 어디로 요청할 것인지(요청 url)
+					url : 'whishList',
+					
+					// 요청 데이터
+					data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
+					
+					// 요청 방식
+					type : 'get',
+					
+					// 요청-응답 성공
+					success : function(data){
+						if(data){
+							console.log(data)
+						} else{
+							console.log(data)
+						}
+						
+						
+					},
+					
+					// 요청-응답 실패
+					error : function(){
+						console.log("통신실패")
+					}
+				})
+            }
+            
         </script>
 
 
@@ -306,7 +342,7 @@
                                     <!-- 아티스트 이름 -->
                                     <p class="artist-name"><%=artList.get(i).getUser_email() %></p>
                                     <p class="artwork-price"><%=artList.get(i).getAw_price() %></p>
-                                    <button class="heart-button"><i
+                                    <button class="heart-button" onclick="likeTF(this)" data-user_email="pochaco3@mail.com" data-aw_seq="<%=artList.get(i).getAw_seq() %>"><i
                                             class="glyphicon glyphicon-heart-empty"></i></button>
                                 </div> <!-- 아트워크 정보 종료 -->
                             </div> <!-- 카드 콘텐츠 종료 -->

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import kr.smhrd.entity.AUCTIONS;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.WISHLIST;
 
 @Mapper
 public interface ArtworksMapper {
@@ -55,6 +56,12 @@ public interface ArtworksMapper {
 	public List<AUCTIONS> auctioninfo();
 
 	public AUCTIONS getAuction(int aw_seq);
+
+	public int wishList(WISHLIST wish);
+
+	public int wishCheck(WISHLIST wish);
+
+	public int deleteWish(WISHLIST wish);
 
 	
 
