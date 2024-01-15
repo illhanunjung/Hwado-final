@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.List"%>
+<%@page import="kr.smhrd.entity.Artworks"%>
+<%@page import="kr.smhrd.entity.IMAGES"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,7 +98,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="blog.html">회원관리</a></li>
+                        <li><a href="user_management">회원관리</a></li>
                         <li><a href="#" onclick="openMypageModal()">마이페이지</a></li>
                         <li><a href="blog.html">작가</a></li>
                         <li><a href="contact.html">갤러리</a></li>
@@ -161,7 +165,7 @@
             <ul class="menu-items">
 
                 <li><a href="user_management.html">회원관리</a></li>
-                <li><a href="artwork_management.html">작품관리</a></li>
+                <li><a href="artwork_management.html" id="fv_at">작품관리</a></li>
                 <li><a href="artist_approval.html">예술가 승인</a></li>
             </ul>
         </div>
@@ -193,95 +197,91 @@
                         </thead>
                         <!-- 테이블 바디: 실제 데이터가 들어가는 부분 -->
                         <tbody class="table-body">
-                            <!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->
-                            <tr class="table-row">
-                                <td class="data-cell">
-                                    <p id="countdown">1</p>
-                                </td>
-                                <td class="data-cell">
-                                    <div class="img_info">
-                                        <img src="./assets/명화/10.jpg" width="100px" height="100px">
-                                        <p>풍경화</p>
+                            <!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->                   
+                           
+                           <% List<Artworks> artworkList = (List<Artworks>)request.getAttribute("artworkList");
+							  List<IMAGES> imgsList = (List<IMAGES>) request.getAttribute("imgsList"); 
+							  
+							  String savePath = "./resources/artworks";
+							  
+							  int pageN = (int)request.getAttribute("pageN");
+							  int maxpage = (int)request.getAttribute("maxpage");
+		                    	int item = 9;
+		                    	
+		                    	int start = pageN * item;
+		                    	int end = start+item;
+		                    	
+		                    	if(end > imgsList.size()){
+		                    		end = imgsList.size();
+		                    	} else if (end < item){
+			                		end = imgsList.size();
+			                	}
+		                    	
+		                    	System.out.println("start : " + start);
+		                    	System.out.println("end : " + end);
+								
+						
+								%>
+							<%-- <c:forEach items="${artworkList}" var="artw" varStatus="status">
+								
+										<!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 --> 
+										
+										
+            					<!-- 정지해제 버튼 항상 표시 -->
+   
+             		  			  <a href="approvalArtwork?email=${artw.user_email}"><button class="button">승인</button></a> 
+           					
+             		  			 <a href="refuseArtwork?email=${artw.user_email}"><button class="button">거절</button></a>
+           						 
+											
+
+									</td>
+								</tr>
+							</c:forEach> --%>
+							
+							
+							<% for(int i = start; i < end; i++){ %>
+							<tr class="table-row">
+									<td class="data-cell"><p><%= i+1 %></p></td>
+									<td class="data-cell">
+									<a href="product_detail?aw_seq=<%= artworkList.get(i).getAw_seq() %>">
+									<div class="img_info">
+                                        <img src="<%=savePath+"/"+imgsList.get(i).getImg_filename() %>" width="100px" height="100px">
+                                        <p><%= artworkList.get(i).getAw_name() %></p>
                                     </div>
-                                </td>
-                                <td class="data-cell">
-                                    <p>500000</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>박지뉴</p>
-                                </td>
-                                <td class="data-cell">
-                                    <!-- 정지해제 버튼: 각 회원들을 정지 해제 시키는 버튼 -->
-                                    <button class="button">승인</button>
-                                    <!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 -->
-                                    <button class="button">거절</button>
-                                </td>
-                            </tr>
-                            <!-- 추가적인 행들은 여기에 위치 -->
-                            <!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->
-                            <tr class="table-row">
-                                <td class="data-cell">
-                                    <p id="countdown">1</p>
-                                </td>
-                                <td class="data-cell">
-                                    <div class="img_info">
-                                        <img src="./assets/명화/10.jpg" width="100px" height="100px">
-                                        <p>풍경화</p>
-                                    </div>
-                                </td>
-                                <td class="data-cell">
-                                    <p>700000</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>박지뉴</p>
-                                </td>
-                                <td class="data-cell">
-                                    <!-- 정지해제 버튼: 각 회원들을 정지 해제 시키는 버튼 -->
-                                    <button class="button">승인</button>
-                                    <!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 -->
-                                    <button class="button">거절</button>
-                                </td>
-                            </tr>
-                            <!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->
-                            <tr class="table-row">
-                                <td class="data-cell">
-                                    <p id="countdown">1</p>
-                                </td>
-                                <td class="data-cell">
-                                    <div class="img_info">
-                                        <img src="./assets/명화/10.jpg" width="100px" height="100px">
-                                        <p>풍경화</p>
-                                    </div>
-                                </td>
-                                <td class="data-cell">
-                                    <p>90000</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>박지뉴</p>
-                                </td>
-                                <td class="data-cell">
-                                    <!-- 정지해제 버튼: 각 회원들을 정지 해제 시키는 버튼 -->
-                                    <button class="button">승인</button>
-                                    <!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 -->
-                                    <button class="button">거절</button>
-                                </td>
-                            </tr>
+                                    </a>
+                                    </td>						
+									<td class="data-cell"><p><%=artworkList.get(i).getAw_price() %></p></td>
+									<td class="data-cell"><p><%=artworkList.get(i).getUser_email() %></p></td>
+									</tr>
+										<%} %>	
+					
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
+            
+            
             <div class="navigation-buttons">
-                <!-- 이전 페이지로 이동하는 버튼 -->
-                <button class="nav-button" onclick="loadPage('previousPageUrl')"><i
-                        class="bi bi-caret-left"></i></button>
-                <!-- 다음 페이지로 이동하는 버튼 -->
-                <button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button>
-            </div>
+    <!-- 첫 페이지가 아니면 이전 페이지 버튼 표시 -->
+   <%--  <% if(pageN > 0) { %>
+        <a href="artwork_management?page=<%= pageN - 1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
+    <% } %>
+    
+    <!-- 마지막 페이지가 아니면 다음 페이지 버튼 표시 -->
+    <% if(pageN < maxpage - 1) { %>
+        <a href="artwork_management?page=<%= pageN + 1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
+    <% } %> --%>
+    <a href="artwork_management?page=<%= pageN - 1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
+    <a href="artwork_management?page=<%= pageN + 1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
+</div>
+
 
         </main>
 
 
-        <script>
+        <!-- <script>
             document.getElementById('searchButton').addEventListener('click', function () {
                 document.getElementById('searchPopup').style.display = 'block';
             });
@@ -290,7 +290,7 @@
                 document.getElementById('searchPopup').style.display = 'none';
             }
 
-        </script>
+        </script> -->
 
         <script>
             function loadPage(url) {

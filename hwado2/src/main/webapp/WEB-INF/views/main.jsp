@@ -86,7 +86,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                                           
                       <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
                       <li><a href="shoppig_cart.html">장바구니</a></li>
-                      <li><a href="blog.html">회원관리</a></li>
+                      <li><a href="user_management">회원관리</a></li>
                         <li><a href="mypage.html">마이페이지</a></li>
                         <li><a href="artists.html">작가</a></li>
                         <li><a href="contact.html">갤러리</a></li>

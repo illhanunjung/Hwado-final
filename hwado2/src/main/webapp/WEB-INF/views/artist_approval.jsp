@@ -165,7 +165,7 @@
 
                 <li><a href="user_management.html">회원관리</a></li>
                 <li><a href="artwork_management.html">작품관리</a></li>
-                <li><a href="artist_approval.html">예술가 승인</a></li>
+                <li><a href="artist_approval.html" id="fv_at">예술가 승인</a></li>
             </ul>
         </div>
 

@@ -685,4 +685,46 @@ public class ArtworksController {
 		}
 		
 	}
+	
+	
+	// 작품관리 페이지로 이동	
+		@RequestMapping("/artwork_management") 
+		public String artwork_management(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
+		    List<Artworks> artworkList = mapper.artworkList();
+	        List<IMAGES> imgsList = mapper.imgsList();
+					
+			model.addAttribute("imgsList", imgsList);
+		    model.addAttribute("artworkList", artworkList);
+		    
+		    System.out.println(imgsList.size());
+		    
+	       int maxpage = 0;
+			
+			if (imgsList.size() %9 == 0) {
+				maxpage = imgsList.size()/9-1;
+			} else {
+				maxpage = imgsList.size()/9 ;
+			}
+			
+			System.out.println("maxpage : "+maxpage);
+			System.out.println("page : " + page);
+			if(page < 0) {
+				page = 0;
+			} else if (page > maxpage) {
+				page = maxpage;
+			}
+			
+			System.out.println("page : " + page);
+			
+			model.addAttribute("pageN", page);
+		    model.addAttribute("maxpage", maxpage);
+		    
+		    return "artwork_management";
+		}
+	
+	
+	
+	
 }
+
+

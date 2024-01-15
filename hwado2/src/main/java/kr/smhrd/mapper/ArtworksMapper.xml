@@ -80,4 +80,15 @@ delete from WISHLIST  where user_email = #{user_email} and aw_seq = #{aw_seq}
 select * from USERS where user_email = #{user_email}
 </select>
 
+<select id="artworkList" resultType="kr.smhrd.entity.Artworks">
+		select * from ARTWORKS where aw_status="심사대기"
+	</select>
+
+<select id="imgsList" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_status="심사대기")
+</select>
+
+
+
+
 </mapper>

@@ -73,7 +73,11 @@ public interface ArtworksMapper {
 	public Users getArtist(String user_email);
 
 	
+	// 심사대기 작품 불러오기
+	public List<Artworks> artworkList();
 
+	// 심사대기 작품 이미지 불러오기
+	public List<IMAGES> imgsList();
 
 	
 
