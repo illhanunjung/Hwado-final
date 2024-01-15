@@ -232,7 +232,7 @@
                             <!-- 카드 콘텐츠 시작 -->
                             <div class="card-content">
                                 <!-- 아트워크 이미지 -->
-                                <a href="" alt="상세페이지">
+                                <<a href="product_detail?aw_seq=<%=wishArtList.get(i).getAw_seq() %>" alt="상세페이지">
                                     <img src="<%=savePath+"/"+wishImgList.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
                                 </a>
                                 <!-- 아트워크 정보 시작 -->
