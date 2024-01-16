@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="kr.smhrd.entity.Users"%>
+<%@page import="kr.smhrd.entity.Portfolios"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 
     <!-- Basic Page Needs
@@ -9,7 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>경매등록</title>
+    <title>작품등록</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -35,8 +37,8 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/auction_registration.css" rel="stylesheet">
     <link href="assets/css/font_bold.css" rel="stylesheet">
+    <link href="/assets/css/artist_registration.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/responsive.css" rel="stylesheet">
     <link href="assets/css/mypage1.css" rel="stylesheet">
@@ -157,11 +159,10 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <ul class="menu-items">
         <li><a href="favorite_artists.html">관심작가</a></li>
         <li><a href="favorite_products.html">관심작품</a></li>
-       
-        <li><a href="purchase_history.html">구매내역</a></li>
-        <li><a href="artist_registration.html" >예술가신청</a></li>
-        <li><a href="product_registration.html">작품등록</a></li>
-        <li><a href="purchase_history.html" id="fv_at">경매등록</a></li>
+        <li><a href="purchase_history.html" >구매내역</a></li>
+        <li><a href="artist_registration">예술가신청</a></li>
+        <li><a href="product_registration.html" >작품등록</a></li>
+        <li><a href="auction_registration.html">경매등록</a></li>
         <li><a href="user_edit.html">개인정보수정</a></li>
     </ul>
 </div>
@@ -170,68 +171,58 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 
 
-   
-<main class="auction-container">
-    <form class="auction-form">
-        <h1 class="form-title">경매등록</h1>
+
+<main class="portfolio-container">
+    <form class="portfolio-form" action="regiPortfolio" method="post" enctype="multipart/form-data">
+        <h1 class="form-title">포트폴리오</h1>
         <p class="form-description">
-            한 작품만 등록 가능합니다
+             ${user.user_name} 님의 대표작 3가지를 등록해주세요
         </p>
         <div class="form-section">
-            <!-- 이름 입력 필드 -->
-            <div class="input-group">
-                <label for="main-image" class="input-label">메인 작품</label>
-                <input type="file" id="image-1" class="input-field" required />
-                <label for="description-1" class="input-label"></label>
-                <textarea id="description-3" class="input-field2" placeholder="작품에 대해 설명하세요" required></textarea>
-            </div>
-            <div class="input-group">
-                <label for="name" class="input-label">작품 명</label>
-                <input type="text" id="name" class="input-field" placeholder="작품 이름을 입력하세요" required />
-            </div>
 
+            <!-- 이메일 입력 필드 -->
+            <div class="input-group">
+            <label for="email" class="input-label">이메일 </label>
+			<input type="email" id="email" name="user_email" class="input-field" value="${user.user_email}" readonly required />
+            </div>
             <!-- 전화번호 입력 필드 -->
             <div class="input-group">
-                <label for="cost" class="input-label">시작가격</label>
-                <input type="text" id="cost" class="input-field" placeholder="시작가격을 입력하세요" required />
-                <span class="currency-unit">원</span>
+                <label for="phone" class="input-label">전화번호</label>
+                <input type="text" id="phone" class="input-field" placeholder="번호를 입력하세요" required />
             </div>
 
+            
+           <!-- 제목 입력 필드 -->
             <div class="input-group">
-                <label for="date" class="input-label">종료날짜</label>
-                <input type="date" id="end_date" class="input-field" required />
+                <label for="phone" class="input-label">제목</label>
+                <input type="text" id="title" class="input-field" name="pf_title" placeholder="제목을 입력하세요" required />
             </div>
 
-     
-
-            <!-- 이미지 1 입력 필드 -->
+           <!-- 이미지 1 입력 필드 -->
             <div class="input-group">
-                <label for="image-1" class="input-label">상세 이미지 1</label>
-                <input type="file" id="image-1" class="input-field" required />
-                <label for="description-1" class="input-label"></label>
-                <textarea id="description-1" class="input-field2" placeholder="상세 이미지에 대해 설명하세요" required></textarea>
+                <label for="image-2" class="input-label">작품 1</label>
+                <input type="file" id="image-1" name="pf_file1" class="input-field" required />
+             
             </div>
-
             <!-- 이미지 2 입력 필드 -->
             <div class="input-group">
-                <label for="image-2" class="input-label">상세 이미지 2</label>
-                <input type="file" id="image-2" class="input-field" required />
-                <label for="description-2" class="input-label"></label>
-                <textarea id="description-2" class="input-field2" placeholder="상세 이미지에 대해 설명하세요" required></textarea>
+                <label for="image-2" class="input-label">작품 2</label>
+                <input type="file" id="image-2" name="pf_file2" class="input-field"  />
             </div>
 
             <!-- 이미지 3 입력 필드 -->
             <div class="input-group">
-                <label for="image-3" class="input-label">상세 이미지 3</label>
-                <input type="file" id="image-3" class="input-field" required />
-                <label for="description-3" class="input-label"></label>
-                <textarea id="description-3" class="input-field2" placeholder="상세 이미지에 대해 설명하세요" required></textarea>
+                <label for="image-3" class="input-label">작품 3</label>
+                <input type="file" id="image-3" name="pf_file2" class="input-field"  />
             </div>
 
-   
+            <div class="input-group">
+                <label for="bio" class="input-label">자기소개서</label>
+                <textarea id="bio" class="input-field3" name="pf_desc" placeholder="본인에 대한 이야기를 써주세요" required></textarea>
+            </div>
 
 
-
+			
             <!-- 폼 제출 및 초기화 버튼 -->
             <div class="form-buttons">
                 <button type="submit" class="submit-button">제출</button>
@@ -240,11 +231,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         </div>
     </form>
 </main>
-
-
-
-
-
 
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 import lombok.NonNull;
@@ -35,6 +36,8 @@ public interface UsersMapper {
 
 		// 작가검색
 		public List<Users> searchArtist(String searchAw);
+
+		public int regiPortfolio(Portfolios portfolio);
 
 
 	

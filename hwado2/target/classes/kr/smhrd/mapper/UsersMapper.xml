@@ -54,5 +54,10 @@ select * from WISHLIST where user_email = #{user_email}
 	</select>
 
 
+ <insert id="regiPortfolio" parameterType="kr.smhrd.entity.Portfolios">
+        INSERT INTO  PORTFOLIOS (user_email, pf_title, pf_file1, pf_file2, pf_file3, pf_desc)
+        VALUES (#{user_email}, #{pf_title}, #{pf_file1}, #{pf_file2}, #{pf_file3}, #{pf_desc})
+</insert>
+
 
 </mapper>

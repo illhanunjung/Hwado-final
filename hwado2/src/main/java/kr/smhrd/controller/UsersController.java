@@ -1,7 +1,9 @@
 package kr.smhrd.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 import kr.smhrd.mapper.ArtworksMapper;
@@ -188,7 +194,93 @@ public class UsersController {
 				 
 	        return "user_management_search";
 				}
-		
+
+		  //작가 등록 페이지
+		  
+		  @RequestMapping("/artist_registration")
+		  public String artist_registration(HttpSession session, Model model) {
+		  Users userLogin = (Users) session.getAttribute("userLogin");
+		    if (userLogin != null) {
+		        model.addAttribute("user", userLogin);
+		    }
+		    return "artist_registration";
+		}
+		  //포폴 페이지
+		  @RequestMapping("/portfolio")
+		  public String  portfolio(HttpSession session, Model model) {
+		  Users userLogin = (Users) session.getAttribute("userLogin");
+		    
+		    if (userLogin != null) {
+		        model.addAttribute("user", userLogin);
+		        
+		        // 포트폴리오 객체를 세션에서 가져온다 (포트폴리오 객체는 세션에 어떻게 저장되었는지에 따라 코드가 달라질 수 있음)
+		        Portfolios portfolio = (Portfolios) session.getAttribute("portfolio");
+		        
+		    if (portfolio != null) {
+		          model.addAttribute("portfolio", portfolio);
+		        } 
+		    }
+		    
+		    return "portfolio";
+		}
+		// 작가 등록
+			@SuppressWarnings("deprecation")
+			@RequestMapping("/regiPortfolio")
+			public String regiPortfolio(HttpServletRequest request, HttpSession session,  Model model) {
+
+				Users userLogin = (Users) session.getAttribute("userLogin");
+
+				MultipartRequest multi = null;
+
+				if (userLogin == null) {
+					return "redirect:/signin";
+				}
+				DefaultFileRenamePolicy dftrp = new DefaultFileRenamePolicy();
+				String savePath = request.getRealPath("./resources/portfolios");
+				
+		        
+				int maxSize = 1024 * 1024 * 10; // 10MB
+				String enc = "UTF-8";
+
+				try {
+					multi = new MultipartRequest(request, savePath, maxSize, enc, new DefaultFileRenamePolicy());
+
+					String pf_title = multi.getParameter("pf_title");
+					String pf_desc = multi.getParameter("pf_desc");
+					String pf_file1 = multi.getFilesystemName("pf_file1");
+					String pf_file2 = multi.getFilesystemName("pf_file2");
+					String pf_file3 = multi.getFilesystemName("pf_file3");
+
+					Portfolios portfolio = new Portfolios();
+					portfolio.setUser_email(userLogin.getUser_email());
+					portfolio.setPf_title(pf_title);
+					portfolio.setPf_desc(pf_desc);
+					portfolio.setPf_file1(pf_file1);
+					portfolio.setPf_file2(pf_file2);
+					portfolio.setPf_file3(pf_file3);
+					
+					// 포폴 작품 등록 mapper
+					int cnt_re = usersMapper.regiPortfolio(portfolio);
+					;
+
+					if (cnt_re > 0) {
+						System.out.println("포폴 등록 성공");
+						
+						 session.setAttribute("portfolio", portfolio);
+						 
+					} else {
+						System.out.println("포폴 등록 실패");
+					}
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				System.out.println("성공");
+				
+				return "redirect:/portfolio";
+			}
+
 		
 		
 }//class
