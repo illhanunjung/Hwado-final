@@ -129,13 +129,34 @@ public class UsersController {
 		
 	
 	
+	// 마이페이지 이동
+		@RequestMapping("/myPage")
+		public String myPage() {
+			return "mypage";
+		}
 	
 	
+	// 작가페이지 이동
+		@RequestMapping("/artist")
+		public String artist() {
+			return "artist";
+		}
 	
 	
+	// 로그아웃
+		@RequestMapping("/logout")
+		public String logout(HttpSession session) {
+			session.invalidate();
+			
+			return "redirect:/";
+		}
 	
 	
-	
+	// 장바구니 이동
+		@RequestMapping("/shoppingCart")
+		public String shoppingCart() {
+			return "shopping_cart";
+		}
 	
 	
 }//class
