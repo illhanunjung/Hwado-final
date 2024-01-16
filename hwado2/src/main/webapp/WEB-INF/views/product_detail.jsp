@@ -10,6 +10,7 @@
 <html lang="en">
 <head>
 
+
     <!-- Basic Page Needs
     ================================================== -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -135,7 +136,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
   </script>
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="main.html">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -212,6 +213,40 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 		})
     }
     
+    // 장바구니 등록
+    function cart(buttonElement) {
+        var userEmail = buttonElement.getAttribute('data-user_email');
+        var awSeq = buttonElement.getAttribute('data-aw_seq');
+
+        console.log('User Email:', userEmail);
+        console.log('AW Seq:', awSeq);
+
+        $.ajax({ //json 형식 -> {key : value, key : value}
+			// 어디로 요청할 것인지(요청 url)
+			url : 'Cart',
+			
+			// 요청 데이터
+			data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
+			
+			// 요청 방식
+			type : 'get',
+			
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			
+			// 요청-응답 성공
+			success : function(data){
+				alert(data);
+				
+				
+			},
+			
+			// 요청-응답 실패
+			error : function(){
+				console.log("통신실패")
+			}
+		})
+    }
+    
                 </script>
 
 <!-- 데이터 가져오기 -->
@@ -245,7 +280,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                 <p class="description"><%=images.get(0).getAw_desc() %></p>
                 <p class="price">가격: ₩<%=art.getAw_price() %></p>
                 <button class="buy-button">구매하기</button>
-                <button class="cart-button">장바구니에 추가</button>
+                <button class="cart-button" onclick="cart(this)" data-user_email="<%=userLogin.getUser_email() %>" data-aw_seq="<%=art.getAw_seq() %>">장바구니에 추가</button>
                 <% boolean isWished = false; %>
 			    <% if(wishList != null) { %>
 			        <% for(WISHLIST wish : wishList) { %>

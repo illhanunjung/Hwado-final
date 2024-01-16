@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import kr.smhrd.entity.AUCTIONS;
 import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.Artworks;
+import kr.smhrd.entity.Cart;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Users;
@@ -114,5 +115,26 @@ public interface ArtworksMapper {
 			public List<Artworks> searchArtw(String searchAw);
 			// 이미지 검색
 			public List<IMAGES> searchImage(String searchAw);
+			
+			// 장바구니 상품 확인
+			public int cartCheck(Artworks art);
+
+			// 장바구니 추가
+			public int insertCart(Artworks art);
+			
+			// 장바구니 리스트 출력
+			public List<Cart> getCart(@NonNull String user_email);
+
+			// 장바구니 작품 리스트
+			public Artworks cartArt(@NonNull int aw_seq);
+
+			//장바구니 작품 이미지 리스트
+			public IMAGES cartImg(@NonNull int aw_seq);
+
+			// 장바구니 작품 아티스트 정보
+			public Users catArtist(int aw_seq);
+
+			// 장바구니 제거
+			public void deleteCart(String i);
 
 }

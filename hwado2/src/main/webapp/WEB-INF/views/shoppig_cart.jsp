@@ -1,3 +1,7 @@
+<%@page import="kr.smhrd.entity.IMAGES"%>
+<%@page import="kr.smhrd.entity.Artworks"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.smhrd.entity.Users"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,20 +31,20 @@
     <!-- Favicon
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="15x15" href="assets/img/logo.png">
+    <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/shopping_cart.css" rel="stylesheet">
-    <link href="assets/css/font_bold.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
+    <link href="resources/assets/css/shopping_cart.css" rel="stylesheet">
+    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -129,8 +133,8 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
   </script>
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="main.html">
-                <img src="assets/img/logo.png" class="logo">
+            <a class="site-title" href="./">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
     
@@ -165,6 +169,16 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     });
 </script>
 
+<%
+Users userLogin = (Users)session.getAttribute("userLogin");
+
+ArrayList<Artworks> artList = (ArrayList<Artworks>) request.getAttribute("artList");
+ArrayList<IMAGES> imgList = (ArrayList<IMAGES>) request.getAttribute("imgList");
+ArrayList<Users> artistList = (ArrayList<Users>) request.getAttribute("artistList");
+
+String savePath = "./resources/artworks";
+%>
+
 
 <p class="cart_name">장바구니</p>
 
@@ -176,7 +190,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         </ul>
     </div>
     <table class="cart__list">
-        <form>
+        
             <thead>
                 <tr>
                     <td class="checkbutton"><input type="checkbox" id="checkAll"></td>
@@ -188,108 +202,25 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                 </tr>
             </thead>
             <tbody>
+            <% if(artList != null){
+            	for(int i = 0; i < artList.size(); i++){%>
                 <tr class="cart__list__detail">
-                    <td><input type="checkbox" class="itemCheckbox"></td>
-                    <td><img src="/assets/명화/12.jpg" ></td>
+                    <td><input type="checkbox" class="itemCheckbox" value="<%=artList.get(i).getAw_seq() %>"></td>
+                    <td><a href="product_detail?aw_seq=<%=artList.get(i).getAw_seq() %>" alt="상세페이지"><img src="<%=savePath+"/"+imgList.get(i).getImg_filename() %>" ></a></td>
                     <td>
-                        <p>홍길동</p>
+                        <p><%=artistList.get(i).getUser_nick() %></p>
                         
                     </td>
                     <td class="cart__list__option">
-                        <p>내가 바로 예수다</p>
+                        <p><%=artList.get(i).getAw_name() %></p>
                         
                     </td>
-                    <td><span class="price">116,620</span><span>원</span><br>
+                    <td><span class="price"><%=artList.get(i).getAw_price() %></span><span>원</span><br>
                       
                     </td>
                     <td>무료</td>
                 </tr>
-                <tr class="cart__list__detail">
-                    <td style="width: 2%;"><input type="checkbox" class="itemCheckbox"></td>
-                    <td style="width: 13%;">
-                        <img src="assets/명화/18.jpg" >
-                    </td>
-                    <td style="width: 17%;">
-                        <p>김말똥</p>
-                       
-                    </td>
-                    <td class="cart__list__option" style="width: 30%;">
-                        <p>뒤에 곰돌이 푸가 있네!</p>
-                        
-                    </td>
-                    <td style="width: 15%;"><span class="price">88,900</span><span>원</span><br>
-                        
-                    </td>
-                    <td style="width: 15%;">무료</td>
-                </tr>
-                <tr class="cart__list__detail">
-                    <td><input type="checkbox" class="itemCheckbox"></td>
-                    <td><img src="/assets/명화/12.jpg" ></td>
-                    <td>
-                        <p>홍길동</p>
-                        
-                    </td>
-                    <td class="cart__list__option">
-                        <p>내가 바로 예수다</p>
-                        
-                    </td>
-                    <td><span class="price">116,620</span><span>원</span><br>
-                      
-                    </td>
-                    <td>무료</td>
-                </tr>
-                <tr class="cart__list__detail">
-                    <td style="width: 2%;"><input type="checkbox" class="itemCheckbox"></td>
-                    <td style="width: 13%;">
-                        <img src="assets/명화/18.jpg" >
-                    </td>
-                    <td style="width: 17%;">
-                        <p>김말똥</p>
-                       
-                    </td>
-                    <td class="cart__list__option" style="width: 30%;">
-                        <p>뒤에 곰돌이 푸가 있네!</p>
-                        
-                    </td>
-                    <td style="width: 15%;"><span class="price">88,900</span><span>원</span><br>
-                        
-                    </td>
-                    <td style="width: 15%;">무료</td>
-                </tr>
-                <tr class="cart__list__detail">
-                    <td><input type="checkbox" class="itemCheckbox"></td>
-                    <td><img src="/assets/명화/12.jpg" ></td>
-                    <td>
-                        <p>홍길동</p>
-                        
-                    </td>
-                    <td class="cart__list__option">
-                        <p>내가 바로 예수다</p>
-                        
-                    </td>
-                    <td><span class="price">116,620</span><span>원</span><br>
-                      
-                    </td>
-                    <td>무료</td>
-                </tr>
-                <tr class="cart__list__detail">
-                    <td style="width: 2%;"><input type="checkbox" class="itemCheckbox"></td>
-                    <td style="width: 13%;">
-                        <img src="assets/명화/18.jpg" >
-                    </td>
-                    <td style="width: 17%;">
-                        <p>김말똥</p>
-                       
-                    </td>
-                    <td class="cart__list__option" style="width: 30%;">
-                        <p>뒤에 곰돌이 푸가 있네!</p>
-                        
-                    </td>
-                    <td style="width: 15%;"><span class="price">88,900</span><span>원</span><br>
-                        
-                    </td>
-                    <td style="width: 15%;">무료</td>
-                </tr>
+                <% }}%>
             </tbody>
 
 
@@ -337,19 +268,144 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
             
             <tfoot>
                 <tr>
-                    <td><button class="cart__bigorderbtn left">선택상품 삭제</button></td>
+                    <td><button class="cart__bigorderbtn left" onclick="deleteCart(getCheckedValues())">선택상품 삭제</button></td>
                     <td id="totalAmount" style="text-align: center;">
                   <td colspan="2"></td>
-                    <td><button class="cart__bigorderbtn right">쇼핑 계속하기</button></td>
-                    <td><button class="cart__bigorderbtn right">주문하기</button></td>
+                    <td><a href="./product_page"><button class="cart__bigorderbtn right">쇼핑 계속하기</button></a></td>
+                    <td><button class="cart__bigorderbtn right" onclick="requestPay()">주문하기</button></td>
                 </tr>
             </tfoot>
-        </form>
+        
     </table>
     <div class="cart__mainbtns">
         
     </div>
 </section>
+
+<script type="text/javascript">
+
+function getCheckedValues() {
+    var checkedValues = "";
+    var checkboxes = document.querySelectorAll('.itemCheckbox');
+
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            checkedValues += checkboxes[i].value + " ";
+        }
+    }
+
+    return checkedValues;
+}
+
+
+function deleteCart(values) {
+	let aw_seq = values;
+	console.log(aw_seq);
+	
+	 $.ajax({ //json 형식 -> {key : value, key : value}
+			// 어디로 요청할 것인지(요청 url)
+			url : 'deleteCart',
+			
+			// 요청 데이터
+			data : { 'awSeq' : aw_seq},
+			
+			// 요청 방식
+			type : 'get',
+			
+			// 요청-응답 성공
+			success : function(response) {
+		        console.log("통신 성공");
+		        window.location.href = response;
+				
+				
+			},
+			
+			// 요청-응답 실패
+			error : function(){
+				console.log("통신실패")
+			}
+		})
+}
+
+
+</script>
+
+<!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+   		 
+   		 
+        var IMP = window.IMP; 
+        IMP.init("imp85467522"); 
+      
+        var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
+        function requestPay() {
+        	var checkedValues = getCheckedValues();
+        	
+        	$.ajax({ 
+    			url : 'payment',
+    			
+    			// 요청 데이터
+    			data : { 'awSeq' : checkedValues},
+    			
+    			// 요청 방식
+    			type : 'get',
+    			
+    			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+    			
+    			// 요청-응답 성공
+    			success : function(response) {
+    		        console.log("통신 성공");
+    		        
+    		        let data = response.split("/")
+    		        console.log(data);
+    		        
+    		            IMP.request_pay({
+    	                pg : 'html5_inicis',
+    	                pay_method : 'card',
+    	                merchant_uid: "IMP"+makeMerchantUid, 
+    	                name : data[0],
+    	                amount : parseInt(data[1]),
+    	                buyer_email : 'smhrd@smhrd.or.kr',
+    	                buyer_name : '아임포트 기술지원팀',
+    	                buyer_tel : '062-655-3506',
+    	                buyer_addr : '광주 동구 예술길 31-15 3~4, 7층',
+    	                buyer_postcode : '123-456',
+    	                display: {
+    	                    card_quota: [3]  // 할부개월 3개월까지 활성화
+    	                }
+    	            }, function (rsp) { // callback
+    	                if (rsp.success) {
+    	                    console.log(rsp);
+    	                } else {
+    	                    console.log(rsp);
+    	                }
+    	            }); 
+    				
+    				
+    			},
+    			
+    			// 요청-응답 실패
+    			error : function(){
+    				console.log("통신실패")
+    			}
+    		})
+        	
+            
+        }
+        
+       
+        
+        
+    </script>
 
 
 

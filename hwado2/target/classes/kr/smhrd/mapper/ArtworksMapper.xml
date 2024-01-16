@@ -150,6 +150,32 @@ SELECT ARTWORKS.* FROM ARTWORKS JOIN USERS ON ARTWORKS.user_email = USERS.user_e
 	</select>
 
 
+<select id="cartCheck" parameterType="kr.smhrd.entity.Artworks" resultType="int">
+select count(*) from BASKETS where user_email=#{user_email} and aw_seq=#{aw_seq}
+</select>
 
+<insert id="insertCart" parameterType="kr.smhrd.entity.Artworks">
+insert into BASKETS (user_email, aw_seq) values (#{user_email}, #{aw_seq})
+</insert> 
+
+<select id="getCart" parameterType="String" resultType="kr.smhrd.entity.Cart">
+select * from BASKETS where user_email=#{user_email}
+</select>
+
+<select id="cartArt" parameterType="int" resultType="kr.smhrd.entity.Artworks">
+select * from ARTWORKS where aw_seq = #{aw_seq}
+</select>
+
+<select id="cartImg" parameterType="int" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where aw_seq = #{aw_seq} and img_type = '0'
+</select>
+
+<select id="catArtist" parameterType="int" resultType="kr.smhrd.entity.Users">
+select * from USERS where user_email = (select user_email from ARTWORKS where aw_seq = #{aw_seq})
+</select>
+
+<delete id="deleteCart" parameterType="String">
+delete from BASKETS where aw_seq = #{aw_seq}
+</delete>
 
 </mapper>

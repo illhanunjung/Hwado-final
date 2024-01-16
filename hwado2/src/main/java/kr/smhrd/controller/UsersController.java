@@ -162,12 +162,6 @@ public class UsersController {
 		}
 	
 	
-	// 장바구니 이동
-		@RequestMapping("/shoppingCart")
-		public String shoppingCart() {
-			return "shopping_cart";
-		}
-	
 		// 예술가 승인	
 		@RequestMapping("/approvalPf")
 		public String approvalPf(@RequestParam("user_email") String email) {

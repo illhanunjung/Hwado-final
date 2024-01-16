@@ -139,7 +139,7 @@ function closeSearchPopup() {
 </script>
 
    
-            <a class="site-title" href=".//">
+            <a class="site-title" href="">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         

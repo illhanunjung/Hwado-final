@@ -99,7 +99,10 @@ public class Artworks {
 	}
 	
 	
-	
+	public Artworks(int aw_seq, @NonNull String user_email) {
+		this.aw_seq = aw_seq;
+		this.user_email = user_email;
+	}
 	
 	
 	

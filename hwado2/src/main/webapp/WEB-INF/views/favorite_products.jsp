@@ -336,7 +336,7 @@
 					// 요청-응답 성공
 					success : function(data){
 						if(data){
-							console.log(data)
+							window.location.href = "wishPage";
 						} else{
 							console.log(data)
 						}

@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -34,6 +35,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.smhrd.entity.AUCTIONS;
 import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.Artworks;
+import kr.smhrd.entity.Cart;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Users;
@@ -885,6 +887,102 @@ public class ArtworksController {
 					}
 
 		
+					
+					// 장바구니 등록
+					@ResponseBody					
+					@RequestMapping(value =  "Cart", produces = "application/text; charset=UTF-8")
+					public String Cart(@RequestParam("userEmail") String userEmail, @RequestParam("awSeq") int awSeq, HttpServletResponse response ) {
+						
+						Artworks art = new Artworks(awSeq, userEmail);
+						
+						// 장바구니 상품 확인
+						int count = mapper.cartCheck(art);
+						int cnt = 0;
+						response.setCharacterEncoding("UTF-8");
+						if(count > 0) {
+							System.out.println("이미 존재");
+							return "이미 존재하는 상품입니다";
+						} else {
+							System.out.println("들어왔음");
+							cnt = mapper.insertCart(art);
+						}
+						
+						
+						if (cnt > 0) {
+							return "장바구니에 추가되었습니다.";
+						} else {
+							return "추가에 실패되었습니다.";
+						}
+						
+					}
+					
+					// 장바구니 이동
+					@RequestMapping("/shoppingCart")
+					public String shoppingCart(HttpSession session, Model model) {
+						Users userLogin = (Users)session.getAttribute("userLogin");
+						List<Cart> cartList = mapper.getCart(userLogin.getUser_email());
+						
+						ArrayList<Artworks> artList = new ArrayList<Artworks>();
+						ArrayList<IMAGES> imgList = new ArrayList<IMAGES>();
+						ArrayList<Users> artistList = new ArrayList<Users>();
+						
+						if(cartList != null) {
+							for(Cart cart : cartList) {
+								artList.add(mapper.cartArt(cart.getAw_seq()));
+								imgList.add(mapper.cartImg(cart.getAw_seq())); 
+								artistList.add(mapper.catArtist(cart.getAw_seq()));
+								
+							}
+						}
+						
+						
+						model.addAttribute("artList", artList);
+						model.addAttribute("imgList", imgList);		
+						model.addAttribute("artistList", artistList);
+						
+						return "shoppig_cart";
+					}
+					
+					// 장바구니 제거
+					@ResponseBody	
+					@RequestMapping("/deleteCart")
+					public String deleteCart(@RequestParam("awSeq") String awSeq) {
+						System.out.println("들어옴");
+						System.out.println(awSeq);
+						String[] aw_seq = awSeq.split(" ");
+						for(String i : aw_seq) {
+							System.out.println(i);
+							mapper.deleteCart(i);
+						}
+						
+						return "shoppingCart";
+						
+					}
+					
+					// 결제 페이지 출력
+					@ResponseBody
+					@RequestMapping(value = "/payment", produces = "application/text; charset=UTF-8")
+					public String payment(@RequestParam("awSeq") String awSeq) {
+						System.out.println(awSeq);
+						
+						String[] aw_seq = awSeq.split(" ");
+						
+						ArrayList<Artworks> payList = new ArrayList<Artworks>();
+						
+						for(String i : aw_seq) {
+							payList.add(mapper.getArt(Integer.parseInt(i)));
+						}
+						
+						int total = 0;
+						
+						for (Artworks art : payList) {
+							total += art.getAw_price();
+						}
+						
+						String result = payList.get(0).getAw_name() + " 외 " + (payList.size()-1) +"개 상품/"+total;
+						
+						return result;
+					}				
 }
 
 
