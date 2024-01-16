@@ -104,8 +104,8 @@
 }
 
 .gallery-column2 {
-	position: relative; 
-  	left: 190px;
+	position: relative !important; 
+  	left: 190px !important;
   	grid-column: span 4 / span 4; /* 네 열 차지 */
 }
 
