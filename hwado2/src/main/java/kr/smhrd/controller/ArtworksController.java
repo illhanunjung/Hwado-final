@@ -33,6 +33,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.smhrd.entity.AUCTIONS;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 import kr.smhrd.mapper.ArtworksMapper;
@@ -796,6 +797,8 @@ public class ArtworksController {
 					  mapper.refuseAw(aw_seq); 
 					  return "redirect:/artwork_management"; 
 					  }
+				  
+				
 
 		
 }
