@@ -813,7 +813,6 @@ html, body {
 .hero-content {
     display: table-cell;
     vertical-align: middle;
-    padding-top: 75px;
 }
 
 .hero-text {
@@ -1835,7 +1834,6 @@ a.linkedin-bg:hover {
 
  
 .slider-container {
-    padding-top: 150px;
     width: 100%;
     overflow: hidden; /* 슬라이더 밖의 이미지 숨기기 */
     

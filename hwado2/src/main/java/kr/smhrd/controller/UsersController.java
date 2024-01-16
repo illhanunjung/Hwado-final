@@ -84,7 +84,7 @@ public class UsersController {
             session.setAttribute("wishList", wishList);
             System.out.println(wishList.toString());
             
-            return "main"; // 로그인 성공 시 리다이렉트
+            return "redirect:/"; // 로그인 성공 시 리다이렉트
         } else {
             return "redirect:/signin"; // 로그인 실패 시 리다이렉트
         }

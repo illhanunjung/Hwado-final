@@ -172,10 +172,12 @@ function closeSearchPopup() {
 		%>
 		<div class="image-slider">
 			<%
+	        if (recentImages != null) {
 			for (int i = 0; i < recentImages.size(); i++) {
 			%>
 			<img src="<%=savePath + "/" + recentImages.get(i).getImg_filename()%>" />
 			<%
+			}
 			}
 			%>
 		</div>
@@ -190,6 +192,7 @@ function closeSearchPopup() {
 
 			<div class="list2">
 				<%
+		        if (monthArtworks != null) {
 				for (int i = 0; i < monthArtworks.size(); i++) {
 				%>
 				<a
@@ -208,6 +211,7 @@ function closeSearchPopup() {
 					</div>
 				</a>
 				<%
+				}
 				}
 				%>
 			</div>
