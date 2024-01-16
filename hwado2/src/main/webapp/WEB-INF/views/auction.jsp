@@ -230,7 +230,7 @@
             <div class="content-grid">
 
                 <!-- 갤러리 열 시작 -->
-                <div class="gallery-column">
+                <div class="gallery-column2">
                     <!-- 갤러리 헤더 시작 -->
                     <div class="gallery-header">
                         <!-- 갤러리 제목 -->
