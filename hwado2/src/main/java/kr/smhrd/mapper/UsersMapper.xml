@@ -33,6 +33,26 @@ select * from WISHLIST where user_email = #{user_email}
 	</update>
 
 
+<delete id="approvalPf" parameterType="String">
+	delete from PORTFOLIOS where user_email=#{email}
+</delete>
+
+<delete id="refusePf" parameterType="String">
+	delete from PORTFOLIOS where user_email=#{email}
+</delete>
+
+<update id="updateArtist" parameterType="String">
+	update USERS set user_role = "2" where user_email=#{email}
+</update>
+
+<select id="searchByQuery" resultType="kr.smhrd.entity.Users">
+		select * from USERS where user_email=#{email}
+	</select>
+
+<select id="searchArtist" resultType="kr.smhrd.entity.Users">
+		SELECT USERS.* FROM USERS JOIN ARTWORKS ON  USERS.user_email = ARTWORKS.user_email  WHERE LOWER(ARTWORKS.aw_name) LIKE CONCAT('%' , #{searchAw} , '%') or LOWER(USERS.user_nick) LIKE CONCAT('%' , #{searchAw} , '%')
+	</select>
+
 
 
 </mapper>

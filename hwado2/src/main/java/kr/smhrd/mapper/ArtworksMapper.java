@@ -108,5 +108,11 @@ public interface ArtworksMapper {
 
 	// 메인 페이지 이달의 작가
 	public List<ArtworkImage> getArtworks_Month();
+	
+
+			// 작품 검색
+			public List<Artworks> searchArtw(String searchAw);
+			// 이미지 검색
+			public List<IMAGES> searchImage(String searchAw);
 
 }

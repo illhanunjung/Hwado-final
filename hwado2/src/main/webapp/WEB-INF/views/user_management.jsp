@@ -99,6 +99,10 @@
 	font-weight: 400;
 	font-style: normal;
 }
+
+#fv_at {
+	color: black;
+}
 </style>
 </head>
 
@@ -154,7 +158,7 @@
 	<hr class="separator">
 
 	<div id="searchPopup" style="display: none;">
-		<form action="/search" method="get">
+		<form action="user_management_search" method="get">
 			<input type="text" name="query" placeholder="회원 검색..."> <input
 				type="submit" value="검색">
 			<button type="button" onclick="closeSearchPopup()">X</button>
@@ -216,51 +220,46 @@
 						</thead>
 						<!-- 테이블 바디: 실제 데이터가 들어가는 부분 -->
 
-						
+
 						<tbody class="table-body">
 							<!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->
-						<% List<Users> list = (List<Users>)request.getAttribute("list"); 
-						
-						 int pageN = (int)request.getAttribute("pageN");
-	                    	int item = 9;
-	                    	
-	                    	int start = pageN * item;
-	                    	int end = start+item;
-	                    	
-	                    	if(end > list.size()){
-	                    		end = list.size();
-	                    	} else if (end < item){
-		                		end = list.size();
-		                	}
-	                    	
-	                    	System.out.println("start : " + start);
-	                    	System.out.println("end : " + end);
-						
-						%>
+							<%
+							List<Users> list = (List<Users>) request.getAttribute("list");
+							int pageN = (int) request.getAttribute("pageN");
+							int item = 16;
 
-							<c:forEach items="${list}" var="users" varStatus="status">
-								<tr class="table-row">
-									<td class="data-cell"><p>${status.count }</p></td>
-									<td class="data-cell"><p>${users.user_name }</p></td>
-									<td class="data-cell"><p>${users.user_nick }</p></td>
-									<td class="data-cell"><p>${users.user_email }</p></td>
-									<td class="data-cell">
-										<!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 --> 
-										
-										
-            					<!-- 정지해제 버튼 항상 표시 -->
-            					<c:if test="${users.user_role eq '3'}">
-             		  			  <a href="unfreezeUser?email=${users.user_email}"><button class="button">정지해제</button></a> 
-           						 </c:if>
-           						 
-           						 <c:if test="${users.user_role ne '3'}">
-             		  			 <a href="stopUser?email=${users.user_email}"><button class="button">영구정지</button></a>
-           						 </c:if>
-											
+							int start = pageN * item;
+							int end = start + item;
 
-									</td>
-								</tr>
-							</c:forEach>
+							if (end > list.size()) {
+								end = list.size();
+							}
+
+							for (int i = start; i < end; i++) {
+								Users users = list.get(i);
+							%>
+							<tr class="table-row">
+								<td class="data-cell"><p><%=i + 1%></p></td>
+								<td class="data-cell"><p><%=users.getUser_name()%></p></td>
+								<td class="data-cell"><p><%=users.getUser_nick()%></p></td>
+								<td class="data-cell"><p><%=users.getUser_email()%></p></td>
+								<td class="data-cell">
+									<!-- 로직에 따른 버튼 표시 --> <%
+ if (users.getUser_role().equals("3")) {
+ %>
+									<a href="unfreezeUser?email=<%=users.getUser_email()%>"><button
+											class="button">정지해제</button></a> <%
+ } else {
+ %> <a
+									href="stopUser?email=<%=users.getUser_email()%>"><button
+											class="button">영구정지</button></a> <%
+ }
+ %>
+								</td>
+							</tr>
+							<%
+							}
+							%>
 
 						</tbody>
 					</table>
@@ -268,8 +267,13 @@
 			</div>
 			<div class="navigation-buttons">
 				<!-- 이전 페이지로 이동하는 버튼 -->
-				<a href="user_management?page=<%= pageN - 1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
-    <a href="user_management?page=<%= pageN + 1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
+				<a href="user_management?page=<%=pageN - 1%>"><button
+						class="nav-button">
+						<i class="bi bi-caret-left"></i>
+					</button></a> <a href="user_management?page=<%=pageN + 1%>"><button
+						class="nav-button">
+						<i class="bi bi-caret-right"></i>
+					</button></a>
 			</div>
 
 		</main>

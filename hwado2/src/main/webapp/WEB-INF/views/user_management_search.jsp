@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
-<%@page import="kr.smhrd.entity.Artworks"%>
-<%@page import="kr.smhrd.entity.IMAGES"%>
+<%@page import="kr.smhrd.entity.Users"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +17,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>회원 관리페이지</title>
+<title>회원관리페이지</title>
 
 <meta name="description" content="">
 <meta name="author" content="">
@@ -42,7 +41,7 @@
 <link rel="apple-touch-icon" sizes="180x180"
 	href="assets/img/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="15x15"
-	href="assets/img/logo.png">
+	href="resources/assets/img/logo.png">
 
 <!-- Stylesheets
     ================================================== -->
@@ -56,7 +55,7 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/assets/css/mypage.css">
 <link rel="stylesheet" type="text/css"
-	href="resources/assets/css/artwork_managerment.css">
+	href="resources/assets/css/user_management.css">
 
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -101,9 +100,8 @@
 	font-style: normal;
 }
 
-
-#fv_at{
-    color: black;
+#fv_at {
+	color: black;
 }
 </style>
 </head>
@@ -118,7 +116,8 @@
 
 					<ul class="nav navbar-nav navbar-right">
 
-						<li><a href="user_management">회원관리</a></li>
+
+						<li><a href="blog.html">회원관리</a></li>
 						<li><a href="#" onclick="openMypageModal()">마이페이지</a></li>
 						<li><a href="blog.html">작가</a></li>
 						<li><a href="contact.html">갤러리</a></li>
@@ -159,8 +158,8 @@
 	<hr class="separator">
 
 	<div id="searchPopup" style="display: none;">
-		<form action="/search" method="get">
-			<input type="text" name="query" placeholder="작품 검색..."> <input
+		<form action="user_management_search" method="get">
+			<input type="text" name="query" placeholder="회원 검색..."> <input
 				type="submit" value="검색">
 			<button type="button" onclick="closeSearchPopup()">X</button>
 		</form>
@@ -178,7 +177,6 @@
 
 
 
-
 		<!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
 
 		<!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
@@ -187,8 +185,8 @@
 		<div class="menu-bar">
 			<ul class="menu-items">
 
-				<li><a href="user_management.html">회원관리</a></li>
-				<li><a href="artwork_management.html" id="fv_at">작품관리</a></li>
+				<li><a href="user_management.html" id="fv_at">회원관리</a></li>
+				<li><a href="artwork_management.html">작품관리</a></li>
 				<li><a href="artist_approval.html">예술가 승인</a></li>
 			</ul>
 		</div>
@@ -203,9 +201,9 @@
 				<!-- 헤더 섹션: 페이지의 상단 헤더 부분 -->
 				<div class="header-section">
 					<h2 class="title">회원관리</h2>
-					<!-- <button id="searchButton">
+					<button id="searchButton">
 						<span class="glyphicon glyphicon-search" id="searchIcon"></span>
-					</button> -->
+					</button>
 				</div>
 				<!-- 테이블 컨테이너: 테이블을 담는 부분 -->
 				<div class="table-container">
@@ -215,116 +213,55 @@
 						<thead>
 							<tr class="table-header">
 								<th id="count" class="header-cell">번호</th>
-								<th id="name" class="header-cell">작품이름</th>
-								<th id="phone" class="header-cell">가격</th>
-								<th id="email" class="header-cell">작가명</th>
+								<th id="name" class="header-cell">이름</th>
+								<th id="phone" class="header-cell">닉네임</th>
+								<th id="email" class="header-cell">이메일</th>
 							</tr>
 						</thead>
 						<!-- 테이블 바디: 실제 데이터가 들어가는 부분 -->
+
+
 						<tbody class="table-body">
 							<!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->
-
-							<% List<Artworks> artworkList = (List<Artworks>)request.getAttribute("artworkList");
-							  List<IMAGES> imgsList = (List<IMAGES>) request.getAttribute("imgsList"); 
-							  
-							  String savePath = "./resources/artworks";
-							  
-							  int pageN = (int)request.getAttribute("pageN");
-							  int maxpage = (int)request.getAttribute("maxpage");
-		                    	int item = 9;
-		                    	
-		                    	int start = pageN * item;
-		                    	int end = start+item;
-		                    	
-		                    	if(end > imgsList.size()){
-		                    		end = imgsList.size();
-		                    	} else if (end < item){
-			                		end = imgsList.size();
-			                	}
-		                    	
-		                    	System.out.println("start : " + start);
-		                    	System.out.println("end : " + end);
-								
-						
-								%>
-							<%-- <c:forEach items="${artworkList}" var="artw" varStatus="status">
-								
-										<!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 --> 
-										
-										
-            					<!-- 정지해제 버튼 항상 표시 -->
-   
-             		  			  <a href="approvalArtwork?email=${artw.user_email}"><button class="button">승인</button></a> 
-           					
-             		  			 <a href="refuseArtwork?email=${artw.user_email}"><button class="button">거절</button></a>
-           						 
-											
-
-									</td>
-								</tr>
-							</c:forEach> --%>
-							<% 
-                          if(artworkList == null || artworkList.isEmpty()) { %>
-							<!-- 데이터가 없을 경우 표시할 메시지 -->
+							<%
+							List<Users> users = (List<Users>) request.getAttribute("users");
+							%>
 							<tr class="table-row">
-								<td colspan="5" class="data-cell">등록된 작품이 없습니다.</td>
-							</tr>
-							<% } else {%>
+								<td class="data-cell"><p><%=1%></p></td>
+								<td class="data-cell"><p><%=users.get(0).getUser_name()%></p></td>
+								<td class="data-cell"><p><%=users.get(0).getUser_nick()%></p></td>
+								<td class="data-cell"><p><%=users.get(0).getUser_email()%></p></td>
+								<td class="data-cell">
+									<!-- 로직에 따른 버튼 표시 --> <%
+								 if (users.get(0).getUser_role().equals("3")) {
+								 %> <a href="unfreezeUser?email=<%=users.get(0).getUser_email()%>"><button
+																			class="button">정지해제</button></a> <%
+								 } else {
+								 %> <a href="stopUser?email=<%=users.get(0).getUser_email()%>"><button
+																			class="button">영구정지</button></a> <%
+								 }
+								 %>
 								
-							<% for(int i = start; i < end; i++){ %>
-							<tr class="table-row">
-								<td class="data-cell"><p><%= i+1 %></p></td>
-								<td class="data-cell"><a
-									href="product_detail?aw_seq=<%= artworkList.get(i).getAw_seq() %>">
-										<div class="img_info">
-											<img
-												src="<%=savePath+"/"+imgsList.get(i).getImg_filename() %>"
-												width="100px" height="100px">
-											<p><%= artworkList.get(i).getAw_name() %></p>
-										</div>
-								</a></td>
-								<td class="data-cell"><p><%=artworkList.get(i).getAw_price() %></p></td>
-								<td class="data-cell"><p><%=artworkList.get(i).getUser_email() %></p></td>
-								<td class="data-cell"><a
-									href="approvalAw?aw_seq=<%= artworkList.get(i).getAw_seq() %>">
-										<button class="button">승인</button>
-								</a> <a href="refuseAw?aw_seq=<%= artworkList.get(i).getAw_seq() %>">
-										<button class="button">거절</button>
-								</a></td>
-							</tr>
-							<%} %>
-						<%} %>
-
 						</tbody>
 					</table>
 				</div>
 			</div>
-
-
 			<div class="navigation-buttons">
-				<!-- 첫 페이지가 아니면 이전 페이지 버튼 표시 -->
-				<%--  <% if(pageN > 0) { %>
-        <a href="artwork_management?page=<%= pageN - 1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
-    <% } %>
-    
-    <!-- 마지막 페이지가 아니면 다음 페이지 버튼 표시 -->
-    <% if(pageN < maxpage - 1) { %>
-        <a href="artwork_management?page=<%= pageN + 1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
-    <% } %> --%>
-				<a href="artwork_management?page=<%= pageN - 1 %>"><button
+				<!-- 이전 페이지로 이동하는 버튼 -->
+				<%-- <a href="user_management?page=<%=pageN - 1%>"><button
 						class="nav-button">
 						<i class="bi bi-caret-left"></i>
-					</button></a> <a href="artwork_management?page=<%= pageN + 1 %>"><button
+					</button></a> <a href="user_management?page=<%=pageN + 1%>"><button
 						class="nav-button">
 						<i class="bi bi-caret-right"></i>
-					</button></a>
+					</button></a> --%>
 			</div>
-
 
 		</main>
 
 
-		<!-- <script>
+
+		<script>
             document.getElementById('searchButton').addEventListener('click', function () {
                 document.getElementById('searchPopup').style.display = 'block';
             });
@@ -333,7 +270,7 @@
                 document.getElementById('searchPopup').style.display = 'none';
             }
 
-        </script> -->
+        </script>
 
 		<script>
             function loadPage(url) {
@@ -346,6 +283,8 @@
                     .catch(error => console.error('Error:', error));
             }
         </script>
+
+
 
 
 

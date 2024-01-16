@@ -24,4 +24,18 @@ public interface UsersMapper {
 
 	void unfreezeUser(String email);
 	
+	// 예술가 승인
+		public void approvalPf(String email);
+		// 예술가 거절
+		public void refusePf(String email);
+	// 예술가 등급으로 업데이트
+		public void updateArtist(String email);
+	// 회원관리 검색
+		public List<Users> searchByQuery(String query);
+
+		// 작가검색
+		public List<Users> searchArtist(String searchAw);
+
+
+	
 }

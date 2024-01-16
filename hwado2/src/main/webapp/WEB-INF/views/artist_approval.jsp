@@ -85,6 +85,12 @@
             font-weight: 400;
             font-style: normal;
         }
+        
+        #fv_at{
+    color: black;
+}
+        
+        
     </style>
 </head>
 
@@ -98,8 +104,8 @@
 
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="#" onclick="openMypageModal()">마이페이지</a></li>
+                        <li><a href="user_management">회원관리</a></li>
+                        <li><a href="">마이페이지</a></li>
                         <li><a href="blog.html">작가</a></li>
                         <li><a href="contact.html">갤러리</a></li>
                         <li><a href="signin.html">로그아웃</a></li>
@@ -183,7 +189,7 @@
                 <!-- 헤더 섹션: 페이지의 상단 헤더 부분 -->
                 <div class="header-section">
                     <h2 class="title">예술가관리</h2>
-                    <button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button>
+                   <!--  <button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button> -->
                 </div>
 
                 <!-- 테이블 컨테이너: 테이블을 담는 부분 -->
@@ -212,7 +218,7 @@
                            
                            
 						 int pageN = (int)request.getAttribute("pageN");
-	                    	int item = 9;
+	                    	int item = 16;
 	                    	
 	                    	int start = pageN * item;
 	                    	int end = start+item;
@@ -227,6 +233,14 @@
 	                    	System.out.println("end : " + end);
 						
 						%>
+
+							 
+    		<% if(artistApproval == null || artistApproval.isEmpty()) { %>
+      		  <!-- 데이터가 없을 경우 표시할 메시지 -->
+       		 <tr class="table-row">
+          		  <td colspan="5" class="data-cell">승인 대기 중인 예술가가 없습니다.</td>
+      			  </tr>   <% } else {%>
+
 
 							<% for(int i = start; i < end; i++){ %>
 							<tr class="table-row">
@@ -247,7 +261,7 @@
                                 </td>
 									</tr>
 										<%} %>	
-                           
+                          <% } %>
                            
                            
                            

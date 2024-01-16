@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -807,7 +808,7 @@ public class ArtworksController {
 					  return "redirect:/artwork_management"; 
 					  }
 				  
-				// 예술가 승인 페이지로 이동	
+					// 예술가 승인 페이지로 이동	
 					@RequestMapping("/artist_approval") 
 					public String artist_approval(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
 					    List<Users> artistApproval = mapper.artistApproval();
@@ -820,10 +821,10 @@ public class ArtworksController {
 					    
 				       int maxpage = 0;
 						
-						if (artistPf.size() %9 == 0) {
-							maxpage = artistPf.size()/9-1;
+						if (artistPf.size() %16 == 0) {
+							maxpage = artistPf.size()/16-1;
 						} else {
-							maxpage = artistPf.size()/9 ;
+							maxpage = artistPf.size()/16 ;
 						}
 						
 						System.out.println("maxpage : "+maxpage);
@@ -840,6 +841,47 @@ public class ArtworksController {
 					    model.addAttribute("maxpage", maxpage);
 					    
 					    return "artist_approval";
+					}
+
+		// 검색기능
+					
+					@GetMapping("/search")
+					 public String search(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam("searchAw") String searchAw, Model model) {
+						
+						System.out.println(searchAw);
+						 List<Users> artist = usersMapper.searchArtist(searchAw); 
+							 List<Artworks> artwork = mapper.searchArtw(searchAw);							
+								 List<IMAGES> image = mapper.searchImage(searchAw);
+								  model.addAttribute("artist", artist);
+								
+							 model.addAttribute("artwork", artwork);
+								 model.addAttribute("image",image); 
+							 
+							 System.out.println(model.toString());
+							 
+							 int maxpage = 0;
+								
+								if (artwork.size() %16 == 0) {
+									maxpage = artwork.size()/16-1;
+								} else {
+									maxpage = artwork.size()/16 ;
+								}
+								
+								System.out.println("maxpage : "+maxpage);
+								System.out.println("page : " + page);
+								if(page < 0) {
+									page = 0;
+								} else if (page > maxpage) {
+									page = maxpage;
+								}
+								
+								System.out.println("page : " + page);
+								
+								model.addAttribute("pageN", page);
+								
+								
+				        return "search _result";
+							
 					}
 
 		

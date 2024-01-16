@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -167,5 +168,33 @@ public class UsersController {
 			return "shopping_cart";
 		}
 	
-	
+		// 예술가 승인	
+		@RequestMapping("/approvalPf")
+		public String approvalPf(@RequestParam("user_email") String email) {
+			usersMapper.approvalPf(email);
+			usersMapper.updateArtist(email);
+			return "redirect:/artist_approval";
+		}	
+		
+		// 예술가 거절	
+		@RequestMapping("/refusePf")
+		public String refusePf(@RequestParam("user_email") String email) {
+		usersMapper.refusePf(email);
+		return "redirect:/artist_approval";
+				}	
+		
+		
+		// 회원관리 검색 
+		@GetMapping("/user_management_search")
+		 public String user_management_search(@RequestParam("query") String query, Model model) {
+	      		System.out.println(query);
+				 List<Users> users = usersMapper.searchByQuery(query);
+				 System.out.println(users.get(0).toString());
+				 model.addAttribute("users", users);
+				 
+	        return "user_management_search";
+				}
+		
+		
+		
 }//class
