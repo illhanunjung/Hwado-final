@@ -48,9 +48,10 @@
 
 /* 이미지 스타일 */
 .purchase-history img {
-    width: 100px;
-    height: auto;
+   width: 100px;
+    height: 150px;
     border-radius: 5px;
+    object-fit: cover;
 }
 
 /* 버튼 스타일 */
