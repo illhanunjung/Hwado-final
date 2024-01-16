@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import kr.smhrd.entity.AUCTIONS;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 import lombok.NonNull;
@@ -89,9 +90,16 @@ public interface ArtworksMapper {
 		public void refuseAw(String aw_seq);
 
 		
+
 		//카테고리 상품
 		public List<Artworks> artCategory(int category_seq);
 
 		// 카테고리 이미지
 		public List<IMAGES> imgCategory(int category_seq);
+
+		// 예술가 승인을 위한 유저정보
+		public List<Users> artistApproval();
+		// 예술가 승인 포트폴리오
+		public List<Portfolios> artistPf();
+
 }

@@ -112,6 +112,14 @@ select * from ARTWORKS where aw_type='일반' and category_seq=#{category_seq} a
 select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_type='일반' and category_seq=#{category_seq} and aw_status = "판매중")
 </select>
 
+<select id="artistPf" resultType="kr.smhrd.entity.Portfolios">
+		select * from PORTFOLIOS
+	</select>
+
+<select id="artistApproval" resultType="kr.smhrd.entity.Users">
+select * from USERS where user_email in (select user_email from PORTFOLIOS )
+</select>
+
 
 
 </mapper>
