@@ -159,7 +159,7 @@
 
 	<div id="searchPopup" style="display: none;">
 		<form action="user_management_search" method="get">
-			<input type="text" name="query" placeholder="회원 검색..."> <input
+			<input type="text" name="query" placeholder="회원 이메일 검색..."> <input
 				type="submit" value="검색">
 			<button type="button" onclick="closeSearchPopup()">X</button>
 		</form>
