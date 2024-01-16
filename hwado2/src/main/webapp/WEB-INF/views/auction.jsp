@@ -229,44 +229,6 @@
             <!-- 콘텐츠 그리드 시작 -->
             <div class="content-grid">
 
-                <!-- 카테고리 열 시작 -->
-                <div class="category-column">
-                    <!-- 카테고리 컨테이너 시작 -->
-                    <div class="category-container">
-                        <!-- 카테고리 제목 -->
-                        <h1 class="category-title">카테고리</h1>
-                        <!-- 카테고리 카드 시작 -->
-                        <div class="category-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 카테고리 리스트 시작 -->
-                                <ul class="category-list">
-                                    <!-- 카테고리 항목: 전체 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">전체</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 추상화 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">추상화</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 풍경화 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">풍경화</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 정물화 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">정물화</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 기타 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">기타</a>
-                                    </li>
-                                </ul> <!-- 카테고리 리스트 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 카테고리 카드 종료 -->
-                    </div> <!-- 카테고리 컨테이너 종료 -->
-                </div> <!-- 카테고리 열 종료 -->
-
                 <!-- 갤러리 열 시작 -->
                 <div class="gallery-column">
                     <!-- 갤러리 헤더 시작 -->
@@ -319,9 +281,15 @@
                                 <!-- 경매 남은 시간 -->
                                 <div id="countdown" class="countdown-timer" data-countdown="<%=auctioninfo.get(i).getAuc_ended_at()%>"></div>
                                 <!-- 아트워크 이미지 -->
+                                <%if(userLogin != null ){%>
                                 <a href="auction_detail?aw_seq=<%=artList.get(i).getAw_seq() %>" alt="상세페이지">
                                     <img src="<%=savePath+"/"+imgList.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
                                 </a>
+                                <%} else{ %>
+                                <a href="signin" alt="상세페이지">
+                                    <img src="<%=savePath+"/"+imgList.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
+                                </a>
+                                <%} %>
                                 <!-- 아트워크 정보 시작 -->
                                 <div class="artwork-info">
                                     <!-- 아트워크 제목 -->

@@ -61,50 +61,58 @@ public class ArtworksController {
 	}
 	
 	// 일반 작품 출력 페이지 이동
-	@RequestMapping("/product_page")
-	public String product_page(@RequestParam(value = "page", defaultValue = "0") int page , Model model) {
-		
-		List<Artworks> artList = mapper.artList();
-		List<IMAGES> imgList = mapper.imgList();
-		
-		model.addAttribute("artList", artList);
-		model.addAttribute("imgList", imgList);
-		
-		System.out.println(artList.size());
-		System.out.println(imgList.size());
-		
-		ArrayList<Users> artistList = new ArrayList<Users>();
-		
-		for(Artworks art : artList) {
-			artistList.add(mapper.getArtist(art.getUser_email()));
+		@RequestMapping("/product_page")
+		public String product_page(@RequestParam(value = "page", defaultValue = "0") int page , Model model, @RequestParam(value = "category_seq", defaultValue = "0") int category_seq) {
+			
+			List<Artworks> artList = null;
+			List<IMAGES> imgList = null;
+			
+			if(category_seq == 0) {
+				artList = mapper.artList();
+				imgList = mapper.imgList();
+			} else {
+				artList = mapper.artCategory(category_seq);
+				imgList = mapper.imgCategory(category_seq);			
+			}
+			
+			model.addAttribute("artList", artList);
+			model.addAttribute("imgList", imgList);
+			
+			System.out.println(artList.size());
+			System.out.println(imgList.size());
+			
+			ArrayList<Users> artistList = new ArrayList<Users>();
+			
+			for(Artworks art : artList) {
+				artistList.add(mapper.getArtist(art.getUser_email()));
+			}
+			
+			System.out.println(artistList.size());
+			
+			model.addAttribute("artistList", artistList);
+			
+			int maxpage = 0;
+			
+			if (imgList.size() %16 == 0) {
+				maxpage = imgList.size()/16-1;
+			} else {
+				maxpage = imgList.size()/16 ;
+			}
+			
+			System.out.println("maxpage : "+maxpage);
+			System.out.println("page : " + page);
+			if(page < 0) {
+				page = 0;
+			} else if (page > maxpage) {
+				page = maxpage;
+			}
+			
+			System.out.println("page : " + page);
+			
+			model.addAttribute("pageN", page);
+			
+			return "product";
 		}
-		
-		System.out.println(artistList.size());
-		
-		model.addAttribute("artistList", artistList);
-		
-		int maxpage = 0;
-		
-		if (imgList.size() %16 == 0) {
-			maxpage = imgList.size()/16-1;
-		} else {
-			maxpage = imgList.size()/16 ;
-		}
-		
-		System.out.println("maxpage : "+maxpage);
-		System.out.println("page : " + page);
-		if(page < 0) {
-			page = 0;
-		} else if (page > maxpage) {
-			page = maxpage;
-		}
-		
-		System.out.println("page : " + page);
-		
-		model.addAttribute("pageN", page);
-		
-		return "product";
-	}
 	
 	
 	//일반 상품 등록
@@ -205,7 +213,7 @@ public class ArtworksController {
 		
 		System.out.println("성공");
 		
-		return "Test";
+		return "auction_registration";
 	}
 	
 	
@@ -323,7 +331,7 @@ public class ArtworksController {
 		
 		System.out.println("성공");
 		
-		return "Test";
+		return "auction";
 	}
 	
 	// 상품 상세 보기

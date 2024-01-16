@@ -257,9 +257,9 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 			
 			
 			
-			<%
-if (userLogin != null && art != null) {
-%>
+				<%
+				if (userLogin != null && art != null) {
+				%>
 			
 			    <button class="heart-button <%= isWished ? "filled" : "" %>" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-aw_seq="<%=art.getAw_seq() %>">
 			        <i class="<%= isWished ? "glyphicon glyphicon-heart" : "glyphicon glyphicon-heart-empty" %>"></i>

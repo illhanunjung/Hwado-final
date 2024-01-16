@@ -238,6 +238,7 @@
 				})
             }
             
+            
         </script>
 
 
@@ -261,23 +262,27 @@
                                 <ul class="category-list">
                                     <!-- 카테고리 항목: 전체 -->
                                     <li class="category-item">
-                                        <a class="category-link" href="#">전체</a>
+                                        <a class="category-link" href="product_page?category_seq=0">전체</a>
                                     </li>
                                     <!-- 카테고리 항목: 추상화 -->
                                     <li class="category-item">
-                                        <a class="category-link" href="#">추상화</a>
+                                        <a class="category-link" href="product_page?category_seq=1">추상화</a>
                                     </li>
                                     <!-- 카테고리 항목: 풍경화 -->
                                     <li class="category-item">
-                                        <a class="category-link" href="#">풍경화</a>
+                                        <a class="category-link" href="product_page?category_seq=2">풍경화</a>
                                     </li>
                                     <!-- 카테고리 항목: 정물화 -->
                                     <li class="category-item">
-                                        <a class="category-link" href="#">정물화</a>
+                                        <a class="category-link" href="product_page?category_seq=3">정물화</a>
+                                    </li>
+                                    <!-- 카테고리 항목: 공예 -->
+                                    <li class="category-item">
+                                        <a class="category-link" href="product_page?category_seq=4">공예품</a>
                                     </li>
                                     <!-- 카테고리 항목: 기타 -->
                                     <li class="category-item">
-                                        <a class="category-link" href="#">기타</a>
+                                        <a class="category-link" href="product_page?category_seq=5">기타</a>
                                     </li>
                                 </ul> <!-- 카테고리 리스트 종료 -->
                             </div> <!-- 카드 콘텐츠 종료 -->
@@ -299,13 +304,9 @@
                     <%
                     	// 유저정보, 관심 작품 불러오기
                     	Users userLogin = (Users)session.getAttribute("userLogin");
-                    List<WISHLIST> wishList = null;
-                    	if(userLogin != null){
-                    		
-                    	wishList = (List<WISHLIST>)session.getAttribute("wishList");
-                    	}
+                     List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
                     	
-                    
+                    System.out.println("들어옴");
                     	// 작품 데이터 불러오기
                    		List<Artworks> artList = (List<Artworks>) request.getAttribute("artList");
                     	List<IMAGES> imgList = (List<IMAGES>) request.getAttribute("imgList");
@@ -338,9 +339,15 @@
                             <!-- 카드 콘텐츠 시작 -->
                             <div class="card-content">
                                 <!-- 아트워크 이미지 -->
+                                <% if(userLogin != null){ %>
                                 <a href="product_detail?aw_seq=<%=artList.get(i).getAw_seq() %>" alt="상세페이지">
                                     <img src="<%=savePath+"/"+imgList.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
                                 </a>
+                                <%} else { %>
+                                <a href="signin" alt="상세페이지">
+                                    <img src="<%=savePath+"/"+imgList.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
+                                </a>
+                                <%} %>   
                                 <!-- 아트워크 정보 시작 -->
                                 <div class="artwork-info">
                                     <!-- 아트워크 제목 -->
@@ -359,10 +366,15 @@
 								        <% } %>
 								    <% } %>
 								
+								<% if(userLogin != null){ %>
 								    <button class="heart-button <%= isWished ? "filled" : "" %>" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-aw_seq="<%=artList.get(i).getAw_seq() %>">
 								        <i class="<%= isWished ? "glyphicon glyphicon-heart" : "glyphicon glyphicon-heart-empty" %>"></i>
 								    </button>
-								                                    
+								  <%} else { %>
+								  	<a href="signin"><button class="heart-button ">
+								        <i class="glyphicon glyphicon-heart-empty"></i>
+								    </button></a>
+								  <%} %>                                  
                                 </div> <!-- 아트워크 정보 종료 -->
                             </div> <!-- 카드 콘텐츠 종료 -->
                         </div> <!-- 아트워크 카드 종료 -->
@@ -394,7 +406,7 @@
                     })
                     .catch(error => console.error('Error:', error));
             }
-            
+           
         </script>
 
 

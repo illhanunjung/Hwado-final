@@ -88,4 +88,10 @@ public interface ArtworksMapper {
 		// 작품 거절
 		public void refuseAw(String aw_seq);
 
+		
+		//카테고리 상품
+		public List<Artworks> artCategory(int category_seq);
+
+		// 카테고리 이미지
+		public List<IMAGES> imgCategory(int category_seq);
 }

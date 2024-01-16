@@ -26,19 +26,19 @@ select * from IMAGES where aw_seq = #{aw_seq}
 </select>
 
 <select id="artList" resultType="kr.smhrd.entity.Artworks">
-select * from ARTWORKS where aw_type='일반'
+select * from ARTWORKS where aw_type='일반' and aw_status = "판매중"
 </select>
 
 <select id="imgList" resultType="kr.smhrd.entity.IMAGES">
-select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_type='일반')
+select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_type='일반' and aw_status = "판매중")
 </select>
 
 <select id="artAllList" resultType="kr.smhrd.entity.Artworks">
-select * from ARTWORKS
+select * from ARTWORKS where aw_status = "판매중"
 </select>
 
 <select id="imgAllList" resultType="kr.smhrd.entity.IMAGES">
-select * from IMAGES where img_type='0'
+select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_status = "판매중")
 </select>
 
 <select id="getArt" parameterType="int"  resultType="kr.smhrd.entity.Artworks">
@@ -46,7 +46,7 @@ select * from ARTWORKS where aw_seq=#{aw_seq}
 </select>
 
 <select id="showImg" parameterType="int"  resultType="String">
-select img_filename from IMAGES where aw_seq=#{aw_seq}
+select img_filename from IMAGES where aw_seq=#{aw_seq} 
 </select>
 
 <select id="auctionList" resultType="kr.smhrd.entity.Artworks">
@@ -104,7 +104,13 @@ select * from IMAGES where img_type='0' and aw_seq = #{aw_seq}
 		UPDATE ARTWORKS SET aw_status = "판매거절" WHERE aw_seq=#{aw_seq}
 	</update>
 
+<select id="artCategory" parameterType="int" resultType="kr.smhrd.entity.Artworks">
+select * from ARTWORKS where aw_type='일반' and category_seq=#{category_seq} and aw_status = "판매중"
+</select>
 
+<select id="imgCategory" parameterType="int" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_type='일반' and category_seq=#{category_seq} and aw_status = "판매중")
+</select>
 
 
 
