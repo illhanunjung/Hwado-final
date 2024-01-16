@@ -267,7 +267,7 @@
                           if(artworkList == null || artworkList.isEmpty()) { %>
 							<!-- 데이터가 없을 경우 표시할 메시지 -->
 							<tr class="table-row">
-								<td colspan="5" class="data-cell">등록된 작품이 없습니다.</td>
+								<td colspan="5" class="data-cell" style="padding-top: 50px;">등록된 작품이 없습니다.</td>
 							</tr>
 							<% } else {%>
 								

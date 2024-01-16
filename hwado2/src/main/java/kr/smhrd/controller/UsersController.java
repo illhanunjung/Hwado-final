@@ -183,7 +183,7 @@ public class UsersController {
 		 public String user_management_search(@RequestParam("query") String query, Model model) {
 	      		System.out.println(query);
 				 List<Users> users = usersMapper.searchByQuery(query);
-				 System.out.println(users.get(0).toString());
+			
 				 model.addAttribute("users", users);
 				 
 	        return "user_management_search";

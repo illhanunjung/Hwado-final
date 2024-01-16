@@ -238,7 +238,7 @@
     		<% if(artistApproval == null || artistApproval.isEmpty()) { %>
       		  <!-- 데이터가 없을 경우 표시할 메시지 -->
        		 <tr class="table-row">
-          		  <td colspan="5" class="data-cell">승인 대기 중인 예술가가 없습니다.</td>
+          		  <td colspan="5" class="data-cell" style="padding-top: 50px;">승인 대기 중인 예술가가 없습니다.</td>
       			  </tr>   <% } else {%>
 
 

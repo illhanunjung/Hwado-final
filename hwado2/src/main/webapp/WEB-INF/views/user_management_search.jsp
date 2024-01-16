@@ -225,6 +225,7 @@
 							<!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->
 							<%
 							List<Users> users = (List<Users>) request.getAttribute("users");
+							  if (users != null && !users.isEmpty()) {
 							%>
 							<tr class="table-row">
 								<td class="data-cell"><p><%=1%></p></td>
@@ -241,7 +242,15 @@
 																			class="button">영구정지</button></a> <%
 								 }
 								 %>
-								
+								 
+								 <% } else { %>
+								 
+								<tr>
+								<td colspan="4" class="data-cell" style="padding-top: 50px;">검색 결과가 없습니다.</td></tr>
+
+								 <% 
+                        }
+                        %>
 						</tbody>
 					</table>
 				</div>
