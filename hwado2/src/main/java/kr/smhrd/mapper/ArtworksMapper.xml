@@ -106,6 +106,14 @@ select * from IMAGES where img_type='0' and aw_seq = #{aw_seq}
 
 
 
+<select id="artistPf" resultType="kr.smhrd.entity.Portfolios">
+		select * from PORTFOLIOS
+	</select>
+
+<select id="artistApproval" resultType="kr.smhrd.entity.Users">
+select * from USERS where user_email in (select user_email from PORTFOLIOS )
+</select>
+
 
 
 </mapper>

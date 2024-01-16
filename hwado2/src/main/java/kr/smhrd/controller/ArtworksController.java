@@ -798,7 +798,40 @@ public class ArtworksController {
 					  return "redirect:/artwork_management"; 
 					  }
 				  
-				
+				// 예술가 승인 페이지로 이동	
+					@RequestMapping("/artist_approval") 
+					public String artist_approval(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
+					    List<Users> artistApproval = mapper.artistApproval();
+				        List<Portfolios> artistPf = mapper.artistPf();
+								
+						model.addAttribute("artistPf", artistPf);
+					    model.addAttribute("artistApproval", artistApproval);
+					    
+					    System.out.println(artistPf.size());
+					    
+				       int maxpage = 0;
+						
+						if (artistPf.size() %9 == 0) {
+							maxpage = artistPf.size()/9-1;
+						} else {
+							maxpage = artistPf.size()/9 ;
+						}
+						
+						System.out.println("maxpage : "+maxpage);
+						System.out.println("page : " + page);
+						if(page < 0) {
+							page = 0;
+						} else if (page > maxpage) {
+							page = maxpage;
+						}
+						
+						System.out.println("page : " + page);
+						
+						model.addAttribute("pageN", page);
+					    model.addAttribute("maxpage", maxpage);
+					    
+					    return "artist_approval";
+					}
 
 		
 }

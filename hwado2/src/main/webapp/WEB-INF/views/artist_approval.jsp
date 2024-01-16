@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ page import="java.util.List"%>
+<%@page import="kr.smhrd.entity.Users"%>
+<%@page import="kr.smhrd.entity.Portfolios"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,19 +35,19 @@
     <!-- Favicon
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="15x15" href="assets/img/logo.png">
+    <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/artist_approval.css">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/artist_approval.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -116,7 +120,7 @@
     <div class="flex-container">
         <div class="top-section">
             <a class="site-title" href="index.html">
-                <img src="assets/img/logo.png" class="logo">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
 
@@ -144,7 +148,7 @@
     <div class="flex-container">
         <div class="top-section">
             <a class="site-title">
-                <img src="assets/img/logo.png" class="logo">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
 
@@ -190,86 +194,77 @@
                         <thead>
                             <tr class="table-header">
                                 <th id="count" class="header-cell">번호</th>
-                                <th id="name" class="header-cell">이름</th>
-                                <th id="phone" class="header-cell">전화번호</th>
+                                <th id="name" class="header-cell">작가명</th>
                                 <th id="email" class="header-cell">이메일</th>
+                                <th id="phone" class="header-cell">포트폴리오</th>
+                                
+                                
                             </tr>
                         </thead>
                         <!-- 테이블 바디: 실제 데이터가 들어가는 부분 -->
                         <tbody class="table-body">
                             <!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->
-                            <tr class="table-row">
-                                <td class="data-cell">
-                                    <p id="countdown">1</p>
+                                                   
+                            
+                        <%   List<Users> artistApproval = (List<Users>)request.getAttribute("artistApproval");
+           		             List<Portfolios> artistPf = (List<Portfolios>)request.getAttribute("artistPf"); 
+                           
+                           
+                           
+						 int pageN = (int)request.getAttribute("pageN");
+	                    	int item = 9;
+	                    	
+	                    	int start = pageN * item;
+	                    	int end = start+item;
+	                    	
+	                    	if(end > artistPf.size()){
+	                    		end = artistPf.size();
+	                    	} else if (end < item){
+		                		end = artistPf.size();
+		                	}
+	                    	
+	                    	System.out.println("start : " + start);
+	                    	System.out.println("end : " + end);
+						
+						%>
+
+							<% for(int i = start; i < end; i++){ %>
+							<tr class="table-row">
+									<td class="data-cell"><p id="countdown"><%= i+1 %></p></td>													
+									<td class="data-cell"><p><%=artistApproval.get(i).getUser_nick() %></p></td>
+									<td class="data-cell"><p><%=artistApproval.get(i).getUser_email() %></p></td>
+									<td class="data-cell">
+									<a href="">								
+                                        <p><%= "포트폴리오 보러가기" %></p>                                
+                                    </a>
+                                    </td>
+									
+									<td class="data-cell">
+                                  
+                                   <a href="approvalPf?user_email=<%= artistApproval.get(i).getUser_email() %>"> <button class="button">승인</button></a>
+                                   
+                                   <a href="refusePf?user_email=<%= artistApproval.get(i).getUser_email() %>"> <button class="button">거절</button></a>
                                 </td>
-                                <td class="data-cell">
-                                    <p>박지뉴</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>123-456-7890</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>jinu@naver.com</p>
-                                </td>
-                                <td class="data-cell">
-                                    <!-- 정지해제 버튼: 각 회원들을 정지 해제 시키는 버튼 -->
-                                    <button class="button">승인</button>
-                                    <!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 -->
-                                    <button class="button">거절</button>
-                                </td>
-                            </tr>
-                            <!-- 추가적인 행들은 여기에 위치 -->
-                            <!-- 테이블 행: 각 회원의 데이터를 나타내는 행 -->
-                            <tr class="table-row">
-                                <td class="data-cell">
-                                    <p id="countdown">1</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>박지뉴</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>123-456-7890</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>jinu@naver.com</p>
-                                </td>
-                                <td class="data-cell">
-                                    <!-- 정지해제 버튼: 각 회원들을 정지 해제 시키는 버튼 -->
-                                    <button class="button">승인</button>
-                                    <!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 -->
-                                    <button class="button">거절</button>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="data-cell">
-                                    <p id="countdown">1</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>박지뉴</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>123-456-7890</p>
-                                </td>
-                                <td class="data-cell">
-                                    <p>jinu@naver.com</p>
-                                </td>
-                                <td class="data-cell">
-                                    <!-- 정지해제 버튼: 각 회원들을 정지 해제 시키는 버튼 -->
-                                    <button class="button">승인</button>
-                                    <!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 -->
-                                    <button class="button">거절</button>
-                                </td>
-                            </tr>
+									</tr>
+										<%} %>	
+                           
+                           
+                           
+                           
+                           
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="navigation-buttons">
                 <!-- 이전 페이지로 이동하는 버튼 -->
-                <button class="nav-button" onclick="loadPage('previousPageUrl')"><i
+              <!--   <button class="nav-button" onclick="loadPage('previousPageUrl')"><i
                         class="bi bi-caret-left"></i></button>
-                <!-- 다음 페이지로 이동하는 버튼 -->
-                <button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button>
+                다음 페이지로 이동하는 버튼
+                <button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button> -->
+                
+      <a href="artist_approval?page=<%= pageN - 1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
+    <a href="artist_approval?page=<%= pageN + 1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
             </div>
 
         </main>
