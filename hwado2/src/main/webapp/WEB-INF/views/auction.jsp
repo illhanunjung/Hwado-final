@@ -123,7 +123,7 @@
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="index.html">
+            <a class="site-title" href=".//">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -147,12 +147,6 @@
         </form>
     </div>
 
-    <div class="flex-container">
-        <div class="top-section">
-            <a class="site-title">
-                <img src="resources/assets/img/logo.png" class="logo">
-            </a>
-        </div>
 
         <script>
             document.getElementById('searchButton').addEventListener('click', function () {
@@ -223,12 +217,8 @@
         <div class="menu-bar">
             <ul class="menu-items">
 
-                <li><a href="favorite_artists.html">관심작가</a></li>
-                <li><a href="favorite_products.html">관심작품</a></li>
-                <li><a href="shoppig_cart.html">장바구니</a></li>
-                <li><a href="purchase_history.html">구매내역</a></li>
-                <li><a href="artist_registration.html">예술가신청</a></li>
-                <li><a href="user_edit.html">개인정보수정</a></li>
+                <li><a href="product_page">일반상품</a></li>
+                <li><a href="auction_page">경매</a></li>
             </ul>
         </div>
 

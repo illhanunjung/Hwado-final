@@ -1,3 +1,4 @@
+<%@page import="kr.smhrd.entity.Users"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -75,6 +76,11 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 </head>
 <body>
 
+<%
+ Users userLogin = (Users)session.getAttribute("userLogin");
+
+%>
+
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
             <div class="container">
@@ -85,13 +91,21 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
                                           
                       <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
-                      <li><a href="shoppig_cart.html">장바구니</a></li>
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_email().equals("admin")){ %>
                       <li><a href="user_management">회원관리</a></li>
-                        <li><a href="mypage.html">마이페이지</a></li>
-                        <li><a href="artists.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
                         <li><a href="signin">로그인</a></li>
+                        <%} %>
 
                     </ul>
 
@@ -122,7 +136,7 @@ function closeSearchPopup() {
 </script>
 
    
-            <a class="site-title">
+            <a class="site-title" href=".//">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         
