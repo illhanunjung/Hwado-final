@@ -31,6 +31,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.smhrd.entity.AUCTIONS;
+import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.Portfolios;
@@ -47,7 +48,7 @@ public class ArtworksController {
 	
 	@Autowired 
 	private UsersMapper usersMapper;
-	
+		
 	// 상품 등록 페이지 이동
 	@RequestMapping("/prd_regi_page")
 	public String prd_regi_page() {

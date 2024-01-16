@@ -120,6 +120,22 @@ select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWOR
 select * from USERS where user_email in (select user_email from PORTFOLIOS )
 </select>
 
+<select id="getRecentArtworkImages" resultType="kr.smhrd.entity.IMAGES">
+		SELECT IMAGES.*
+		FROM IMAGES
+		JOIN ARTWORKS ON IMAGES.aw_seq = ARTWORKS.aw_seq
+		WHERE ARTWORKS.created_at > NOW() - INTERVAL 7 DAY;
+</select>
+
+<select id="getArtworks_Month" resultType="kr.smhrd.entity.ArtworkImage">
+		SELECT * 
+		FROM ARTWORKS A
+		JOIN IMAGES I ON A.aw_seq = I.aw_seq
+		WHERE A.created_at >= NOW() - INTERVAL 1 MONTH
+		ORDER BY RAND()
+		LIMIT 16;
+</select>
+
 
 
 </mapper>

@@ -1,3 +1,6 @@
+<%@page import="kr.smhrd.entity.IMAGES"%>
+<%@page import="kr.smhrd.entity.ArtworkImage"%>
+<%@page import="java.util.List"%>
 <%@page import="kr.smhrd.entity.Users"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -158,235 +161,56 @@ function closeSearchPopup() {
 
     <hr class="separator">
 
-    <img class="mainback" src="resources/assets/img/land3.jpg">
-    
-    <hr class="separator">
-    
-    <div class="slider-container">
-      <div class="image-slider">
-          <img src="resources/assets/명화/11.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/12.jpg" alt="이미지 2">
-          <img src="resources/assets/명화/13.jpg" alt="이미지 3">
-          <img src="resources/assets/명화/14.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/15.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/16.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/17.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/18.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/1.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/2.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/3.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/4.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/5.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/6.jpg" alt="이미지 1">
-          <img src="resources/assets/명화/7.jpg" alt="이미지 1">
-          <!-- 더 많은 이미지를 추가할 수 있습니다 -->
-      </div>
-  </div>
-  <hr class="separator">
-    <p class="artistName">❝ 이 달의 작가 ❞</p>
-    <main id="main" class="site-main">
+	<img class="mainback" src="resources/assets/img/land3.jpg">
 
+	<hr class="separator">
 
-         <div class="list2">
-            <a href="/product/detail.html?product_no=9289&amp;cate_no=42&amp;display_group=1">
-              <div class="list2-item1">
-                <img class="list2-item-img" src="/assets/명화/1.jpg" alt="best 상품 이미지">
-                
-                <div class="list2-item-text-box">
-                  <span class="list2-item-desc">
-                    Lilly Butler(1896)
-                  </span><br>
-                  <span class="list2-item-name">Theodore Earl Butler </span>
-                  
-                </div>
-              </div>
-            </a>
-              
-            <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-              <div class="list2-item2">
-               
-                <img class="list2-item-img" src="/assets/명화/2.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                  <span class="list2-item-desc">
-                    Woman with a Parasol
-                  </span><br>
-                  <span class="list2-item-name">Claude Monet</span>
-                 
-                </div>
-              </div>
-            </a>
-              
-            <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item3">
-                    
-                  <img class="list2-item-img" src="/assets/명화/6.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      La Victoire(1918-1919)
-                    </span><br>
-                    <span class="list2-item-name">Maurice Denis</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item4">
-                    
-                  <img class="list2-item-img" src="/assets/명화/7.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      Study for a Composition(1940-1941)
-                    </span><br>
-                    <span class="list2-item-name">Piet Mondrian</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item5">
-                   
-                  <img class="list2-item-img" src="/assets/명화/5.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      Help Your Country
-                    </span><br>
-                    <span class="list2-item-name">Anonymous</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                   
-                  <img class="list2-item-img" src="/assets/명화/8.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      Portret van Benedictus
-                    </span><br>
-                    <span class="list2-item-name">Peter Paul Rubens</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                    
-                  <img class="list2-item-img" src="/assets/명화/9.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      Heavy red
-                    </span><br>
-                    <span class="list2-item-name">Wassily Kandinsky</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                   
-                  <img class="list2-item-img" src="/assets/명화/10.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      Fishing Boats
-                    </span><br>
-                    <span class="list2-item-name">Mikulas Galanda</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                    
-                  <img class="list2-item-img" src="/assets/명화/11.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      Self-Portrait
-                    </span><br>
-                    <span class="list2-item-name">Emst Ludwig Kirchner</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                    
-                  <img class="list2-item-img" src="/assets/명화/12.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                     Joseph's Coat
-                    </span><br>
-                    <span class="list2-item-name">Horace Vemet</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                    
-                  <img class="list2-item-img" src="/assets/명화/13.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      Rouget
-                    </span><br>
-                    <span class="list2-item-name">Maurice Pillard Verneuil</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                   
-                  <img class="list2-item-img" src="/assets/명화/14.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      A Visit To Lvov
-                    </span><br>
-                    <span class="list2-item-name">Vincent Stiepevich</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                    
-                  <img class="list2-item-img" src="/assets/명화/15.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      A lady at her toilette
-                    </span><br>
-                    <span class="list2-item-name">Jean-Frederic Schall</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                   
-                  <img class="list2-item-img" src="/assets/명화/16.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      The Mole And Her Son
-                    </span><br>
-                    <span class="list2-item-name">Charies Henny Bennett</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                   
-                  <img class="list2-item-img" src="/assets/명화/17.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                     Geometric and wavy lines
-                    </span><br>
-                    <span class="list2-item-name">Myriam Thyes</span>
-                   
-                  </div>
-                </div>
-              </a>   
-              <a href="/product/detail.html?product_no=10670&amp;cate_no=628&amp;display_group=1">
-                <div class="list2-item">
-                   
-                  <img class="list2-item-img" src="/assets/명화/18.jpg" alt="best 상품 이미지"><div class="list2-item-text-box">                
-                    <span class="list2-item-desc">
-                      Marie Bizard & Roger
-                    </span><br>
-                    <span class="list2-item-name">Leonetto Cappiello</span>
-                   
-                  </div>
-                </div>
-              </a>
+	<div class="slider-container">
+		<%
+		String savePath = "./resources/artworks";
+		List<IMAGES> recentImages = (List<IMAGES>) request.getAttribute("recentImages");
+		%>
+		<div class="image-slider">
+			<%
+			for (int i = 0; i < recentImages.size(); i++) {
+			%>
+			<img src="<%=savePath + "/" + recentImages.get(i).getImg_filename()%>" />
+			<%
+			}
+			%>
+		</div>
+		</div>
+		<hr class="separator">
+		<p class="artistName">❝ 이 달의 작가 ❞</p>
+		<main id="main" class="site-main">
 
+			<%
+			List<ArtworkImage> monthArtworks = (List<ArtworkImage>) request.getAttribute("monthArtworks");
+			%>
 
-          </div> 
-          
+			<div class="list2">
+				<%
+				for (int i = 0; i < monthArtworks.size(); i++) {
+				%>
+				<a
+					href="/product/detail.html?product_no=9289&amp;cate_no=42&amp;display_group=1">
+					<div class="list2-item<%=i + 1%>">
+						<img class="list2-item-img"
+							src="<%=savePath + "/" + monthArtworks.get(i).getImg_filename()%>"
+							alt="best 상품 이미지">
+
+						<div class="list2-item-text-box">
+							<span class="list2-item-desc"> <%=monthArtworks.get(i).getAw_name()%>
+							</span><br> <span class="list2-item-name"><%=monthArtworks.get(i).getUser_email()%>
+							</span>
+
+						</div>
+					</div>
+				</a>
+				<%
+				}
+				%>
+			</div>
 
 
 
@@ -401,49 +225,63 @@ function closeSearchPopup() {
 
 
 
-    </main><!-- /#main -->
+
+		</main>
+		<!-- /#main -->
 
 
 
 
 
-        <hr class="separator2">
-
-        
-         
-              <div class="row">
-                  <div class="col-md-3 col-sm-4 col-xs-6">
-                      <a class="site-title"><h2>화도</h2></a>
-                      <p>[畵道]예술의 길을 걷는 사람들을 <br>[花導]꽃길로 인도한다</p>      
-                  </div>
-                  <div class="col-lg-offset-4 col-md-3 col-sm-4 col-md-offset-2 col-sm-offset-0 col-xs-6 ">
-                      <ul class="list-unstyled contact-links">
-                          <li><span class="glyphicon glyphicon-envelope"></span><a href="mailto:info@agencyperfect.com">smhrd@smhrd.or.kr</a></li><br>
-                          <li><span class="glyphicon glyphicon-earphone"></span><a href="tel:+37400800000">062-655-3506</a></li><br>
-                          <li><span class="glyphicon glyphicon-print"></span><a href="+37400900000">062-655-3510</a></li><br>
-                          <li><span class="glyphicon glyphicon-map-marker"></span><a href="https://smhrd.or.kr/">광주 동구 예술길 31-15 3~4, 7층</a></li>
-                      </ul>
-                  </div>
-                  <div class="col-md-12">
-                      <hr> <!-- Optional: Add a line to separate -->
-                      <p style="text-align: center;">&copy; 2024 화도. All rights reserved.</p>
-                  </div>
-              
-          
-  
-      
+		<hr class="separator2">
 
 
-    <!-- Bootstrap core JavaScript
+
+		<div class="row">
+			<div class="col-md-3 col-sm-4 col-xs-6">
+				<a class="site-title"><h2>화도</h2></a>
+				<p>
+					[畵道]예술의 길을 걷는 사람들을 <br>[花導]꽃길로 인도한다
+				</p>
+			</div>
+			<div
+				class="col-lg-offset-4 col-md-3 col-sm-4 col-md-offset-2 col-sm-offset-0 col-xs-6 ">
+				<ul class="list-unstyled contact-links">
+					<li><span class="glyphicon glyphicon-envelope"></span><a
+						href="mailto:info@agencyperfect.com">smhrd@smhrd.or.kr</a></li>
+					<br>
+					<li><span class="glyphicon glyphicon-earphone"></span><a
+						href="tel:+37400800000">062-655-3506</a></li>
+					<br>
+					<li><span class="glyphicon glyphicon-print"></span><a
+						href="+37400900000">062-655-3510</a></li>
+					<br>
+					<li><span class="glyphicon glyphicon-map-marker"></span><a
+						href="https://smhrd.or.kr/">광주 동구 예술길 31-15 3~4, 7층</a></li>
+				</ul>
+			</div>
+			<div class="col-md-12">
+				<hr>
+				<!-- Optional: Add a line to separate -->
+				<p style="text-align: center;">&copy; 2024 화도. All rights
+					reserved.</p>
+			</div>
+
+
+
+
+
+
+			<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/bootstrap-select.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
-    <script src="assets/js/jquery.countTo.min.js"></script>
-    <script src="assets/js/jquery.shuffle.min.js"></script>
-    <script src="assets/js/script.js"></script>
-  
+			<!-- Placed at the end of the document so the pages load faster -->
+			<script
+				src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+			<script src="assets/js/bootstrap.min.js"></script>
+			<script src="assets/js/bootstrap-select.min.js"></script>
+			<script src="assets/js/jquery.slicknav.min.js"></script>
+			<script src="assets/js/jquery.countTo.min.js"></script>
+			<script src="assets/js/jquery.shuffle.min.js"></script>
+			<script src="assets/js/script.js"></script>
 </body>
 </html>

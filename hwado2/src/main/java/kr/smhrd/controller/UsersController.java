@@ -12,19 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.smhrd.entity.ArtworkImage;
+import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
+import kr.smhrd.mapper.ArtworksMapper;
 import kr.smhrd.mapper.UsersMapper;
 
 @Controller
 public class UsersController {
 	
+	@Autowired
+	private ArtworksMapper mapper;
 	@Autowired 
 	private UsersMapper usersMapper;
 	
 	//메인 페이지
 	@RequestMapping("/")
-	public String mainPage() {
+	public String mainPage(Model model) {
+		List<ArtworkImage> monthArtworks = mapper.getArtworks_Month();
+		List<IMAGES> recentImages = mapper.getRecentArtworkImages();
+		model.addAttribute("monthArtworks", monthArtworks);
+		model.addAttribute("recentImages", recentImages);
 		return "main";
 	}
 	

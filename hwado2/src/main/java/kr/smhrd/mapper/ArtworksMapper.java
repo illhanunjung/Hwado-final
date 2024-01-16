@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.smhrd.entity.AUCTIONS;
+import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.Portfolios;
@@ -101,5 +102,11 @@ public interface ArtworksMapper {
 		public List<Users> artistApproval();
 		// 예술가 승인 포트폴리오
 		public List<Portfolios> artistPf();
+		
+	// 메인 페이지 슬라이더
+	public List<IMAGES> getRecentArtworkImages();
+
+	// 메인 페이지 이달의 작가
+	public List<ArtworkImage> getArtworks_Month();
 
 }
