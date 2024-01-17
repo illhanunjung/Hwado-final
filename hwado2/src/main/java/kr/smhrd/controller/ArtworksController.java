@@ -39,6 +39,7 @@ import kr.smhrd.entity.Cart;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.ORDERS;
 import kr.smhrd.entity.Portfolios;
+import kr.smhrd.entity.Profile;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 import kr.smhrd.mapper.ArtworksMapper;
@@ -1020,7 +1021,270 @@ public class ArtworksController {
 						
 						
 						return result;
-					}			
+					}		
+					
+					// 예술가 프로필 등록
+					@RequestMapping("/artist_profile_edit")
+					public String artist_profile_edit(HttpSession session, Model model) {
+						Users userLogin = (Users)session.getAttribute("userLogin");	
+						
+						int count = mapper.getProfile(userLogin.getUser_email());
+						
+						model.addAttribute("count", count);
+						
+						
+						return "artist_profile_edit";
+					}
+					
+					@RequestMapping("/profile")
+					public String profile(Profile pf, HttpServletRequest request, HttpSession session) {
+						
+						MultipartRequest multi = null;
+						
+						
+						
+						String savePath = request.getRealPath("./resources/profile"); 
+						
+						int maxSize = 1024 * 1024 *10; //10MB
+						
+						String enc = "UTF-8";
+						
+						DefaultFileRenamePolicy dftrp = new DefaultFileRenamePolicy();
+						
+						try {
+							multi = new MultipartRequest(request, savePath, maxSize, enc, dftrp);
+							
+							String ap_title = multi.getFilesystemName("ap_title");
+							String ap_desc = multi.getParameter("ap_desc");
+							
+							String name1 = multi.getParameter("name1");
+							String file1 = multi.getFilesystemName("file1");
+							String desc1 = multi.getParameter("desc1");	
+							
+							String name2 = multi.getParameter("name2");
+							String file2 = multi.getFilesystemName("file2");
+							String desc2 = multi.getParameter("desc2");	
+							
+							String name3 = multi.getParameter("name3");
+							String file3 = multi.getFilesystemName("file3");
+							String desc3 = multi.getParameter("desc3");	
+							
+							String name4 = multi.getParameter("name4");
+							String file4 = multi.getFilesystemName("file4");
+							String desc4 = multi.getParameter("desc4");	
+							
+							String name5 = multi.getParameter("name5");
+							String file5 = multi.getFilesystemName("file5");
+							String desc5 = multi.getParameter("desc5");	
+							
+							String name6 = multi.getParameter("name6");
+							String file6 = multi.getFilesystemName("file6");
+							String desc6 = multi.getParameter("desc6");	
+							
+							String name7 = multi.getParameter("name7");
+							String file7 = multi.getFilesystemName("file7");
+							String desc7 = multi.getParameter("desc7");	
+							
+							String name8 = multi.getParameter("name8");
+							String file8 = multi.getFilesystemName("file8");
+							String desc8 = multi.getParameter("desc8");	
+							
+							Users userLogin = (Users)session.getAttribute("userLogin");	
+							
+							Profile profile = new Profile(userLogin.getUser_email(), ap_title, ap_desc, "0");
+							mapper.insertProfile_0(profile);
+							
+							if(name1 != null) {
+								profile = new Profile(userLogin.getUser_email(), file1, desc1, "1", name1);
+								mapper.insertProfile_1(profile);
+							}
+							if(name2 != null) {
+								profile = new Profile(userLogin.getUser_email(), file2, desc2, "1", name2);
+								mapper.insertProfile_1(profile);
+							}
+							if(name3 != null) {
+								profile = new Profile(userLogin.getUser_email(), file3, desc3, "1", name3);
+								mapper.insertProfile_1(profile);
+							}
+							if(name4 != null) {
+								profile = new Profile(userLogin.getUser_email(), file4, desc4, "1", name4);
+								mapper.insertProfile_1(profile);
+							}
+							if(name5 != null) {
+								profile = new Profile(userLogin.getUser_email(), file5, desc5, "1", name5);
+								mapper.insertProfile_1(profile);
+							}
+							if(name6 != null) {
+								profile = new Profile(userLogin.getUser_email(), file6, desc6, "1", name6);
+								mapper.insertProfile_1(profile);
+							}
+							if(name7 != null) {
+								profile = new Profile(userLogin.getUser_email(), file7, desc7, "1", name7);
+								mapper.insertProfile_1(profile);
+							}
+							if(name8 != null) {
+								profile = new Profile(userLogin.getUser_email(), file8, desc8, "1", name8);
+								mapper.insertProfile_1(profile);
+							}
+							
+						
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+						
+						return "redirect:artist_profile_edit";
+				}
+
+					
+					@RequestMapping("/profile_update")
+					public String profile_update(Profile pf, HttpServletRequest request, HttpSession session) {
+						
+						MultipartRequest multi = null;
+						
+						Users userLogin = (Users)session.getAttribute("userLogin");	
+						List<Profile> pfList = mapper.getProfileList(userLogin.getUser_email());
+						
+						int count = mapper.getProfile(userLogin.getUser_email());
+						
+						String savePath = request.getRealPath("./resources/profile"); 
+						
+						int maxSize = 1024 * 1024 *10; //10MB
+						
+						String enc = "UTF-8";
+						
+						DefaultFileRenamePolicy dftrp = new DefaultFileRenamePolicy();
+						
+						try {
+							multi = new MultipartRequest(request, savePath, maxSize, enc, dftrp);
+							
+							String ap_title = multi.getFilesystemName("ap_title");
+							String ap_desc = multi.getParameter("ap_desc");
+							
+							String name1 = multi.getParameter("name1");
+							String file1 = multi.getFilesystemName("file1");
+							String desc1 = multi.getParameter("desc1");	
+							
+							String name2 = multi.getParameter("name2");
+							String file2 = multi.getFilesystemName("file2");
+							String desc2 = multi.getParameter("desc2");	
+							
+							String name3 = multi.getParameter("name3");
+							String file3 = multi.getFilesystemName("file3");
+							String desc3 = multi.getParameter("desc3");	
+							
+							String name4 = multi.getParameter("name4");
+							String file4 = multi.getFilesystemName("file4");
+							String desc4 = multi.getParameter("desc4");	
+							
+							String name5 = multi.getParameter("name5");
+							String file5 = multi.getFilesystemName("file5");
+							String desc5 = multi.getParameter("desc5");	
+							
+							String name6 = multi.getParameter("name6");
+							String file6 = multi.getFilesystemName("file6");
+							String desc6 = multi.getParameter("desc6");	
+							
+							String name7 = multi.getParameter("name7");
+							String file7 = multi.getFilesystemName("file7");
+							String desc7 = multi.getParameter("desc7");	
+							
+							String name8 = multi.getParameter("name8");
+							String file8 = multi.getFilesystemName("file8");
+							String desc8 = multi.getParameter("desc8");	
+												
+							Profile profile = new Profile(userLogin.getUser_email(), ap_title, ap_desc, "0");
+							mapper.updateProfile_0(profile);
+							
+							if(name1 != null) {
+								
+								if(count > 1) {
+								profile = new Profile(pfList.get(1).getAp_seq(),userLogin.getUser_email(), file1, desc1, "1", name1);
+								mapper.updateProfile_1(profile);
+								} else {
+									profile = new Profile(userLogin.getUser_email(), file1, desc1, "1", name1);
+									mapper.insertProfile_1(profile);
+								}
+							}
+							if(name2 != null) {
+								
+								if(count > 2) {
+									profile = new Profile(pfList.get(2).getAp_seq(),userLogin.getUser_email(), file2, desc2, "1", name2);
+									mapper.updateProfile_1(profile);
+									} else {
+										profile = new Profile(pfList.get(2).getAp_seq(),userLogin.getUser_email(), file2, desc2, "1", name2);
+										mapper.insertProfile_1(profile);
+									}
+							}
+							if(name3 != null) {
+								
+								if(count > 3) {
+									profile = new Profile(pfList.get(3).getAp_seq(),userLogin.getUser_email(), file3, desc3, "1", name3);
+									mapper.updateProfile_1(profile);
+									} else {
+										profile = new Profile(userLogin.getUser_email(), file3, desc3, "1", name3);
+										mapper.insertProfile_1(profile);
+									}
+							}
+							if(name4 != null) {
+								
+								if(count > 4) {
+									profile = new Profile(pfList.get(4).getAp_seq(),userLogin.getUser_email(), file4, desc4, "1", name4);
+									mapper.updateProfile_1(profile);
+									} else {
+										profile = new Profile(userLogin.getUser_email(), file4, desc4, "1", name4);
+										mapper.insertProfile_1(profile);
+									}
+							}
+							if(name5 != null) {
+								
+								if(count > 5) {
+									profile = new Profile(pfList.get(5).getAp_seq(),userLogin.getUser_email(), file5, desc5, "1", name5);
+									mapper.updateProfile_1(profile);
+									} else {
+										profile = new Profile(userLogin.getUser_email(), file5, desc5, "1", name5);
+										mapper.insertProfile_1(profile);
+									}
+							}
+							if(name6 != null) {
+								
+								if(count > 6) {
+									profile = new Profile(pfList.get(6).getAp_seq(),userLogin.getUser_email(), file6, desc6, "1", name6);
+									mapper.updateProfile_1(profile);
+									} else {
+										profile = new Profile(userLogin.getUser_email(), file6, desc6, "1", name6);
+										mapper.insertProfile_1(profile);
+									}
+							}
+							if(name7 != null) {
+								
+								if(count > 7) {
+									profile = new Profile(pfList.get(7).getAp_seq(),userLogin.getUser_email(), file7, desc7, "1", name7);
+									mapper.updateProfile_1(profile);
+									} else {
+										profile = new Profile(userLogin.getUser_email(), file7, desc7, "1", name7);
+										mapper.insertProfile_1(profile);
+									}
+							}
+							if(name8 != null) {
+								
+								if(count > 8) {
+									profile = new Profile(pfList.get(8).getAp_seq(),userLogin.getUser_email(), file8, desc8, "1", name8);
+									mapper.updateProfile_1(profile);
+									} else {
+										profile = new Profile(userLogin.getUser_email(), file8, desc8, "1", name8);
+										mapper.insertProfile_1(profile);
+									}
+							}
+							
+						
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+						return "redirect:artist_profile_edit";
+					}
+					
 }
 
 

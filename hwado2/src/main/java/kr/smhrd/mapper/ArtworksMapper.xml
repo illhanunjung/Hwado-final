@@ -217,6 +217,28 @@ select * from BIDDING where user_email=#{user_email}
     WHERE aw_seq IN (SELECT aw_seq FROM AUCTIONS WHERE auc_seq = #{auc_seq})
 </update>
 
+<insert id="insertProfile_0" parameterType="kr.smhrd.entity.Profile">
+insert into ARTIST_PROFILE (user_email, ap_title, ap_desc, ap_type) values (#{user_email}, #{ap_title}, #{ap_desc}, #{ap_type})
+</insert>
 
+<insert id="insertProfile_1" parameterType="kr.smhrd.entity.Profile">
+insert into ARTIST_PROFILE (user_email, ap_title, ap_desc, ap_type, aw_title) values (#{ap_title}, #{ap_desc}, #{name1}, #{file1}, #{desc1})
+</insert>
+
+<select id="getProfile" parameterType="String" resultType="int">
+select count(*) from ARTIST_PROFILE where user_email = #{user_email}
+</select>
+
+<insert id="updateProfile_0" parameterType="kr.smhrd.entity.Profile">
+update ARTIST_PROFILE set ap_title = #{ap_title}, ap_desc = #{ap_desc} where user_email=#{user_email} and ap_type = #{ap_type}
+</insert>
+
+<insert id="updateProfile_1" parameterType="kr.smhrd.entity.Profile">
+update ARTIST_PROFILE set ap_title = #{ap_title}, ap_desc = #{ap_desc}, aw_title=#{aw_title} where user_email=#{user_email} and ap_type = #{ap_type} and ap_seq = #{ap_seq}
+</insert>
+
+<select id="getProfileList" parameterType="String" resultType="kr.smhrd.entity.Profile">
+select * from ARTIST_PROFILE where user_email = #{user_email}
+</select>
 
 </mapper>

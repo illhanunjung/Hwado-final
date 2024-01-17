@@ -26,21 +26,21 @@
     
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="15x15" href="assets/img/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/artist_profile_edit.css" rel="stylesheet">
-    <link href="assets/css/font_bold.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
+    <link href="resources/assets/css/artist_profile_edit.css" rel="stylesheet">
+    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -133,7 +133,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <div class="flex-container">
         <div class="top-section">
             <a class="site-title" href="main.html">
-                <img src="assets/img/logo.png" class="logo">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
     
@@ -168,7 +168,12 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 <hr class="separator">
 
-<form>
+<%
+int count = (int)request.getAttribute("count");
+System.out.println(count);
+%>
+
+<form action=<%= count==0 ? "profile" : "profile_update" %> method="post" enctype="multipart/form-data">
     <div class="profile-edit-container">
         <h2 class="edit-title">프로필수정</h2>
     
@@ -176,19 +181,13 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
             <!-- 작가 프로필 사진 필드 -->
             <div class="form-group">
                 <label for="artistProfilePicture">프로필사진</label>
-                <input type="file" id="artistProfilePicture" accept="image/*">
-            </div>
-        
-            <!-- 작가 이메일 필드 -->
-            <div class="form-group">
-                <label for="artistEmail">이메일</label>
-                <input type="email" id="artistEmail" placeholder="이메일을 입력하세요..">
+                <input type="file" name="ap_title" id="artistProfilePicture" accept="image/*" required>
             </div>
         
             <!-- 작가 소개 필드 -->
             <div class="form-group">
                 <label for="artistBio">소개</label>
-                <textarea id="artistBio" placeholder="당신은 누구인가요.."></textarea>
+                <textarea name="ap_desc" id="artistBio" placeholder="당신은 누구인가요.." required> </textarea>
             </div>
         
             <!-- 작가 작품 추가 섹션 -->
@@ -214,32 +213,61 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     
     <script>
         
-        document.getElementById('addArtworkButton').addEventListener('click', function() {
-        var artworksContainer = document.getElementById('artworksContainer');
-        
-        // 새로운 작품 컨테이너 생성
-        var newArtworkContainer = document.createElement('div');
-        newArtworkContainer.classList.add('new-artwork-container');
     
-        // 작품 이름 입력 필드 추가
-        var newArtworkNameInput = document.createElement('input');
-        newArtworkNameInput.type = 'text';
-        newArtworkNameInput.placeholder = '작품 명';
-        newArtworkNameInput.classList.add('artwork-name-input');
     
-        // 작품 파일 업로드 필드 추가
-        var newArtworkFileInput = document.createElement('input');
-        newArtworkFileInput.type = 'file';
-        newArtworkFileInput.accept = 'image/*';
-        newArtworkFileInput.classList.add('artwork-file-input');
+    var containerCount = 0; // 현재 생성된 컨테이너 수를 추적하는 변수
     
-        // 컨테이너에 필드 추가
-        newArtworkContainer.appendChild(newArtworkNameInput);
-        newArtworkContainer.appendChild(newArtworkFileInput);
+   
+    	
+    	document.getElementById('addArtworkButton').addEventListener('click', function() {
+    		 if(containerCount < 8){
+            var artworksContainer = document.getElementById('artworksContainer');
+
+            // 새로운 작품 컨테이너 생성
+            var newArtworkContainer = document.createElement('div');
+            newArtworkContainer.classList.add('new-artwork-container');
+
+            // 작품 이름 입력 필드 추가
+            var newArtworkNameInput = document.createElement('input');
+            newArtworkNameInput.type = 'text';
+            newArtworkNameInput.placeholder = '작품 명';
+            newArtworkNameInput.classList.add('artwork-name-input');
+
+            // 작품 파일 업로드 필드 추가
+            var newArtworkFileInput = document.createElement('input');
+            newArtworkFileInput.type = 'file';
+            newArtworkFileInput.accept = 'image/*';
+            newArtworkFileInput.classList.add('artwork-file-input');
+            
+            // 작품 설명 필드 추가
+            var newArtworkDescInput = document.createElement('input');
+            newArtworkDescInput.type = 'text';
+            newArtworkDescInput.placeholder = '작품 설명';
+            newArtworkDescInput.classList.add('artwork-name-input');
+            
+         	// 필수 속성 (required) 추가
+            newArtworkNameInput.required = true;
+            newArtworkFileInput.required = true;
+            newArtworkDescInput.required = true;
+
+            // 컨테이너에 필드 추가
+            newArtworkContainer.appendChild(newArtworkNameInput);
+            newArtworkContainer.appendChild(newArtworkFileInput);
+            newArtworkContainer.appendChild(newArtworkDescInput);
+
+            // name 속성 설정 (예: name1, name2, name3...)
+            newArtworkNameInput.name = 'name' + (++containerCount);
+            newArtworkFileInput.name = 'file' + (containerCount);
+            newArtworkDescInput.name = 'desc' + (containerCount);
+
+            // 전체 컨테이너를 artworksContainer에 추가
+            artworksContainer.appendChild(newArtworkContainer);
+            console.log(containerCount)
+    		 }
+        });
     
-        // 전체 컨테이너를 artworksContainer에 추가
-        artworksContainer.appendChild(newArtworkContainer);
-    });
+
+    
     
         </script>
     

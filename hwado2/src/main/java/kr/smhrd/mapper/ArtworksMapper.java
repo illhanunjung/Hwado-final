@@ -12,6 +12,7 @@ import kr.smhrd.entity.Cart;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.ORDERS;
 import kr.smhrd.entity.Portfolios;
+import kr.smhrd.entity.Profile;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 import lombok.NonNull;
@@ -153,15 +154,33 @@ public interface ArtworksMapper {
 			
 			
 			// 경매관리페이지
-						public List<Bidding> bidList(@NonNull String user_email);
+			public List<Bidding> bidList(@NonNull String user_email);
 
-						public Bidding bidDetail(String user_email);
+			public Bidding bidDetail(String user_email);
 
-						
-						public int aucStatus(int auc_seq);
+			
+			public int aucStatus(int auc_seq);
 
-						
+			
 
-						public void bidder(AUCTIONS auction);
+			public void bidder(AUCTIONS auction);
 
+			// 프로필 등록
+			public void insertProfile_0(Profile profile);
+
+			// 작가 개인페이지 작품 등록
+			public void insertProfile_1(Profile profile);
+
+			// 작가 개인페이지 작품 확인
+			public int getProfile(@NonNull String user_email);
+
+			// 프로필 업데이트
+			public void updateProfile_0(Profile profile);
+
+			// 작가 개인페이지 작품 업데이트
+			public void updateProfile_1(Profile profile);
+			
+			// 작가 개인페이지 작품 가져오기
+			public List<Profile> getProfileList(String user_email);
+			
 }
