@@ -10,23 +10,22 @@ import lombok.Setter;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Bidding {
 
-	@NonNull
+	
 	private int bid_seq;
 	
 	@NonNull
 	private int auc_seq;
-	
 	@NonNull
 	private String user_email;
 	
 	@NonNull
 	private int bid_price;
-	
 	private String bid_story;
-	
-	@NonNull
 	private String created_at;
 	
 }

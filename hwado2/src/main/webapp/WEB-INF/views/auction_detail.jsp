@@ -267,7 +267,7 @@ List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
                 <p class="description"><%=images.get(0).getAw_desc() %></p>
                 <p class="price countdown-timer" data-countdown="<%=auction.getAuc_ended_at()%>"></p>
                 <p class="price">가격: ₩<%=art.getAw_price() %></p><br>
-                <a href=""><button class="buy-button">입찰하기</button></a>
+                <a href=""><button class="buy-button"><a href="auction_bid?auc_seq=<%= auction.getAuc_seq() %>">입찰하기</a></button></a>
             </div>
         </div>
         <hr class="separator">

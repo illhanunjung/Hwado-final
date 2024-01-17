@@ -185,4 +185,5 @@ public interface ArtworksMapper {
 			
 			public Portfolios detailport(String user_email);
 			
+			public void insertBid(Bidding bidding);
 }

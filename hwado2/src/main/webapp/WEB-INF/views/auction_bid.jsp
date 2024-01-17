@@ -312,121 +312,49 @@
                     <!-- 아트워크 그리드 시작 -->
                     <div class="artwork-grid">
                     
-                    <!-- 데이터 가져오기 -->
+                     <hr class="separator">
+
                     <%
-	                    List<Artworks> artList = (List<Artworks>) request.getAttribute("auctionList");
-	                	List<IMAGES> imgList = (List<IMAGES>) request.getAttribute("auctionImgList");
-	                	List<AUCTIONS> auctioninfo = (List<AUCTIONS>) request.getAttribute("auctioninfo");
-	                	
-	                	// 저장소 위치
-	                	String savePath = "./resources/artworks";
-	                	
-	                	// 페이지
-	                	int pageN = (int)request.getAttribute("pageN");
-	                	int item = 16;
-	                	
-	                	int start = pageN * item;
-	                	int end = start+item;
-	                	
-	                	if(end > imgList.size()){
-	                		end = imgList.size();
-	                	} else if (end < item){
-	                		end = imgList.size();
-	                	}
-	                	
-	                	System.out.println("start : " + start);
-	                	System.out.println("end : " + end);
-                    
-                    %>
-                    
-                    <% for(int i = start; i < end; i++){ %>
-                        <!-- 아트워크 카드 시작 -->
-                        <div class="artwork-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <h2 class="countdown-title">경매 남은 시간</h2>
-                                <!-- 경매 남은 시간 -->
-                                <div id="countdown" class="countdown-timer" data-countdown="<%=auctioninfo.get(i).getAuc_ended_at()%>"></div>
-                                <!-- 아트워크 이미지 -->
-                                <a href="auction_detail?aw_seq=<%=artList.get(i).getAw_seq() %>" alt="상세페이지">
-                                    <img src="<%=savePath+"/"+imgList.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
-                                </a>
-                                <!-- 아트워크 정보 시작 -->
-                                <div class="artwork-info">
-                                    <!-- 아트워크 제목 -->
-                                    <h2 class="artwork-title"><%=artList.get(i).getAw_name() %></h2>
-                                    <!-- 아티스트 이름 -->
-                                    <p class="artist-name"><%=artList.get(i).getUser_email() %></p>
-                                    <p class="artwork-price"><%=artList.get(i).getAw_price() %></p>
-                                </div> <!-- 아트워크 정보 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 아트워크 카드 종료 -->
-                        
-                    <%} %>
-                    </div> <!-- 아트워크 그리드 종료 -->
-                    <div class="navigation-buttons">
-                        <!-- 이전 페이지로 이동하는 버튼 -->
-                        <a href="auction_page?page=<%=pageN-1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
-                        <!-- 다음 페이지로 이동하는 버튼 -->
-                        <a href="auction_page?page=<%=pageN+1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
-                    </div>
-                </div> <!-- 갤러리 열 종료 -->
-            </div> <!-- 콘텐츠 그리드 종료 -->
-        </div> <!-- 메인 컨테이너 종료 -->
+                    String auc_seq = (String) request.getAttribute("auc_seq");
+					%>
+                
+
+
+<main class="portfolio-container">
+    <form class="portfolio-form" action="bid_submit">
+        <h1 class="form-title">경매 입찰</h1>
+        <div class="form-section">
+        <input type="hidden" name="auc_seq" value="<%= auc_seq %>">
+            <!-- 이름 입력 필드 -->
+            <div class="input-group">
+                <label for="name" class="input-label">제목</label>
+                <input type="text" id="name" class="input-field" placeholder="제목을 입력하세요" required />
+            </div>
+            <div class="input-group">
+                <label for="name" class="input-label">입찰가</label>
+                <input type="text" id="name" name="bid_price" class="input-field" placeholder="입찰가를 입력하세요" required />
+            </div>
+
+
+            <!-- 이미지 1 입력 필드 -->
+            <div class="input-group">
+                <label for="image-1" class="input-label">사연</label>
+                <label for="description-1"  class="input-label"></label>
+                <textarea id="description-1" class="input-field2" name="bid-price" placeholder="사연을 입력해주세요" required></textarea>
+            </div>
+
+            <br><br><br><br>  
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <!-- 폼 제출 및 초기화 버튼 -->
+            <div class="form-buttons">
+                <button type="submit" class="submit-button">입찰하기</button>
+                <button type="reset" class="reset-button">초기화</button>
+            </div>
+        </div>
+    </form>
+</main>
 
 
 

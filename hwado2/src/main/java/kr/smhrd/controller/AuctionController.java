@@ -56,6 +56,26 @@ public class AuctionController {
 	private UsersMapper usersMapper;
 	
 	
+	// 경매 입찰 페이지 이동
+    @RequestMapping("/auction_bid")
+    public String auction_bid(@RequestParam("auc_seq") String auc_seq, Model model) {
+        // auc_seq 값을 모델에 추가
+        model.addAttribute("auc_seq", auc_seq);
+        return "auction_bid"; // auction_bid.jsp로 이동
+    }
+ // 경매 입찰  정보
+    @RequestMapping("/bid_submit")
+    public String bidSubmit(Bidding bidding, HttpSession session) {
+        Users userLogin = (Users) session.getAttribute("userLogin");
+        // Bidding 객체에 사용자 이메일 설정
+        bidding.setUser_email(userLogin.getUser_email());
+
+        // 입찰 정보 데이터베이스에 저장
+        mapper.insertBid(bidding);
+
+        // 경매 상세 페이지나 확인 페이지로 리다이렉트
+        return "auction";
+    }
 	
 	
 
