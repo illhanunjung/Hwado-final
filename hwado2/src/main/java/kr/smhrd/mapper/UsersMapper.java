@@ -42,6 +42,9 @@ public interface UsersMapper {
 		
 		// 구매내역 페이지
 		public List<ArtworkImage> purchase_history(@NonNull String user_email);
+		
+		// 작가페이지 이동
+		public List<ArtworkImage> Author_page();
 
 	
 }
