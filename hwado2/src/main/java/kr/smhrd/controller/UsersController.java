@@ -280,7 +280,16 @@ public class UsersController {
 				
 				return "redirect:/portfolio";
 			}
-
+			
+			// 구매내역 이동
+			@RequestMapping("/purchase_history")
+			public String purchase_history(Model model , HttpSession session) {
+				Users user = (Users)session.getAttribute("userLogin");
+				List<ArtworkImage> purchase_history = usersMapper.purchase_history(user.getUser_email());
+				model.addAttribute("purchase_history",purchase_history);
+				return "purchase_history";
+			}
+		
 		
 		
 }//class

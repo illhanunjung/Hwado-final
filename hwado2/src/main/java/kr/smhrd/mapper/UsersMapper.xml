@@ -59,5 +59,20 @@ select * from WISHLIST where user_email = #{user_email}
         VALUES (#{user_email}, #{pf_title}, #{pf_file1}, #{pf_file2}, #{pf_file3}, #{pf_desc})
 </insert>
 
+<select id="purchase_history" resultType="kr.smhrd.entity.ArtworkImage">
+	SELECT 
+    ARTWORKS.aw_name,
+    IMAGES.img_filename,
+    USERS.user_nick,
+    ORDERS.delivery_at,
+    ORDERS.pay_amount,
+    ORDERS.delivery_status
+	FROM ORDERS
+	JOIN USERS ON ORDERS.user_email = USERS.user_email
+	JOIN BASKETS ON ORDERS.basket_seq = BASKETS.basket_seq
+	JOIN ARTWORKS ON BASKETS.aw_seq = ARTWORKS.aw_seq
+	JOIN IMAGES ON ARTWORKS.aw_seq = IMAGES.aw_seq
+	WHERE ORDERS.user_email = #{user.email};
+	</select>
 
 </mapper>

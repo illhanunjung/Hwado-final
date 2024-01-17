@@ -1,3 +1,5 @@
+<%@page import="kr.smhrd.entity.ArtworkImage"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,15 +34,15 @@
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/purchase_history.css" rel="stylesheet">
-    <link href="assets/css/font_bold.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
+    <link href="resources/assets/css/purchase_history.css" rel="stylesheet">
+    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -130,7 +132,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <div class="flex-container">
         <div class="top-section">
             <a class="site-title" href="main.html">
-                <img src="assets/img/logo.png" class="logo">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
     
@@ -181,38 +183,25 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
             </tr>
         </thead>
         <tbody>
+            <%
+        	String savePath = "./resources/artworks";
+        	List<ArtworkImage> purchase_history = (List<ArtworkImage>)request.getAttribute("purchase_history");
+        	%>
+        	
+        	<%
+        		if (purchase_history != null) {
+            	for (ArtworkImage history : purchase_history) {
+        	%>
             <tr>
-                <td><img src="assets/명화/13.jpg" alt="상품 이미지" class="order-image"></td>
-                <td>꽃병에 든 꽃</td>
-                <td>플라워</td>
-                <td>2021-01-01</td>
-                <td>₩20,000</td>
-                <td>배송 중</td>
+                <td><img src="<%=savePath + "/" + history.getImg_filename()%>" alt="상품 이미지" class="order-image"></td>
+                <td><%=history.getAw_name() %></td>
+                <td><%=history.getUser_nick() %></td>
+                <td><%=history.getDelivery_at() %></td>
+                <td><%=history.getPay_amount() %></td>
+                <td><%=history.getDelivery_status() %></td>
             </tr>
-            <tr>
-                <td><img src="assets/명화/16.jpg" alt="상품 이미지" class="order-image"></td>
-                <td>두더지 부부</td>
-                <td>장 폴</td>
-                <td>2021-01-01</td>
-                <td>₩300,000</td>
-                <td>배송 중</td>
-            </tr>
-            <tr>
-                <td><img src="assets/명화/3.jpg" alt="상품 이미지" class="order-image"></td>
-                <td>바나나보트</td>
-                <td>김석희</td>
-                <td>2021-01-01</td>
-                <td>₩80,000</td>
-                <td>배송 완료</td>
-            </tr>
-            <tr>
-                <td><img src="assets/명화/12.jpg" alt="상품 이미지" class="order-image"></td>
-                <td>난 예수여</td>
-                <td>유다</td>
-                <td>2021-01-01</td>
-                <td>₩10,000,000</td>
-                <td>배송 중</td>
-            </tr>
+            <% }
+            	} %>
             <!-- 다른 주문 내역들 -->
         </tbody>
     </table>

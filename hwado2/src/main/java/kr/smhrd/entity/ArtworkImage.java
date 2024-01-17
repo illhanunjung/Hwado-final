@@ -16,7 +16,11 @@ public class ArtworkImage {
 	// ARTWORKS 테이블의 필드
     private String aw_name;
     private String user_email;
-
+    private String user_nick;
+    private int pay_amount;
+    private String delivery_status;
+    private String delivery_at;
+    
     // IMAGES 테이블의 필드
     private String img_filename;
 
