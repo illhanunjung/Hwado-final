@@ -153,7 +153,7 @@ function closeSearchPopup() {
         <div id="hero" class="hero overlay">
             <div class="hero-content">
                 <div class="hero-text">            
-                    <p class="hero-text">❝ [畵道]예술의 길을 걷는 사람들을 [花導]꽃길로 인도한다 ❞</p>
+                    <p class="hero-text">❝ [畵道]예술의 길을 걷는 사람들을 [花導]꽃길로 인도하다 ❞</p>
                 </div><!-- /.hero-text -->
             </div><!-- /.hero-content -->
         </div><!-- /.hero -->
