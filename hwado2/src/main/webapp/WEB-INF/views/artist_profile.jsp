@@ -1,3 +1,6 @@
+<%@page import="kr.smhrd.entity.Profile"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.smhrd.entity.Users"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,21 +29,21 @@
     
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="15x15" href="assets/img/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/artist_profile.css" rel="stylesheet">
-    <link href="assets/css/font_bold.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
+    <link href="resources/assets/css/artist_profile.css" rel="stylesheet">
+    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -133,7 +136,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <div class="flex-container">
         <div class="top-section">
             <a class="site-title" href="main.html">
-                <img src="assets/img/logo.png" class="logo">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
     
@@ -168,10 +171,20 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <hr class="separator">
 
 
+    <%
+    Users userLogin = (Users)session.getAttribute("userLogin");	
+    Users artist = (Users) request.getAttribute("artist");
+	List<Profile> profiles = (List<Profile>) request.getAttribute("profiles");
+	String savePath = "./resources/profile";
+    %>
+    
+
 <div class="artist-profile-container">
     <header class="profile-header">
         <h1 class="profile-title">작가프로필</h1>
+        <% if(userLogin.getUser_email().equals(artist.getUser_email())){ %>
         <a href="artist_profile_edit.html"><button class="profile-edit-button">프로필수정</button></a>
+        <%} %>
         <button class="heart-button"><i class="glyphicon glyphicon-heart-empty"></i></button>
 
         <script>
@@ -196,31 +209,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     </header>
+    
+
 
     <div class="profile-body">
         <div class="profile-picture">
             <!-- 프로필 이미지 또는 이니셜을 넣을 수 있습니다 -->
-            <img src="/assets/img/꽃길.png" alt="Artist Profile Picture" class="profile-img">
+            <% if(profiles != null){ %>
+            <img src=<%=savePath+"/"+profiles.get(0).getAp_title() %> alt="Artist Profile Picture" class="profile-img">
+            <%} else { %>
+            <img alt="Artist Profile Picture" class="profile-img">
+            <%} %>
             <!-- 또는 <span class="profile-initials">AP</span> -->
         </div>
 
         <div class="profile-information">
-            <h2 class="artist-name">홍길동</h2>
-            <p class="artist-email">artistname@example.com</p>
+            <h2 class="artist-name"><%=artist.getUser_nick() %></h2>
+            <p class="artist-email"><%=artist.getUser_email() %></p>
         </div>
 
         <div class="artist-about">
             <h3>작가소개</h3>
-            <p>죽는 날까지 하늘을 우러러
-                한 점 부끄럼이 없기를,
-                잎새에 이는 바람에도
-                나는 괴로워했다.
-                별을 노래하는 마음으로
-                모든 죽어 가는 것을 사랑해야지
-                그리고 나한테 주어진 길을
-                걸어가야겠다.
-                
-                오늘 밤에도 별이 바람에 스치운다.</p>
+            <%if(profiles != null){ %>
+            <p><%=profiles.get(0).getAp_desc()%></p>
+            <%} %>
         </div>
 
         <div class="artist-works">
@@ -232,44 +244,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 
 
                 <!-- 이미지 예시; 실제 이미지로 대체해야 합니다 -->
+               
+                
                 <div class="works-gallery">
+                
+                 <%if(profiles != null && profiles.size() >1){
+                	for(int i = 1; i<profiles.size(); i++){
+                	%>
                     <div class="artwork-container">
-                        <img src="/assets/명화/1.jpg" alt="Work 1" class="artwork">
-                        <div class="artwork-title">소녀</div>
+                        <img src=<%=savePath+"/"+profiles.get(i).getAp_title() %> alt="Work 1" class="artwork">
+                        <div class="artwork-title"><%=profiles.get(i).getAw_title() %></div>
                     </div>
-                    <div class="artwork-container">
-                        <img src="/assets/명화/16.jpg" alt="Work 2" class="artwork">
-                        <div class="artwork-title">두더지</div>
-                    </div>
-                    <div class="artwork-container">
-                        <img src="/assets/명화/18.jpg" alt="Work 2" class="artwork">
-                        <div class="artwork-title">뒤에 곰돌이 푸</div>
-                    </div>
-                    <div class="artwork-container">
-                        <img src="/assets/명화/11.jpg" alt="Work 2" class="artwork">
-                        <div class="artwork-title">코난 범인</div>
-                    </div>
-                    <div class="artwork-container">
-                        <img src="/assets/명화/15.jpg" alt="Work 2" class="artwork">
-                        <div class="artwork-title">잠옷입은 소녀</div>
-                    </div>
-                    <div class="artwork-container">
-                        <img src="/assets/명화/3.jpg" alt="Work 2" class="artwork">
-                        <div class="artwork-title">바나나보트</div>
-                    </div>
-                    <div class="artwork-container">
-                        <img src="/assets/명화/9.jpg" alt="Work 2" class="artwork">
-                        <div class="artwork-title">현대미술</div>
-                    </div>
-                    <div class="artwork-container">
-                        <img src="/assets/명화/12.jpg" alt="Work 2" class="artwork">
-                        <div class="artwork-title">내가 예수다</div>
-                    </div>
+                    <%}} %>
                     </div>
                     
                 <div class="artwork-display2">
-                    <button class="exhibit-btn">판매작품 보러가기 →</button>
-                    <button class="exhibit-btn">경매작품 보러가기 →</button>
+                    <a href="product_userEmail?artist_email=<%=artist.getUser_email() %>"><button class="exhibit-btn">판매작품 보러가기 →</button></a>
+                    <a href="auction_userEmail?artist_email=<%=artist.getUser_email() %>"><button class="exhibit-btn">경매작품 보러가기 →</button></a>
                 </div>
 
 

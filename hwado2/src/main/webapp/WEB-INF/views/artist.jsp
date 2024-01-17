@@ -201,8 +201,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         <div class="row"> 
             <%
-            String savePath = "./resources/artworks";
+            String savePath = "./resources/profile";
             List<ArtworkImage> Author_page = (List<ArtworkImage>)request.getAttribute("Author_page");
+            System.out.println(Author_page.get(0).toString());
             %>
             
             <%
@@ -220,8 +221,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         <br><br><br><br><br><br><br><br><br>
                         <button class="heart-button"><i class="glyphicon glyphicon-heart-empty"></i></button>
                     </h4>
-                       
-                    <a href="artist_profile"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                     <%if(userLogin != null){ %>  
+                    <a href="goArtist_profile?user_email=<%=Author_page.get(i).getUser_email() %>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <%} else{ %>
+                    <a href="signin"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <%} %>
                 </div><!-- /.portfolio-item -->
             </div>
             <%}

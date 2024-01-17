@@ -78,6 +78,7 @@ select * from WISHLIST where user_email = #{user_email}
 <select id="Author_page" resultType="kr.smhrd.entity.ArtworkImage">
 	SELECT
     ap.ap_desc,
+    ap.user_email,
     u.user_nick,
     ap.ap_title
 	FROM ARTIST_PROFILE ap

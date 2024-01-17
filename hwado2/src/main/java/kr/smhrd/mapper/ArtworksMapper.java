@@ -186,4 +186,14 @@ public interface ArtworksMapper {
 			public Portfolios detailport(String user_email);
 			
 			public void insertBid(Bidding bidding);
+
+			public List<Artworks> artistProduct(String artist_email);
+
+			public List<IMAGES> artistPrImg(String artist_email);
+
+			public List<Artworks> artistAuction(String artist_email);
+
+			public List<IMAGES> artistAcImg(String artist_email);
+
+			public List<AUCTIONS> artistAcinfo(String artist_email);
 }

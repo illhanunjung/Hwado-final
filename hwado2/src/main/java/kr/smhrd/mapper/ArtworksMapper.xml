@@ -250,6 +250,26 @@ select * from ARTIST_PROFILE where user_email = #{user_email}
     VALUES (#{auc_seq}, #{user_email}, #{bid_price}, #{bid_story}, NOW())
 </insert>
 
+<select id="artistProduct" parameterType="String" resultType="kr.smhrd.entity.Artworks">
+select * from ARTWORKS where user_email=#{artist_email} and aw_status='판매중'
+</select>
 
+<select id="artistPrImg" parameterType="String" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where user_email=#{artist_email} and aw_status='판매중')
+
+</select>
+
+<select id="artistAuction" parameterType="String" resultType="kr.smhrd.entity.Artworks">
+select * from ARTWORKS where user_email=#{artist_email} and aw_status='경매'
+</select>
+
+<select id="artistAcImg" parameterType="String" resultType="kr.smhrd.entity.IMAGES">
+select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where user_email=#{artist_email} and aw_status='경매')
+
+</select>
+
+<select id="artistAcinfo" parameterType="String" resultType="kr.smhrd.entity.AUCTIONS">
+select * from AUCTIONS where aw_seq in (select aw_seq from ARTWORKS where user_email=#{artist_email} and aw_status='경매') 
+</select>
 
 </mapper>
