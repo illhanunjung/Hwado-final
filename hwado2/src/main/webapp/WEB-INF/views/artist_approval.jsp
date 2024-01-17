@@ -217,7 +217,7 @@
                                 <th id="name" class="header-cell">작가명</th>
                                 <th id="email" class="header-cell">이메일</th>
                                 <th id="phone" class="header-cell">포트폴리오</th>
-                                
+
                                 
                             </tr>
                         </thead>
@@ -262,7 +262,7 @@
 									<td class="data-cell"><p><%=artistApproval.get(i).getUser_nick() %></p></td>
 									<td class="data-cell"><p><%=artistApproval.get(i).getUser_email() %></p></td>
 									<td class="data-cell">
-									<a href="">								
+									<a href="portfolio?user_email=<%= artistApproval.get(i).getUser_email()%>">								
                                         <p><%= "포트폴리오 보러가기" %></p>                                
                                     </a>
                                     </td>

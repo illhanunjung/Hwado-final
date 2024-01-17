@@ -241,4 +241,8 @@ update ARTIST_PROFILE set ap_title = #{ap_title}, ap_desc = #{ap_desc}, aw_title
 select * from ARTIST_PROFILE where user_email = #{user_email}
 </select>
 
+<select id="detailport"  resultType="kr.smhrd.entity.Portfolios">
+	select * from PORTFOLIOS where user_email=#{user_email}
+</select>
+
 </mapper>

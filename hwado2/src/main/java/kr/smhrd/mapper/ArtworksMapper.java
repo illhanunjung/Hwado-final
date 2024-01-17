@@ -183,4 +183,6 @@ public interface ArtworksMapper {
 			// 작가 개인페이지 작품 가져오기
 			public List<Profile> getProfileList(String user_email);
 			
+			public Portfolios detailport(String user_email);
+			
 }

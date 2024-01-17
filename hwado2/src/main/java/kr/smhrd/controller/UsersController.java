@@ -207,23 +207,13 @@ public class UsersController {
 		    }
 		    return "artist_registration";
 		}
-		  //포폴 페이지
+		  
+		//포폴 페이지
 		  @RequestMapping("/portfolio")
-		  public String  portfolio(HttpSession session, Model model) {
-		  Users userLogin = (Users) session.getAttribute("userLogin");
-		    
-		    if (userLogin != null) {
-		        model.addAttribute("user", userLogin);
-		        
-		        // 포트폴리오 객체를 세션에서 가져온다 (포트폴리오 객체는 세션에 어떻게 저장되었는지에 따라 코드가 달라질 수 있음)
-		        Portfolios portfolio = (Portfolios) session.getAttribute("portfolio");
-		        
-		    if (portfolio != null) {
-		          model.addAttribute("portfolio", portfolio);
-		        } 
-		    }
-		    
-		    return "portfolio";
+		  public String  portfolio(@RequestParam("user_email") String user_email, Model model) {
+			  Portfolios portfolio = mapper.detailport(user_email);	
+				model.addAttribute("portfolio",portfolio);
+				return "portfolio";
 		}
 		// 작가 등록
 			@SuppressWarnings("deprecation")
