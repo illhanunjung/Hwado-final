@@ -154,7 +154,9 @@ public class UsersController {
 	
 	// 작가페이지 이동
 		@RequestMapping("/artist")
-		public String artist() {
+		public String artist(Model model) {
+			List<ArtworkImage> Author_page = usersMapper.Author_page();
+			model.addAttribute("Author_page", Author_page);
 			return "artist";
 		}
 	

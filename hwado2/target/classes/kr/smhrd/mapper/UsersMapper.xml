@@ -73,6 +73,20 @@ select * from WISHLIST where user_email = #{user_email}
 	JOIN ARTWORKS ON BASKETS.aw_seq = ARTWORKS.aw_seq
 	JOIN IMAGES ON ARTWORKS.aw_seq = IMAGES.aw_seq
 	WHERE ORDERS.user_email = #{user.email};
-	</select>
+</select>
+	
+<select id="Author_page" resultType="kr.smhrd.entity.ArtworkImage">
+	SELECT
+    ap.ap_desc,
+    u.user_nick,
+    ap.ap_title
+	FROM ARTIST_PROFILE ap
+	JOIN USERS u ON ap.user_email = u.user_email
+	LEFT JOIN ARTWORKS a ON u.user_email = a.user_email
+	LEFT JOIN IMAGES i ON a.aw_seq = i.aw_seq
+	WHERE ap.ap_type = '0'
+	ORDER BY RAND()
+	LIMIT 16
+</select>
 
 </mapper>
