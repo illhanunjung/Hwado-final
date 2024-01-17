@@ -272,7 +272,7 @@ String savePath = "./resources/artworks";
                     <td id="totalAmount" style="text-align: center;">
                   <td colspan="2"></td>
                     <td><a href="./product_page"><button class="cart__bigorderbtn right">쇼핑 계속하기</button></a></td>
-                    <td><button class="cart__bigorderbtn right" onclick="requestPay()">주문하기</button></td>
+                    <td><button class="cart__bigorderbtn right" onclick="goPurchase(getCheckedValues())">주문하기</button></td>
                 </tr>
             </tfoot>
         
@@ -327,85 +327,36 @@ function deleteCart(values) {
 		})
 }
 
-
+	
+	function goPurchase(values) {
+	let aw_seq = values;
+	console.log(aw_seq);
+	
+	 $.ajax({ //json 형식 -> {key : value, key : value}
+			// 어디로 요청할 것인지(요청 url)
+			url : 'goPurchase',
+			
+			// 요청 데이터
+			data : { 'awSeq' : aw_seq},
+			
+			// 요청 방식
+			type : 'get',
+			
+			// 요청-응답 성공
+			success : function(response) {
+		        console.log("통신 성공");
+		        window.location.href = response;
+				
+				
+			},
+			
+			// 요청-응답 실패
+			error : function(){
+				console.log("통신실패")
+			}
+		})
+}
 </script>
-
-<!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-    <!-- iamport.payment.js -->
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-    <script>
-   		 
-   		 
-        var IMP = window.IMP; 
-        IMP.init("imp85467522"); 
-      
-        var today = new Date();   
-        var hours = today.getHours(); // 시
-        var minutes = today.getMinutes();  // 분
-        var seconds = today.getSeconds();  // 초
-        var milliseconds = today.getMilliseconds();
-        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-        
-        function requestPay() {
-        	var checkedValues = getCheckedValues();
-        	
-        	$.ajax({ 
-    			url : 'payment',
-    			
-    			// 요청 데이터
-    			data : { 'awSeq' : checkedValues},
-    			
-    			// 요청 방식
-    			type : 'get',
-    			
-    			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-    			
-    			// 요청-응답 성공
-    			success : function(response) {
-    		        console.log("통신 성공");
-    		        
-    		        let data = response.split("/")
-    		        console.log(data);
-    		        
-    		            IMP.request_pay({
-    	                pg : 'html5_inicis',
-    	                pay_method : 'card',
-    	                merchant_uid: "IMP"+makeMerchantUid, 
-    	                name : data[0],
-    	                amount : parseInt(data[1]),
-    	                buyer_email : 'smhrd@smhrd.or.kr',
-    	                buyer_name : '아임포트 기술지원팀',
-    	                buyer_tel : '062-655-3506',
-    	                buyer_addr : '광주 동구 예술길 31-15 3~4, 7층',
-    	                buyer_postcode : '123-456',
-    	                display: {
-    	                    card_quota: [3]  // 할부개월 3개월까지 활성화
-    	                }
-    	            }, function (rsp) { // callback
-    	                if (rsp.success) {
-    	                    console.log(rsp);
-    	                } else {
-    	                    console.log(rsp);
-    	                }
-    	            }); 
-    				
-    				
-    			},
-    			
-    			// 요청-응답 실패
-    			error : function(){
-    				console.log("통신실패")
-    			}
-    		})
-        	
-            
-        }
-        
-       
-        
-        
-    </script>
 
 
 

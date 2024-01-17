@@ -37,6 +37,7 @@ import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.Cart;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.ORDERS;
 import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
@@ -961,12 +962,29 @@ public class ArtworksController {
 						
 					}
 					
+					
+					// 결제 페이지 이동
+					@ResponseBody
+					@RequestMapping(value = "/goPurchase", produces = "application/text; charset=UTF-8")
+					public String goPurchase(@RequestParam("awSeq") String awSeq) {
+						
+						return "purchase?awSeq="+awSeq;
+					}
+					
+					// 결제 페이지
+					@RequestMapping("/purchase")
+					public String purchase(@RequestParam("awSeq") String awSeq, Model model) {
+						System.out.println(awSeq+"들어왔음");
+						model.addAttribute("awSeq", awSeq);
+						return "purchase";
+					}
+					
 					// 결제 페이지 출력
 					@ResponseBody
 					@RequestMapping(value = "/payment", produces = "application/text; charset=UTF-8")
-					public String payment(@RequestParam("awSeq") String awSeq) {
+					public String payment(@RequestParam("awSeq") String awSeq, @RequestParam("name") String name,@RequestParam("phone") String phone,@RequestParam("addr") String addr,@RequestParam("bio") String bio, HttpSession session ) {
 						System.out.println(awSeq);
-						
+						Users userLogin = (Users)session.getAttribute("userLogin");
 						String[] aw_seq = awSeq.split(" ");
 						
 						ArrayList<Artworks> payList = new ArrayList<Artworks>();
@@ -983,8 +1001,26 @@ public class ArtworksController {
 						
 						String result = payList.get(0).getAw_name() + " 외 " + (payList.size()-1) +"개 상품/"+total;
 						
+						System.out.println(name + phone + addr + bio);
+						
+						for (Artworks art : payList) {
+							Cart cart = new Cart(userLogin.getUser_email(), art.getAw_seq());
+							int basket_seq = mapper.getBasket_seq(cart);
+							
+							ORDERS order = new ORDERS(userLogin.getUser_email(), total, art.getAw_price(), art.getAw_price(), basket_seq, addr, name, phone, bio);
+							
+							int cnt = mapper.Orders(order);
+							
+							if(cnt > 0) {
+								mapper.updateCart(art.getAw_seq());
+								mapper.updateArt(art.getAw_seq());
+							}
+						}
+						
+						
+						
 						return result;
-					}				
+					}			
 }
 
 

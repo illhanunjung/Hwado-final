@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -154,11 +155,16 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 <!-- 메뉴 바 -->
 
+<%
 
+String awSeq = (String)request.getAttribute("awSeq");
+System.out.println(awSeq+"들어왔음");
+
+%>
 
 
 <main class="portfolio-container">
-    <form class="portfolio-form">
+    <!-- <form class="portfolio-form"> -->
         <h1 class="form-title">작품 구매</h1>
         <p class="form-description">
             
@@ -176,13 +182,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                 <input type="text" id="phone" class="input-field" placeholder="번호를 입력하세요" required />
             </div>
 
-            <!-- 이메일 입력 필드 -->
-            <div class="input-group">
-                <label for="email" class="input-label">이메일</label>
-                <input type="email" id="email" class="input-field" placeholder="이메일을 입력하세요" required />
-            </div>
-
-          
             <div class="input-group">
                 <label for="detailAddress" class="input-label">주소</label>
             <input type="text" id="sample6_postcode" placeholder="우편번호">
@@ -255,13 +254,117 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
             <!-- 폼 제출 및 초기화 버튼 -->
             <div class="form-buttons">
-                <button type="submit" class="submit-button">구매</button>
+                <button type="submit" class="submit-button" onclick="requestPay(<%=awSeq %>)">구매</button>
             </div>
         </div>
-    </form>
+    <!-- </form> -->
 </main>
 
 
+
+<!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> 
+    <!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+   		 
+   		 
+        var IMP = window.IMP; 
+        IMP.init("imp85467522"); 
+      
+        var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
+        
+        
+        
+        function requestPay(awSeq) {
+        	
+        	// 이름 입력 필드의 값을 가져오기
+            var name = document.getElementById("name").value;
+
+            // 전화번호 입력 필드의 값을 가져오기
+            var phone = document.getElementById("phone").value;
+
+
+            // 주소 입력 필드의 값을 가져오기
+            var postcode = document.getElementById("sample6_postcode").value;
+            var address = document.getElementById("sample6_address").value;
+            var detailAddress = document.getElementById("sample6_detailAddress").value;
+            var extraAddress = document.getElementById("sample6_extraAddress").value;
+            
+            var addr = postcode + " " + address + " "+ detailAddress + " "+ extraAddress;
+
+            // 요청사항 입력 필드의 값을 가져오기
+            var bio = document.getElementById("bio").value;
+
+            
+            // 예시: 가져온 값을 콘솔에 출력
+            console.log("이름:"+ name);
+            console.log("전화번호:"+ phone);
+            console.log("주소:"+ addr);
+            console.log("요청사항:"+ bio);
+        	
+        	$.ajax({ 
+    			url : 'payment',
+    			
+    			// 요청 데이터
+    			data : { 'awSeq' : awSeq, 'name':name, 'phone':phone, 'addr':addr,'bio': bio },
+    			
+    			// 요청 방식
+    			type : 'get',
+    			
+    			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+    			
+    			// 요청-응답 성공
+    			success : function(response) {
+    		        console.log("통신 성공");
+    		        
+    		        let data = response.split("/")
+    		        console.log(data);
+    		        
+    		            IMP.request_pay({
+    	                pg : 'html5_inicis',
+    	                pay_method : 'card',
+    	                merchant_uid: "IMP"+makeMerchantUid, 
+    	                name : data[0],
+    	                amount : parseInt(data[1]),
+    	                buyer_email : 'smhrd@smhrd.or.kr',
+    	                buyer_name : '아임포트 기술지원팀',
+    	                buyer_tel : '062-655-3506',
+    	                buyer_addr : '광주 동구 예술길 31-15 3~4, 7층',
+    	                buyer_postcode : '123-456',
+    	                display: {
+    	                    card_quota: [3]  // 할부개월 3개월까지 활성화
+    	                }
+    	            }, function (rsp) { // callback
+    	                if (rsp.success) {
+    	                    console.log(rsp);
+    	                } else {
+    	                    console.log(rsp);
+    	                }
+    	            }); 
+    				
+    				
+    			},
+    			
+    			// 요청-응답 실패
+    			error : function(){
+    				console.log("통신실패")
+    			}
+    		})
+        	
+            
+        }
+        
+       
+        
+        
+    </script>
 
 
 

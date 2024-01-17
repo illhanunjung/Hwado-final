@@ -9,6 +9,7 @@ import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.Cart;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.ORDERS;
 import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
@@ -136,5 +137,17 @@ public interface ArtworksMapper {
 
 			// 장바구니 제거
 			public void deleteCart(Cart cart);
+
+			// basket_seq 가져오기
+			public int getBasket_seq(Cart cart);
+
+			// 주문하기
+			public int Orders(ORDERS order);
+
+			// 장바구니 업데이트
+			public void updateCart(int aw_seq);
+			
+			// 작품 업데이트
+			public void updateArt(int aw_seq);
 
 }

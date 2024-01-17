@@ -159,7 +159,7 @@ insert into BASKETS (user_email, aw_seq) values (#{user_email}, #{aw_seq})
 </insert> 
 
 <select id="getCart" parameterType="String" resultType="kr.smhrd.entity.Cart">
-select * from BASKETS where user_email=#{user_email}
+select * from BASKETS where user_email=#{user_email} and basket_status = '판매'
 </select>
 
 <select id="cartArt" parameterType="int" resultType="kr.smhrd.entity.Artworks">
@@ -177,5 +177,21 @@ select * from USERS where user_email = (select user_email from ARTWORKS where aw
 <delete id="deleteCart" parameterType="kr.smhrd.entity.Cart">
 delete from BASKETS where aw_seq = #{aw_seq} and user_email = #{user_email}
 </delete>
+
+<select id="getBasket_seq" parameterType="kr.smhrd.entity.Cart" resultType="int">
+select basket_seq from BASKETS where aw_seq = #{aw_seq} and user_email = #{user_email}
+</select>
+
+<insert id="Orders" parameterType="kr.smhrd.entity.ORDERS">
+insert into ORDERS (user_email, total_amount, pay_amount, paid_amount, basket_seq, delivery_addr, receiver_name, receiver_phone, delivery_msg) values (#{user_email}, #{total_amount}, #{pay_amount}, #{paid_amount}, #{basket_seq}, #{delivery_addr}, #{receiver_name}, #{receiver_phone}, #{delivery_msg})
+</insert>
+
+<update id="updateCart" parameterType="int">
+update BASKETS set basket_status = '품절' where aw_seq = #{aw_seq}
+</update>
+
+<update id="updateArt" parameterType="int">
+update ARTWORKS set aw_status = '판매완료' where aw_seq = #{aw_seq}
+</update>
 
 </mapper>
