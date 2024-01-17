@@ -946,13 +946,15 @@ public class ArtworksController {
 					// 장바구니 제거
 					@ResponseBody	
 					@RequestMapping("/deleteCart")
-					public String deleteCart(@RequestParam("awSeq") String awSeq) {
-						System.out.println("들어옴");
+					public String deleteCart(@RequestParam("awSeq") String awSeq, HttpSession session) {
+						Users userLogin = (Users)session.getAttribute("userLogin");
+						System.out.println("들어왔음");
 						System.out.println(awSeq);
 						String[] aw_seq = awSeq.split(" ");
 						for(String i : aw_seq) {
-							System.out.println(i);
-							mapper.deleteCart(i);
+							Cart cart = new Cart(userLogin.getUser_email(), Integer.parseInt(i));
+							System.out.println(cart.toString());
+							mapper.deleteCart(cart);
 						}
 						
 						return "shoppingCart";

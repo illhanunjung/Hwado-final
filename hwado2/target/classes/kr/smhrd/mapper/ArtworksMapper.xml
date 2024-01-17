@@ -174,8 +174,8 @@ select * from IMAGES where aw_seq = #{aw_seq} and img_type = '0'
 select * from USERS where user_email = (select user_email from ARTWORKS where aw_seq = #{aw_seq})
 </select>
 
-<delete id="deleteCart" parameterType="String">
-delete from BASKETS where aw_seq = #{aw_seq}
+<delete id="deleteCart" parameterType="kr.smhrd.entity.Cart">
+delete from BASKETS where aw_seq = #{aw_seq} and user_email = #{user_email}
 </delete>
 
 </mapper>

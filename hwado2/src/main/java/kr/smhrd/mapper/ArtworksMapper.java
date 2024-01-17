@@ -135,6 +135,6 @@ public interface ArtworksMapper {
 			public Users catArtist(int aw_seq);
 
 			// 장바구니 제거
-			public void deleteCart(String i);
+			public void deleteCart(Cart cart);
 
 }
