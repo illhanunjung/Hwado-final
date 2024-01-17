@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ page import="java.util.List"%>
+<%@page import="kr.smhrd.entity.Artworks"%>
+<%@page import="kr.smhrd.entity.IMAGES"%>
+<%@ page import="kr.smhrd.entity.Bidding"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,13 +95,11 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
                                           
                         <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
-                        <li><a href="blog.html">장바구니</a></li>
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="mypage.html">마이페이지</a></li>
-                        <li><a href="blog.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                        <li><a href="shoppingCart">장바구니</a></li>
+						<li><a href="myPage">마이페이지</a></li>
+						<li><a href="artist">작가</a></li>
+						<li><a href="product_page">갤러리</a></li>
+						<li><a href="logout">로그아웃</a></li>
 
                     </ul>
 
@@ -111,12 +114,12 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     </header><!-- /#mastheaed -->
 
     <div id="searchPopup" style="display:none;">
-        <form action="/search" method="get">
-            <input type="text" name="query" placeholder="작품/작가 검색..." >
-            <input type="submit" value="검색" >
-            <button type="button" onclick="closeSearchPopup()" >X</button>
-        </form>
-    </div>
+     <form action="search" method="get">
+          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
+          <input type="submit" value="검색" >
+          <button type="button" onclick="closeSearchPopup()" >X</button>
+      </form>
+  </div>
   
   <script>
     document.getElementById('searchButton').addEventListener('click', function() {
@@ -132,7 +135,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="main.html">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -162,23 +165,24 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         <div>
         <h1 class="form-title">입찰 사유</h1>
        
+       <%  Bidding bid = (Bidding)request.getAttribute("bid"); %>
         <div class="form-section">
             <!-- 이름 입력 필드 -->
             <div class="input-group">
-                <label for="name" class="input-label">이름 : </label>
+                <label for="email" class="input-label">이메일 : <%=bid.getUser_email() %></label>
                 
             </div>
 
             <!-- 전화번호 입력 필드 -->
             <div class="input-group">
-                <label for="email" class="input-label">이메일 :</label>
+                <label for="count" class="input-label">입찰금액 : <%=bid.getBid_price() %></label>
                
             </div>
 
             <!-- 이메일 입력 필드 -->
             <div class="input-group">
                 <label for="reason" class="input-label">사유</label>
-                <label for="name" class="input-label2">이 작품이 제 마음에 쏙 들어와버렸습니다람쥐 ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㅇㄻㄴㄻㅇㄹㄴㅇㄴㅇㄻ</label>
+                <label for="name" class="input-label2"><%=bid.getBid_story() %></label>
             </div>
 
 

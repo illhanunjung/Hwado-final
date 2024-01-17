@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.List"%>
+<%@page import="kr.smhrd.entity.Artworks"%>
+<%@page import="kr.smhrd.entity.IMAGES"%>
+<%@ page import="kr.smhrd.entity.Bidding"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,13 +95,11 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
                                           
                         <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
-                        <li><a href="shoppig_cart.html">장바구니</a></li>
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="mypage.html">마이페이지</a></li>
-                        <li><a href="artists.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                       <li><a href="shoppingCart">장바구니</a></li>
+						<li><a href="myPage">마이페이지</a></li>
+						<li><a href="artist">작가</a></li>
+						<li><a href="product_page">갤러리</a></li>
+						<li><a href="logout">로그아웃</a></li>
 
                     </ul>
 
@@ -110,12 +113,12 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         </nav><!-- /.site-navigation -->
     </header><!-- /#mastheaed -->
     <div id="searchPopup" style="display:none;">
-        <form action="/search" method="get">
-            <input type="text" name="query" placeholder="작품/작가 검색..." >
-            <input type="submit" value="검색" >
-            <button type="button" onclick="closeSearchPopup()" >X</button>
-        </form>
-    </div>
+     <form action="search" method="get">
+          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
+          <input type="submit" value="검색" >
+          <button type="button" onclick="closeSearchPopup()" >X</button>
+      </form>
+  </div>
   
   <script>
     document.getElementById('searchButton').addEventListener('click', function() {
@@ -129,7 +132,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
   </script>
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="main.html">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -159,25 +162,43 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <h1 class="page-title">경매 입찰 관리</h1>
     <table>
         <thead>
+       
             <tr>
-                <th>이름</th>
+                
                 <th>이메일</th>
                 <th>입찰금액</th>
                 <th>입찰사유</th>
-                <th>입찰</th>
+                <th>낙찰</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>김부식</td>
-                <td>호랑나비</td>
-                <td>한마리가</td>
-                <td><a href="">보러가기</a></td>
+        
+        
+        <% 
+            List<Bidding> bid = (List<Bidding>)request.getAttribute("bid");
+        
+       
+                          if(bid == null || bid.isEmpty()) { %>
+							<!-- 데이터가 없을 경우 표시할 메시지 -->
+							<tr>
+								<td colspan="5"  style="padding-top: 50px;">입찰신청이 없습니다.</td>
+							</tr>
+							<% } else {%>
+								
+							<% for(int i = 0; i < bid.size(); i++){ %>
+                <tr>
+               
+                <td><%=bid.get(i).getUser_email() %></td>
+                <td><%=bid.get(i).getBid_price() %></td>
+                <td><a href="bid_reason?user_email=<%= bid.get(i).getUser_email() %>">보러가기</a></td>
                 <td>
-                    <button class="acution_bid">입찰</button>
+                
+                   <a href="bidder?user_email=<%= bid.get(i).getUser_email() %>&auc_seq=<%= bid.get(i).getAuc_seq() %>"><button class="acution_bid">낙찰</button></a>
                 </td>
             </tr>
             
+            <%} %>
+		<%} %>
             <!-- 다른 주문 내역들 -->
         </tbody>
     </table>

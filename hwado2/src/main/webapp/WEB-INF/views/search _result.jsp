@@ -16,7 +16,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>마이페이지</title>
+    <title>검색결과</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -98,14 +98,26 @@
                     <ul class="nav navbar-nav navbar-right">
 
 
-                        <li><button id="searchButton"><span class="glyphicon glyphicon-search"
-                                    id="searchIcon"></span></button></li>
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="#" onclick="openMypageModal()">마이페이지</a></li>
-                        <li><a href="blog.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                      <%
+ Users userLogin = (Users)session.getAttribute("userLogin");
+
+%>              
+                      <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_email().equals("admin")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
 
                     </ul>
 
@@ -137,17 +149,17 @@
 
     <hr class="separator">
 
-    <div id="searchPopup" style="display:none;">
-        <form action="/search" method="get">
-            <input type="text" name="query" placeholder="작품/작가 검색...">
-            <input type="submit" value="검색">
-            <button type="button" onclick="closeSearchPopup()">X</button>
-        </form>
-    </div>
+   <div id="searchPopup" style="display:none;">
+     <form action="search" method="get">
+          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
+          <input type="submit" value="검색" >
+          <button type="button" onclick="closeSearchPopup()" >X</button>
+      </form>
+  </div>
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -174,19 +186,7 @@
         <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
 
         <!-- 메뉴 바 -->
-        <div class="menu-bar">
-            <ul class="menu-items">
-
-                <li><a href="favorite_artists.html">관심작가</a></li>
-                <li><a href="favorite_products.html">관심작품</a></li>
-                <li><a href="shoppig_cart.html">장바구니</a></li>
-                <li><a href="purchase_history.html">구매내역</a></li>
-                <li><a href="artist_registration.html">예술가신청</a></li>
-                <li><a href="user_edit.html">개인정보수정</a></li>
-            </ul>
-        </div>
-
-        <hr class="separator">
+        
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -261,46 +261,12 @@
             <div class="content-grid">
 
                 <!-- 카테고리 열 시작 -->
-                <div class="category-column">
-                    <!-- 카테고리 컨테이너 시작 -->
-                    <div class="category-container">
-                        <!-- 카테고리 제목 -->
-                        <h1 class="category-title">카테고리</h1>
-                        <!-- 카테고리 카드 시작 -->
-                        <div class="category-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 카테고리 리스트 시작 -->
-                                <ul class="category-list">
-                                    <!-- 카테고리 항목: 전체 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">전체</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 추상화 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">추상화</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 풍경화 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">풍경화</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 정물화 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">정물화</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 기타 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">기타</a>
-                                    </li>
-                                </ul> <!-- 카테고리 리스트 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 카테고리 카드 종료 -->
-                    </div> <!-- 카테고리 컨테이너 종료 -->
-                </div> <!-- 카테고리 열 종료 -->
+                
 
+		<% String searchAw = (String)session.getAttribute("searchAw"); %>
                 <!-- 갤러리 열 시작 -->
                 <div class="gallery-column">
-                        <p class="search_result">"화도로고"에 관한 검색결과입니다</p>
+                        <p class="search_result">"${searchAw}"에 관한 검색결과입니다</p>
                     <!-- 갤러리 헤더 시작 -->
                     <div class="gallery-header">
                         <!-- 갤러리 제목 -->
@@ -311,7 +277,7 @@
                     
                     
                     <%
-                    Users userLogin = (Users)session.getAttribute("userLogin");
+                  
                     List<WISHLIST> wishList =  (List<WISHLIST>)session.getAttribute("wishList");
                     	
                     
@@ -343,10 +309,15 @@
                 	System.out.println("end : " + end);
                     
                     
+                	if (artwork == null || artwork.isEmpty()) {
+                		%>
+                		
+                		 <p class="search-no-result">검색 결과가 없습니다.</p>               	
                     
-                    %>
+                    <% 
                     
-                    <% for(int i = start; i < end; i++){ %>
+                    } else {
+                    		for(int i = start; i < end; i++){ %>
                         <!-- 아트워크 카드 시작 -->
                         <div class="artwork-card">
                             <!-- 카드 콘텐츠 시작 -->
@@ -392,7 +363,7 @@
                         </div> <!-- 아트워크 카드 종료 -->
                         <!-- 다른 아트워크 카드들도 같은 구조로 반복 -->
                      <%} %>
-                 
+                 <%} %>
                     </div> <!-- 아트워크 그리드 종료 -->
                     <div class="navigation-buttons">
                     		<a href="search _result?page=<%=pageN-1 %>"><button class="nav-button" ><i

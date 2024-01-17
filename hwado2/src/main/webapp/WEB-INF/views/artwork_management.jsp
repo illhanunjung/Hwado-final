@@ -18,7 +18,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>회원 관리페이지</title>
+<title>작품관리페이지</title>
 
 <meta name="description" content="">
 <meta name="author" content="">
@@ -42,7 +42,7 @@
 <link rel="apple-touch-icon" sizes="180x180"
 	href="assets/img/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="15x15"
-	href="assets/img/logo.png">
+	href="resources/assets/img/logo.png">
 
 <!-- Stylesheets
     ================================================== -->
@@ -117,15 +117,16 @@
 				<div class="collapse navbar-collapse" id="agency-navbar-collapse">
 
 					<ul class="nav navbar-nav navbar-right">
-
+						<li><a href="shoppingCart">장바구니</a></li>
 						<li><a href="user_management">회원관리</a></li>
-						<li><a href="#" onclick="openMypageModal()">마이페이지</a></li>
-						<li><a href="blog.html">작가</a></li>
-						<li><a href="contact.html">갤러리</a></li>
-						<li><a href="signin.html">로그아웃</a></li>
-						<li><a href="signin.html">로그인</a></li>
+						<li><a href="myPage">마이페이지</a></li>
+						<li><a href="artist">작가</a></li>
+						<li><a href="product_page">갤러리</a></li>
+						<li><a href="logout">로그아웃</a></li>
+						
 
 					</ul>
+       
 
 				</div>
 
@@ -168,7 +169,7 @@
 
 	<div class="flex-container">
 		<div class="top-section">
-			<a class="site-title"> <img src="resources/assets/img/logo.png"
+			<a class="site-title" href="./"> <img src="resources/assets/img/logo.png"
 				class="logo">
 			</a>
 		</div>
@@ -187,9 +188,9 @@
 		<div class="menu-bar">
 			<ul class="menu-items">
 
-				<li><a href="user_management.html">회원관리</a></li>
-				<li><a href="artwork_management.html" id="fv_at">작품관리</a></li>
-				<li><a href="artist_approval.html">예술가 승인</a></li>
+				<li><a href="user_management">회원관리</a></li>
+				<li><a href="artwork_management" id="fv_at">작품관리</a></li>
+				<li><a href="artist_approval">예술가 승인</a></li>
 			</ul>
 		</div>
 

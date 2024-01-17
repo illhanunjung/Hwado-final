@@ -856,7 +856,7 @@ public class ArtworksController {
 							 List<Artworks> artwork = mapper.searchArtw(searchAw);							
 								 List<IMAGES> image = mapper.searchImage(searchAw);
 								  model.addAttribute("artist", artist);
-								
+								model.addAttribute("searchAw",searchAw);
 							 model.addAttribute("artwork", artwork);
 								 model.addAttribute("image",image); 
 							 

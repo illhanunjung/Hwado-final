@@ -117,12 +117,26 @@
 					<ul class="nav navbar-nav navbar-right">
 
 
-						<li><a href="blog.html">회원관리</a></li>
-						<li><a href="#" onclick="openMypageModal()">마이페이지</a></li>
-						<li><a href="blog.html">작가</a></li>
-						<li><a href="contact.html">갤러리</a></li>
-						<li><a href="signin.html">로그아웃</a></li>
-						<li><a href="signin.html">로그인</a></li>
+						<%
+ Users userLogin = (Users)session.getAttribute("userLogin");
+
+%>              
+                     
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_email().equals("admin")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
 
 					</ul>
 
@@ -167,7 +181,7 @@
 
 	<div class="flex-container">
 		<div class="top-section">
-			<a class="site-title"> <img src="resources/assets/img/logo.png"
+			<a class="site-title" href="./"> <img src="resources/assets/img/logo.png"
 				class="logo">
 			</a>
 		</div>
@@ -185,9 +199,9 @@
 		<div class="menu-bar">
 			<ul class="menu-items">
 
-				<li><a href="user_management.html" id="fv_at">회원관리</a></li>
-				<li><a href="artwork_management.html">작품관리</a></li>
-				<li><a href="artist_approval.html">예술가 승인</a></li>
+				<li><a href="user_management" id="fv_at">회원관리</a></li>
+				<li><a href="artwork_management">작품관리</a></li>
+				<li><a href="artist_approval">예술가 승인</a></li>
 			</ul>
 		</div>
 

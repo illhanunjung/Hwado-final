@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import kr.smhrd.entity.AUCTIONS;
 import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.Artworks;
+import kr.smhrd.entity.Bidding;
 import kr.smhrd.entity.Cart;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.ORDERS;
@@ -149,5 +150,18 @@ public interface ArtworksMapper {
 			
 			// 작품 업데이트
 			public void updateArt(int aw_seq);
+			
+			
+			// 경매관리페이지
+						public List<Bidding> bidList(@NonNull String user_email);
+
+						public Bidding bidDetail(String user_email);
+
+						
+						public int aucStatus(int auc_seq);
+
+						
+
+						public void bidder(AUCTIONS auction);
 
 }

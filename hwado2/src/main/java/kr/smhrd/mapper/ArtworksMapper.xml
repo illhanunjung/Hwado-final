@@ -194,4 +194,29 @@ update BASKETS set basket_status = '품절' where aw_seq = #{aw_seq}
 update ARTWORKS set aw_status = '판매완료' where aw_seq = #{aw_seq}
 </update>
 
+<select id="bidList" resultType="kr.smhrd.entity.Bidding">
+SELECT BIDDING.*
+FROM BIDDING
+JOIN AUCTIONS ON BIDDING.auc_seq = AUCTIONS.auc_seq
+JOIN ARTWORKS ON AUCTIONS.aw_seq = ARTWORKS.aw_seq
+WHERE ARTWORKS.user_email = #{user_email} AND AUCTIONS.auc_status = "0"
+</select>
+
+<select id="bidDetail" resultType="kr.smhrd.entity.Bidding">
+select * from BIDDING where user_email=#{user_email}
+</select>
+
+
+<update id="bidder" parameterType="kr.smhrd.entity.AUCTIONS">
+	UPDATE AUCTIONS SET auc_status = '1', bidder_email = #{bidder_email} WHERE auc_seq = #{auc_seq}
+</update>
+
+<update id="aucStatus" parameterType="int">
+	UPDATE ARTWORKS
+    SET aw_status = '낙찰완료'
+    WHERE aw_seq IN (SELECT aw_seq FROM AUCTIONS WHERE auc_seq = #{auc_seq})
+</update>
+
+
+
 </mapper>

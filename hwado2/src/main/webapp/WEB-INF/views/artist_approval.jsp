@@ -17,7 +17,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>예술가 관리페이지</title>
+    <title>예술가 승인페이지</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -104,12 +104,26 @@
 
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="user_management">회원관리</a></li>
-                        <li><a href="">마이페이지</a></li>
-                        <li><a href="blog.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                        <%
+ Users userLogin = (Users)session.getAttribute("userLogin");
+
+%>              
+                     
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_email().equals("admin")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
 
                     </ul>
 
@@ -141,19 +155,19 @@
 
     <hr class="separator">
 
-    <div id="searchPopup" style="display:none;">
-        <form action="/search" method="get">
-            <input type="text" name="query" placeholder=" 검색....">
-            <input type="submit" value="검색">
-            <button type="button" onclick="closeSearchPopup()">X</button>
-        </form>
-    </div>
+   <div id="searchPopup" style="display:none;">
+     <form action="search" method="get">
+          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
+          <input type="submit" value="검색" >
+          <button type="button" onclick="closeSearchPopup()" >X</button>
+      </form>
+  </div>
 
 
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -173,9 +187,9 @@
         <div class="menu-bar">
             <ul class="menu-items">
 
-                <li><a href="user_management.html">회원관리</a></li>
-                <li><a href="artwork_management.html">작품관리</a></li>
-                <li><a href="artist_approval.html" id="fv_at">예술가 승인</a></li>
+                <li><a href="user_management" >회원관리</a></li>
+				<li><a href="artwork_management">작품관리</a></li>
+				<li><a href="artist_approval" id="fv_at">예술가 승인</a></li>
             </ul>
         </div>
 

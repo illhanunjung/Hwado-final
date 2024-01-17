@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>로그인/회원가입 페이지</title>
-<link rel="stylesheet" type="text/css" href="/assets/css/signin.css">
+<link rel="stylesheet" type="text/css" href="resources/assets/css/signin.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <!-- External JavaScript -->
@@ -17,7 +17,7 @@
 
 <style>
 .login-page {
-    background-image: url('/assets/img/background.png');
+    background-image: url('resources/assets/img/land5.jpg');
     background-size: cover; /* 이미지를 화면에 맞게 조절 */
     background-repeat: no-repeat; /* 이미지 반복 없이 한 번만 표시 */
     background-position: center;
@@ -34,8 +34,8 @@
 <div class="login-page" ng-app="">
    <div class="login-content login-content-signin" ng-hide="showSignIn">
       <div>
-         <img src="/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
-            style="display: block; margin: 0 auto;">
+        <a href="./"> <img src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
+            style="display: block; margin: 0 auto;"></a>
         <form class="wrapper-box" role="form" ng-submit="login()" action="userSelect" method="post">
                <input type="text" ng-model="email" class="form-control form-control-email"
                name="user_email" placeholder="이메일 주소" required>
@@ -58,7 +58,7 @@
       <div class="modal-content">
          <span class="close" onclick="closeModal()">&times;</span>
          <!-- 비밀번호 찾기에 관련된 폼 요소들을 추가하세요 -->
-         <img src="/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
+         <a href="./"><img src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"</a>
             style="display: block; margin: 0 auto;">
          <form>
             <!-- 비밀번호 찾기에 필요한 입력 필드들을 추가하세요 -->
@@ -82,7 +82,7 @@
    <div id="forgotIdModal" class="modal">
       <div class="modal-content">
          <span class="close" onclick="closeIdModal()">&times;</span> <img
-            src="/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
+            src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
             style="display: block; margin: 0 auto;">
          <form>
             <div class="form-group">
@@ -144,8 +144,8 @@
  <div class="login-content login-content-signup ng-hide"
          ng-show="showSignIn">
          <div>
-            <a href="main.html">
-            <img src="/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
+            <a href="./">
+            <img src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
                style="display: block; margin: 0 auto;"></a>
                
             <form class="wrapper-box" role="form" ng-submit="register()"
