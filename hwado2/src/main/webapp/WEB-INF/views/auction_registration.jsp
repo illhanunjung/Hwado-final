@@ -82,6 +82,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 </head>
 <body>
 
+
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
             <div class="container">
@@ -91,14 +92,22 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                     <ul class="nav navbar-nav navbar-right">
 
                                           
-                        <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
-                        <li><a href="blog.html">장바구니</a></li>
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="mypage.html">마이페이지</a></li>
-                        <li><a href="blog.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                      <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_role().equals("0")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
 
                     </ul>
 
@@ -154,19 +163,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
 
-<!-- 메뉴 바 -->
-<div class="menu-bar">
-    <ul class="menu-items">
-        <li><a href="favorite_artists.html">관심작가</a></li>
-        <li><a href="favorite_products.html">관심작품</a></li>
-        <li><a href="shoppig_cart.html">장바구니</a></li>
-        <li><a href="purchase_history.html">구매내역</a></li>
-        <li><a href="artist_registration.html" >프로필</a></li>
-        <li><a href="purchase_history.html">작품등록</a></li>
-        <li><a href="purchase_history.html" id="fv_at">경매등록</a></li>
-        <li><a href="user_edit.html">개인정보수정</a></li>
-    </ul>
-</div>
+
 
 <hr class="separator">
 

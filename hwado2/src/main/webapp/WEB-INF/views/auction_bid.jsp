@@ -88,23 +88,35 @@
 
 <body>
 
+<%
+ Users userLogin = (Users)session.getAttribute("userLogin");
+%>
+
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
             <div class="container">
 
                 <div class="collapse navbar-collapse" id="agency-navbar-collapse">
-
+                    
                     <ul class="nav navbar-nav navbar-right">
 
-
-                        <li><button id="searchButton"><span class="glyphicon glyphicon-search"
-                                    id="searchIcon"></span></button></li>
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="#" onclick="openMypageModal()">마이페이지</a></li>
-                        <li><a href="blog.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                                          
+                      <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_role().equals("0")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
 
                     </ul>
 
@@ -162,100 +174,28 @@
 
         </script>
 
-        <script>
-           /*  // 타이머 업데이트 함수
-            function updateTimer(timers, countDownDate) {
-                var now = new Date().getTime();
-                var distance = countDownDate - now;
 
-                // 모든 타이머 업데이트
-                for (var i = 0; i < timers.length; i++) {
-                    if (distance > 0) {
-                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                        timers[i].innerHTML = hours + "시간 " + minutes + "분 " + seconds + "초 ";
-                    } else {
-                        timers[i].innerHTML = "타이머 종료";
-                    }
-                }
-            } */
-
-            // 타이머 요소를 선택하고 종료 시간 설정
-           /*  var timers = document.getElementsByClassName("countdown-timer"); */
-           /*  var countDownDate = new Date().getTime() + 3 * 60 * 60 * 1000; // 현재로부터 3시간 후 */
-           
-
-            // 1초마다 타이머 업데이트
-            /* var interval = setInterval(function () {
-                updateTimer(timers, countDownDate);
-            }, 1000); */
-           
-            function parseDate(dateStr) {
-                let parts = dateStr.split(" ");
-                let dateParts = parts[0].split("-");
-                let timeParts = parts[1].split(":");
-
-                // Date의 월은 0부터 시작하므로 1을 빼줍니다.
-                let year = parseInt(dateParts[0], 10);
-                let month = parseInt(dateParts[1], 10) - 1;
-                let day = parseInt(dateParts[2], 10);
-
-                let hour = parseInt(timeParts[0], 10);
-                let minute = parseInt(timeParts[1], 10);
-                let second = parseInt(timeParts[2], 10);
-
-                return new Date(year, month, day, hour, minute, second);
-            }
-  
-            function updateTimer(timer) {
-               let countDownDate = parseDate(timer.getAttribute('data-countdown'));
-               let now = new Date().getTime();
-               let distance = countDownDate - now;
-               
-               console.log("countDownDate : "+timer.getAttribute('data-countdown'));
-
-                if (distance > 0) {
-                	let day = Math.floor((distance / (1000 * 60 * 60 * 24)));
-                	let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                	let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                	let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                    timer.innerHTML =day + "일 " + hours + "시간 " + minutes + "분 " + seconds + "초 ";
-                } else {
-                    timer.innerHTML = "타이머 종료";
-                }
-            }
-
-            function updateAllTimers() {
-            	let timers = document.getElementsByClassName("countdown-timer");
-                for (let i = 0; i < timers.length; i++) {
-                    updateTimer(timers[i]);
-                }
-            }
-
-            // 1초마다 모든 타이머 업데이트
-            setInterval(updateAllTimers, 1000);
-
-           
-        </script>
         <!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
 
         <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
 
         <!-- 메뉴 바 -->
-        <div class="menu-bar">
-            <ul class="menu-items">
+<div class="menu-bar">
+    <ul class="menu-items">
+    	<% if(userLogin.getUser_role().equals("1")){ %>
+        <li><a href="favorite_artists">관심작가</a></li>
+        <li><a href="wishPage">관심작품</a></li>
+        <li><a href="purchase_history">구매내역</a></li>
+        <li><a href=artist_registration >예술가신청</a></li>
+         <%} %>
+         <% if(userLogin.getUser_role().equals("2")){ %>
+        <li><a href="prd_regi_page" >작품등록</a></li>
+        <li><a href="artist_registration">경매등록</a></li>
+         <%} %>
+        <li><a href="user_edit">개인정보수정</a></li>
+    </ul>
+</div>
 
-                <li><a href="favorite_artists.html">관심작가</a></li>
-                <li><a href="favorite_products.html">관심작품</a></li>
-                <li><a href="shoppig_cart.html">장바구니</a></li>
-                <li><a href="purchase_history.html">구매내역</a></li>
-                <li><a href="artist_registration.html">예술가신청</a></li>
-                <li><a href="user_edit.html">개인정보수정</a></li>
-            </ul>
-        </div>
 
         <hr class="separator">
 
@@ -393,13 +333,13 @@
         <!-- Bootstrap core JavaScript
 ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/bootstrap-select.min.js"></script>
-        <script src="assets/js/jquery.slicknav.min.js"></script>
-        <script src="assets/js/jquery.countTo.min.js"></script>
-        <script src="assets/js/jquery.shuffle.min.js"></script>
-        <script src="assets/js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="resources/assets/js/bootstrap.min.js"></script>
+<script src="resources/assets/js/bootstrap-select.min.js"></script>
+<script src="resources/assets/js/jquery.slicknav.min.js"></script>
+<script src="resources/assets/js/jquery.countTo.min.js"></script>
+<script src="resources/assets/js/jquery.shuffle.min.js"></script>
+<script src="resources/assets/js/script.js"></script>
 
 </body>
 

@@ -26,7 +26,7 @@
     
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/assets/img/apple-touch-icon.png">
 
 
     <!-- Stylesheets
@@ -35,12 +35,12 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/exhibition.css" rel="stylesheet">
-    <link href="assets/css/font_bold.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
+    <link href="resources/assets/css/exhibition.css" rel="stylesheet">
+    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -99,21 +99,21 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <!-- 메뉴 바 -->
 <div class="slider-container">
     <div class="image-slider">
-        <img src="/assets/명화/11.jpg" alt="이미지 1">
-        <img src="/assets/명화/12.jpg" alt="이미지 2">
-        <img src="/assets/명화/13.jpg" alt="이미지 3">
-        <img src="/assets/명화/14.jpg" alt="이미지 1">
-        <img src="/assets/명화/15.jpg" alt="이미지 1">
-        <img src="/assets/명화/16.jpg" alt="이미지 1">
-        <img src="/assets/명화/17.jpg" alt="이미지 1">
-        <img src="/assets/명화/18.jpg" alt="이미지 1">
-        <img src="/assets/명화/1.jpg" alt="이미지 1">
-        <img src="/assets/명화/2.jpg" alt="이미지 1">
-        <img src="/assets/명화/3.jpg" alt="이미지 1">
-        <img src="/assets/명화/4.jpg" alt="이미지 1">
-        <img src="/assets/명화/5.jpg" alt="이미지 1">
-        <img src="/assets/명화/6.jpg" alt="이미지 1">
-        <img src="/assets/명화/7.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/11.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/12.jpg" alt="이미지 2">
+        <img src="resources/assets/명화/13.jpg" alt="이미지 3">
+        <img src="resources/assets/명화/14.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/15.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/16.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/17.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/18.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/1.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/2.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/3.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/4.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/5.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/6.jpg" alt="이미지 1">
+        <img src="resources/assets/명화/7.jpg" alt="이미지 1">
         <!-- 더 많은 이미지를 추가할 수 있습니다 -->
     </div>
 </div>
@@ -123,7 +123,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <div class="exhibition-content">
         <div class="artwork-image">
             <button class="glyphicon glyphicon-menu-left"></button>
-            <img src="/assets/명화/11.jpg" alt="Artwork Image">
+            <img src="resources/assets/명화/11.jpg" alt="Artwork Image">
             <button class="glyphicon glyphicon-menu-right"></button>
         </div>
         <div class="artwork-info">

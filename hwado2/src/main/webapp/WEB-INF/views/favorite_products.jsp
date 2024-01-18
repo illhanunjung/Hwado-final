@@ -88,25 +88,36 @@
     </style>
 </head>
 
-<body>
+
+<%
+ Users userLogin = (Users)session.getAttribute("userLogin");
+%>
 
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
             <div class="container">
 
                 <div class="collapse navbar-collapse" id="agency-navbar-collapse">
-
+                    
                     <ul class="nav navbar-nav navbar-right">
 
-
-                        <li><button id="searchButton"><span class="glyphicon glyphicon-search"
-                                    id="searchIcon"></span></button></li>
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="#" onclick="openMypageModal()">마이페이지</a></li>
-                        <li><a href="blog.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                                          
+                      <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_role().equals("0")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
 
                     </ul>
 
@@ -123,7 +134,7 @@
     <div class="flex-container">
         <div class="top-section">
             <a class="site-title" href="index.html">
-                <img src="assets/img/logo.png" class="logo">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
 
@@ -149,7 +160,7 @@
     <div class="flex-container">
         <div class="top-section">
             <a class="site-title">
-                <img src="assets/img/logo.png" class="logo">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
 
@@ -165,18 +176,22 @@
 
         <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
 
-        <!-- 메뉴 바 -->
-        <div class="menu-bar">
-            <ul class="menu-items">
-
-                <li><a href="favorite_artists.html">관심작가</a></li>
-                <li><a href="favorite_products.html">관심작품</a></li>
-                <li><a href="shoppig_cart.html">장바구니</a></li>
-                <li><a href="purchase_history.html">구매내역</a></li>
-                <li><a href="artist_registration.html">예술가신청</a></li>
-                <li><a href="user_edit.html">개인정보수정</a></li>
-            </ul>
-        </div>
+<!-- 메뉴 바 -->
+<div class="menu-bar">
+    <ul class="menu-items">
+    	<% if(userLogin.getUser_role().equals("1")){ %>
+        <li><a href="favorite_artists">관심작가</a></li>
+        <li><a href="wishPage">관심작품</a></li>
+        <li><a href="purchase_history">구매내역</a></li>
+        <li><a href=artist_registration >예술가신청</a></li>
+         <%} %>
+         <% if(userLogin.getUser_role().equals("2")){ %>
+        <li><a href="prd_regi_page" >작품등록</a></li>
+        <li><a href="artist_registration">경매등록</a></li>
+         <%} %>
+        <li><a href="user_edit">개인정보수정</a></li>
+    </ul>
+</div>
 
         <hr class="separator">
 
