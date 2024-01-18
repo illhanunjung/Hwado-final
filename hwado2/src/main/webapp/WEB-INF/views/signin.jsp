@@ -42,8 +42,8 @@
                 <input type="password" ng-model="password" class="form-control form-control-password"
                name="user_pw" placeholder="비밀번호" required>
 
-            <a class="outer-link pull-left" onclick="openModal()"
-               style="margin-right: 10px;">비밀번호 찾기</a>
+<!--             <a class="outer-link pull-left" onclick="openModal()"
+               style="margin-right: 10px;">비밀번호 찾기</a> -->
  
                   <button type="submit" class="btn btn-submit btn-default pull-right" >로그인</button>
 
@@ -54,15 +54,15 @@
    </div>
    
    
-   <div id="forgotPasswordModal" class="modal">
+<!--    <div id="forgotPasswordModal" class="modal">
       <div class="modal-content">
          <span class="close" onclick="closeModal()">&times;</span>
-         <!-- 비밀번호 찾기에 관련된 폼 요소들을 추가하세요 -->
+         비밀번호 찾기에 관련된 폼 요소들을 추가하세요
          <a href="./"><img src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
             style="display: block; margin: 0 auto;"></a>
          <form>
-            <!-- 비밀번호 찾기에 필요한 입력 필드들을 추가하세요 -->
-            <!-- 예: 이메일 주소 입력 등 -->
+            비밀번호 찾기에 필요한 입력 필드들을 추가하세요
+            예: 이메일 주소 입력 등
             <div class="form-group">
                <label for="nickname">이메일</label> <input type="email"
                   ng-model="email" class="form-control form-control-email"
@@ -78,7 +78,7 @@
          </form>
       </div>
    </div>
-
+ -->
    <div id="forgotIdModal" class="modal">
       <div class="modal-content">
          <span class="close" onclick="closeIdModal()">&times;</span> <img
