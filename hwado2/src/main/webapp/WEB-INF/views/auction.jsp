@@ -44,6 +44,7 @@
     <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
     <link href="resources/assets/css/style.css" rel="stylesheet">
     <link href="resources/assets/css/responsive.css" rel="stylesheet">
     <link href="resources/assets/css/mypage1.css" rel="stylesheet">
@@ -86,6 +87,12 @@
             font-weight: 400;
             font-style: normal;
         }
+        
+.main-container {
+ 
+  background-color: white !important; /* 회색 배경색 */
+
+}
     </style>
 </head>
 
@@ -229,7 +236,7 @@
             <ul class="menu-items">
 
                 <li><a href="product_page">일반상품</a></li>
-                <li><a href="auction_page">경매</a></li>
+                <li><a href="auction_page" id="fv_at">경매</a></li>
             </ul>
         </div>
 

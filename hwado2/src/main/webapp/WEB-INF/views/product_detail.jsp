@@ -281,8 +281,8 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <div class="centered-container">
     <section class="product-detail">
         <div class="product-grid">
-            <div class="product-image">
-                <img src="<%=savePath+"/"+images.get(0).getImg_filename() %>" alt="상품 이미지">
+            <div class="product-image" style="display: flex; align-items: center;">
+                <img src="<%=savePath+"/"+images.get(0).getImg_filename() %>" alt="상품 이미지" style="vertical-align: middle;">
             </div>
             <div class="product-info">
                 <h1><%=art.getAw_name() %></h1><br><br>

@@ -43,6 +43,7 @@
     <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
     <link href="resources/assets/css/style.css" rel="stylesheet">
     <link href="resources/assets/css/responsive.css" rel="stylesheet">
     <link href="resources/assets/css/mypage1.css" rel="stylesheet">
@@ -85,7 +86,20 @@
             font-weight: 400;
             font-style: normal;
         }
+        
+        .gallery-column {
+    position: relative !important;
+    left: 190px !important;
+    grid-column: span 4 / span 4;
+}
+
+.main-container {
+ 
+  background-color: white !important; /* 회색 배경색 */
+
+}
     </style>
+    
 </head>
 
 <body>
@@ -221,8 +235,8 @@
         <div class="menu-bar">
             <ul class="menu-items">
 
-                <li><a href="product_userEmail?artist_email=<%=artistList.get(0).getUser_email() %>">일반상품</a></li>
-                <li><a href="auction_userEmail?artist_email=<%=artistList.get(0).getUser_email() %>">경매</a></li>
+                <li><a href="product_userEmail?artist_email=<%=artistList.get(0).getUser_email() %>" id="fv_at">작품</a></li>
+                <li><a href="auction_userEmail?artist_email=<%=artistList.get(0).getUser_email() %>">경매작품</a></li>
             </ul>
         </div>
 
@@ -300,7 +314,7 @@
                     <!-- 갤러리 헤더 시작 -->
                     <div class="gallery-header">
                         <!-- 갤러리 제목 -->
-                        <h1 class="gallery-title">갤러리</h1>
+                        <h1 class="gallery-title">작품</h1>
                     </div> <!-- 갤러리 헤더 종료 -->
                     <!-- 아트워크 그리드 시작 -->
                     <div class="artwork-grid">
