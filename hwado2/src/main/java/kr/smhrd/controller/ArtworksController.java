@@ -525,6 +525,9 @@ public class ArtworksController {
 		
 		model.addAttribute("pageN", page);
 		
+		mapper.artworksdeadline();
+		mapper.auctiondeadline();
+		
 		return "auction";
 	}
 	

@@ -196,4 +196,10 @@ public interface ArtworksMapper {
 			public List<IMAGES> artistAcImg(String artist_email);
 
 			public List<AUCTIONS> artistAcinfo(String artist_email);
+			
+			// 경매 마감 업데이트
+			public void auctiondeadline();
+			
+			//아트 경매 마갋 업데이트
+			public void artworksdeadline();
 }

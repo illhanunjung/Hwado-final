@@ -272,4 +272,12 @@ select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWOR
 select * from AUCTIONS where aw_seq in (select aw_seq from ARTWORKS where user_email=#{artist_email} and aw_status='경매') 
 </select>
 
+<update id="auctiondeadline">
+update AUCTIONS set auc_status = '2' where now() > auc_ended_at
+</update>
+
+<update id="artworksdeadline">
+update ARTWORKS set aw_status = '마감' where aw_seq in (select aw_seq from AUCTIONS where now() > auc_ended_at)
+</update>
+
 </mapper>

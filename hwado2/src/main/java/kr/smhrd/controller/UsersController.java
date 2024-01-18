@@ -41,6 +41,9 @@ public class UsersController {
 		List<IMAGES> recentImages = mapper.getRecentArtworkImages();
 		model.addAttribute("monthArtworks", monthArtworks);
 		model.addAttribute("recentImages", recentImages);
+		
+		mapper.artworksdeadline();
+		mapper.auctiondeadline();
 		return "main";
 	}
 	
