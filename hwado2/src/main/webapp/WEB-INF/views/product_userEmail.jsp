@@ -194,6 +194,9 @@
           	List<IMAGES> imgList = (List<IMAGES>) request.getAttribute("imgList");
           	ArrayList<Users> artistList = (ArrayList<Users>) request.getAttribute("artistList");
           	
+         // 아티스트 정보
+          	String artist_email =(String)request.getAttribute("artist_email");
+          	
           	// 저장소 위치
           	String savePath = "./resources/artworks";
           	
@@ -305,7 +308,8 @@
                    
                    
                     
-                    <% for(int i = start; i < end; i++){ %>
+                   <% if(end > 0){
+                    for(int i = start; i < end; i++){ %>
                         <!-- 아트워크 카드 시작 -->
                         <div class="artwork-card">
                             <!-- 카드 콘텐츠 시작 -->
@@ -351,7 +355,7 @@
                             </div> <!-- 카드 콘텐츠 종료 -->
                         </div> <!-- 아트워크 카드 종료 -->
                         
-                        <%} %>
+                        <%}} %>
                     </div> <!-- 아트워크 그리드 종료 -->
                     <!-- 네비게이션 버튼들을 포함하는 컨테이너 -->
                     <div class="navigation-buttons">

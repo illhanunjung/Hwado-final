@@ -1311,101 +1311,109 @@ public class ArtworksController {
 					}
 					
 					
-			// 일반 작품 출력 페이지 이동
-			@RequestMapping("/product_userEmail")
-			public String product_userEmail(@RequestParam(value = "page", defaultValue = "0") int page , Model model, @RequestParam("artist_email")String artist_email) {
-				
-				System.out.println("들어왔음 : "+ artist_email);
-				
-				List<Artworks> artList = mapper.artistProduct(artist_email);
-				List<IMAGES> imgList = mapper.artistPrImg(artist_email);
-				
-				
-				
-				model.addAttribute("artList", artList);
-				model.addAttribute("imgList", imgList);
-				
-				System.out.println(artList.size());
-				System.out.println(imgList.size());
-				
-				ArrayList<Users> artistList = new ArrayList<Users>();
-				
-				for(Artworks art : artList) {
-					artistList.add(mapper.getArtist(art.getUser_email()));
-				}
-				
-				System.out.println(artistList.size());
-				
-				model.addAttribute("artistList", artistList);
-				
-				int maxpage = 0;
-				
-				if (imgList.size() %16 == 0) {
-					maxpage = imgList.size()/16-1;
-				} else {
-					maxpage = imgList.size()/16 ;
-				}
-				
-				System.out.println("maxpage : "+maxpage);
-				System.out.println("page : " + page);
-				if(page < 0) {
-					page = 0;
-				} else if (page > maxpage) {
-					page = maxpage;
-				}
-				
-				System.out.println("page : " + page);
-				
-				model.addAttribute("pageN", page);
-				
-				return "product_userEmail";
-			}
-			
-			//경매 페이지 이동
-			@RequestMapping("/auction_userEmail")
-			public String auction_userEmail(@RequestParam(value = "page", defaultValue = "0") int page , Model model, @RequestParam("artist_email")String artist_email) {
-				List<Artworks> auctionList = mapper.artistAuction(artist_email);
-				List<IMAGES> auctionImgList = mapper.artistAcImg(artist_email);
-				List<AUCTIONS> auctioninfo = mapper.artistAcinfo(artist_email);
-				
-				model.addAttribute("auctionList", auctionList);
-				model.addAttribute("auctionImgList", auctionImgList);
-				model.addAttribute("auctioninfo", auctioninfo);
-				
-				ArrayList<Users> artistList = new ArrayList<Users>();
-				
-				for(Artworks art : auctionList) {
-					artistList.add(mapper.getArtist(art.getUser_email()));
-				}
-				
-				model.addAttribute("artistList", artistList);
-				
-				System.out.println(auctionList.size());
-				System.out.println(auctionImgList.size());
-				System.out.println(auctioninfo.size());
-				
-				int maxpage = 0;
-				
-				if (auctionImgList.size() %16 == 0) {
-					maxpage = auctionImgList.size()/16-1;
-				} else {
-					maxpage = auctionImgList.size()/16 ;
-				}
-				
-				System.out.println("maxpage : "+maxpage);
-				System.out.println("page : " + page);
-				if(page < 0) {
-					page = 0;
-				} else if (page > maxpage) {
-					page = maxpage;
-				}
-				
-				System.out.println("page : " + page);
-				
-				model.addAttribute("pageN", page);
-				
-				return "auction_userEmail";
-			}
+					// 일반 작품 출력 페이지 이동
+					@RequestMapping("/product_userEmail")
+					public String product_userEmail(@RequestParam(value = "page", defaultValue = "0") int page , Model model, @RequestParam("artist_email")String artist_email) {
+						
+						System.out.println("들어왔음 : "+ artist_email);
+						
+						List<Artworks> artList = mapper.artistProduct(artist_email);
+						List<IMAGES> imgList = mapper.artistPrImg(artist_email);
+						
+						
+						
+						model.addAttribute("artList", artList);
+						model.addAttribute("imgList", imgList);
+						model.addAttribute("artist_email", artist_email);
+						
+						System.out.println(artList.size());
+						System.out.println(imgList.size());
+						
+						ArrayList<Users> artistList = new ArrayList<Users>();
+						
+						for(Artworks art : artList) {
+							artistList.add(mapper.getArtist(art.getUser_email()));
+						}
+						
+						System.out.println(artistList.size());
+						
+						model.addAttribute("artistList", artistList);
+						
+						int maxpage = 0;
+						
+						if(imgList.size() < 16) {
+							maxpage = 0;
+						}
+						else if (imgList.size() %16 == 0) {
+							maxpage = imgList.size()/16-1;
+						} else {
+							maxpage = imgList.size()/16 ;
+						}
+						
+						System.out.println("maxpage : "+maxpage);
+						System.out.println("page : " + page);
+						if(page < 0) {
+							page = 0;
+						} else if (page > maxpage) {
+							page = maxpage;
+						}
+						
+						System.out.println("page : " + page);
+						
+						model.addAttribute("pageN", page);
+						
+						return "product_userEmail";
+					}
+					
+					//경매 페이지 이동
+					@RequestMapping("/auction_userEmail")
+					public String auction_userEmail(@RequestParam(value = "page", defaultValue = "0") int page , Model model, @RequestParam("artist_email")String artist_email) {
+						List<Artworks> auctionList = mapper.artistAuction(artist_email);
+						List<IMAGES> auctionImgList = mapper.artistAcImg(artist_email);
+						List<AUCTIONS> auctioninfo = mapper.artistAcinfo(artist_email);
+						
+						model.addAttribute("auctionList", auctionList);
+						model.addAttribute("auctionImgList", auctionImgList);
+						model.addAttribute("auctioninfo", auctioninfo);
+						model.addAttribute("artist_email", artist_email);
+						
+						ArrayList<Users> artistList = new ArrayList<Users>();
+						
+						for(Artworks art : auctionList) {
+							artistList.add(mapper.getArtist(art.getUser_email()));
+						}
+						
+						model.addAttribute("artistList", artistList);
+						
+						System.out.println(auctionList.size());
+						System.out.println(auctionImgList.size());
+						System.out.println(auctioninfo.size());
+						
+						int maxpage = 0;
+						
+						if(auctionImgList.size() < 16) {
+							maxpage = 0;
+						}
+						else if (auctionImgList.size() %16 == 0) {
+							maxpage = auctionImgList.size()/16-1;
+						} else {
+							maxpage = auctionImgList.size()/16 ;
+						}
+						
+						System.out.println("maxpage : "+maxpage);
+						System.out.println("page : " + page);
+						if(page < 0) {
+							page = 0;
+						} else if (page > maxpage) {
+							page = maxpage;
+						}
+						
+						System.out.println("page : " + page);
+						
+						model.addAttribute("pageN", page);
+						
+						return "auction_userEmail";
+					}
 			
 			// 상품 타입 구별
 			@ResponseBody
