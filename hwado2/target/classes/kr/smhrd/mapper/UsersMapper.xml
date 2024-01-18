@@ -90,4 +90,8 @@ select * from WISHLIST where user_email = #{user_email}
 	LIMIT 16
 </select>
 
+<select id="getWishArtist" parameterType="String" resultType="kr.smhrd.entity.Interests">
+select * from INTERESTS where user_email = #{user_email}
+</select>
+
 </mapper>

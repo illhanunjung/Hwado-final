@@ -219,3 +219,21 @@ body{
   text-align: center; /* 중앙 정렬 */
   margin-top: 0; /* 마진 제거 */
 }
+
+
+.navigation-buttons {
+  display: flex; /* Flexbox 레이아웃 적용 */
+  justify-content: center; /* 가운데 정렬 */
+  gap: 20px; /* 버튼 사이의 간격 */
+}
+
+.nav-button {
+  background-color: transparent; /* 배경색 투명 */
+  border: none; /* 테두리 없음 */
+  cursor: pointer; /* 커서 스타일 */
+  font-size: 40px; /* 아이콘 크기 */
+  color: #6f6f74; /* 아이콘 색상 */
+  margin-top: 5px; /* 상단 여백 */
+  position: relative;
+  left: 22px;
+}

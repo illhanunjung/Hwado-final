@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="kr.smhrd.entity.IMAGES"%>
+<%@page import="kr.smhrd.entity.Users"%>
+<%@page import="kr.smhrd.entity.Artworks"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.smhrd.entity.WISHLIST"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.smhrd.entity.Profile"%>
+<%@page import="kr.smhrd.entity.Interests"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,12 +35,12 @@
     <!-- Favicon
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="15x15" href="assets/img/logo.png">
+    <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="resources/assets/css/favorite_artists.css" rel="stylesheet">
@@ -79,11 +87,10 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     </style>
 </head>
 <body>
-
 <%
  Users userLogin = (Users)session.getAttribute("userLogin");
-%>
 
+%>
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
             <div class="container">
@@ -93,10 +100,10 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                     <ul class="nav navbar-nav navbar-right">
 
                                           
-                      <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
+                        <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
                       <% if(userLogin!= null){ %>
                       <li><a href="shoppingCart">장바구니</a></li>
-                      	<% if(userLogin.getUser_role().equals("0")){ %>
+                      	<% if(userLogin.getUser_email().equals("admin")){ %>
                       <li><a href="user_management">회원관리</a></li>
                         <%} %>
                         <li><a href="myPage">마이페이지</a></li>
@@ -114,20 +121,18 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
                 </div>
 
-          
-
-
             </div>   
+
 
         </nav><!-- /.site-navigation -->
     </header><!-- /#mastheaed -->
     <div id="searchPopup" style="display:none;">
-        <form action="/search" method="get">
-            <input type="text" name="query" placeholder="작품/작가 검색..." >
-            <input type="submit" value="검색" >
-            <button type="button" onclick="closeSearchPopup()" >X</button>
-        </form>
-    </div>
+     <form action="search" method="get">
+          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
+          <input type="submit" value="검색" >
+          <button type="button" onclick="closeSearchPopup()" >X</button>
+      </form>
+  </div>
   
   <script>
     document.getElementById('searchButton').addEventListener('click', function() {
@@ -141,8 +146,8 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
   </script>
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="main.html">
-                <img src="assets/img/logo.png" class="logo">
+            <a class="site-title" href="./">
+                <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
     
@@ -164,17 +169,13 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <!-- 메뉴 바 -->
 <div class="menu-bar">
     <ul class="menu-items">
-    	<% if(userLogin.getUser_role().equals("1")){ %>
-        <li><a href="favorite_artists">관심작가</a></li>
-        <li><a href="wishPage">관심작품</a></li>
-        <li><a href="purchase_history">구매내역</a></li>
-        <li><a href=artist_registration >예술가신청</a></li>
-         <%} %>
-         <% if(userLogin.getUser_role().equals("2")){ %>
-        <li><a href="prd_regi_page" >작품등록</a></li>
-        <li><a href="artist_registration">경매등록</a></li>
-         <%} %>
-        <li><a href="user_edit">개인정보수정</a></li>
+        <li><a href="favorite_artists.html" id="fv_at">관심작가</a></li>
+        <li><a href="favorite_products.html">관심작품</a></li>
+        <li><a href="purchase_history.html">구매내역</a></li>
+        <li><a href="artist_registration.html" >예술가신청</a></li>
+        <li><a href="product_registration.html" >작품등록</a></li>
+        <li><a href="product_registration.html">경매등록</a></li>
+        <li><a href="user_edit.html">개인정보수정</a></li>
     </ul>
 </div>
 
@@ -182,6 +183,88 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 <hr class="separator">
 <p class="artistName1">❝ 함께 나아가는 여정에서 여러분과의 소중한 인연을 잊지 않겠습니다 ❞</p>
+
+<%
+
+	List<Interests> wishArtist = (List<Interests>)session.getAttribute("wishArtist");
+
+	ArrayList<Profile> wishProfile = (ArrayList<Profile>)request.getAttribute("wishProfile");
+	ArrayList<Users> artistList = (ArrayList<Users>)request.getAttribute("artistList");
+	
+	String savePath = "./resources/artist_profile";
+	
+	//페이지
+	int pageN = (int)request.getAttribute("pageN");
+	int item = 16;
+	
+	int start = pageN * item;
+	int end = start+item;
+	
+	if(wishProfile != null){
+		if(end > wishProfile.size()){
+			end = wishProfile.size();
+		} else if (end < item){
+			end = wishProfile.size();
+		}
+	}
+	
+	
+	System.out.println("start : " + start);
+	System.out.println("end : " + end);
+%>
+
+  
+
+<section class="site-section subpage-site-section section-related-projects">
+    <div class="container">
+        
+       
+
+        <div class="row">
+           
+            <% if(wishProfile != null && wishProfile != null){ 
+                    for(int i = start; i < end; i++){ %>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <div class="portfolio-item">                 
+                        <img src="<%=savePath+"/"+wishProfile.get(i).getAp_title() %>" class="img-res" alt="">
+                       
+                    
+                    <h4 class="portfolio-item-title"><%=artistList.get(i).getUser_nick() %><br><br><%=wishProfile.get(i).getAp_desc() %>
+                        <br><br><br><br><br><br><br><br><br>
+                        <button class="heart-button filled" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-ap_seq="<%=wishProfile.get(i).getAp_seq() %>"><i class="glyphicon glyphicon-heart"></i></button>
+
+                    </h4>
+                       
+                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                </div><!-- /.portfolio-item -->
+            </div>     
+           <%}}else{%>
+ 				<h3>관심작가가 없습니다.</h3>       	   
+           <% } %>
+             <div class="navigation-buttons">
+                        <a href="wishArtistsPage?page=<%=pageN-1 %>"><button class="nav-button" ><i
+                                class="bi bi-caret-left"></i></button></a>
+                    		<a href="wishArtistsPage?page=<%=pageN+1 %>"><button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button></a>
+            
+        </div>
+    </div>
+    
+</section><!-- /.section-portfolio -->
+
+
+
+
+<script>
+            function loadPage(url) {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        // 여기서 'content'는 업데이트하고자 하는 페이지의 부분의 ID입니다.
+                        document.getElementById('content').innerHTML = data;
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        </script>
 
 <script>
 
@@ -204,265 +287,43 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+function likeTF(buttonElement) {
+    var user_email = buttonElement.getAttribute('data-user_email');
+    var ap_seq = buttonElement.getAttribute('data-ap_seq');
+
+    console.log('user_email:', user_email);
+    console.log('ap_seq:', ap_seq);
+
+    $.ajax({ //json 형식 -> {key : value, key : value}
+			// 어디로 요청할 것인지(요청 url)
+			url : 'whishArtist',
+			
+			// 요청 데이터
+			data : { 'user_email' : user_email, 'ap_seq' : ap_seq },
+			
+			// 요청 방식
+			type : 'get',
+			
+			// 요청-응답 성공
+			success : function(data){
+				if(data){
+					window.location.href = "wishArtistsPage";
+				} else{
+					console.log(data)
+				}
+				
+			},
+			
+			// 요청-응답 실패
+			error : function(){
+				console.log("통신실패")
+			}
+		})
+}
+
 
     
                 </script>
-
-<section class="site-section subpage-site-section section-related-projects">
-    <div class="container">
-        
-       
-
-        <div class="row">
-           
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/1.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/2.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/3.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/4.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/5.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/6.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/7.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/8.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/9.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/10.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/11.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/12.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/13.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/14.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/15.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6">
-                <div class="portfolio-item">
-                  
-                        <img src="assets/명화/16.jpg" class="img-res" alt="">
-                       
-                    
-                    <h4 class="portfolio-item-title">홍길동<br><br>세상과 미술은 하나다 나는 미술 그 자체다 
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled"><i class="glyphicon glyphicon-heart"></i></button>
-
-                    </h4>
-                       
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                </div><!-- /.portfolio-item -->
-            </div>
-        </div>
-    </div>
-</section><!-- /.section-portfolio -->
-
-
-
-
-
 
 
 
@@ -547,13 +408,12 @@ document.addEventListener('DOMContentLoaded', function () {
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="resources/assets/js/bootstrap.min.js"></script>
-<script src="resources/assets/js/bootstrap-select.min.js"></script>
-<script src="resources/assets/js/jquery.slicknav.min.js"></script>
-<script src="resources/assets/js/jquery.countTo.min.js"></script>
-<script src="resources/assets/js/jquery.shuffle.min.js"></script>
-<script src="resources/assets/js/script.js"></script>
-
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-select.min.js"></script>
+<script src="assets/js/jquery.slicknav.min.js"></script>
+<script src="assets/js/jquery.countTo.min.js"></script>
+<script src="assets/js/jquery.shuffle.min.js"></script>
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>

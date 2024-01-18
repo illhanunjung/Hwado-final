@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.smhrd.entity.ArtworkImage;
+import kr.smhrd.entity.Interests;
 import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
@@ -46,5 +47,7 @@ public interface UsersMapper {
 		// 작가페이지 이동
 		public List<ArtworkImage> Author_page();
 
+		// 관심작가
+				public List<Interests> getWishArtist(String userEmail);
 	
 }

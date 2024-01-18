@@ -284,4 +284,22 @@ update ARTWORKS set aw_status = '마감' where aw_seq in (select aw_seq from AUC
 select aw_status from ARTWORKS where aw_seq = #{aw_seq}
 </select>
 
+
+<select id="wishArtistCheck" parameterType="kr.smhrd.entity.Interests" resultType="int">
+select count(*) from INTERESTS where user_email = #{user_email} and ap_seq = #{ap_seq}
+</select>
+
+<insert id="wishArtist" parameterType="kr.smhrd.entity.Interests">
+insert into INTERESTS (user_email, ap_seq) values (#{user_email}, #{ap_seq})
+</insert>
+
+<delete id="deleteArtistWish" parameterType="kr.smhrd.entity.Interests">
+delete from INTERESTS  where user_email = #{user_email} and ap_seq = #{ap_seq} 
+</delete>
+
+
+<select id="getArtists" parameterType="Long"  resultType="kr.smhrd.entity.Profile">
+select * from ARTIST_PROFILE where ap_type='0' and ap_seq=#{ap_seq}
+</select>
+
 </mapper>

@@ -10,6 +10,7 @@ import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.Bidding;
 import kr.smhrd.entity.Cart;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.Interests;
 import kr.smhrd.entity.ORDERS;
 import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Profile;
@@ -205,4 +206,15 @@ public interface ArtworksMapper {
 			
 			// 상품 타입 확인
 			public String selectPdAc(int aw_seq);
+			
+			
+		// 관심작가
+			
+			public int wishArtistCheck(Interests wish);
+
+			public int wishArtist(Interests wish);
+
+			public int deleteArtistWish(Interests wish);
+
+			public Profile getArtists(@NonNull Long ap_seq);
 }

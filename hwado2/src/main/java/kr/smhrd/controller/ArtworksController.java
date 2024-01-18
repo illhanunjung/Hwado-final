@@ -37,6 +37,7 @@ import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.Artworks;
 import kr.smhrd.entity.Cart;
 import kr.smhrd.entity.IMAGES;
+import kr.smhrd.entity.Interests;
 import kr.smhrd.entity.ORDERS;
 import kr.smhrd.entity.Portfolios;
 import kr.smhrd.entity.Profile;
@@ -44,6 +45,7 @@ import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 import kr.smhrd.mapper.ArtworksMapper;
 import kr.smhrd.mapper.UsersMapper;
+import lombok.NonNull;
 
 @Controller
 public class ArtworksController {
@@ -1423,6 +1425,91 @@ public class ArtworksController {
 				System.out.println(result);
 				
 				return result;
+			}
+			
+			
+			// 관심작가 등록
+			@ResponseBody
+			@RequestMapping("/whishArtist")
+			public boolean whishArtist(@RequestParam("user_email") String userEmail, @RequestParam("ap_seq") @NonNull Long ap_seq, HttpSession session) {
+				System.out.println("들어왔음");
+				System.out.println(userEmail);
+				System.out.println(ap_seq);
+				
+				Interests wish = new Interests(userEmail, ap_seq);
+				// 관심 등록 확인
+				int TF = mapper.wishArtistCheck(wish);
+				System.out.println("들어왔음");
+				
+				int cnt = 0;
+				
+				if (TF > 0) {
+					cnt = mapper.deleteArtistWish(wish);
+				} else {
+					cnt = mapper.wishArtist(wish);
+				}
+				
+				List<Interests> wishArtist = usersMapper.getWishArtist(userEmail);
+				session.setAttribute("wishArtist", wishArtist);
+				
+				if(cnt >= 0) {
+					return true;
+				}else {
+					return false;
+				}
+				
+			}
+			
+			
+			// 관심 작가 페이지
+			@RequestMapping("/wishArtistsPage")
+			public String wishArtistsPage(HttpSession session, Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+				Users userLogin = (Users)session.getAttribute("userLogin");
+				List<Interests> wishArtist = usersMapper.getWishArtist(userLogin.getUser_email());
+				session.setAttribute("wishArtist", wishArtist);
+				
+				ArrayList<Profile> wishProfile = new ArrayList<Profile>();
+				ArrayList<Users> artistList = new ArrayList<Users>();
+				
+				if(wishArtist != null) {
+					System.out.println("들어옴1");
+					for(Interests wish : wishArtist) {
+						System.out.println("들어옴2");
+						wishProfile.add(mapper.getArtists(wish.getAp_seq()));
+					}
+					
+					for(Profile art : wishProfile) {
+						artistList.add(mapper.getArtist(art.getUser_email()));
+					}
+				}
+				
+				model.addAttribute("wishProfile", wishProfile);
+				model.addAttribute("artistList", artistList);
+				
+				int maxpage = 0;
+				
+				if(wishProfile.size() == 0) {
+					maxpage = 0;
+					
+				} else if (wishProfile.size() %16 == 0) {
+					maxpage = wishProfile.size()/16-1;
+				} else {
+					maxpage = wishProfile.size()/16 ;
+				}
+				
+				System.out.println("maxpage : "+maxpage);
+				System.out.println("page : " + page);
+				if(page < 0) {
+					page = 0;
+				} else if (page > maxpage) {
+					page = maxpage;
+				}
+				
+				System.out.println("page : " + page);
+				
+				model.addAttribute("pageN", page);
+				
+				return "favorite_artist";
 			}
 					
 }
