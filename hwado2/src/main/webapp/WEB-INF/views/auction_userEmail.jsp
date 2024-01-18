@@ -268,8 +268,8 @@
         <div class="menu-bar">
             <ul class="menu-items">
 
-                <li><a href="product_userEmail?artist_email=<%=artistList.get(0).getUser_email() %>">작품</a></li>
-                <li><a href="auction_userEmail?artist_email=<%=artistList.get(0).getUser_email() %>" id="fv_at">경매작품</a></li>
+                <li><a href="product_userEmail?artist_email=<%=artist_email %>">작품</a></li>
+                <li><a href="auction_userEmail?artist_email=<%=artist_email %>" id="fv_at">경매작품</a></li>
             </ul>
         </div>
 
