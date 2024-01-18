@@ -215,10 +215,10 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="profile-body">
         <div class="profile-picture">
             <!-- 프로필 이미지 또는 이니셜을 넣을 수 있습니다 -->
-            <% if(profiles != null){ %>
+            <% if(profiles != null && profiles.size() != 0){ %>
             <img src=<%=savePath+"/"+profiles.get(0).getAp_title() %> alt="Artist Profile Picture" class="profile-img">
             <%} else { %>
-            <img alt="Artist Profile Picture" class="profile-img">
+            <img src="" alt="Artist Profile Picture" class="profile-img">
             <%} %>
             <!-- 또는 <span class="profile-initials">AP</span> -->
         </div>
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         <div class="artist-about">
             <h3>작가소개</h3>
-            <%if(profiles != null){ %>
+            <%if(profiles != null && profiles.size() != 0){ %>
             <p><%=profiles.get(0).getAp_desc()%></p>
             <%} %>
         </div>
