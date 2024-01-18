@@ -3,7 +3,6 @@
 <%@ page import="java.util.List"%>
 <%@page import="kr.smhrd.entity.Artworks"%>
 <%@page import="kr.smhrd.entity.IMAGES"%>
-<%@page import="kr.smhrd.entity.Users"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -187,25 +186,15 @@
 
 		<!-- 메뉴 바 -->
 		<div class="menu-bar">
-    <ul class="menu-items">
-      <% if(userLogin.getUser_role().equals("1")){ %>
-        <li><a href="favorite_artists">관심작가</a></li>
-        <li><a href="wishPage">관심작품</a></li>
-        <li><a href="purchase_history">구매내역</a></li>
-        <li><a href=artist_registration >예술가신청</a></li>
-         <%} %>
-         <% if(userLogin.getUser_role().equals("2")){ %>
-        <li><a href="prd_regi_page" >작품등록</a></li>
-        <li><a href="artist_registration">경매등록</a></li>
-        <li><a href="auction_management">경매관리</a></li>
-         <%} %>
-        <li><a href="user_edit">개인정보수정</a></li>
-    </ul>
-</div>
+			<ul class="menu-items">
 
+				<li><a href="user_management">회원관리</a></li>
+				<li><a href="artwork_management" id="fv_at">작품관리</a></li>
+				<li><a href="artist_approval">예술가 승인</a></li>
+			</ul>
+		</div>
 
-
-<hr class="separator">
+		<hr class="separator">
 
 
 		<!-- 메인 레이아웃: 전체 페이지의 메인 컨테이너 -->
