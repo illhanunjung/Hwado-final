@@ -204,11 +204,13 @@
             
             <script type="text/javascript">
             window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); // js 앱키
+            var isVerified = false; // 본인인증 완료 여부
 
             function kakaoLogin() {
                 window.Kakao.Auth.login({
                     scope: 'name, birthday, birthyear', //개인정보 활성화된 ID값
                     success: function(a) {
+                    	isVerified = true;
                         console.log(a) // 로그인 성공하면 받아오는 데이터
                         window.Kakao.API.request({ // 사용자 정보 가져오기 
                             url: '/v2/user/me',
@@ -225,14 +227,18 @@
                                 // 숨겨진 폼 필드에 데이터 설정
                                 document.getElementById('kakaoUserName').value = user_name;
                                 document.getElementById('kakaoUserBirthdate').value = user_birthdate;
+                            },
+                            fail: function(error) {
+                                console.log(error);
                             }
                         });
-                    },
-                    fail: function(error) {
-                        console.log(error);
+                    }
+                document.querySelector('.btn-submit').addEventListener('click', function(event) {
+                    if (!isVerified) {
+                        event.preventDefault();
+                        alert('본인인증을 해주세요.');
                     }
                 });
-            }
             </script>
 			<script>
 			   function checkPasswordMatch() {
