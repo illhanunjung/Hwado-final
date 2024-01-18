@@ -182,7 +182,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 </script>
 
 <%
-Users userLogin = (Users)session.getAttribute("userLogin");
 
 ArrayList<Artworks> artList = (ArrayList<Artworks>) request.getAttribute("artList");
 ArrayList<IMAGES> imgList = (ArrayList<IMAGES>) request.getAttribute("imgList");

@@ -254,7 +254,7 @@
                     <%
                     
 	                 // 유저정보, 관심 작품 불러오기
-	                	Users userLogin = (Users)session.getAttribute("userLogin");
+	                	
 	                	List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
                     
 	                    List<Artworks> artList = (List<Artworks>) request.getAttribute("auctionList");

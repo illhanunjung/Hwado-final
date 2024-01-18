@@ -82,7 +82,10 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 </head>
 <body>
 
+<%
+Users userLogin = (Users)session.getAttribute("userLogin");
 
+%>
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
             <div class="container">
@@ -162,16 +165,24 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
 
 <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
-
+<div class="menu-bar">
+    <ul class="menu-items">
+    	
+        <li><a href="wishArtistsPage">관심작가</a></li>
+        <li><a href="wishPage">관심작품</a></li>
+        <li><a href="purchase_history">구매내역</a></li>
+        <li><a href="prd_regi_page" >작품등록</a></li>
+        <li><a href="auction_regi_page">경매등록</a></li>
+        <li><a href="auction_management">경매관리</a></li>
+        <li><a href="user_edit">개인정보수정</a></li>
+    </ul>
+</div>
 
 
 <hr class="separator">
 
 
-<%
-Users userLogin = (Users)session.getAttribute("userLogin");
 
-%>
    
 <main class="auction-container">
     <form class="auction-form" action="auction_regi" method="post" enctype="multipart/form-data">

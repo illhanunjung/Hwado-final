@@ -169,15 +169,15 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <!-- 메뉴 바 -->
 <div class="menu-bar">
     <ul class="menu-items">
-      <% if(userLogin.getUser_role().equals("1")){ %>
-        <li><a href="favorite_artists">관심작가</a></li>
+      <li><a href="wishArtistsPage">관심작가</a></li>
         <li><a href="wishPage">관심작품</a></li>
         <li><a href="purchase_history">구매내역</a></li>
+        <% if(userLogin.getUser_role().equals("1")){ %>
         <li><a href=artist_registration >예술가신청</a></li>
          <%} %>
          <% if(userLogin.getUser_role().equals("2")){ %>
         <li><a href="prd_regi_page" >작품등록</a></li>
-        <li><a href="artist_registration">경매등록</a></li>
+        <li><a href="auction_regi_page">경매등록</a></li>
         <li><a href="auction_management">경매관리</a></li>
          <%} %>
         <li><a href="user_edit">개인정보수정</a></li>
