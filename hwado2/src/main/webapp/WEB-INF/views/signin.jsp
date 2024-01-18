@@ -58,8 +58,8 @@
       <div class="modal-content">
          <span class="close" onclick="closeModal()">&times;</span>
          <!-- 비밀번호 찾기에 관련된 폼 요소들을 추가하세요 -->
-         <a href="./"><img src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"</a>
-            style="display: block; margin: 0 auto;">
+         <a href="./"><img src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
+            style="display: block; margin: 0 auto;"></a>
          <form>
             <!-- 비밀번호 찾기에 필요한 입력 필드들을 추가하세요 -->
             <!-- 예: 이메일 주소 입력 등 -->
