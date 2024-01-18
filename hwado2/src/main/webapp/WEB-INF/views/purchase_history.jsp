@@ -12,7 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>장바구니</title>
+    <title>구매내역</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
