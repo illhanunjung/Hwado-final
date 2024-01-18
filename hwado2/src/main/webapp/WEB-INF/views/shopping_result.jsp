@@ -32,15 +32,15 @@
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/shopping_cart.css" rel="stylesheet">
-    <link href="assets/css/font_bold.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/responsive.css" rel="stylesheet">
-    <link href="assets/css/mypage1.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/mypage.css">
+    <link href="resources/assets/css/shopping_cart.css" rel="stylesheet">
+    <link href="resources/assets/css/font_bold.css" rel="stylesheet">
+    <link href="resources/assets/css/style.css" rel="stylesheet">
+    <link href="resources/assets/css/responsive.css" rel="stylesheet">
+    <link href="resources/assets/css/mypage1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -79,6 +79,9 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     </style>
 </head>
 <body>
+<%
+ Users userLogin = (Users)session.getAttribute("userLogin");
+%>
 
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
@@ -89,18 +92,27 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                     <ul class="nav navbar-nav navbar-right">
 
                                           
-                        <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
-                        <li><a href="shoppig_cart.html">장바구니</a></li>
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="mypage.html">마이페이지</a></li>
-                        <li><a href="artists.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                      <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_role().equals("0")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
 
                     </ul>
 
                 </div>
+
 
           
 
@@ -353,57 +365,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- -------------------------------------------------------------하단---------------------------------------------------------- -->
 
 
@@ -435,12 +396,13 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/bootstrap-select.min.js"></script>
-<script src="assets/js/jquery.slicknav.min.js"></script>
-<script src="assets/js/jquery.countTo.min.js"></script>
-<script src="assets/js/jquery.shuffle.min.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="resources/assets/js/bootstrap.min.js"></script>
+<script src="resources/assets/js/bootstrap-select.min.js"></script>
+<script src="resources/assets/js/jquery.slicknav.min.js"></script>
+<script src="resources/assets/js/jquery.countTo.min.js"></script>
+<script src="resources/assets/js/jquery.shuffle.min.js"></script>
+<script src="resources/assets/js/script.js"></script>
+
 
 </body>
 </html>

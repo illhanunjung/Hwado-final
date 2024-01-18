@@ -30,7 +30,7 @@
     
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
@@ -454,12 +454,12 @@ function deleteCart(values) {
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/bootstrap-select.min.js"></script>
-<script src="assets/js/jquery.slicknav.min.js"></script>
-<script src="assets/js/jquery.countTo.min.js"></script>
-<script src="assets/js/jquery.shuffle.min.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="resources/assets/js/bootstrap.min.js"></script>
+<script src="resources/assets/js/bootstrap-select.min.js"></script>
+<script src="resources/assets/js/jquery.slicknav.min.js"></script>
+<script src="resources/assets/js/jquery.countTo.min.js"></script>
+<script src="resources/assets/js/jquery.shuffle.min.js"></script>
+<script src="resources/assets/js/script.js"></script>
 
 </body>
 </html>

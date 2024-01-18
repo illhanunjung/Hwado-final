@@ -33,7 +33,7 @@
     
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
@@ -86,6 +86,9 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     </style>
 </head>
 <body>
+<%
+ Users userLogin = (Users)session.getAttribute("userLogin");
+%>
 
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
@@ -96,14 +99,22 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                     <ul class="nav navbar-nav navbar-right">
 
                                           
-                        <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
-                        <li><a href="shoppig_cart.html">장바구니</a></li>
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="mypage.html">마이페이지</a></li>
-                        <li><a href="artists.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                      <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_role().equals("0")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
 
                     </ul>
 
@@ -368,12 +379,12 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/bootstrap-select.min.js"></script>
-<script src="assets/js/jquery.slicknav.min.js"></script>
-<script src="assets/js/jquery.countTo.min.js"></script>
-<script src="assets/js/jquery.shuffle.min.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="resources/assets/js/bootstrap.min.js"></script>
+<script src="resources/assets/js/bootstrap-select.min.js"></script>
+<script src="resources/assets/js/jquery.slicknav.min.js"></script>
+<script src="resources/assets/js/jquery.countTo.min.js"></script>
+<script src="resources/assets/js/jquery.shuffle.min.js"></script>
+<script src="resources/assets/js/script.js"></script>
 
 </body>
 </html>
