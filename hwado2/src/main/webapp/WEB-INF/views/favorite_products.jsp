@@ -190,6 +190,7 @@
         <li><a href="prd_regi_page" >작품등록</a></li>
         <li><a href="auction_regi_page">경매등록</a></li>
         <li><a href="auction_management">경매관리</a></li>
+        <li><a href="goArtist_profile?user_email=<%=userLogin.getUser_email()%>">작가프로필</a></li>
          <%} %>
         <li><a href="user_edit">개인정보수정</a></li>
     </ul>

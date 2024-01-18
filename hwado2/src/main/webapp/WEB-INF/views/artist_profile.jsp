@@ -156,19 +156,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
 
 <!-- 메뉴 바 -->
-<div class="menu-bar">
-    <ul class="menu-items">
-        <li><a href="favorite_artists.html">관심작가</a></li>
-        <li><a href="favorite_products.html">관심작품</a></li>
-        <li><a href="purchase_history.html">구매내역</a></li>
-        <li><a href="artist_registration.html" id="fv_at">프로필</a></li>
-        <li><a href="purchase_history.html">작품등록</a></li>
-        <li><a href="purchase_history.html">경매등록</a></li>
-        <li><a href="user_edit.html">개인정보수정</a></li>
-    </ul>
-</div>
-
-<hr class="separator">
 
 
     <%
@@ -185,8 +172,10 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         <% if(userLogin.getUser_email().equals(artist.getUser_email())){ %>
         <a href="artist_profile_edit.html"><button class="profile-edit-button">프로필수정</button></a>
         <%} %>
-        <button class="heart-button"><i class="glyphicon glyphicon-heart-empty"></i></button>
-
+        
+        <% if(profiles.size() != 0){ %>
+         <button class="heart-button" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-ap_seq="<%=profiles.get(0).getAp_seq() %>" data-artist_email="<%=profiles.get(0).getUser_email()%>"><i class="glyphicon glyphicon-heart-empty"></i></button>
+		<%} %>
         <script>
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -204,6 +193,43 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+
+function likeTF(buttonElement) {
+    var user_email = buttonElement.getAttribute('data-user_email');
+    var ap_seq = buttonElement.getAttribute('data-ap_seq');
+    var artist_email = buttonElement.getAttribute('data-artist_email');
+
+    console.log('user_email:', user_email);
+    console.log('ap_seq:', ap_seq);
+
+    $.ajax({ //json 형식 -> {key : value, key : value}
+			// 어디로 요청할 것인지(요청 url)
+			url : 'whishArtist',
+			
+			// 요청 데이터
+			data : { 'user_email' : user_email, 'ap_seq' : ap_seq },
+			
+			// 요청 방식
+			type : 'get',
+			
+			// 요청-응답 성공
+			success : function(data){
+				if(data){
+					window.location.href = "goArtist_profile?user_email="+artist_email ;
+				} else{
+					console.log(data)
+				}
+				
+			},
+			
+			// 요청-응답 실패
+			error : function(){
+				console.log("통신실패")
+			}
+		})
+}
+
 
             </script>
 
