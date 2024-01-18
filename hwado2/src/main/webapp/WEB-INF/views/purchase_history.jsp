@@ -170,7 +170,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <ul class="menu-items">
     	<li><a href="wishArtistsPage">관심작가</a></li>
         <li><a href="wishPage">관심작품</a></li>
-        <li><a href="purchase_history">구매내역</a></li>
+        <li><a href="purchase_history" id="fv_at">구매내역</a></li>
         <% if(userLogin.getUser_role().equals("1")){ %>
         <li><a href=artist_registration >예술가신청</a></li>
          <%} %>

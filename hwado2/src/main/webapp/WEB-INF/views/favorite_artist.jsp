@@ -43,6 +43,7 @@
     <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link href="resources/assets/css/favorite_artists.css" rel="stylesheet">
     <link href="resources/assets/css/style.css" rel="stylesheet">
     <link href="resources/assets/css/font_bold.css" rel="stylesheet">
@@ -169,7 +170,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <!-- 메뉴 바 -->
 <div class="menu-bar">
     <ul class="menu-items">
-      <li><a href="wishArtistsPage">관심작가</a></li>
+      <li><a href="wishArtistsPage" id="fv_at">관심작가</a></li>
         <li><a href="wishPage">관심작품</a></li>
         <li><a href="purchase_history">구매내역</a></li>
         <% if(userLogin.getUser_role().equals("1")){ %>
@@ -227,7 +228,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
         <div class="row">
            
-            <% if(wishProfile != null && wishProfile != null){ 
+            <% if(wishProfile.size() != 0){ 
                     for(int i = start; i < end; i++){ %>
             <div class="col-lg-3 col-md-4 col-xs-6">
                 <div class="portfolio-item">                 
@@ -244,14 +245,16 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                 </div><!-- /.portfolio-item -->
             </div>     
            <%}}else{%>
- 				<h3>관심작가가 없습니다.</h3>       	   
+ 				<h3>관심작가가 없습니다.</h3>     	   
            <% } %>
-             <div class="navigation-buttons">
-                        <a href="wishArtistsPage?page=<%=pageN-1 %>"><button class="nav-button" ><i
-                                class="bi bi-caret-left"></i></button></a>
-                    		<a href="wishArtistsPage?page=<%=pageN+1 %>"><button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button></a>
-            
+  	
+           	
         </div>
+       
+        <div class="navigation-buttons">
+                        <a href="wishArtistsPage?page=<%=pageN-1 %>"><button class="nav-button" ><i class="bi bi-caret-left"></i></button></a>
+                    		<a href="wishArtistsPage?page=<%=pageN+1 %>"><button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button></a>
+           	</div>          	
     </div>
     
 </section><!-- /.section-portfolio -->

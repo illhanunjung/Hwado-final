@@ -37,6 +37,7 @@
     <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    
     <link href="resources/assets/css/font_bold.css" rel="stylesheet">
     <link href="resources/assets/css/artist_registration.css" rel="stylesheet">
     <link href="resources/assets/css/style.css" rel="stylesheet">
@@ -171,7 +172,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     	<li><a href="wishArtistsPage">관심작가</a></li>
         <li><a href="wishPage">관심작품</a></li>
         <li><a href="purchase_history">구매내역</a></li>
-        <li><a href=artist_registration >예술가신청</a></li>
+        <li><a href=artist_registration id="fv_at">예술가신청</a></li>
         <li><a href="user_edit">개인정보수정</a></li>
     </ul>
 </div>

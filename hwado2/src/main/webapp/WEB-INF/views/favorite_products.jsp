@@ -43,6 +43,7 @@
     <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+       <link href="resources/assets/css/font_bold.css" rel="stylesheet">
     <link href="resources/assets/css/style.css" rel="stylesheet">
     <link href="resources/assets/css/responsive.css" rel="stylesheet">
     <link href="resources/assets/css/mypage1.css" rel="stylesheet">
@@ -180,7 +181,7 @@
 <div class="menu-bar">
     <ul class="menu-items">
     	<li><a href="wishArtistsPage">관심작가</a></li>
-        <li><a href="wishPage">관심작품</a></li>
+        <li><a href="wishPage" id="fv_at">관심작품</a></li>
         <li><a href="purchase_history">구매내역</a></li>
         <% if(userLogin.getUser_role().equals("1")){ %>
         <li><a href=artist_registration >예술가신청</a></li>
@@ -241,7 +242,7 @@
                     </div> <!-- 갤러리 헤더 종료 -->
                     <!-- 아트워크 그리드 시작 -->
                     <div class="artwork-grid">
-                    <% if(wishImgList != null && wishArtList != null){ 
+                    <% if(wishImgList.size() != 0 ){ 
                     for(int i = start; i < end; i++){ %>
                         <!-- 아트워크 카드 시작 -->
                         <div class="artwork-card">
@@ -261,7 +262,11 @@
                                 </div> <!-- 아트워크 정보 종료 -->
                             </div> <!-- 카드 콘텐츠 종료 -->
                         </div> <!-- 아트워크 카드 종료 -->
-                         <%}} %>
+                         <%} }else{%>
+										<h3>관심작품이 없습니다.</h3>                    
+                    
+                    
+                     <% } %>
                     </div>   
                     <!-- 네비게이션 버튼들을 포함하는 컨테이너 -->
                     <div class="navigation-buttons">
