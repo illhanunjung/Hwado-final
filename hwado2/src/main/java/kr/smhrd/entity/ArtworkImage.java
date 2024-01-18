@@ -14,6 +14,7 @@ import lombok.ToString;
 public class ArtworkImage {
 	
 	// ARTWORKS 테이블의 필드
+	private String aw_seq;
 	private String ap_desc;
     private String aw_name;
     private String user_email;

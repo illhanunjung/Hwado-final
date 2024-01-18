@@ -280,4 +280,8 @@ update AUCTIONS set auc_status = '2' where now() > auc_ended_at
 update ARTWORKS set aw_status = '마감' where aw_seq in (select aw_seq from AUCTIONS where now() > auc_ended_at)
 </update>
 
+<select id="selectPdAc" parameterType="int" resultType="String">
+select aw_status from ARTWORKS where aw_seq = #{aw_seq}
+</select>
+
 </mapper>

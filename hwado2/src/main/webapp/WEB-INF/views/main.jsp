@@ -175,7 +175,11 @@ function closeSearchPopup() {
 	        if (recentImages != null) {
 			for (int i = 0; i < recentImages.size(); i++) {
 			%>
-			<img src="<%=savePath + "/" + recentImages.get(i).getImg_filename()%>" />
+			<%if(userLogin != null){ %>
+			<a onclick="goPdAc(<%=recentImages.get(i).getAw_seq() %>)"><img src="<%=savePath + "/" + recentImages.get(i).getImg_filename()%>" /></a>
+			<%} else{ %>
+			<a href="signin"><img src="<%=savePath + "/" + recentImages.get(i).getImg_filename()%>" /></a>
+			<%} %>
 			<%
 			}
 			}
@@ -195,13 +199,17 @@ function closeSearchPopup() {
 		        if (monthArtworks != null) {
 				for (int i = 0; i < monthArtworks.size(); i++) {
 				%>
-				<a
-					href="/product/detail.html?product_no=9289&amp;cate_no=42&amp;display_group=1">
-					<div class="list2-item<%=i + 1%>">
-						<img class="list2-item-img"
-							src="<%=savePath + "/" + monthArtworks.get(i).getImg_filename()%>"
-							alt="best 상품 이미지">
-
+				
+				<div class="list2-item<%=i + 1%>">
+				<%if(userLogin != null){ %>
+					<a onclick="goPdAc(<%=monthArtworks.get(i).getAw_seq() %>)"><img class="list2-item-img"
+						src="<%=savePath + "/" + monthArtworks.get(i).getImg_filename()%>"
+						alt="best 상품 이미지"></a>
+				<%}else{ %>
+					<a href="signin"><img class="list2-item-img"
+						src="<%=savePath + "/" + monthArtworks.get(i).getImg_filename()%>"
+						alt="best 상품 이미지"></a>
+				<%} %>
 						<div class="list2-item-text-box">
 							<span class="list2-item-desc"> <%=monthArtworks.get(i).getAw_name()%>
 							</span><br> <span class="list2-item-name"><%=monthArtworks.get(i).getUser_email()%>
@@ -221,7 +229,40 @@ function closeSearchPopup() {
 
 
 
+<script type="text/javascript">
 
+function goPdAc(awSeq) {
+	
+	$.ajax({ //json 형식 -> {key : value, key : value}
+		// 어디로 요청할 것인지(요청 url)
+		url : 'selectPdAc',
+		
+		// 요청 데이터
+		data : { 'awSeq' : awSeq },
+		
+		// 요청 방식
+		type : 'get',
+		
+		// 요청-응답 성공
+		success : function(response) {
+		        console.log("통신 성공");
+		        window.location.href = response+"?aw_seq="+awSeq;
+				
+				
+			},
+		
+		// 요청-응답 실패
+		error : function(){
+			console.log("통신실패")
+		}
+	})
+	
+}
+
+
+
+
+</script>
 
 
 
