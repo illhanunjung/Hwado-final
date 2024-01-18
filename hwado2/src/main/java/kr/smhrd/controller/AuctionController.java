@@ -74,7 +74,7 @@ public class AuctionController {
         mapper.insertBid(bidding);
 
         // 경매 상세 페이지나 확인 페이지로 리다이렉트
-        return "auction";
+        return "redirect:/ auction";
     }
 	
 	
