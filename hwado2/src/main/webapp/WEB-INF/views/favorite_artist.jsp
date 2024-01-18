@@ -198,7 +198,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 	ArrayList<Profile> wishProfile = (ArrayList<Profile>)request.getAttribute("wishProfile");
 	ArrayList<Users> artistList = (ArrayList<Users>)request.getAttribute("artistList");
 	
-	String savePath = "./resources/artist_profile";
+	String savePath = "./resources/profile";
 	
 	//페이지
 	int pageN = (int)request.getAttribute("pageN");
