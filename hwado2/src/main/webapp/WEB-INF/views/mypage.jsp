@@ -176,6 +176,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
          <% if(userLogin.getUser_role().equals("2")){ %>
         <li><a href="prd_regi_page" >작품등록</a></li>
         <li><a href="artist_registration">경매등록</a></li>
+        <li><a href="auction_management">경매관리</a></li>
          <%} %>
         <li><a href="user_edit">개인정보수정</a></li>
     </ul>

@@ -169,13 +169,18 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <!-- 메뉴 바 -->
 <div class="menu-bar">
     <ul class="menu-items">
-        <li><a href="favorite_artists.html" id="fv_at">관심작가</a></li>
-        <li><a href="favorite_products.html">관심작품</a></li>
-        <li><a href="purchase_history.html">구매내역</a></li>
-        <li><a href="artist_registration.html" >예술가신청</a></li>
-        <li><a href="product_registration.html" >작품등록</a></li>
-        <li><a href="product_registration.html">경매등록</a></li>
-        <li><a href="user_edit.html">개인정보수정</a></li>
+      <% if(userLogin.getUser_role().equals("1")){ %>
+        <li><a href="favorite_artists">관심작가</a></li>
+        <li><a href="wishPage">관심작품</a></li>
+        <li><a href="purchase_history">구매내역</a></li>
+        <li><a href=artist_registration >예술가신청</a></li>
+         <%} %>
+         <% if(userLogin.getUser_role().equals("2")){ %>
+        <li><a href="prd_regi_page" >작품등록</a></li>
+        <li><a href="artist_registration">경매등록</a></li>
+        <li><a href="auction_management">경매관리</a></li>
+         <%} %>
+        <li><a href="user_edit">개인정보수정</a></li>
     </ul>
 </div>
 
@@ -235,7 +240,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
                     </h4>
                        
-                    <a href="artist_profile.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <a href="goArtist_profile?user_email=<%=wishProfile.get(i).getUser_email()%>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                 </div><!-- /.portfolio-item -->
             </div>     
            <%}}else{%>

@@ -110,7 +110,7 @@
 %>              
                      
                       <% if(userLogin!= null){ %>
-                      <li><a href="shoppingCart">장바구니</a></li>
+                      
                       	<% if(userLogin.getUser_email().equals("admin")){ %>
                       <li><a href="user_management">회원관리</a></li>
                         <%} %>
