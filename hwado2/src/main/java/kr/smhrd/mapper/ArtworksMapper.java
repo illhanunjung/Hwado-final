@@ -202,4 +202,7 @@ public interface ArtworksMapper {
 			
 			//아트 경매 마갋 업데이트
 			public void artworksdeadline();
+			
+			// 상품 타입 확인
+			public String selectPdAc(int aw_seq);
 }

@@ -1404,6 +1404,26 @@ public class ArtworksController {
 				
 				return "auction_userEmail";
 			}
+			
+			// 상품 타입 구별
+			@ResponseBody
+			@RequestMapping(value =  "selectPdAc", produces = "application/text; charset=UTF-8")
+			public String selectPdAc(@RequestParam("awSeq")int aw_seq) {
+				System.out.println(aw_seq);
+				String status = mapper.selectPdAc(aw_seq);
+				System.out.println(status);
+				String result = "";
+				
+				if(status.equals("경매")) {
+					result="auction_detail";
+				} else {
+					result="product_detail";
+				}
+				
+				System.out.println(result);
+				
+				return result;
+			}
 					
 }
 
