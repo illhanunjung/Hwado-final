@@ -86,7 +86,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 }
 
 
-
     </style>
 </head>
 <body>
@@ -238,9 +237,10 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                         <img src="<%=savePath+"/"+wishProfile.get(i).getAp_title() %>" class="img-res" alt="">
                        
                     
-                    <h4 class="portfolio-item-title"><%=artistList.get(i).getUser_nick() %><br><br><%=wishProfile.get(i).getAp_desc() %>
+                    <h4 class="portfolio-item-title"><%=artistList.get(i).getUser_nick() %><button class="heart-button filled"  style="position: relative; top: 5px;" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-ap_seq="<%=wishProfile.get(i).getAp_seq() %>"><i class="glyphicon glyphicon-heart"></i></button>
+                    <br><br><%=wishProfile.get(i).getAp_desc() %>
                         <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button filled" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-ap_seq="<%=wishProfile.get(i).getAp_seq() %>"><i class="glyphicon glyphicon-heart"></i></button>
+                       
 
                     </h4>
                        
