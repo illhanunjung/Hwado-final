@@ -172,7 +172,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <header class="profile-header">
         <h1 class="profile-title">작가프로필</h1>
         <% if(userLogin.getUser_email().equals(artist.getUser_email())){ %>
-        <a href="artist_profile_edit.html"><button class="profile-edit-button">프로필수정</button></a>
+        <a href="artist_profile_edit"><button class="profile-edit-button">프로필수정</button></a>
         <%} %>
         
         

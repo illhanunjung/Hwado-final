@@ -1046,7 +1046,7 @@ public class ArtworksController {
 						
 						MultipartRequest multi = null;
 						
-						
+						Users userLogin = (Users)session.getAttribute("userLogin");	
 						
 						String savePath = request.getRealPath("./resources/profile"); 
 						
@@ -1094,7 +1094,6 @@ public class ArtworksController {
 							String file8 = multi.getFilesystemName("file8");
 							String desc8 = multi.getParameter("desc8");	
 							
-							Users userLogin = (Users)session.getAttribute("userLogin");	
 							
 							Profile profile = new Profile(userLogin.getUser_email(), ap_title, ap_desc, "0");
 							mapper.insertProfile_0(profile);
@@ -1138,7 +1137,7 @@ public class ArtworksController {
 						e.printStackTrace();
 					}
 						
-						return "redirect:artist_profile";
+						return "redirect:goArtist_profile?user_email="+userLogin.getUser_email();
 				}
 
 					
@@ -1287,7 +1286,7 @@ public class ArtworksController {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-						return "redirect:artist_profile";
+						return "redirect:goArtist_profile?user_email="+userLogin.getUser_email();
 					}
 					
 					
