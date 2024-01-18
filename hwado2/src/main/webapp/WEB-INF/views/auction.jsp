@@ -191,7 +191,7 @@
                 	let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 	let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    timer.innerHTML =day + "일 " + hours + "시간 " + minutes + "분 " + seconds + "초 ";
+                    timer.innerHTML = day + "일 " + hours + "시간 " + minutes + "분 " + seconds + "초 ";
                 } else {
                     timer.innerHTML = "타이머 종료";
                 }
@@ -250,6 +250,7 @@
 	                	List<IMAGES> imgList = (List<IMAGES>) request.getAttribute("auctionImgList");
 	                	List<AUCTIONS> auctioninfo = (List<AUCTIONS>) request.getAttribute("auctioninfo");
 	                	ArrayList<Users> artistList = (ArrayList<Users>) request.getAttribute("artistList");
+	                	
 	                	
 	                	// 저장소 위치
 	                	String savePath = "./resources/artworks";

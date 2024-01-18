@@ -50,14 +50,14 @@ select img_filename from IMAGES where aw_seq=#{aw_seq}
 </select>
 
 <select id="auctionList" resultType="kr.smhrd.entity.Artworks">
-select * from ARTWORKS where aw_type='경매'
+select * from ARTWORKS where aw_status='경매'
 </select>
 
 <select id="auctionImgList" resultType="kr.smhrd.entity.IMAGES">
-select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_type='경매')
+select * from IMAGES where img_type='0' and aw_seq in (select aw_seq from ARTWORKS where aw_status='경매')
 </select>
 <select id="auctioninfo" resultType="kr.smhrd.entity.AUCTIONS">
-select * from AUCTIONS
+select * from AUCTIONS where auc_status = '0'
 </select>
 
 <select id="getAuction" parameterType="int"  resultType="kr.smhrd.entity.AUCTIONS">
