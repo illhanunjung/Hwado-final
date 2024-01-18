@@ -1518,6 +1518,13 @@ public class ArtworksController {
 				
 				return "favorite_artist";
 			}
+			
+			
+			@RequestMapping("/delivery")
+			public String delivery(Model model, HttpSession session) {
+				
+				return "delivery";
+			}
 					
 }
 

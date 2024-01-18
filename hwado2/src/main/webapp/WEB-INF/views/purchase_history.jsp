@@ -218,7 +218,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                 <td><%=history.getUser_nick() %></td>
                 <td><%=history.getDelivery_at() %></td>
                 <td><%=history.getPay_amount() %></td>
-                <td><%=history.getDelivery_status() %></td>
+                <td><a href="delivery"><p>배송조회<p></a></td>
             </tr>
             <% }
             	} %>
