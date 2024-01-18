@@ -126,12 +126,12 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         </nav><!-- /.site-navigation -->
     </header><!-- /#mastheaed -->
     <div id="searchPopup" style="display:none;">
-        <form action="/search" method="get">
-            <input type="text" name="query" placeholder="작품/작가 검색..." >
-            <input type="submit" value="검색" >
-            <button type="button" onclick="closeSearchPopup()" >X</button>
-        </form>
-    </div>
+     <form action="search" method="get">
+          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
+          <input type="submit" value="검색" >
+          <button type="button" onclick="closeSearchPopup()" >X</button>
+      </form>
+  </div>
   
   <script>
     document.getElementById('searchButton').addEventListener('click', function() {

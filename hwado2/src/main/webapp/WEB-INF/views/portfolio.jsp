@@ -99,7 +99,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                     <ul class="nav navbar-nav navbar-right">
 
                                           
-                      <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
+                      
                       <% if(userLogin!= null){ %>
                       <li><a href="shoppingCart">장바구니</a></li>
                       	<% if(userLogin.getUser_role().equals("0")){ %>
@@ -127,6 +127,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
     </nav><!-- /.site-navigation -->
 </header><!-- /#mastheaed -->
+
 
 <div class="flex-container">
     <div class="top-section">

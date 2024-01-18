@@ -1,3 +1,4 @@
+<%@page import="kr.smhrd.entity.Users"%>
 <%@page import="kr.smhrd.entity.AUCTIONS"%>
 <%@page import="kr.smhrd.entity.IMAGES"%>
 <%@page import="kr.smhrd.entity.Artworks"%>
@@ -33,7 +34,7 @@
     <!-- Favicon
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="15x15" href="assets/img/logo.png">
+    <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
     ================================================== -->
@@ -45,7 +46,7 @@
     <link href="resources/assets/css/responsive.css" rel="stylesheet">
     <link href="resources/assets/css/mypage1.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
-    <link rel="stylesheet" type="text/css" href="resources/assets/css/auction.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/auction_bid.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -132,7 +133,7 @@
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="index.html">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -149,16 +150,16 @@
     <hr class="separator">
 
     <div id="searchPopup" style="display:none;">
-        <form action="/search" method="get">
-            <input type="text" name="query" placeholder="작품/작가 검색...">
-            <input type="submit" value="검색">
-            <button type="button" onclick="closeSearchPopup()">X</button>
-        </form>
-    </div>
+     <form action="search" method="get">
+          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
+          <input type="submit" value="검색" >
+          <button type="button" onclick="closeSearchPopup()" >X</button>
+      </form>
+  </div>
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -204,55 +205,9 @@
             <!-- 콘텐츠 그리드 시작 -->
             <div class="content-grid">
 
-                <!-- 카테고리 열 시작 -->
-                <div class="category-column">
-                    <!-- 카테고리 컨테이너 시작 -->
-                    <div class="category-container">
-                        <!-- 카테고리 제목 -->
-                        <h1 class="category-title">카테고리</h1>
-                        <!-- 카테고리 카드 시작 -->
-                        <div class="category-card">
-                            <!-- 카드 콘텐츠 시작 -->
-                            <div class="card-content">
-                                <!-- 카테고리 리스트 시작 -->
-                                <ul class="category-list">
-                                    <!-- 카테고리 항목: 전체 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">전체</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 추상화 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">추상화</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 풍경화 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">풍경화</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 정물화 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">정물화</a>
-                                    </li>
-                                    <!-- 카테고리 항목: 기타 -->
-                                    <li class="category-item">
-                                        <a class="category-link" href="#">기타</a>
-                                    </li>
-                                </ul> <!-- 카테고리 리스트 종료 -->
-                            </div> <!-- 카드 콘텐츠 종료 -->
-                        </div> <!-- 카테고리 카드 종료 -->
-                    </div> <!-- 카테고리 컨테이너 종료 -->
-                </div> <!-- 카테고리 열 종료 -->
+                
 
-                <!-- 갤러리 열 시작 -->
-                <div class="gallery-column">
-                    <!-- 갤러리 헤더 시작 -->
-                    <div class="gallery-header">
-                        <!-- 갤러리 제목 -->
-                        <h1 class="gallery-title">갤러리</h1>
-                    </div> <!-- 갤러리 헤더 종료 -->
-                    <!-- 아트워크 그리드 시작 -->
-                    <div class="artwork-grid">
-                    
-                     <hr class="separator">
+  
 
                     <%
                     String auc_seq = (String) request.getAttribute("auc_seq");

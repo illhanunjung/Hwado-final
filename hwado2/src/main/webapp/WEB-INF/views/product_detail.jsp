@@ -128,12 +128,12 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         </nav><!-- /.site-navigation -->
     </header><!-- /#mastheaed -->
     <div id="searchPopup" style="display:none;">
-        <form action="/search" method="get">
-            <input type="text" name="query" placeholder="작품/작가 검색..." >
-            <input type="submit" value="검색" >
-            <button type="button" onclick="closeSearchPopup()" >X</button>
-        </form>
-    </div>
+     <form action="search" method="get">
+          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
+          <input type="submit" value="검색" >
+          <button type="button" onclick="closeSearchPopup()" >X</button>
+      </form>
+  </div>
   
   <script>
     document.getElementById('searchButton').addEventListener('click', function() {
@@ -264,7 +264,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <%
 
 	//유저정보, 관심 작품 불러오기
-	Users userLogin = (Users)session.getAttribute("userLogin");
 	List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
 
 	Artworks art = (Artworks)request.getAttribute("art");
