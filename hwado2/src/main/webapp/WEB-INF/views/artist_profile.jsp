@@ -1,3 +1,4 @@
+<%@page import="kr.smhrd.entity.Interests"%>
 <%@page import="kr.smhrd.entity.Profile"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.smhrd.entity.Users"%>
@@ -163,6 +164,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     Users artist = (Users) request.getAttribute("artist");
 	List<Profile> profiles = (List<Profile>) request.getAttribute("profiles");
 	String savePath = "./resources/profile";
+	List<Interests> wishArtist = (List<Interests>)session.getAttribute("wishArtist");
     %>
     
 
@@ -173,10 +175,22 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         <a href="artist_profile_edit.html"><button class="profile-edit-button">프로필수정</button></a>
         <%} %>
         
+        
+        <% boolean isWished = false; %>
         <% if(profiles.size() != 0){ %>
-         <button class="heart-button" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-ap_seq="<%=profiles.get(0).getAp_seq() %>" data-artist_email="<%=profiles.get(0).getUser_email()%>"><i class="glyphicon glyphicon-heart-empty"></i></button>
-		<%} %>
-        <script>
+        	
+		    <% if(wishArtist != null) { %>
+		        <% for(Interests wish : wishArtist) { %>
+		            <% if(wish.getAp_seq() == profiles.get(0).getAp_seq()) { %>
+		                <% isWished = true; %>
+		            <% break; } %>
+		        <% } %>
+		    <% } %>
+         <button class="heart-button <%= isWished ? "filled" : "" %>" onclick="likeTF(this)" data-user_email="<%=userLogin.getUser_email() %>" data-ap_seq="<%=profiles.get(0).getAp_seq() %>" data-artist_email="<%=profiles.get(0).getUser_email()%>">
+         <i class="<%= isWished ? "glyphicon glyphicon-heart" : "glyphicon glyphicon-heart-empty" %>"</i></button>
+		<%} %> 
+
+<script>
 
 document.addEventListener('DOMContentLoaded', function () {
     var heartButton = document.querySelector('.heart-button');
