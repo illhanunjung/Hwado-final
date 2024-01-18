@@ -84,26 +84,41 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     </style>
 </head>
 
-<header id="masthead" class="site-header">
-    <nav id="primary-navigation" class="site-navigation">
-        <div class="container">
+<body>
 
-            <div class="collapse navbar-collapse" id="agency-navbar-collapse">
-                
-                <ul class="nav navbar-nav navbar-right">
+<%
+ Users userLogin = (Users)session.getAttribute("userLogin");
+%>
 
-                                      
-                    <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
-                    <li><a href="blog.html">장바구니</a></li>
-                    <li><a href="blog.html">회원관리</a></li>
-                    <li><a href="mypage.html">마이페이지</a></li>
-                    <li><a href="blog.html">작가</a></li>
-                    <li><a href="contact.html">갤러리</a></li>
-                    <li><a href="signin.html">로그아웃</a></li>
+    <header id="masthead" class="site-header">
+        <nav id="primary-navigation" class="site-navigation">
+            <div class="container">
 
-                </ul>
+                <div class="collapse navbar-collapse" id="agency-navbar-collapse">
+                    
+                    <ul class="nav navbar-nav navbar-right">
 
-            </div>
+                                          
+                      <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
+                      <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_role().equals("0")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
+
+                    </ul>
+
+                </div>
 
       
 
