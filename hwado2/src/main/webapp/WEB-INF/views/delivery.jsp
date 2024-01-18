@@ -102,6 +102,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 .move{
 padding-left:850px;
+padding-bottom:250px;
 }
     </style>
 </head>
