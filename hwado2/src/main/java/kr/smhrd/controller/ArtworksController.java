@@ -365,7 +365,7 @@ public class ArtworksController {
 	            String serverUrl = "http://211.227.224.159:9001/get_similar_images";
 
 	            // 요청을 위한 JSON 데이터 설정
-	            String jsonData = "{\"query_image_path\": \"C:/eGovFrame-4.0.0/workspace.edu/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/hwado4/resources/artworks/"+images.get(0).getImg_filename()+"\"}";
+	            String jsonData = "{\"query_image_path\": \"C:/eGovFrame-4.0.0/workspace.edu/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/hwado2/resources/artworks/"+images.get(0).getImg_filename()+"\"}";
 
 	            // 연결 생성
 	            URL url = new URL(serverUrl);
@@ -561,7 +561,7 @@ public class ArtworksController {
 	            String serverUrl = "http://211.227.224.159:9001/get_similar_images";
 
 	            // 요청을 위한 JSON 데이터 설정
-	            String jsonData = "{\"query_image_path\": \"C:/eGovFrame-4.0.0/workspace.edu/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/hwado4/resources/artworks/"+images.get(0).getImg_filename()+"\"}";
+	            String jsonData = "{\"query_image_path\": \"C:/eGovFrame-4.0.0/workspace.edu/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/hwado2/resources/artworks/"+images.get(0).getImg_filename()+"\"}";
 
 	            // 연결 생성
 	            URL url = new URL(serverUrl);
