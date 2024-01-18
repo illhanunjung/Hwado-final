@@ -96,7 +96,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
                       <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
                       <% if(userLogin!= null){ %>
                       <li><a href="shoppingCart">장바구니</a></li>
-                      	<% if(userLogin.getUser_email().equals("admin")){ %>
+                      	<% if(userLogin.getUser_role().equals("0")){ %>
                       <li><a href="user_management">회원관리</a></li>
                         <%} %>
                         <li><a href="myPage">마이페이지</a></li>
