@@ -1,5 +1,6 @@
 package kr.smhrd.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -218,7 +219,7 @@ public class UsersController {
 				model.addAttribute("portfolio",portfolio);
 				return "portfolio";
 		}
-		// 작가 등록
+			// 작가 등록
 			@SuppressWarnings("deprecation")
 			@RequestMapping("/regiPortfolio")
 			public String regiPortfolio(HttpServletRequest request, HttpSession session,  Model model) {
@@ -254,6 +255,8 @@ public class UsersController {
 					portfolio.setPf_file2(pf_file2);
 					portfolio.setPf_file3(pf_file3);
 					
+					
+					
 					// 포폴 작품 등록 mapper
 					int cnt_re = usersMapper.regiPortfolio(portfolio);
 					;
@@ -261,7 +264,16 @@ public class UsersController {
 					if (cnt_re > 0) {
 						System.out.println("포폴 등록 성공");
 						
-						 session.setAttribute("portfolio", portfolio);
+					    // 업로드된 대표 파일이 실제로 존재하는지 확인
+					    File file1 = new File(savePath, pf_file1);
+					    if (file1.exists() && !file1.isDirectory()) {
+					        System.out.println("파일 업로드 성공: " + pf_file1);
+					    } else {
+					        System.out.println("파일 업로드 실패 또는 파일이 존재하지 않음: " + pf_file1);
+					    }
+
+
+					    session.setAttribute("portfolio", portfolio);
 						 
 					} else {
 						System.out.println("포폴 등록 실패");
@@ -273,8 +285,9 @@ public class UsersController {
 
 				System.out.println("성공");
 				
-				return "redirect:/portfolio";
+				return "redirect:/";
 			}
+			
 			
 			// 구매내역 이동
 			@RequestMapping("/purchase_history")
