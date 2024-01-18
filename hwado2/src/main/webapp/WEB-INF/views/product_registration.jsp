@@ -184,11 +184,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 <hr class="separator">
 
-<%
-Users userLogin = (Users)session.getAttribute("userLogin");
-
-%>
-
 <main class="product-container">
     <form class="product-form" action="prd_regi" method="post" enctype="multipart/form-data">
         <h1 class="form-title">작품등록</h1>
