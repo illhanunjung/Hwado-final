@@ -53,6 +53,11 @@ public class UsersController {
 	public String signin() {
 		return "signin";
 	}
+	// 회원수정 페이지
+	@RequestMapping("/user_edit")
+	public String user_edit() {
+		return "user_edit";
+	}
 	
 	// 회원가입 
 	@RequestMapping("/usersInsert")
