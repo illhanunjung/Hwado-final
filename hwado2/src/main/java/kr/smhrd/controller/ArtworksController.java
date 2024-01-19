@@ -120,6 +120,8 @@ public class ArtworksController {
 			
 			model.addAttribute("pageN", page);
 			
+			model.addAttribute("category_seq", category_seq);
+			
 			return "product";
 		}
 	
@@ -222,7 +224,7 @@ public class ArtworksController {
 		
 		System.out.println("성공");
 		
-		return "auction_registration";
+		return "myPage";
 	}
 	
 	
@@ -340,7 +342,7 @@ public class ArtworksController {
 		
 		System.out.println("성공");
 		
-		return "auction";
+		return "myPage";
 	}
 	
 	// 상품 상세 보기
@@ -431,20 +433,20 @@ public class ArtworksController {
          // 현재 보고 있는 작품 이미지 제거
          ArrayList<String> similar_img_list = new ArrayList<String>();
          List<Artworks> artList = mapper.artAllList();
-     	 List<IMAGES> imgList = mapper.imgAllList();
-        		 
+     	 List<IMAGES> imgList = mapper.imgAllList_similar();
+        
          for(String i : similar_img_all) {
         	 i = i.replace("\"", "");
-        	 
+        	 System.out.println(i);
         	for (IMAGES img : imgList) {
         		int k = 0;
         			for(int j = 0; j < showArtImg.size(); j++) {
 	        			 if(!i.equals(showArtImg.get(j))) {
 	            			 k++;
 	            		 }
-        		 }
-        		if(k==showArtImg.size() && i.equals(img.getImg_filename())) {
-           			 
+        			}
+        			
+        		if(k>=showArtImg.size() && i.equals(img.getImg_filename())) {
            			 similar_img_list.add(i);
            		 }
         		
@@ -627,7 +629,7 @@ public class ArtworksController {
          // 현재 보고 있는 작품 이미지 제거
          ArrayList<String> similar_img_list = new ArrayList<String>();
          List<Artworks> artList = mapper.artAllList();
-     	 List<IMAGES> imgList = mapper.imgAllList();
+     	 List<IMAGES> imgList = mapper.imgAllList_similar();
         		 
          for(String i : similar_img_all) {
         	 i = i.replace("\"", "");

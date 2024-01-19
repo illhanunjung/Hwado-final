@@ -356,6 +356,9 @@
                     	
                     	System.out.println("start : " + start);
                     	System.out.println("end : " + end);
+                    	
+                    	// 카테고리
+                    	int category_seq = (int)request.getAttribute("category_seq");
                     
                     %>
                     
@@ -409,9 +412,9 @@
                     </div> <!-- 아트워크 그리드 종료 -->
                     <!-- 네비게이션 버튼들을 포함하는 컨테이너 -->
                     <div class="navigation-buttons">
-                    		<a href="product_page?page=<%=pageN-1 %>"><button class="nav-button" ><i
+                    		<a href="product_page?page=<%=pageN-1 %>&&category_seq=<%=category_seq%>"><button class="nav-button" ><i
                                 class="bi bi-caret-left"></i></button></a>
-                    		<a href="product_page?page=<%=pageN+1 %>"><button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button></a>
+                    		<a href="product_page?page=<%=pageN+1 %>&&category_seq=<%=category_seq%>"><button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button></a>
                         <!-- 이전 페이지로 이동하는 버튼 -->
                         <!-- <button class="nav-button" onclick="loadPage('previousPageUrl')"><i
                                 class="bi bi-caret-left"></i></button> -->

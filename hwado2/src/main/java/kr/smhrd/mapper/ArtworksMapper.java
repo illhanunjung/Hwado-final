@@ -50,6 +50,9 @@ public interface ArtworksMapper {
 	
 	// 전체 작품 이미지 불러오기
 	public List<IMAGES> imgAllList();
+	
+	// 전체 작품 이미지 불러오기_비숫한
+	public List<IMAGES> imgAllList_similar();
 
 	// 상세 작품 불러오기
 	public Artworks getArt(int aw_seq);

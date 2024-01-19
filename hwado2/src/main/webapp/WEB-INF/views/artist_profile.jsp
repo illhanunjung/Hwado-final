@@ -288,7 +288,9 @@ function likeTF(buttonElement) {
             
                 <div class="artwork-display">
                     <h3>작품</h3>
+                     <%if(profiles != null && profiles.size() >1){%>
                     <a href="exhibition?artist_email=<%=profiles.get(0).getUser_email() %>"><button class="exhibit-btn">전시회 보러가기 →</button></a>
+               		<%} %>
                 </div>
                 
 

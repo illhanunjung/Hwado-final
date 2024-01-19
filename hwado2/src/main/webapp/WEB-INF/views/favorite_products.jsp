@@ -186,6 +186,7 @@
         <% if(userLogin.getUser_role().equals("1")){ %>
         <li><a href=artist_registration >예술가신청</a></li>
          <%} %>
+        <li><a href=auction_management_user >경매확인</a></li>
          <% if(userLogin.getUser_role().equals("2")){ %>
         <li><a href="prd_regi_page" >작품등록</a></li>
         <li><a href="auction_regi_page">경매등록</a></li>

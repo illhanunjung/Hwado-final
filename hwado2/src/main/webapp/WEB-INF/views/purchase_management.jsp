@@ -90,13 +90,21 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
                                           
                         <li><button id="searchButton"><span class="glyphicon glyphicon-search" id="searchIcon"></span></button></li>
-                        <li><a href="shoppig_cart.html">장바구니</a></li>
-                        <li><a href="blog.html">회원관리</a></li>
-                        <li><a href="mypage.html">마이페이지</a></li>
-                        <li><a href="artists.html">작가</a></li>
-                        <li><a href="contact.html">갤러리</a></li>
-                        <li><a href="signin.html">로그아웃</a></li>
-                        <li><a href="signin.html">로그인</a></li>
+                        <% if(userLogin!= null){ %>
+                      <li><a href="shoppingCart">장바구니</a></li>
+                      	<% if(userLogin.getUser_role().equals("0")){ %>
+                      <li><a href="user_management">회원관리</a></li>
+                        <%} %>
+                        <li><a href="myPage">마이페이지</a></li>
+                      <%} %> 
+                        <li><a href="artist">작가</a></li>
+                        <li><a href="product_page">갤러리</a></li> 
+                        <% if(userLogin!= null){ %>
+                        <li><a href="logout">로그아웃</a></li>
+                         <%} %>  
+                         <% if(userLogin== null){ %>
+                        <li><a href="signin">로그인</a></li>
+                        <%} %>
 
                     </ul>
 
