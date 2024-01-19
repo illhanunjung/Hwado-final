@@ -124,16 +124,20 @@ select * from USERS where user_email in (select user_email from PORTFOLIOS )
 		SELECT IMAGES.*
 		FROM IMAGES
 		JOIN ARTWORKS ON IMAGES.aw_seq = ARTWORKS.aw_seq
-		WHERE ARTWORKS.created_at > NOW() - INTERVAL 7 DAY;
+		WHERE ARTWORKS.created_at > NOW() - INTERVAL 7 DAY
+		AND IMAGES.img_type = 0
+		AND (ARTWORKS.aw_status = '판매중' OR ARTWORKS.aw_status = '경매');	
 </select>
 
 <select id="getArtworks_Month" resultType="kr.smhrd.entity.ArtworkImage">
-		SELECT * 
-		FROM ARTWORKS A
-		JOIN IMAGES I ON A.aw_seq = I.aw_seq
-		WHERE A.created_at >= NOW() - INTERVAL 1 MONTH
-		ORDER BY RAND()
-		LIMIT 16;
+    SELECT * 
+	FROM ARTWORKS A
+	JOIN IMAGES I ON A.aw_seq = I.aw_seq
+	WHERE A.created_at >= NOW() - INTERVAL 1 MONTH
+	AND I.img_type = 0
+	AND (A.aw_status = '판매중' OR A.aw_status = '경매')
+	ORDER BY RAND()
+	LIMIT 16;
 </select>
 
 
