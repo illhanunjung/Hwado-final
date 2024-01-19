@@ -52,5 +52,8 @@ public interface UsersMapper {
 
 		//비번 수정
 		public void updateUser(Users users);
+		
+		//전시페이지 수정
+		public List<ArtworkImage> exhibition(String artist_email);
 	
 }

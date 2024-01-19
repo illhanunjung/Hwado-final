@@ -344,6 +344,17 @@ public class UsersController {
 				model.addAttribute("purchase_history",purchase_history);
 				return "purchase_history";
 			}
+			
+			// 전시페이지 이동
+			@RequestMapping("/exhibition")
+			public String exhibition(Model model, HttpSession session, @RequestParam("artist_email") String artist_email) {
+				System.out.println(artist_email);
+				List<ArtworkImage> exhibition = usersMapper.exhibition(artist_email);
+				model.addAttribute("exhibition",exhibition);
+				System.out.println(exhibition.size());
+				System.out.println(exhibition.get(0).toString());
+				return "exhibition";
+				}
 		
 		
 		

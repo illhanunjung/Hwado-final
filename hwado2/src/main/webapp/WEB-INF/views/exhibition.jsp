@@ -1,3 +1,6 @@
+<%@page import="kr.smhrd.entity.Users"%>
+<%@page import="kr.smhrd.entity.ArtworkImage"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,7 +35,7 @@
     <!-- Stylesheets
     ================================================== -->
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="resources/assets/css/exhibition.css" rel="stylesheet">
@@ -76,13 +79,27 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     font-style: normal;
 }
 
+.artwork-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.artwork-description{
+	max-width: 50%;
+    margin: 0 auto;
+    line-height: 29px;
+}
+
     </style>
 </head>
 <body>
+	<% String savePath = "./resources/profile"; 
+    	List<ArtworkImage> exhibition = (List<ArtworkImage>)request.getAttribute("exhibition");%>
 
     
-                                 <a href="artists.html"><p class="back_returns">뒤로가기</p></a>           
-                       <p class="artist_info">❝ 박지뉴님의 갤러리 ❞</p>
+                                 <a href="artist"><p class="back_returns">뒤로가기</p></a>           
+                       <p class="artist_info">❝ <%= exhibition.get(0).getUser_nick() %>의 갤러리 ❞</p>
                      
 
                  
@@ -99,21 +116,11 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <!-- 메뉴 바 -->
 <div class="slider-container">
     <div class="image-slider">
-        <img src="resources/assets/명화/11.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/12.jpg" alt="이미지 2">
-        <img src="resources/assets/명화/13.jpg" alt="이미지 3">
-        <img src="resources/assets/명화/14.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/15.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/16.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/17.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/18.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/1.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/2.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/3.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/4.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/5.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/6.jpg" alt="이미지 1">
-        <img src="resources/assets/명화/7.jpg" alt="이미지 1">
+    <% if (exhibition != null) { 
+    for(int i = 0; i < exhibition.size(); i++){%>
+        <img src="<%=savePath + "/" + exhibition.get(i).getAp_title()%>" alt="이미지">
+        <%} 
+        	}%>
         <!-- 더 많은 이미지를 추가할 수 있습니다 -->
     </div>
 </div>
@@ -122,58 +129,16 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     
     <div class="exhibition-content">
         <div class="artwork-image">
-            <button class="glyphicon glyphicon-menu-left"></button>
-            <img src="resources/assets/명화/11.jpg" alt="Artwork Image">
-            <button class="glyphicon glyphicon-menu-right"></button>
+            <button id="prevButton" class="glyphicon glyphicon-menu-left" ></button>
+            <img src="<%=savePath + "/" + exhibition.get(0).getAp_title()%>" alt="Artwork Image" class="exhibit-img">
+            <button id="nextButton" class="glyphicon glyphicon-menu-right" ></button>
         </div>
         <div class="artwork-info">
-            <h2 class="artwork-title">삶과 죽음의 순환은 계속된다</h2>
-            
-            <p class="artwork-description">무릇 사람이 </div></p>
+            <h2 class="artwork-title"><%=exhibition.get(0).getAw_title()%></h2>
+            <p class="artwork-description"><%=exhibition.get(0).getAp_desc()%></p>
+        </div>
         </div>
     </div>
-    
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- -------------------------------------------------------------하단---------------------------------------------------------- -->
@@ -190,6 +155,63 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <script src="assets/js/jquery.countTo.min.js"></script>
 <script src="assets/js/jquery.shuffle.min.js"></script>
 <script src="assets/js/script.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+    
+    const artworks = [];
+
+    <% if (exhibition != null) { 
+        for (ArtworkImage artworkImage : exhibition) { %>
+            artworks.push({
+                imgFilename: `<%= savePath + "/" + artworkImage.getAp_title() %>`,
+                awName: `<%= artworkImage.getAw_title() %>`,
+                awDesc: `<%= artworkImage.getAp_desc() %>`
+            });
+        <% } 
+    } %>
+
+    let currentImageIndex = 0;
+    const img = document.querySelector(".exhibit-img");
+    const title = document.querySelector(".artwork-title");
+    const description = document.querySelector(".artwork-description");
+    
+  
+
+    function updateArtworkDisplay() {
+        if (artworks.length > 0) {
+            const artwork = artworks[currentImageIndex];
+            img.src = artwork.imgFilename;
+            title.innerHTML = artwork.awName;
+            description.textContent = artwork.awDesc;
+        }
+    }
+
+    function prev() {
+    	console.log("prev")
+        if(currentImageIndex == 0) {
+            currentImageIndex = artworks.length - 1;
+        } else {
+            currentImageIndex -= 1;
+        }
+        updateArtworkDisplay();
+    }
+
+    function next() {
+        if (currentImageIndex == artworks.length - 1) {
+            currentImageIndex = 0;
+        } else {
+            currentImageIndex += 1;
+        }
+        updateArtworkDisplay();
+    }
+    
+    document.getElementById("prevButton").addEventListener("click", prev);
+    document.getElementById("nextButton").addEventListener("click", next);
+
+    })
+</script>
 
 </body>
 </html>

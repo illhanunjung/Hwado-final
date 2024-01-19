@@ -24,6 +24,8 @@ public class ArtworkImage {
     private String delivery_at;
     private String aw_desc;
     private String ap_title;
+    private String aw_title;
+    private int ap_type;
     
     // IMAGES 테이블의 필드
     private String img_filename;

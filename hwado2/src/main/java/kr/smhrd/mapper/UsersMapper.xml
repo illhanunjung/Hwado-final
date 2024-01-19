@@ -89,4 +89,17 @@ select * from INTERESTS where user_email = #{user_email}
     UPDATE USERS SET user_nick = #{user_nick}, user_pw = MD5(#{user_pw})
     WHERE user_email=#{user_email}
 </update>
+
+<select id="exhibition" parameterType="String" resultType="kr.smhrd.entity.ArtworkImage">
+    SELECT 
+        ap.ap_title,
+        ap.ap_desc,
+        ap.ap_type,
+        ap.aw_title,
+        u.user_nick
+    FROM ARTIST_PROFILE ap
+    JOIN USERS u ON ap.user_email = u.user_email
+    WHERE ap.ap_type = 1
+    AND ap.user_email = #{userEmail}
+</select>
 </mapper>
