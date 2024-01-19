@@ -134,7 +134,7 @@
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="index.html">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -160,7 +160,7 @@
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>

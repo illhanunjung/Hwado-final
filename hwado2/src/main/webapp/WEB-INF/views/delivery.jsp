@@ -170,7 +170,7 @@ padding-bottom:250px;
   </script>
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="main.html">
+            <a class="site-title" href="./">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>

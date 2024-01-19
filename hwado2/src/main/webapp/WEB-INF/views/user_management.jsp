@@ -153,7 +153,7 @@
 
 	<div class="flex-container">
 		<div class="top-section">
-			<a class="site-title" href="index.html"> <img
+			<a class="site-title" href="./"> <img
 				src="resources/assets/img/logo.png" class="logo">
 			</a>
 		</div>
@@ -170,13 +170,13 @@
 
 	<hr class="separator">
 
-	<div id="searchPopup" style="display:none;">
-     <form action="search" method="get">
-          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
-          <input type="submit" value="검색" >
-          <button type="button" onclick="closeSearchPopup()" >X</button>
+	<div id="searchPopup" style="display: none;">
+      <form action="user_management_search" method="get">
+         <input type="text" name="query" placeholder="회원 이메일 검색..."> <input
+            type="submit" value="검색">
+         <button type="button" onclick="closeSearchPopup()">X</button>
       </form>
-  </div>
+   </div>
 
 	<div class="flex-container">
 		<div class="top-section">

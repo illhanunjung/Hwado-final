@@ -170,7 +170,7 @@
 			    <input type="hidden" name="user_name" id="kakaoUserName" />
 			    <input type="hidden" name="user_birthdate" id="kakaoUserBirthdate" />
        	 	<button type="button" id="verifyButton" class="btn btn-primary" onclick="kakaoLogin()"> 카카오 본인인증 </a></button>
-               <button type="submit" class="btn btn-submit btn-default pull-right"
+               <button type="submit" class="btn btn-submit btn-default pull-right btn_verify"
                   style="margin: 10; padding: 20;">회원가입</button>
            
              <script type="text/javascript"> 
@@ -202,29 +202,26 @@
 			}
             </script>
             
-            <script type="text/javascript">
+           <script type="text/javascript">
             window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); // js 앱키
+
             var isVerified = false; // 본인인증 완료 여부
 
             function kakaoLogin() {
                 window.Kakao.Auth.login({
-                    scope: 'name, birthday, birthyear', //개인정보 활성화된 ID값
+                    scope: 'name, birthday, birthyear',
                     success: function(a) {
-                    	isVerified = true;
-                        console.log(a) // 로그인 성공하면 받아오는 데이터
-                        window.Kakao.API.request({ // 사용자 정보 가져오기 
+                        isVerified = true;
+                        // 로그인 성공 처리
+                        window.Kakao.API.request({
                             url: '/v2/user/me',
-                            success:res => {
+                            success: function(res) {
                                 const kakao_account = res.kakao_account;
-                                console.log(kakao_account);
-                                var user_name = res.kakao_account.name;
-                               	var birthday = res.kakao_account.birthday;
-                               	var birthyear = res.kakao_account.birthyear;
-                               	var user_birthdate = birthyear + birthday;
-                               	
-                                console.log("이름",user_name,"생년월일",user_birthdate);
-                                
-                                // 숨겨진 폼 필드에 데이터 설정
+                                var user_name = kakao_account.name;
+                                var birthday = kakao_account.birthday;
+                                var birthyear = kakao_account.birthyear;
+                                var user_birthdate = birthyear + birthday;
+
                                 document.getElementById('kakaoUserName').value = user_name;
                                 document.getElementById('kakaoUserBirthdate').value = user_birthdate;
                             },
@@ -233,12 +230,20 @@
                             }
                         });
                     }
-                document.querySelector('.btn-submit').addEventListener('click', function(event) {
-                    if (!isVerified) {
-                        event.preventDefault();
-                        alert('본인인증을 해주세요.');
-                    }
                 });
+            }
+
+            document.querySelector('.btn_verify').addEventListener('click', function(event) {
+                if (!isVerified) {
+                    event.preventDefault();
+                    alert('본인인증을 해주세요.');
+                }
+            });
+
+            document.querySelector('.find').addEventListener('click', function(event) {
+                var email = document.querySelector('.form-control-email').value;
+                // checkEmailAndVerify 함수 호출
+            });
             </script>
 			<script>
 			   function checkPasswordMatch() {
