@@ -235,7 +235,7 @@
             <div class="input-group">
                 <label for="image-1" class="input-label">사연</label>
                 <label for="description-1"  class="input-label"></label>
-                <textarea id="description-1" class="input-field2" name="bid-price" placeholder="사연을 입력해주세요" required></textarea>
+                <textarea id="description-1" class="input-field2" name="bid_story" placeholder="사연을 입력해주세요" required></textarea>
             </div>
 
             <br><br><br><br>  

@@ -69,12 +69,12 @@ public class AuctionController {
         Users userLogin = (Users) session.getAttribute("userLogin");
         // Bidding 객체에 사용자 이메일 설정
         bidding.setUser_email(userLogin.getUser_email());
-
+        System.out.println(bidding.toString());
         // 입찰 정보 데이터베이스에 저장
         mapper.insertBid(bidding);
 
         // 경매 상세 페이지나 확인 페이지로 리다이렉트
-        return "redirect:/ auction";
+        return "redirect:/auction_page";
     }
 	
 	
