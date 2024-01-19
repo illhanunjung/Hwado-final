@@ -266,8 +266,8 @@ List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
 <div class="centered-container">
     <section class="product-detail">
         <div class="product-grid">
-            <div class="product-image">
-                <img src="<%=savePath+"/"+images.get(0).getImg_filename() %>" alt="상품 이미지">
+            <div class="product-image" style="display: flex; align-items: center;">
+                <img src="<%=savePath+"/"+images.get(0).getImg_filename() %>" alt="상품 이미지" style="vertical-align: middle;">
             </div>
             <div class="product-info">
                 
