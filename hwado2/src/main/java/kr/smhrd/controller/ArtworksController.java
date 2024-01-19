@@ -224,7 +224,7 @@ public class ArtworksController {
 		
 		System.out.println("성공");
 		
-		return "myPage";
+		return "redirect:/myPage";
 	}
 	
 	
@@ -342,7 +342,7 @@ public class ArtworksController {
 		
 		System.out.println("성공");
 		
-		return "myPage";
+		return "redirect:/myPage";
 	}
 	
 	// 상품 상세 보기
