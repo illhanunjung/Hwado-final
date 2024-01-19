@@ -1,3 +1,5 @@
+<%@page import="kr.smhrd.entity.Profile"%>
+<%@page import="kr.smhrd.entity.Interests"%>
 <%@page import="kr.smhrd.entity.ArtworkImage"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.smhrd.entity.Users"%>
@@ -79,6 +81,14 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     font-style: normal;
 }
 
+.glyphicon-heart-empty{
+	position: apsolute;
+	border: none;
+    background: none;
+    font-size: 24px; /* 아이콘 크기 조정 */
+    cursor: pointer;
+    
+}
     </style>
 </head>
 <body>
@@ -124,12 +134,12 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     </header><!-- /#mastheaed -->
 
     <div id="searchPopup" style="display:none;">
-     <form action="search" method="get">
-          <input type="text" name="searchAw" placeholder="작품/작가 검색..." >
-          <input type="submit" value="검색" >
-          <button type="button" onclick="closeSearchPopup()" >X</button>
-      </form>
-  </div>
+        <form action="/search" method="get">
+            <input type="text" name="query" placeholder="작품/작가 검색..." >
+            <input type="submit" value="검색" >
+            <button type="button" onclick="closeSearchPopup()" >X</button>
+        </form>
+    </div>
   
   <script>
     document.getElementById('searchButton').addEventListener('click', function() {
@@ -145,7 +155,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="./">
+            <a class="site-title" href="main">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -171,75 +181,158 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <hr class="separator">
 <p class="artistName1">❝ 여러분의 작가를 만나보세요 ❞</p>
 
-<script>
 
-document.addEventListener('DOMContentLoaded', function () {
-    var heartButtons = document.querySelectorAll('.heart-button');
-
-    heartButtons.forEach(function(heartButton) {
-        heartButton.addEventListener('click', function () {
-            if (heartButton.classList.contains('filled')) {
-                // 이미 채워진 하트라면 빈 하트로 변경
-                heartButton.innerHTML = '<i class="glyphicon glyphicon-heart-empty"></i>';
-                heartButton.classList.remove('filled');
-            } else {
-                // 빈 하트라면 채워진 하트로 변경
-                heartButton.innerHTML = '<i class="glyphicon glyphicon-heart"></i>';
-                heartButton.classList.add('filled');
-            }
-        });
-    });
-});
-
-    
-                </script>
 
 <section class="site-section subpage-site-section section-related-projects">
     <div class="container">
         
        
 
-        <div class="row"> 
             <%
-            String savePath = "./resources/profile";
+            List<Interests> wishArtist = (List<Interests>)session.getAttribute("wishArtist");
             List<ArtworkImage> Author_page = (List<ArtworkImage>)request.getAttribute("Author_page");
-            System.out.println(Author_page.get(0).toString());
+            List<Profile> profiles = (List<Profile>)request.getAttribute("profiles");
+            String savePath = "./resources/profile";
+         	// 페이지
+        	int pageN = (int)request.getAttribute("pageN");
+        	int item = 16;
+        	
+        	int start = pageN * item;
+        	int end = start+item;
+        	
+        	if(end > Author_page.size()){
+        		end = Author_page.size();
+        	} else if (end < item){
+        		end = Author_page.size();
+        	}
+        	
+        	System.out.println("start : " + start);
+        	System.out.println("end : " + end);
+        
             %>
-            
+        <div class="row"> 
+                    
             <%
 	        if (Author_page != null) {
-			for (int i = 0; i < Author_page.size(); i++) {
+			for (int i = 0; i < profiles.size(); i++) {
 			%>
+			<% Profile profile = profiles.get(i); %>
+        <% if(profile != null) { %>
+            <% int ap_seq = profile.getAp_seq(); %>
+            <% String artist_email = profile.getUser_email(); %>
+           
             <div class="col-lg-3 col-md-4 col-xs-6">
                 <div class="portfolio-item">
-                  
-                        <img src="<%=savePath + "/" + Author_page.get(i).getAp_title()%>" class="img-res" alt="">
+                  		<% String imagePath = profiles.get(i).getAp_title();
+						   String displayImage = imagePath != null && !imagePath.isEmpty() ? savePath + "/" + imagePath : "resources/assets/img/logo.png"; %>
+                        <img src="<%= displayImage %>" class="img-res" alt="">
                        
                     
-                    <h4 class="portfolio-item-title"><%= Author_page.get(i).getUser_nick() %><br><br>
-						<%= Author_page.get(i).getAp_desc()%>
-                        <br><br><br><br><br><br><br><br><br>
-                        <button class="heart-button"><i class="glyphicon glyphicon-heart-empty"></i></button>
-                    </h4>
-                     <%if(userLogin != null){ %>  
-                    <a href="goArtist_profile?user_email=<%=Author_page.get(i).getUser_email() %>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <h4 class="portfolio-item-title"><%= Author_page.get(i).getUser_nick() %>
+                        <% boolean isWished = false; %>
+            
+		    <% if(wishArtist != null) { %>
+		        <% for(Interests wish : wishArtist) { %>
+		            <% if(wish.getAp_seq() == profiles.get(i).getAp_seq()) { %>
+		                <% isWished = true; %>
+		            <% break; } %>
+		        <% } %>
+		    <% } %>
+		
+		  
+		  
+		  <% if(userLogin != null) {%>
+		   <% String user_email = userLogin.getUser_email(); %>
+          <button class="heart-button <%= isWished ? "filled" : "" %>" style="position: relative; top: 5px;" onclick="likeTF(this)"
+                    data-user_email="<%= user_email %>" 
+                    data-ap_seq="<%= ap_seq %>" 
+                    data-artist_email="<%= artist_email %>">
+                <i class="<%= isWished ? "glyphicon glyphicon-heart" : "glyphicon glyphicon-heart-empty" %>"></i>
+            </button>
+            <%}%>
+           
+           
+           <br><br><% String apDesc = profiles.get(i).getAp_desc();
+                	if (apDesc != null && !apDesc.equals("NULL")) {%>
+                    <%=apDesc%>
+                	<% } %> <br><br><br><br><br><br><br><br><br>
+                        
+         </h4>
+          <%if(userLogin != null){ %>  
+                    <a href="goArtist_profile?user_email=<%=profiles.get(i).getUser_email() %>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     <%} else{ %>
                     <a href="signin"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     <%} %>
+         
+		  <%} %>
                 </div><!-- /.portfolio-item -->
             </div>
-            <%}
-				}%>
+		<%} %> 
+		<%} %>     
         </div>
+    <div class="navigation-buttons">
+           <a href="artist?page=<%=pageN-1 %>"><button class="nav-button" ><i class="bi bi-caret-left"></i></button></a>
+          <a href="artist?page=<%=pageN+1 %>"><button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button></a>
     </div>
+      </div>
 </section><!-- /.section-portfolio -->
 
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+    var heartButton = document.querySelector('.heart-button');
+
+    heartButton.addEventListener('click', function () {
+        if (heartButton.classList.contains('filled')) {
+            // 이미 채워진 하트라면 빈 하트로 변경
+            heartButton.innerHTML = '<i class="glyphicon glyphicon-heart-empty"></i>';
+            heartButton.classList.remove('filled');
+        } else {
+            // 빈 하트라면 채워진 하트로 변경
+            heartButton.innerHTML = '<i class="glyphicon glyphicon-heart"></i>';
+            heartButton.classList.add('filled');
+        }
+    });
+});
 
 
+function likeTF(buttonElement) {
+    var user_email = buttonElement.getAttribute('data-user_email');
+    var ap_seq = buttonElement.getAttribute('data-ap_seq');
+    var artist_email = buttonElement.getAttribute('data-artist_email');
+
+    console.log('user_email:', user_email);
+    console.log('ap_seq:', ap_seq);
+
+    $.ajax({ //json 형식 -> {key : value, key : value}
+			// 어디로 요청할 것인지(요청 url)
+			url : 'whishArtist',
+			
+			// 요청 데이터
+			data : { 'user_email' : user_email, 'ap_seq' : ap_seq },
+			
+			// 요청 방식
+			type : 'get',
+			
+			// 요청-응답 성공
+			success : function(data){
+				if(data){
+					window.location.href = "artist?user_email="+artist_email ;
+				} else{
+					console.log(data)
+				}
+				
+			},
+			
+			// 요청-응답 실패
+			error : function(){
+				console.log("통신실패")
+			}
+		})
+}
 
 
-
-
+            </script>
 
 
     <!-- -------------------------------------------------------------하단---------------------------------------------------------- -->
@@ -281,4 +374,4 @@ document.addEventListener('DOMContentLoaded', function () {
 <script src="assets/js/script.js"></script>
 
 </body>
-</html>>
+</html>

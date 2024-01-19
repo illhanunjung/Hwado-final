@@ -22,6 +22,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.smhrd.entity.ArtworkImage;
 import kr.smhrd.entity.IMAGES;
 import kr.smhrd.entity.Portfolios;
+import kr.smhrd.entity.Profile;
 import kr.smhrd.entity.Users;
 import kr.smhrd.entity.WISHLIST;
 import kr.smhrd.mapper.ArtworksMapper;
@@ -177,10 +178,37 @@ public class UsersController {
 	
 	// 작가페이지 이동
 		@RequestMapping("/artist")
-		public String artist(Model model) {
-			List<ArtworkImage> Author_page = usersMapper.Author_page();
-			model.addAttribute("Author_page", Author_page);
-			return "artist";
+		public String artist(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
+			List<Profile> profiles = mapper.ProfileList();
+		    List<ArtworkImage> Author_page = usersMapper.Author_page();
+		    System.out.println(profiles.toString());
+		    System.out.println(Author_page.toString());		    
+		    model.addAttribute("Author_page", Author_page);
+		    model.addAttribute("profiles", profiles);
+		    
+		    
+		    int maxpage = 0;
+			
+			if (Author_page.size() %16 == 0) {
+				maxpage = Author_page.size()/16-1;
+			} else {
+				maxpage = Author_page.size()/16 ;
+			}
+			
+			System.out.println("maxpage : "+maxpage);
+			System.out.println("page : " + page);
+			if(page < 0) {
+				page = 0;
+			} else if (page > maxpage) {
+				page = maxpage;
+			}
+			
+			System.out.println("page : " + page);
+			model.addAttribute("pageN", page);
+		
+
+		    return "artist";
+		    
 		}
 	
 	

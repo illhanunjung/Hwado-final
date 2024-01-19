@@ -217,4 +217,6 @@ public interface ArtworksMapper {
 			public int deleteArtistWish(Interests wish);
 
 			public Profile getArtists(@NonNull Long ap_seq);
+
+			public List<Profile> ProfileList();
 }

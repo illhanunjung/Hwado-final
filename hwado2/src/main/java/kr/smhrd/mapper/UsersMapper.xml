@@ -76,18 +76,9 @@ select * from WISHLIST where user_email = #{user_email}
 </select>
 	
 <select id="Author_page" resultType="kr.smhrd.entity.ArtworkImage">
-	SELECT
-    ap.ap_desc,
-    ap.user_email,
-    u.user_nick,
-    ap.ap_title
-	FROM ARTIST_PROFILE ap
-	JOIN USERS u ON ap.user_email = u.user_email
-	LEFT JOIN ARTWORKS a ON u.user_email = a.user_email
-	LEFT JOIN IMAGES i ON a.aw_seq = i.aw_seq
-	WHERE ap.ap_type = '0'
-	ORDER BY RAND()
-	LIMIT 16
+SELECT u.user_nick
+FROM USERS u
+JOIN ARTIST_PROFILE ap ON u.user_email = ap.user_email where ap.ap_type = '0'
 </select>
 
 <select id="getWishArtist" parameterType="String" resultType="kr.smhrd.entity.Interests">
