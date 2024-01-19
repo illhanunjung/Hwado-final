@@ -171,11 +171,16 @@ Users userLogin = (Users)session.getAttribute("userLogin");
         <li><a href="wishArtistsPage">관심작가</a></li>
         <li><a href="wishPage">관심작품</a></li>
         <li><a href="purchase_history">구매내역</a></li>
-        <li><a href=auction_management_user >경매확인</a></li>
+        <% if(userLogin.getUser_role().equals("1")){ %>
+        <li><a href=artist_registration >예술가신청</a></li>
+         <%} %>
+        <li><a href=auction_management_user  >경매확인</a></li>
+         <% if(userLogin.getUser_role().equals("2")){ %>
         <li><a href="prd_regi_page" >작품등록</a></li>
         <li><a href="auction_regi_page" id="fv_at">경매등록</a></li>
         <li><a href="auction_management">경매관리</a></li>
         <li><a href="goArtist_profile?user_email=<%=userLogin.getUser_email()%>">작가프로필</a></li>
+         <%} %>
         <li><a href="user_edit">개인정보수정</a></li>
     </ul>
 </div>
