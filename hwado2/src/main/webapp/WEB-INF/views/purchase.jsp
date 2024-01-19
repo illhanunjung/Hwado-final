@@ -254,7 +254,7 @@ System.out.println(awSeq+"들어왔음");
 
             <!-- 폼 제출 및 초기화 버튼 -->
             <div class="form-buttons">
-                <button type="submit" class="submit-button" onclick="requestPay(<%=awSeq %>)">구매</button>
+                <button type="submit" class="submit-button" onclick="requestPay()">구매</button>
             </div>
         </div>
     <!-- </form> -->
@@ -281,9 +281,8 @@ System.out.println(awSeq+"들어왔음");
         
         
         
-        
-        function requestPay(awSeq) {
-        	
+        function requestPay() {
+        	var awSeq = '<%= awSeq %>'
         	// 이름 입력 필드의 값을 가져오기
             var name = document.getElementById("name").value;
 
