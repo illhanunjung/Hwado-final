@@ -100,6 +100,20 @@ public class UsersController {
         }
     }
 	
+	// 개인정보 수정
+	@RequestMapping("/updateUser")
+	public String updateUser(Users users,Model model, HttpSession session) { 
+		System.out.println("들어왔음 : "+users.toString());
+		
+		
+		 usersMapper.updateUser(users); 
+		 
+		 Users userLogin = usersMapper.userSelect(users);
+		 session.setAttribute("userLogin", userLogin);
+		 System.out.println(userLogin.toString());
+		return "redirect:/";
+	}
+	
 	
 
 	// 회원관리 페이지로 이동 - 바로 회원관리 수정하는 곳으로 감

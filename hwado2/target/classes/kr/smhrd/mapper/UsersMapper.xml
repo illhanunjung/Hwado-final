@@ -94,4 +94,8 @@ select * from WISHLIST where user_email = #{user_email}
 select * from INTERESTS where user_email = #{user_email}
 </select>
 
+<update id="updateUser" parameterType="kr.smhrd.entity.Users">
+    UPDATE USERS SET user_nick = #{user_nick}, user_pw = MD5(#{user_pw})
+    WHERE user_email=#{user_email}
+</update>
 </mapper>

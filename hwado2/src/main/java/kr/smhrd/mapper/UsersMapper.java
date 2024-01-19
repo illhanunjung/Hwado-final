@@ -48,6 +48,9 @@ public interface UsersMapper {
 		public List<ArtworkImage> Author_page();
 
 		// 관심작가
-				public List<Interests> getWishArtist(String userEmail);
+		public List<Interests> getWishArtist(String userEmail);
+
+		//비번 수정
+		public void updateUser(Users users);
 	
 }
