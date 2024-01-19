@@ -309,4 +309,12 @@ select * from ARTIST_PROFILE where ap_type='0' and ap_seq=#{ap_seq}
 <select id="ProfileList" resultType="kr.smhrd.entity.Profile">
 	select * from ARTIST_PROFILE where ap_type='0'
 </select>
+
+<select id="bidList_user" parameterType="String" resultType="kr.smhrd.entity.Artworks">
+select * from ARTWORKS where aw_seq in(select aw_seq from AUCTIONS where auc_seq in (select auc_seq from BIDDING where user_email=#{user_email}))
+</select>
+<select id="aucList_user" parameterType="String" resultType="kr.smhrd.entity.AUCTIONS">
+select * from AUCTIONS where auc_seq in (select auc_seq from BIDDING where user_email=#{user_email})
+</select>
+
 </mapper>

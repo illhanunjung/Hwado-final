@@ -219,4 +219,9 @@ public interface ArtworksMapper {
 			public Profile getArtists(@NonNull Long ap_seq);
 
 			public List<Profile> ProfileList();
+			
+			// 경매관리페이지-유저_상품
+			public List<Artworks> bidList_user(@NonNull String user_email);
+			// 경매관리페이지-유저_경매
+			public List<AUCTIONS> aucList_user(String email);
 }

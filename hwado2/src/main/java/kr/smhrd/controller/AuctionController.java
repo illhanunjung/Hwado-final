@@ -114,4 +114,20 @@ public class AuctionController {
 		
 		return "redirect:/auction_management";
 	}
+	
+		// 경매관리페이지 - 유저
+		@RequestMapping("/auction_management_user")
+		public String auction_management_user(HttpSession session,Model model) {
+		System.out.println("안녕");
+		Users user = (Users)session.getAttribute("userLogin");
+		System.out.println(user.toString());
+		String email = user.getUser_email();
+		List<Artworks> art = mapper.bidList_user(email);
+		model.addAttribute("art",art);
+		
+		List<AUCTIONS> bid = mapper.aucList_user(email);
+		model.addAttribute("bid",bid);
+		
+		return "auction_management_user";
+		}
 }
