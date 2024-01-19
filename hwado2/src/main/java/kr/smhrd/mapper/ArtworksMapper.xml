@@ -147,12 +147,12 @@ select * from USERS where user_email in (select user_email from PORTFOLIOS )
 
 
 <select id="searchArtw" resultType="kr.smhrd.entity.Artworks">
-SELECT ARTWORKS.* FROM ARTWORKS JOIN USERS ON ARTWORKS.user_email = USERS.user_email WHERE LOWER(ARTWORKS.aw_name) LIKE CONCAT('%' , #{searchAw} , '%') OR LOWER(USERS.user_nick) LIKE CONCAT('%' , #{searchAw} , '%')
+SELECT ARTWORKS.* FROM ARTWORKS JOIN USERS ON ARTWORKS.user_email = USERS.user_email WHERE (LOWER(ARTWORKS.aw_name) LIKE CONCAT('%' , #{searchAw} , '%') OR LOWER(USERS.user_nick) LIKE CONCAT('%' , #{searchAw} , '%')) AND ARTWORKS.aw_status IN ('판매중', '경매') 
 	</select>
 
 
 <select id="searchImage" resultType="kr.smhrd.entity.IMAGES">
-		SELECT IMAGES.* FROM IMAGES JOIN ARTWORKS ON ARTWORKS.aw_seq = IMAGES.aw_seq JOIN USERS ON ARTWORKS.user_email = USERS.user_email WHERE IMAGES.img_type = '0' and (LOWER(USERS.user_nick) LIKE CONCAT('%' , #{searchAw} , '%') or ARTWORKS.aw_name LIKE CONCAT('%' , #{searchAw} , '%'))
+		SELECT IMAGES.* FROM IMAGES JOIN ARTWORKS ON ARTWORKS.aw_seq = IMAGES.aw_seq JOIN USERS ON ARTWORKS.user_email = USERS.user_email WHERE ARTWORKS.aw_status IN ('판매중', '경매') AND IMAGES.img_type = '0' and (LOWER(USERS.user_nick) LIKE CONCAT('%' , #{searchAw} , '%') or ARTWORKS.aw_name LIKE CONCAT('%' , #{searchAw} , '%'))
 		
 	</select>
 

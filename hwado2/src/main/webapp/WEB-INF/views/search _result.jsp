@@ -55,6 +55,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
     <style>
         @font-face {
             font-family: 'Giants-Bold';
@@ -84,6 +85,22 @@
             font-weight: 400;
             font-style: normal;
         }
+        
+        .gallery-column2 {
+	position: relative !important; 
+  	left: 190px !important;
+  	grid-column: span 4 / span 4; /* 네 열 차지 */
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* 화면 높이만큼의 최소 높이 */
+  background-color:white; /* 회색 배경색 */
+  padding: 1.5rem; /* 모든 방향에 대한 패딩 */
+}
     </style>
 </head>
 
@@ -133,7 +150,7 @@
 
     <div class="flex-container">
         <div class="top-section">
-            <a class="site-title" href="./">
+            <a class="site-title" href="index.html">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
         </div>
@@ -265,7 +282,7 @@
 
 		<% String searchAw = (String)session.getAttribute("searchAw"); %>
                 <!-- 갤러리 열 시작 -->
-                <div class="gallery-column">
+                <div class="gallery-column2">
                         <p class="search_result">"${searchAw}"에 관한 검색결과입니다</p>
                     <!-- 갤러리 헤더 시작 -->
                     <div class="gallery-header">
