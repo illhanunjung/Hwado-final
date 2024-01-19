@@ -72,6 +72,8 @@ font-family: 'Pretendard-Regular';
   display: flex; /* Flexbox 레이아웃 적용 */
   justify-content: center; /* 가운데 정렬 */
   gap: 20px; /* 버튼 사이의 간격 */
+  position: relative;
+  right: 22px;
 }
 
 .nav-button {

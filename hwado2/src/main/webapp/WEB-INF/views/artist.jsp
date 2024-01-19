@@ -270,11 +270,11 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 		<%} %> 
 		<%} %>     
         </div>
+      </div>
     <div class="navigation-buttons">
            <a href="artist?page=<%=pageN-1 %>"><button class="nav-button" ><i class="bi bi-caret-left"></i></button></a>
           <a href="artist?page=<%=pageN+1 %>"><button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button></a>
     </div>
-      </div>
 </section><!-- /.section-portfolio -->
 
 <script>

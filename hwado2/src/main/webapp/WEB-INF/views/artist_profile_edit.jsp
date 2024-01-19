@@ -76,6 +76,12 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     font-weight: 400;
     font-style: normal;
 }
+.artwork-name-input{
+	margin-bottom : 5px !important;
+}
+.artwork-file-input{
+	margin-bottom : 5px !important;
+}
 
     </style>
 </head>
