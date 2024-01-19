@@ -318,7 +318,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
         <div class="works-gallery">
         	<% for(int i = 0; i< similar_img_list.size(); i++){  	%>
 	            <div class="artwork-container">
-	                <a href="product_detail?aw_seq=<%=similar_art.get(i).getAw_seq() %>">
+	                <a onclick="goPdAc(<%=similar_art.get(i).getAw_seq() %>)">
 	                <img src="<%=savePath+"/"+similar_img_list.get(i) %>" alt="Work 1" class="artwork"></a>
 	                <div class="artwork-title"><%=similar_art.get(i).getAw_name() %></div>
 	            </div>
@@ -343,6 +343,41 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     </section>
 </div>
 
+
+<script type="text/javascript">
+
+function goPdAc(awSeq) {
+	
+	$.ajax({ //json 형식 -> {key : value, key : value}
+		// 어디로 요청할 것인지(요청 url)
+		url : 'selectPdAc',
+		
+		// 요청 데이터
+		data : { 'awSeq' : awSeq },
+		
+		// 요청 방식
+		type : 'get',
+		
+		// 요청-응답 성공
+		success : function(response) {
+		        console.log("통신 성공");
+		        window.location.href = response+"?aw_seq="+awSeq;
+				
+				
+			},
+		
+		// 요청-응답 실패
+		error : function(){
+			console.log("통신실패")
+		}
+	})
+	
+}
+
+
+
+
+</script>
 
 
 
