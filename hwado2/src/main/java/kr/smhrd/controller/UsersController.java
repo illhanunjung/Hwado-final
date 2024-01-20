@@ -262,8 +262,10 @@ public class UsersController {
 		//포폴 페이지
 		  @RequestMapping("/portfolio")
 		  public String  portfolio(@RequestParam("user_email") String user_email, Model model) {
-			  Portfolios portfolio = mapper.detailport(user_email);	
+			  Portfolios portfolio = mapper.detailport(user_email);
+			  Users user = mapper.portuser(user_email);
 				model.addAttribute("portfolio",portfolio);
+				model.addAttribute("user",user);
 				return "portfolio";
 		}
 			// 작가 등록

@@ -172,7 +172,7 @@ body {
 <!-- 작가 정보 -->
 
 <div class="input-group">
-    <label id="a_name" for="name" class="input-label">작가 이름: ${user.user_name}</label>
+    <label id="a_name" for="name" class="input-label">작가 이름: ${user.user_nick}</label>
 </div>
 
 

@@ -252,6 +252,11 @@ select * from ARTIST_PROFILE where user_email = #{user_email}
 	select * from PORTFOLIOS where user_email=#{user_email}
 </select>
 
+
+<select id="portuser" resultType="kr.smhrd.entity.Users">
+    select * from USERS where user_email=#{user_email}
+</select>
+
 <insert id="insertBid" parameterType="kr.smhrd.entity.Bidding">
     INSERT INTO BIDDING (auc_seq, user_email, bid_price, bid_story, created_at)
     VALUES (#{auc_seq}, #{user_email}, #{bid_price}, #{bid_story}, NOW())

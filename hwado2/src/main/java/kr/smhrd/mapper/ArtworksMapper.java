@@ -227,4 +227,6 @@ public interface ArtworksMapper {
 			public List<Artworks> bidList_user(@NonNull String user_email);
 			// 경매관리페이지-유저_경매
 			public List<AUCTIONS> aucList_user(String email);
+
+			public Users portuser(String user_email);
 }
