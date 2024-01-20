@@ -80,6 +80,15 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     font-weight: 400;
     font-style: normal;
 }
+body {
+	font-family: 'Pretendard-Regular';
+}
+.sub-container{
+    padding: 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
     </style>
 </head>
@@ -162,11 +171,11 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 
 <main class="portfolio-container">
-        <div>
+        <div class="sub-container">
+        <div class="form-section">
         <h1 class="form-title">입찰 사유</h1>
        
        <%  Bidding bid = (Bidding)request.getAttribute("bid"); %>
-        <div class="form-section">
             <!-- 이름 입력 필드 -->
             <div class="input-group">
                 <label for="email" class="input-label">이메일 : <%=bid.getUser_email() %></label>

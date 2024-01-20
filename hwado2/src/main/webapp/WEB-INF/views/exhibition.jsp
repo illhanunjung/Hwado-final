@@ -90,6 +90,9 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     margin: 0 auto;
     line-height: 29px;
 }
+.image-slider {
+	justify-content: center;
+}
 
     </style>
 </head>
