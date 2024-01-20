@@ -25,6 +25,8 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -89,7 +91,25 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     cursor: pointer;
     
 }
-    </style>
+
+.navigation-buttons {
+  display: flex; /* Flexbox 레이아웃 적용 */
+  justify-content: center; /* 가운데 정렬 */
+  gap: 20px; /* 버튼 사이의 간격 */
+}
+/* 네비게이션 버튼 공통 스타일 */
+.nav-button {
+    border: none;
+    background-color: transparent;
+    margin-top: 8px ; /* 상단 여백 */
+      cursor: pointer ; /* 커서 스타일 */
+  	font-size: 40px ; /* 아이콘 크기 */
+  	color: #6f6f74 ; /* 아이콘 색상 */
+  	margin-top: 8px ; /* 상단 여백 */
+}
+
+
+</style>
 </head>
 <body>
 

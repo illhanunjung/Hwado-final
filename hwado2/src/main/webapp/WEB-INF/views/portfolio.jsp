@@ -81,6 +81,23 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 .form-title{
  padding-top : 80px;
 }
+.sub-container{
+	margin-bottom: 450px;
+    width: 100%;
+    max-width: 600px;
+    padding: 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#a_name{
+    position: relative;
+    top: 60px;
+    padding-top : 10px;
+}
+body {
+	font-family: 'Pretendard-Regular';
+}
     </style>
 </head>
 
@@ -149,14 +166,13 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 
 <main class="portfolio-container">
-    <div>
+    <div class="sub-container">
 <h1 class="form-title">포트폴리오</h1>
 
 <!-- 작가 정보 -->
 
 <div class="input-group">
-    <label for="name" class="input-label">작가 이름: ${user.user_name}</label>
-    
+    <label id="a_name" for="name" class="input-label">작가 이름: ${user.user_name}</label>
 </div>
 
 
@@ -175,6 +191,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     <img src="./resources/portfolios/${portfolio.pf_file1}" >
     <img src="${portfolio.pf_file2}" alt="빈칸">
     <img src="${portfolio.pf_file3}" alt="빈칸">
+</div>
 </div>
 </div>
 </main>
