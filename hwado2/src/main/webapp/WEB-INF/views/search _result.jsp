@@ -346,7 +346,7 @@
                                 </a>
                                 <%} else { %>
                                 <a href="signin" alt="상세페이지">
-                                <img src="<%=savePath+"/"+image.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
+                    			<img src="<%=savePath+"/"+image.get(i).getImg_filename() %>" alt="Artwork Image" class="artwork-image" />
                                 </a>
                                 <%} %> 
                                 <!-- 아트워크 정보 시작 -->
