@@ -187,7 +187,7 @@ function closeSearchPopup() {
 		</div>
 		</div>
 		<hr class="separator">
-		<p class="artistName">❝ 이 달의 작가 ❞</p>
+		<p class="artistName">❝ 1월의 작가 ❞</p>
 		<main id="main" class="site-main">
 
 			<%
@@ -223,11 +223,6 @@ function closeSearchPopup() {
 				}
 				%>
 			</div>
-
-
-
-
-
 
 <script type="text/javascript">
 
