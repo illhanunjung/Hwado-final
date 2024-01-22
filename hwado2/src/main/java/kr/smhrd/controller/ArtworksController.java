@@ -434,6 +434,7 @@ public class ArtworksController {
          ArrayList<String> similar_img_list = new ArrayList<String>();
          List<Artworks> artList = mapper.artAllList();
      	 List<IMAGES> imgList = mapper.imgAllList_similar();
+     	 ArrayList<Integer> img_aw_seq = new ArrayList<Integer>();
         
          for(String i : similar_img_all) {
         	 i = i.replace("\"", "");
@@ -447,7 +448,24 @@ public class ArtworksController {
         			}
         			
         		if(k>=showArtImg.size() && i.equals(img.getImg_filename())) {
-           			 similar_img_list.add(i);
+        			if(similar_img_list.size() != 0) {
+        				int n = 0;
+        				for(int seq : img_aw_seq) {
+        					if(seq != img.getAw_seq()) {
+        						n++;
+        					}
+        				}
+        				
+        				if(n == img_aw_seq.size()) {
+        					similar_img_list.add(i);
+            				img_aw_seq.add(img.getAw_seq());
+        				}
+        				
+        			}else {
+        				similar_img_list.add(i);
+        				img_aw_seq.add(img.getAw_seq());
+        				
+        			}
            		 }
         		
         		if(similar_img_list.size() == 5) {
@@ -630,6 +648,7 @@ public class ArtworksController {
          ArrayList<String> similar_img_list = new ArrayList<String>();
          List<Artworks> artList = mapper.artAllList();
      	 List<IMAGES> imgList = mapper.imgAllList_similar();
+     	ArrayList<Integer> img_aw_seq = new ArrayList<Integer>();
         		 
          for(String i : similar_img_all) {
         	 i = i.replace("\"", "");
@@ -642,8 +661,25 @@ public class ArtworksController {
 	            		 }
         		 }
         		if(k==showArtImg.size() && i.equals(img.getImg_filename())) {
-           			 
-           			 similar_img_list.add(i);
+        			if(similar_img_list.size() != 0) {
+        				int n = 0;
+        				for(int seq : img_aw_seq) {
+        					if(seq != img.getAw_seq()) {
+        						n++;
+        					}
+        				}
+        				
+        				if(n == img_aw_seq.size()) {
+        					similar_img_list.add(i);
+            				img_aw_seq.add(img.getAw_seq());
+        				}
+        				
+        			}else {
+        				similar_img_list.add(i);
+        				img_aw_seq.add(img.getAw_seq());
+        				
+        			}
+       
            		 }
         		
         		if(similar_img_list.size() == 5) {
