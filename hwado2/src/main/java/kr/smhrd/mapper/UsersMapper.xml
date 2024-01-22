@@ -72,7 +72,8 @@ select * from WISHLIST where user_email = #{user_email}
 	JOIN BASKETS ON ORDERS.basket_seq = BASKETS.basket_seq
 	JOIN ARTWORKS ON BASKETS.aw_seq = ARTWORKS.aw_seq
 	JOIN IMAGES ON ARTWORKS.aw_seq = IMAGES.aw_seq
-	WHERE ORDERS.user_email = #{user.email};
+	WHERE ORDERS.user_email = #{user.email}
+	AND IMAGES.img_type = "0";
 </select>
 	
 <select id="Author_page" resultType="kr.smhrd.entity.ArtworkImage">
