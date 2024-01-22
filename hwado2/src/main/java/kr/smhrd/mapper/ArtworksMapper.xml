@@ -285,11 +285,11 @@ select * from AUCTIONS where aw_seq in (select aw_seq from ARTWORKS where user_e
 </select>
 
 <update id="auctiondeadline">
-update AUCTIONS set auc_status = '2' where now() > auc_ended_at
+update AUCTIONS set auc_status = '2' where now() > auc_ended_at and auc_status = '0'
 </update>
 
 <update id="artworksdeadline">
-update ARTWORKS set aw_status = '마감' where aw_seq in (select aw_seq from AUCTIONS where now() > auc_ended_at)
+update ARTWORKS set aw_status = '마감' where aw_seq in (select aw_seq from AUCTIONS where now() > auc_ended_at and auc_status = '0')
 </update>
 
 <select id="selectPdAc" parameterType="int" resultType="String">
