@@ -9,7 +9,7 @@
 <title>로그인/회원가입 페이지</title>
 <link rel="stylesheet" type="text/css" href="resources/assets/css/signin.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+<link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 <!-- External JavaScript -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.5/angular.min.js"></script>
