@@ -1,3 +1,4 @@
+<%@page import="kr.smhrd.entity.Users"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -80,6 +81,10 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     </style>
 </head>
 <body>
+
+<%
+Users userLogin = (Users)session.getAttribute("userLogin");
+%>
 
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
