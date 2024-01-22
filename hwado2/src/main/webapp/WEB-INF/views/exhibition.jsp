@@ -95,7 +95,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
     </style>
 </head>
-<body>
+<body oncontextmenu="return false" oncopy="return false" ondragstart="return false" onselectstart="return false">
 	<% String savePath = "./resources/profile"; 
     	List<ArtworkImage> exhibition = (List<ArtworkImage>)request.getAttribute("exhibition");%>
 

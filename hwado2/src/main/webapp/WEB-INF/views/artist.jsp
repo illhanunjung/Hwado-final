@@ -111,7 +111,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
 </style>
 </head>
-<body>
+<body oncontextmenu="return false" oncopy="return false" ondragstart="return false" onselectstart="return false">
 
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">

@@ -92,7 +92,7 @@
 <%
  Users userLogin = (Users)session.getAttribute("userLogin");
 %>
-
+<body oncontextmenu="return false" oncopy="return false" ondragstart="return false" onselectstart="return false">
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
             <div class="container">

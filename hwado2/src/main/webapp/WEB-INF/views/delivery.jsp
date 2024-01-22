@@ -106,7 +106,7 @@ padding-bottom:250px;
 }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false" oncopy="return false" ondragstart="return false" onselectstart="return false">
 
 <%
  Users userLogin = (Users)session.getAttribute("userLogin");

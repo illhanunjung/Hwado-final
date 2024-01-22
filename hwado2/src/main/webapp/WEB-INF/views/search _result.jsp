@@ -104,7 +104,7 @@
     </style>
 </head>
 
-<body>
+<body oncontextmenu="return false" oncopy="return false" ondragstart="return false" onselectstart="return false">
 
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
