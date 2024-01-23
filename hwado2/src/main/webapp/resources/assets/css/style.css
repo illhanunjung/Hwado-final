@@ -1672,13 +1672,13 @@ a.linkedin-bg:hover {
     background: #555;
   }
 
-  /* 이미지 배열 */
+/*   이미지 배열
   .list2 {
-    display: grid; /* 그리드 시스템 사용 */
-    grid-template-columns: repeat(4, 1fr); /* 4개의 동일한 크기의 컬럼 */
-    grid-gap: 20px; /* 그리드 사이의 간격 */
-    margin: 0 100px; /* 양쪽 여백 */
-  }
+    display: grid; 그리드 시스템 사용
+    grid-template-columns: repeat(4, 1fr); 4개의 동일한 크기의 컬럼
+    grid-gap: 20px; 그리드 사이의 간격
+    margin: 0 100px; 양쪽 여백
+  } */
   
 
   
