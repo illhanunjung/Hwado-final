@@ -57,7 +57,8 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
-
+ 
+ 
 }
 
 @font-face{
@@ -97,6 +98,13 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 }
 body {
 	font-family: 'Pretendard-Regular';
+}
+.portfolio-images img {
+    display: block;
+    margin-bottom: 10px; /* 이미지 간격 조절 */
+    width: 100%; /* 이미지 너비를 부모 요소의 100%로 설정 (조절 가능) */
+    max-width: 700px; /* 이미지의 최대 너비 설정 (조절 가능) */
+    height: auto; /* 자동으로 높이 조절 */
 }
     </style>
 </head>
