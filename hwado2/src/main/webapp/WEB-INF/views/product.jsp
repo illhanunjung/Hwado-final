@@ -50,13 +50,6 @@
     <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/auction.css">
 
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <style>
         @font-face {
             font-family: 'Giants-Bold';
@@ -87,27 +80,19 @@
             font-style: normal;
         }
         .main-container {
- 
-  background-color: white !important; /* 회색 배경색 */
-
-}
+  		background-color: white !important;
+		}
 
 
-    /* ... your existing styles ... */
-
-    .selected-category a.category-link {
-        color: black; /* 선택된 카테고리의 글씨를 검정색으로 설정 */
-        /* 기타 스타일링을 원하는 대로 추가하세요 */
-    }
+    	.selected-category a.category-link {
+        color: black;
+    	}
     </style>
 </head>
 
 <body oncontextmenu="return false" oncopy="return false" ondragstart="return false" onselectstart="return false">
 
-<%
- Users userLogin = (Users)session.getAttribute("userLogin");
-%>
-
+<% Users userLogin = (Users)session.getAttribute("userLogin"); %>
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation">
             <div class="container">
@@ -133,21 +118,13 @@
                          <% if(userLogin== null){ %>
                         <li><a href="signin">로그인</a></li>
                         <%} %>
-
                     </ul>
-
                 </div>
 
-
-
-
             </div>
-
         </nav><!-- /.site-navigation -->
     </header><!-- /#mastheaed -->
 	
-	
-
     <div class="flex-container">
         <div class="top-section">
             <a class="site-title" href="./">
@@ -174,7 +151,6 @@
       </form>
   </div>
 
-
         <script>
             document.getElementById('searchButton').addEventListener('click', function () {
                 document.getElementById('searchPopup').style.display = 'block';
@@ -187,14 +163,7 @@
         </script>
 
 
-
-
-
-
-
         <!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
-
-        <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
 
         <!-- 메뉴 바 -->
         <div class="menu-bar">
@@ -233,9 +202,6 @@
                 var userEmail = buttonElement.getAttribute('data-user_email');
                 var awSeq = buttonElement.getAttribute('data-aw_seq');
 
-                console.log('User Email:', userEmail);
-                console.log('AW Seq:', awSeq);
-
                 $.ajax({ //json 형식 -> {key : value, key : value}
 					// 어디로 요청할 것인지(요청 url)
 					url : 'whishList',
@@ -244,30 +210,12 @@
 					data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
 					
 					// 요청 방식
-					type : 'get',
-					
-					// 요청-응답 성공
-					success : function(data){
-						if(data){
-							console.log(data)
-						} else{
-							console.log(data)
-						}
-						
-						
-					},
-					
-					// 요청-응답 실패
-					error : function(){
-						console.log("통신실패")
-					}
+					type : 'get'
 				})
             }
             
             
         </script>
-
-
 
         <!-- 메인 컨테이너 시작 -->
         <div class="main-container">
@@ -315,7 +263,6 @@
                         </div> <!-- 카테고리 카드 종료 -->
                     </div> <!-- 카테고리 컨테이너 종료 -->
                 </div> <!-- 카테고리 열 종료 -->
-
                 <!-- 갤러리 열 시작 -->
                 <div class="gallery-column">
                     <!-- 갤러리 헤더 시작 -->

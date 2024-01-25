@@ -50,12 +50,6 @@
     <link rel="stylesheet" type="text/css" href="resources/assets/css/favorite_products.css">
 
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <style>
         @font-face {
             font-family: 'Giants-Bold';
@@ -123,9 +117,6 @@
 
                 </div>
 
-
-
-
             </div>
 
         </nav><!-- /.site-navigation -->
@@ -174,7 +165,6 @@
 
         <!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
 
-        <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
 
 <!-- 메뉴 바 -->
 <div class="menu-bar">
@@ -280,19 +270,6 @@
         </div> <!-- 메인 컨테이너 종료 -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         <script>
             function loadPage(url) {
                 fetch(url)
@@ -342,9 +319,6 @@
                var userEmail = buttonElement.getAttribute('data-user_email');
                var awSeq = buttonElement.getAttribute('data-aw_seq');
 
-               console.log('User Email:', userEmail);
-               console.log('AW Seq:', awSeq);
-
                $.ajax({ //json 형식 -> {key : value, key : value}
 					// 어디로 요청할 것인지(요청 url)
 					url : 'whishList',
@@ -353,22 +327,7 @@
 					data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
 					
 					// 요청 방식
-					type : 'get',
-					
-					// 요청-응답 성공
-					success : function(data){
-						if(data){
-							window.location.href = "wishPage";
-						} else{
-							console.log(data)
-						}
-						
-					},
-					
-					// 요청-응답 실패
-					error : function(){
-						console.log("통신실패")
-					}
+					type : 'get'
 				})
            }
         </script>

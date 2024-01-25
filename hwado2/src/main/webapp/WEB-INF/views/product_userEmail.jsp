@@ -34,7 +34,6 @@
 
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
@@ -49,13 +48,6 @@
     <link href="resources/assets/css/mypage1.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/auction.css">
-
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     <style>
         @font-face {
@@ -138,8 +130,6 @@
                 </div>
 
 
-
-
             </div>
 
         </nav><!-- /.site-navigation -->
@@ -186,15 +176,7 @@
         </script>
 
 
-
-
-
-
-
         <!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
-
-        <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
-         
         <!-- 모델에 있는 작품 가져오기 -->
         
          <%
@@ -279,23 +261,7 @@
 					data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
 					
 					// 요청 방식
-					type : 'get',
-					
-					// 요청-응답 성공
-					success : function(data){
-						if(data){
-							console.log(data)
-						} else{
-							console.log(data)
-						}
-						
-						
-					},
-					
-					// 요청-응답 실패
-					error : function(){
-						console.log("통신실패")
-					}
+					type : 'get'
 				})
             }
             
@@ -397,58 +363,6 @@
             }
            
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
