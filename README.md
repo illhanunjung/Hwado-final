@@ -26,6 +26,7 @@
   - HTML
   - CSS
   - Javascript
+  - Ajax
 #### `API`
   - Kakao Login API
   - PortOne API
