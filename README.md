@@ -16,17 +16,23 @@
 ## 2. 사용 기술
 #### `Back-end`
   - Java 8
-  - Spring Boot 2.3
-  - Gradle
-  - Spring Data JPA
-  - QueryDSL
-  - H2
+  - Spring FrameWork
   - MySQL 5.7
-  - Spring Security
-  - Jsoup
+  - Python
+  - Flask
+  - Tomcat
+  - Mybatis
 #### `Front-end`
-  - Vue.js 3.0
-
+  - HTML
+  - CSS
+  - Javascript
+#### `API`
+  - Kakao Login API
+  - PortOne API
+  - Kakao Map API
+  - 스마트택배 API
+#### `Model`
+  - VGG16
 </br>
 
 ## 3. ERD 설계
