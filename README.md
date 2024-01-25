@@ -60,6 +60,7 @@
 ![시스템 아키텍쳐](https://github.com/illhanunjung/Hwado-final/assets/153901490/bae78183-b86a-4ac2-b16a-053209b4b2a2)
 
 ### 4.2. 추천 알고리즘
+![Uploading image.png…]()
 [코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/resources/py/RecommendationAlgorithm.py)
 - VGG16 모델을 활용합니다.
 - VGG16 모델의 최상위 계층을 제외하고 사용하여 이미지의 특징 추출기로 사용합니다.
@@ -75,7 +76,7 @@
 - 페이지의 JavaScript 부분에서 메이슨리 라이브러리를 초기화하고 설정합니다. $(window).on('load', function(){ ... }); 코드 블록 내에서 메이슨리를 초기화하고, 각 항목(itemSelector)의 선택자와 열(columnWidth)의 너비 등을 지정합니다.
 
 ### 4.4. Kakao Login API
-
+![image](https://github.com/illhanunjung/Hwado-final/assets/153901490/c362852f-0df3-4d96-a19d-3b0d7da47f71)
 [코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/signin.jsp)
 - 웹 페이지에는 카카오 SDK를 초기화하기 위한 스크립트(<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>)가 포함되어 있습니다.
 window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 카카오 SDK를 초기화합니다. 여기서 제공된 문자열은 카카오 앱의 JavaScript 키입니다.
@@ -89,7 +90,7 @@ window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 �
 본인인증이 완료되지 않았다면, 폼 제출을 중단하고 사용자에게 본인인증을 요청하는 알림을 표시합니다.
 
 ### 4.5. PortOne API
-
+![image](https://github.com/illhanunjung/Hwado-final/assets/153901490/d452e17b-2fde-482f-a9b4-8805abb97411)
 [코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
 - 페이지에는 Iamport 결제 관련 JavaScript 라이브러리(<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>)가 포함되어 있어 API 기능을 사용할 수 있습니다.
 - var IMP = window.IMP; IMP.init("imp85467522");: 이 코드를 통해 Iamport를 초기화합니다. 여기서 "imp85467522"는 Iamport에서 제공한 고유한 가맹점 식별자입니다.
@@ -100,7 +101,7 @@ window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 �
 - 결제 정보에는 pg, pay_method, merchant_uid, name, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, buyer_postcode 등의 필드가 포함되어, 이를 통해 결제 과정에서 필요한 모든 정보를 Iamport에 전달합니다.
 
 ### 4.6. 스마트 택배 API
-
+![image](https://github.com/illhanunjung/Hwado-final/assets/153901490/cc7351fc-a733-4b39-8221-0f0c5a78e078)
 [코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/delivery.jsp)
 -  먼저, 스마트택배 서비스에서 API 키를 발급받습니다. 이 키는 웹 페이지나 애플리케이션의 코드 내에서 보안상의 이유로 숨겨져야 합니다.
 이를 위해 HTML의 input 요소에 type="hidden" 속성을 사용하여 API 키를 숨겼습니다.
@@ -110,7 +111,6 @@ window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 �
 - 스마트택배 API로부터 반환된 배송 상태 정보는 사용자에게 표시됩니다. 이 정보에는 상품의 현재 위치, 배송 단계, 예상 도착 시간 등이 포함될 수 있습니다.
 
 ### 4.7. Kakao Map API
-
 [코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
 - 주소 검색 필드 제공: 사용자는 '주소', '상세주소', '참고항목'을 입력할 수 있는 입력 필드를 사용합니다. 이 중 '주소' 필드는 카카오주소 API와 직접 연동됩니다.
 - 사용자는 '우편번호 찾기' 버튼을 클릭하여 주소 검색을 시작할 수 있습니다. 이 버튼은 카카오주소 API의 기능을 호출합니다.
