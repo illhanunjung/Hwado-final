@@ -1,4 +1,4 @@
-# :pushpin: goQuality
+# :pushpin: Hwado
 >고퀄리티 개발 컨텐츠 공유 서비스  
 > 데모사이트 링크
 
@@ -28,8 +28,7 @@
 </br>
 
 ## 3. ERD 설계
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/final_erd.png)
-![](https://github.com/JungHyung2/gitio.io/blob/master/assets/images/portfolio/p1.jpg)
+![화도 (2)](https://github.com/illhanunjung/Hwado-final/assets/114290412/141390c4-34de-4fca-b073-440f5d357c99)
 
 
 ## 4. 핵심 기능
