@@ -15,10 +15,10 @@
 
 ## 2. 사용 기술
 #### `Back-end`
-  - Java 8
+  - Java 1.6
   - Spring FrameWork
-  - MySQL 5.7
-  - Python
+  - MySQL 8.5.26
+  - Python 3.9
   - Flask
   - Tomcat
   - Mybatis
@@ -41,11 +41,6 @@
 
 
 ## 4. 핵심 기능
-이 서비스의 핵심 기능은 컨텐츠 등록 기능입니다.  
-사용자는 단지 컨텐츠의 카테고리를 선택하고, URL만 입력하면 끝입니다.  
-이 단순한 기능의 흐름을 보면, 서비스가 어떻게 동작하는지 알 수 있습니다. 
-
-이 프로젝트의 핵심 기능은 
 - 추천 알고리즘 ( VGG16 )
 - PortOne API
 - 스마트택배 API
@@ -57,7 +52,6 @@
 
 
 
-
 <details>
 <summary><b>핵심 기능 설명 펼치기</b></summary>
 <div markdown="1">
@@ -65,57 +59,74 @@
 ### 4.1. 전체 흐름
 ![시스템 아키텍쳐](https://github.com/illhanunjung/Hwado-final/assets/153901490/bae78183-b86a-4ac2-b16a-053209b4b2a2)
 
-### 4.2. 사용자 요청
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_vue.png)
-
-- **URL 정규식 체크** :pushpin: [코드 확인](https://github.com/JungHyung2/gitio.io/blob/95b4c4f06a2a5a74a00f81a3c3fcc003c994725f/index.html#L15C8-L15C26)
-  - Vue.js로 렌더링된 화면단에서, 사용자가 등록을 시도한 URL의 모양새를 정규식으로 확인합니다.
-  - URL의 모양새가 아닌 경우, 에러 메세지를 띄웁니다.
-
-- **Axios 비동기 요청** :pushpin: [코드 확인]()
-  - URL의 모양새인 경우, 컨텐츠를 등록하는 POST 요청을 비동기로 날립니다.
 ### 4.2. 추천 알고리즘
+[코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/resources/py/RecommendationAlgorithm.py)
+- VGG16 모델을 활용합니다.
+- VGG16 모델의 최상위 계층을 제외하고 사용하여 이미지의 특징 추출기로 사용합니다.
+- VGG16 모델을 활용하여 추출한 이미지의 특징 벡터를 코사인 유사도를 사용하여 유사한 이미지 5개를 추천합니다.
+- 유클리드 유사도, 맨해튼 유사도 등을 모두 사용한 결과 코사인 유사도의 결과가 가장 유사도가 높아 사용하였습니다.
 
+### 4.3. 메이슨리 라이브러리 ( 자유 레이아웃 )
 
-### 4.3. Controller
+![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/main.jsp)
+- 메이슨리와 관련된 JavaScript 라이브러리와 의존성들이 추가되어 있습니다. 예를 들어, masonry.pkgd.min.js와 imagesloaded.pkgd.min.js 스크립트가 HTML 헤더 부분에 포함되어 있습니다.
+- HTML에서 메이슨리를 적용할 요소들을 정의합니다. 이 경우, div 태그와 클래스 list2를 사용하여 메이슨리 레이아웃이 적용될 영역을 지정하고 있습니다. 각 아이템은 list2-item 클래스를 사용하여 정의됩니다.
+- 메이슨리 레이아웃의 각 아이템에 대한 스타일을 CSS를 통해 정의합니다. 여기서는 .list2-item에 대한 스타일을 지정하여 각 항목의 너비, 여백 등을 설정합니다.
+- 페이지의 JavaScript 부분에서 메이슨리 라이브러리를 초기화하고 설정합니다. $(window).on('load', function(){ ... }); 코드 블록 내에서 메이슨리를 초기화하고, 각 항목(itemSelector)의 선택자와 열(columnWidth)의 너비 등을 지정합니다.
 
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_controller.png)
+### 4.4. Kakao Login API
 
-- **요청 처리** :pushpin: [코드 확인](https://github.com/2023-SMHRD-KDT-IOT-4/Repo/blob/94e1b3a93c48cc3fdb51d4468de151930705faa6/Middle_project12/src/main/webapp/WEB-INF/views/BoardContent.jsp#L20)
-  - Controller에서는 요청을 화면단에서 넘어온 요청을 받고, Service 계층에 로직 처리를 위임합니다.
+![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/signin.jsp)
+- 웹 페이지에는 카카오 SDK를 초기화하기 위한 스크립트(<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>)가 포함되어 있습니다.
+window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 카카오 SDK를 초기화합니다. 여기서 제공된 문자열은 카카오 앱의 JavaScript 키입니다.
+- 회원가입 폼에는 "카카오 본인인증" 버튼(<button type="button" id="verifyButton" class="btn btn-primary" onclick="kakaoLogin()"> 카카오 본인인증 </a></button>)이 있습니다.
+이 버튼을 클릭하면 kakaoLogin 함수가 호출됩니다.
+- kakaoLogin 함수는 카카오 로그인을 통해 사용자의 이름, 생일, 출생년도에 접근합니다. 이를 위해 scope에 'name', 'birthday', 'birthyear'를 요청합니다.
+사용자가 로그인에 성공하면, window.Kakao.API.request 함수를 사용하여 사용자 정보를 요청합니다.
+- 사용자 정보 요청이 성공하면, 반환된 데이터에서 사용자의 이름, 생일, 출생년도를 추출합니다.
+이 정보는 숨겨진 입력 필드(<input type="hidden" name="user_name" id="kakaoUserName" />, <input type="hidden" name="user_birthdate" id="kakaoUserBirthdate" />)에 저장됩니다.
+- 회원가입 버튼 클릭 시, isVerified 변수를 확인하여 본인인증이 완료되었는지 검사합니다.
+본인인증이 완료되지 않았다면, 폼 제출을 중단하고 사용자에게 본인인증을 요청하는 알림을 표시합니다.
 
-- **결과 응답** :pushpin: [코드 확인]()
-  - Service 계층에서 넘어온 로직 처리 결과(메세지)를 화면단에 응답해줍니다.
+### 4.5. PortOne API
 
-### 4.4. Service
+![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
+- 페이지에는 Iamport 결제 관련 JavaScript 라이브러리(<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>)가 포함되어 있어 API 기능을 사용할 수 있습니다.
+- var IMP = window.IMP; IMP.init("imp85467522");: 이 코드를 통해 Iamport를 초기화합니다. 여기서 "imp85467522"는 Iamport에서 제공한 고유한 가맹점 식별자입니다.
+- function requestPay() { ... }: 사용자가 '구매' 버튼을 클릭하면 이 함수가 실행됩니다. 이 함수는 사용자의 입력 데이터와 함께 Iamport 결제 요청을 처리합니다.
+- 사용자로부터 이름, 전화번호, 주소 등의 정보를 입력 받습니다. 이 데이터는 결제 요청에 포함됩니다.
+- 서버에 Ajax 요청을 보내 결제에 필요한 데이터(예: 상품명, 가격)를 받아옵니다. 받아온 데이터는 response 변수에 저장되며, 이후 Iamport 결제 요청에 사용됩니다.
+- IMP.request_pay({...}): 이 함수를 통해 실제 결제 창을 호출합니다. 여기에는 결제 관련 상세 정보(결제 수단, 상품명, 가격, 구매자 정보 등)가 포함됩니다.
+- 결제 정보에는 pg, pay_method, merchant_uid, name, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, buyer_postcode 등의 필드가 포함되어, 이를 통해 결제 과정에서 필요한 모든 정보를 Iamport에 전달합니다.
 
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_service1.png)
+### 4.6. 스마트 택배 API
 
-- **Http 프로토콜 추가 및 trim()** :pushpin: [코드 확인]()
-  - 사용자가 URL 입력 시 Http 프로토콜을 생략하거나 공백을 넣은 경우,  
-  올바른 URL이 될 수 있도록 Http 프로토콜을 추가해주고, 공백을 제거해줍니다.
+![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/delivery.jsp)
+-  먼저, 스마트택배 서비스에서 API 키를 발급받습니다. 이 키는 웹 페이지나 애플리케이션의 코드 내에서 보안상의 이유로 숨겨져야 합니다.
+이를 위해 HTML의 input 요소에 type="hidden" 속성을 사용하여 API 키를 숨겼습니다.
+- 사용자가 다양한 택배 회사 중에서 선택할 수 있는 드롭다운 메뉴를 제공했습니다. 이를 통해 사용자는 자신이 이용하는 택배 서비스를 쉽게 선택할 수 있습니다.
+- 사용자가 자신의 운송장 번호를 입력할 수 있는 입력란을 제공합니다. 이 번호는 배송 조회를 위해 필요합니다. 사용자가 운송장 번호를 입력하고 나면, '조회' 버튼을 클릭하여 배송 상태를 확인할 수 있습니다.
+- 조회 버튼을 클릭하면, 시스템은 선택된 택배 회사와 입력된 운송장 번호를 사용하여 스마트택배 API에 요청을 보냅니다. 이때 숨겨진 API 키도 함께 전송됩니다.
+- 스마트택배 API로부터 반환된 배송 상태 정보는 사용자에게 표시됩니다. 이 정보에는 상품의 현재 위치, 배송 단계, 예상 도착 시간 등이 포함될 수 있습니다.
 
-- **URL 접속 확인** :pushpin: [코드 확인]()
-  - 화면단에서 모양새만 확인한 URL이 실제 리소스로 연결되는지 HttpUrlConnection으로 테스트합니다.
-  - 이 때, 빠른 응답을 위해 Request Method를 GET이 아닌 HEAD를 사용했습니다.
-  - (HEAD 메소드는 GET 메소드의 응답 결과의 Body는 가져오지 않고, Header만 확인하기 때문에 GET 메소드에 비해 응답속도가 빠릅니다.)
+### 4.7. Kakao Map API
 
-  ![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_service2.png)
+![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
+- 주소 검색 필드 제공: 사용자는 '주소', '상세주소', '참고항목'을 입력할 수 있는 입력 필드를 사용합니다. 이 중 '주소' 필드는 카카오주소 API와 직접 연동됩니다.
+- 사용자는 '우편번호 찾기' 버튼을 클릭하여 주소 검색을 시작할 수 있습니다. 이 버튼은 카카오주소 API의 기능을 호출합니다.
+- 페이지에는 카카오주소 API를 사용하기 위한 JavaScript 스크립트(<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>)가 포함되어 있습니다.
+- sample6_execDaumPostcode 함수는 카카오주소 API를 사용하여 주소 검색을 실행합니다. 이 함수는 사용자가 주소를 검색할 때 실행됩니다.
+- 사용자가 검색 결과 중 하나를 선택하면, 선택된 주소 정보는 '우편번호', '주소', '참고항목' 필드에 자동으로 채워집니다. 이를 위해 카카오주소 API에서 반환된 데이터(data)를 활용합니다.
 
-- **Jsoup 이미지, 제목 파싱** :pushpin: [코드 확인]()
-  - URL 접속 확인결과 유효하면 Jsoup을 사용해서 입력된 URL의 이미지와 제목을 파싱합니다.
-  - 이미지는 Open Graphic Tag를 우선적으로 파싱하고, 없을 경우 첫 번째 이미지와 제목을 파싱합니다.
-  - 컨텐츠에 이미지가 없을 경우, 미리 설정해둔 기본 이미지를 사용하고, 제목이 없을 경우 생략합니다.
+### 4.8. 좋아요 기능
 
-
-### 4.5. Repository
-
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_repo.png)
-
-- **컨텐츠 저장** :pushpin: [코드 확인]()
-  - URL 유효성 체크와 이미지, 제목 파싱이 끝난 컨텐츠는 DB에 저장합니다.
-  - 저장된 컨텐츠는 다시 Repository - Service - Controller를 거쳐 화면단에 송출됩니다.
-
+![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/artist.jsp)
+- 각 작가의 프로필이나 작품 옆에는 '좋아요' 버튼(<button class="heart-button">)이 있습니다. 이 버튼에는 하트 아이콘이 (glyphicon-heart 또는 glyphicon-heart-empty) 포함되어 있으며, 사용자가 좋아하는 작가나 작품을 표시하는 데 사용됩니다.
+- 좋아요 버튼의 클래스(filled 또는 빈 상태)는 사용자가 해당 작가나 작품을 이미 '좋아요' 했는지 여부를 나타냅니다. 사용자가 이미 '좋아요'를 했다면 glyphicon-heart와 filled 클래스가 사용되고, 그렇지 않으면 glyphicon-heart-empty 아이콘이 사용됩니다.
+- 사용자가 좋아요 버튼을 클릭하면 likeTF 함수가 호출됩니다. 이 함수는 AJAX를 사용하여 서버에 좋아요 상태 변경을 요청합니다.
+- likeTF 함수는 좋아요 버튼의 데이터 속성에서 사용자 이메일(data-user_email), 작가 페이지 시퀀스(data-ap_seq), 작가 이메일(data-artist_email)을 가져옵니다.
+이 정보는 서버에 보내지며, 서버는 이를 바탕으로 사용자의 좋아요 목록을 업데이트합니다.
+- AJAX 요청이 성공적으로 처리되면 페이지가 새로고침되어 좋아요 상태가 최신 상태로 반영됩니다.
 </div>
 </details>
 
