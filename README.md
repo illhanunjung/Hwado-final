@@ -86,8 +86,8 @@
 ![image](https://github.com/illhanunjung/Hwado-final/assets/153901490/e9123860-feb2-4a9b-bc4a-f0ea868fd70d)
  <br>
 [코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/signin.jsp)
-- 웹 페이지에는 카카오 SDK를 초기화하기 위한 스크립트(<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>)가 포함되어 있습니다.
-window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 카카오 SDK를 초기화합니다. 여기서 제공된 문자열은 카카오 앱의 JavaScript 키입니다.
+- 웹 페이지에는 카카오 SDK를 초기화하기 위한 스크립트가 포함되어 있습니다.
+window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초기화합니다. 여기서 제공된 문자열은 카카오 앱의 JavaScript 키입니다.
 - 회원가입 폼에는 "카카오 본인인증" 버튼(<button type="button" id="verifyButton" class="btn btn-primary" onclick="kakaoLogin()"> 카카오 본인인증 </a></button>)이 있습니다.
 이 버튼을 클릭하면 kakaoLogin 함수가 호출됩니다.
 - kakaoLogin 함수는 카카오 로그인을 통해 사용자의 이름, 생일, 출생년도에 접근합니다. 이를 위해 scope에 'name', 'birthday', 'birthyear'를 요청합니다.
@@ -102,8 +102,7 @@ window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 �
 ![image](https://github.com/illhanunjung/Hwado-final/assets/153901490/7d7e7429-ad75-4b6e-8520-07bc7a709319)
  <br>
 [코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
-- 페이지에는 Iamport 결제 관련 JavaScript 라이브러리(<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>)가 포함되어 있어 API 기능을 사용할 수 있습니다.
-- var IMP = window.IMP; IMP.init("imp85467522");: 이 코드를 통해 Iamport를 초기화합니다. 여기서 "imp85467522"는 Iamport에서 제공한 고유한 가맹점 식별자입니다.
+- 페이지에는 Iamport 결제 관련 JavaScript 라이브러리가 포함되어 있어 API 기능을 사용할 수 있습니다.
 - function requestPay() { ... }: 사용자가 '구매' 버튼을 클릭하면 이 함수가 실행됩니다. 이 함수는 사용자의 입력 데이터와 함께 Iamport 결제 요청을 처리합니다.
 - 사용자로부터 이름, 전화번호, 주소 등의 정보를 입력 받습니다. 이 데이터는 결제 요청에 포함됩니다.
 - 서버에 Ajax 요청을 보내 결제에 필요한 데이터(예: 상품명, 가격)를 받아옵니다. 받아온 데이터는 response 변수에 저장되며, 이후 Iamport 결제 요청에 사용됩니다.
