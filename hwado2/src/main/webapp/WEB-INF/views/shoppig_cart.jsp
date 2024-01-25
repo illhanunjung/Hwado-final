@@ -311,7 +311,6 @@ function getCheckedValues() {
 
 function deleteCart(values) {
 	let aw_seq = values;
-	console.log(aw_seq);
 	
 	 $.ajax({ //json 형식 -> {key : value, key : value}
 			// 어디로 요청할 것인지(요청 url)
@@ -325,7 +324,6 @@ function deleteCart(values) {
 			
 			// 요청-응답 성공
 			success : function(response) {
-		        console.log("통신 성공");
 		        window.location.href = response;
 				
 				
@@ -333,7 +331,6 @@ function deleteCart(values) {
 			
 			// 요청-응답 실패
 			error : function(){
-				console.log("통신실패")
 			}
 		})
 }
@@ -341,7 +338,6 @@ function deleteCart(values) {
 	
 	function goPurchase(values) {
 	let aw_seq = values;
-	console.log(aw_seq);
 	
 	 $.ajax({ //json 형식 -> {key : value, key : value}
 			// 어디로 요청할 것인지(요청 url)
@@ -355,15 +351,12 @@ function deleteCart(values) {
 			
 			// 요청-응답 성공
 			success : function(response) {
-		        console.log("통신 성공");
 		        window.location.href = response;
-				
 				
 			},
 			
 			// 요청-응답 실패
 			error : function(){
-				console.log("통신실패")
 			}
 		})
 }

@@ -53,32 +53,7 @@
       </div>
    </div>
    
-   
-<!--    <div id="forgotPasswordModal" class="modal">
-      <div class="modal-content">
-         <span class="close" onclick="closeModal()">&times;</span>
-         비밀번호 찾기에 관련된 폼 요소들을 추가하세요
-         <a href="./"><img src="resources/assets/img/logo.png" alt="로그인 이미지" width="160" height="140"
-            style="display: block; margin: 0 auto;"></a>
-         <form>
-            비밀번호 찾기에 필요한 입력 필드들을 추가하세요
-            예: 이메일 주소 입력 등
-            <div class="form-group">
-               <label for="nickname">이메일</label> <input type="email"
-                  ng-model="email" class="form-control form-control-email"
-                  name="email" placeholder="Email address" required>
-            </div>
-            <div class="form-group">
-               <label for="nickname">닉네임</label> <input type="text"
-                  ng-model="username" class="form-control form-control-username"
-                  name="id" placeholder="Nick" required>
-            </div>
-            
-            <button type="submit" class="find">비밀번호 재설정 링크 요청</button>
-         </form>
-      </div>
-   </div>
- -->
+  
    <div id="forgotIdModal" class="modal">
       <div class="modal-content">
          <span class="close" onclick="closeIdModal()">&times;</span> <img
@@ -114,30 +89,7 @@
          modal.style.display = 'none';
       }
 
-      // 비밀번호 찾기 버튼에 모달 열기 함수 연결
-      document.querySelector('.outer-link-find-password')
-            .addEventListener('click', function(event) {
-               event.preventDefault();
-               openModal();
-            });
 
-      document.querySelector('.outer-link-find-id').addEventListener(
-            'click', function(event) {
-               event.preventDefault();
-               openIdModal();
-            });
-
-      // 아이디 찾기 모달 열기 함수
-      function openIdModal() {
-         var modal = document.getElementById('forgotIdModal');
-         modal.style.display = 'flex';
-      }
-
-      // 아이디 찾기 모달 닫기 함수
-      function closeIdModal() {
-         var modal = document.getElementById('forgotIdModal');
-         modal.style.display = 'none';
-      }
    </script>
 
 
@@ -176,7 +128,6 @@
              <script type="text/javascript"> 
                function checkE(){ 
 			var inputE = $('#inputE').val()
-			console.log(inputE)
 			
 			$.ajax({ //json 형식 -> {key : value, key:value}
 				//어디로 요청할 것인지(요청url)
@@ -226,7 +177,6 @@
                                 document.getElementById('kakaoUserBirthdate').value = user_birthdate;
                             },
                             fail: function(error) {
-                                console.log(error);
                             }
                         });
                     }

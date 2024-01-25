@@ -38,10 +38,7 @@
 
 <!-- Favicon
     ================================================== -->
-<link rel="apple-touch-icon" sizes="180x180"
-	href="assets/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="15x15"
-	href="resources/assets/img/logo.png">
+<link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
 <!-- Stylesheets
     ================================================== -->
@@ -269,16 +266,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="navigation-buttons">
-				<!-- 이전 페이지로 이동하는 버튼 -->
-				<%-- <a href="user_management?page=<%=pageN - 1%>"><button
-						class="nav-button">
-						<i class="bi bi-caret-left"></i>
-					</button></a> <a href="user_management?page=<%=pageN + 1%>"><button
-						class="nav-button">
-						<i class="bi bi-caret-right"></i>
-					</button></a> --%>
-			</div>
+
 
 		</main>
 

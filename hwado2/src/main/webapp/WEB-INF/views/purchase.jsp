@@ -28,7 +28,6 @@
     
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
@@ -315,11 +314,7 @@ System.out.println(awSeq+"들어왔음");
             var bio = document.getElementById("bio").value;
 
             
-            // 예시: 가져온 값을 콘솔에 출력
-            console.log("이름:"+ name);
-            console.log("전화번호:"+ phone);
-            console.log("주소:"+ addr);
-            console.log("요청사항:"+ bio);
+
         	
         	$.ajax({ 
     			url : 'payment',
@@ -334,10 +329,9 @@ System.out.println(awSeq+"들어왔음");
     			
     			// 요청-응답 성공
     			success : function(response) {
-    		        console.log("통신 성공");
     		        
     		        let data = response.split("/")
-    		        console.log(data);
+    		       
     		        
     		            IMP.request_pay({
     	                pg : 'html5_inicis',
@@ -353,20 +347,10 @@ System.out.println(awSeq+"들어왔음");
     	                display: {
     	                    card_quota: [3]  // 할부개월 3개월까지 활성화
     	                }
-    	            }, function (rsp) { // callback
-    	                if (rsp.success) {
-    	                    console.log(rsp);
-    	                } else {
-    	                    console.log(rsp);
-    	                }
+    	            }
     	            }); 
     				
     				
-    			},
-    			
-    			// 요청-응답 실패
-    			error : function(){
-    				console.log("통신실패")
     			}
     		})
         	

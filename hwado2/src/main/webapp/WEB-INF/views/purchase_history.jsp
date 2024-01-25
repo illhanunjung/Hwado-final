@@ -29,7 +29,6 @@
     
     <!-- Favicon
     ================================================== -->
-
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets

@@ -33,7 +33,6 @@
 
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
@@ -231,8 +230,6 @@
                 var userEmail = buttonElement.getAttribute('data-user_email');
                 var awSeq = buttonElement.getAttribute('data-aw_seq');
 
-                console.log('User Email:', userEmail);
-                console.log('AW Seq:', awSeq);
 
                 $.ajax({ //json 형식 -> {key : value, key : value}
 					// 어디로 요청할 것인지(요청 url)
@@ -242,23 +239,7 @@
 					data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
 					
 					// 요청 방식
-					type : 'get',
-					
-					// 요청-응답 성공
-					success : function(data){
-						if(data){
-							console.log(data)
-						} else{
-							console.log(data)
-						}
-						
-						
-					},
-					
-					// 요청-응답 실패
-					error : function(){
-						console.log("통신실패")
-					}
+					type : 'get'
 				})
             }
             
@@ -427,16 +408,11 @@ function goPdAc(awSeq) {
 		
 		// 요청-응답 성공
 		success : function(response) {
-		        console.log("통신 성공");
 		        window.location.href = response+"?aw_seq="+awSeq;
 				
 				
-			},
+			}
 		
-		// 요청-응답 실패
-		error : function(){
-			console.log("통신실패")
-		}
 	})
 	
 }
