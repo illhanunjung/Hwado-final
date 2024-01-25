@@ -103,6 +103,7 @@ window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초�
  <br>
 [코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
 - 페이지에는 Iamport 결제 관련 JavaScript 라이브러리가 포함되어 있어 API 기능을 사용할 수 있습니다.
+- var IMP = window.IMP; IMP.init("imp85467522");: 이 코드를 통해 Iamport를 초기화합니다. 여기서 "imp85467522"는 Iamport에서 제공한 고유한 가맹점 식별자입니다.
 - function requestPay() { ... }: 사용자가 '구매' 버튼을 클릭하면 이 함수가 실행됩니다. 이 함수는 사용자의 입력 데이터와 함께 Iamport 결제 요청을 처리합니다.
 - 사용자로부터 이름, 전화번호, 주소 등의 정보를 입력 받습니다. 이 데이터는 결제 요청에 포함됩니다.
 - 서버에 Ajax 요청을 보내 결제에 필요한 데이터(예: 상품명, 가격)를 받아옵니다. 받아온 데이터는 response 변수에 저장되며, 이후 Iamport 결제 요청에 사용됩니다.
@@ -162,15 +163,44 @@ window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초�
 
 ## 5. 트러블 슈팅
 <details>
-<summary>npm run dev 실행 오류</summary>
+<summary></summary>
 <div markdown="1">
 
-- Webpack-dev-server 버전을 3.0.0으로 다운그레이드로 해결
-- `$ npm install —save-dev webpack-dev-server@3.0.0`
+- 
+- `
 
 </div>
 </details>
 
+<details>
+<summary></summary>
+<div markdown="1">
+
+- 
+- `
+
+</div>
+</details>
+
+<details>
+<summary></summary>
+<div markdown="1">
+
+- 
+- `
+
+</div>
+</details>
+
+<details>
+<summary></summary>
+<div markdown="1">
+
+- 
+- `
+
+</div>
+</details>
 <details>
 <summary>vue-devtools 크롬익스텐션 인식 오류 문제</summary>
 <div markdown="1">
