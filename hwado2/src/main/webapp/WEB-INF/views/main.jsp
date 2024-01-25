@@ -32,7 +32,6 @@
     
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
@@ -44,11 +43,7 @@
     <link href="resources/assets/css/style.css" rel="stylesheet">
     <link href="resources/assets/css/responsive.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
 
 <style>
 @font-face {
@@ -178,12 +173,6 @@ function closeSearchPopup() {
             <a class="site-title" href="">
                 <img src="resources/assets/img/logo.png" class="logo">
             </a>
-        
-    
-
-
-
-
 
 
         <div id="hero" class="hero overlay">
@@ -272,33 +261,13 @@ function goPdAc(awSeq) {
 		data : { 'awSeq' : awSeq },
 		
 		// 요청 방식
-		type : 'get',
-		
-		// 요청-응답 성공
-		success : function(response) {
-		        console.log("통신 성공");
-		        window.location.href = response+"?aw_seq="+awSeq;
-				
-				
-			},
-		
-		// 요청-응답 실패
-		error : function(){
-			console.log("통신실패")
-		}
+		type : 'get'
 	})
 	
 }
 
 
-
-
 </script>
-
-
-
-
-
 
 
 
@@ -342,9 +311,6 @@ function goPdAc(awSeq) {
 				<p style="text-align: center;">&copy; 2024 화도. All rights
 					reserved.</p>
 			</div>
-
-
-
 
 
 

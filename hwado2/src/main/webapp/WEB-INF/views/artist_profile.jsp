@@ -30,7 +30,6 @@
     
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="resources/assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
@@ -45,13 +44,6 @@
     <link href="resources/assets/css/responsive.css" rel="stylesheet">
     <link href="resources/assets/css/mypage1.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
-
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     <style>
         @font-face {
@@ -164,10 +156,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
     <!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
 
-<!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
-
-<!-- 메뉴 바 -->
-
 
     <%
     Users artist = (Users) request.getAttribute("artist");
@@ -223,8 +211,6 @@ function likeTF(buttonElement) {
     var ap_seq = buttonElement.getAttribute('data-ap_seq');
     var artist_email = buttonElement.getAttribute('data-artist_email');
 
-    console.log('user_email:', user_email);
-    console.log('ap_seq:', ap_seq);
 
     $.ajax({ //json 형식 -> {key : value, key : value}
 			// 어디로 요청할 것인지(요청 url)
@@ -241,14 +227,14 @@ function likeTF(buttonElement) {
 				if(data){
 					window.location.href = "goArtist_profile?user_email="+artist_email ;
 				} else{
-					console.log(data)
+		
 				}
 				
 			},
 			
 			// 요청-응답 실패
 			error : function(){
-				console.log("통신실패")
+	
 			}
 		})
 }

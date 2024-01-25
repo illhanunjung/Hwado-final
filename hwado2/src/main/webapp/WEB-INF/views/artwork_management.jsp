@@ -39,8 +39,6 @@
 
 <!-- Favicon
     ================================================== -->
-<link rel="apple-touch-icon" sizes="180x180"
-	href="assets/img/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="15x15"
 	href="resources/assets/img/logo.png">
 
@@ -58,12 +56,6 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/assets/css/artwork_managerment.css">
 
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 <style>
 @font-face {
@@ -181,9 +173,6 @@
 
 
 		<!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
-
-		<!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
-
 		<!-- 메뉴 바 -->
 		<div class="menu-bar">
 			<ul class="menu-items">
@@ -248,22 +237,7 @@
 								
 						
 								%>
-							<%-- <c:forEach items="${artworkList}" var="artw" varStatus="status">
-								
-										<!-- 영구정지 버튼: 각 회원들을 영구 정지 시키는 버튼 --> 
-										
-										
-            					<!-- 정지해제 버튼 항상 표시 -->
-   
-             		  			  <a href="approvalArtwork?email=${artw.user_email}"><button class="button">승인</button></a> 
-           					
-             		  			 <a href="refuseArtwork?email=${artw.user_email}"><button class="button">거절</button></a>
-           						 
-											
 
-									</td>
-								</tr>
-							</c:forEach> --%>
 							<% 
                           if(artworkList == null || artworkList.isEmpty()) { %>
 							<!-- 데이터가 없을 경우 표시할 메시지 -->
@@ -304,14 +278,7 @@
 
 			<div class="navigation-buttons">
 				<!-- 첫 페이지가 아니면 이전 페이지 버튼 표시 -->
-				<%--  <% if(pageN > 0) { %>
-        <a href="artwork_management?page=<%= pageN - 1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
-    <% } %>
-    
-    <!-- 마지막 페이지가 아니면 다음 페이지 버튼 표시 -->
-    <% if(pageN < maxpage - 1) { %>
-        <a href="artwork_management?page=<%= pageN + 1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
-    <% } %> --%>
+
 				<a href="artwork_management?page=<%= pageN - 1 %>"><button
 						class="nav-button">
 						<i class="bi bi-caret-left"></i>
@@ -325,17 +292,6 @@
 		</main>
 
 
-		<!-- <script>
-            document.getElementById('searchButton').addEventListener('click', function () {
-                document.getElementById('searchPopup').style.display = 'block';
-            });
-
-            function closeSearchPopup() {
-                document.getElementById('searchPopup').style.display = 'none';
-            }
-
-        </script> -->
-
 		<script>
             function loadPage(url) {
                 fetch(url)
@@ -347,36 +303,6 @@
                     .catch(error => console.error('Error:', error));
             }
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
