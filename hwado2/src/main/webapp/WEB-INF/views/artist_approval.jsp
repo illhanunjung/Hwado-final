@@ -34,7 +34,6 @@
 
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
@@ -180,9 +179,6 @@
 
 
         <!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
-
-        <!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
-
         <!-- 메뉴 바 -->
         <div class="menu-bar">
             <ul class="menu-items">
@@ -285,12 +281,7 @@
                 </div>
             </div>
             <div class="navigation-buttons">
-                <!-- 이전 페이지로 이동하는 버튼 -->
-              <!--   <button class="nav-button" onclick="loadPage('previousPageUrl')"><i
-                        class="bi bi-caret-left"></i></button>
-                다음 페이지로 이동하는 버튼
-                <button class="nav-button" onclick="loadPage('nextPageUrl')"><i class="bi bi-caret-right"></i></button> -->
-                
+                <!-- 이전 페이지로 이동하는 버튼 -->               
       <a href="artist_approval?page=<%= pageN - 1 %>"><button class="nav-button"><i class="bi bi-caret-left"></i></button></a>
     <a href="artist_approval?page=<%= pageN + 1 %>"><button class="nav-button"><i class="bi bi-caret-right"></i></button></a>
             </div>
@@ -320,39 +311,6 @@
                     .catch(error => console.error('Error:', error));
             }
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
