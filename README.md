@@ -68,7 +68,7 @@
 
 ### 4.3. 메이슨리 라이브러리 ( 자유 레이아웃 )
 
-![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/main.jsp)
+[코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/main.jsp)
 - 메이슨리와 관련된 JavaScript 라이브러리와 의존성들이 추가되어 있습니다. 예를 들어, masonry.pkgd.min.js와 imagesloaded.pkgd.min.js 스크립트가 HTML 헤더 부분에 포함되어 있습니다.
 - HTML에서 메이슨리를 적용할 요소들을 정의합니다. 이 경우, div 태그와 클래스 list2를 사용하여 메이슨리 레이아웃이 적용될 영역을 지정하고 있습니다. 각 아이템은 list2-item 클래스를 사용하여 정의됩니다.
 - 메이슨리 레이아웃의 각 아이템에 대한 스타일을 CSS를 통해 정의합니다. 여기서는 .list2-item에 대한 스타일을 지정하여 각 항목의 너비, 여백 등을 설정합니다.
@@ -76,7 +76,7 @@
 
 ### 4.4. Kakao Login API
 
-![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/signin.jsp)
+[코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/signin.jsp)
 - 웹 페이지에는 카카오 SDK를 초기화하기 위한 스크립트(<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>)가 포함되어 있습니다.
 window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 카카오 SDK를 초기화합니다. 여기서 제공된 문자열은 카카오 앱의 JavaScript 키입니다.
 - 회원가입 폼에는 "카카오 본인인증" 버튼(<button type="button" id="verifyButton" class="btn btn-primary" onclick="kakaoLogin()"> 카카오 본인인증 </a></button>)이 있습니다.
@@ -90,7 +90,7 @@ window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 �
 
 ### 4.5. PortOne API
 
-![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
+[코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
 - 페이지에는 Iamport 결제 관련 JavaScript 라이브러리(<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>)가 포함되어 있어 API 기능을 사용할 수 있습니다.
 - var IMP = window.IMP; IMP.init("imp85467522");: 이 코드를 통해 Iamport를 초기화합니다. 여기서 "imp85467522"는 Iamport에서 제공한 고유한 가맹점 식별자입니다.
 - function requestPay() { ... }: 사용자가 '구매' 버튼을 클릭하면 이 함수가 실행됩니다. 이 함수는 사용자의 입력 데이터와 함께 Iamport 결제 요청을 처리합니다.
@@ -101,7 +101,7 @@ window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 �
 
 ### 4.6. 스마트 택배 API
 
-![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/delivery.jsp)
+[코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/delivery.jsp)
 -  먼저, 스마트택배 서비스에서 API 키를 발급받습니다. 이 키는 웹 페이지나 애플리케이션의 코드 내에서 보안상의 이유로 숨겨져야 합니다.
 이를 위해 HTML의 input 요소에 type="hidden" 속성을 사용하여 API 키를 숨겼습니다.
 - 사용자가 다양한 택배 회사 중에서 선택할 수 있는 드롭다운 메뉴를 제공했습니다. 이를 통해 사용자는 자신이 이용하는 택배 서비스를 쉽게 선택할 수 있습니다.
@@ -111,7 +111,7 @@ window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 �
 
 ### 4.7. Kakao Map API
 
-![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
+[코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/purchase.jsp)
 - 주소 검색 필드 제공: 사용자는 '주소', '상세주소', '참고항목'을 입력할 수 있는 입력 필드를 사용합니다. 이 중 '주소' 필드는 카카오주소 API와 직접 연동됩니다.
 - 사용자는 '우편번호 찾기' 버튼을 클릭하여 주소 검색을 시작할 수 있습니다. 이 버튼은 카카오주소 API의 기능을 호출합니다.
 - 페이지에는 카카오주소 API를 사용하기 위한 JavaScript 스크립트(<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>)가 포함되어 있습니다.
@@ -120,7 +120,7 @@ window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 �
 
 ### 4.8. 좋아요 기능
 
-![](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/artist.jsp)
+[코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/WEB-INF/views/artist.jsp)
 - 각 작가의 프로필이나 작품 옆에는 '좋아요' 버튼(<button class="heart-button">)이 있습니다. 이 버튼에는 하트 아이콘이 (glyphicon-heart 또는 glyphicon-heart-empty) 포함되어 있으며, 사용자가 좋아하는 작가나 작품을 표시하는 데 사용됩니다.
 - 좋아요 버튼의 클래스(filled 또는 빈 상태)는 사용자가 해당 작가나 작품을 이미 '좋아요' 했는지 여부를 나타냅니다. 사용자가 이미 '좋아요'를 했다면 glyphicon-heart와 filled 클래스가 사용되고, 그렇지 않으면 glyphicon-heart-empty 아이콘이 사용됩니다.
 - 사용자가 좋아요 버튼을 클릭하면 likeTF 함수가 호출됩니다. 이 함수는 AJAX를 사용하여 서버에 좋아요 상태 변경을 요청합니다.
