@@ -7,7 +7,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
     <!-- Basic Page Needs
     ================================================== -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -48,13 +50,12 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <style>
-        @font-face {
+<style>
+@font-face {
     font-family: 'Giants-Bold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
-
 }
 
 @font-face{
@@ -75,9 +76,44 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
     font-style: normal;
 }
 
+.list2 {
+  	max-width: 100%; /* 4개 열의 너비 합계 */
+  	margin: 0 auto; /* 중앙 정렬 */
+} 
+
+.list2:after {
+content: '' ;
+display: block !improtant;
+clear: both !improtant;
+
+}
+
+.list2-sizer,
+.list2-item {
+  	width: 25%; /* 각 아이템의 너비 */
+  	
+}
+
+.list2-item	{
+	padding: 10px !important;
+	float: left;
+}
+
+.list2-item img {
+  	width: 100%; /* 이미지를 부모 요소의 너비에 맞춤 */
+  	display: block;
+	float: left !important!;
+	padding-bottom : 5px !important;
+	
+	}
+	
+	
+	span{
+	   font-family: 'Pretendard-Regular';
+	}
     </style>
 </head>
-<body oncontextmenu="return false" oncopy="return false" ondragstart="return false" onselectstart="return false">
+<body>
 
 <%
  Users userLogin = (Users)session.getAttribute("userLogin");
@@ -193,14 +229,15 @@ function closeSearchPopup() {
 			<%
 			List<ArtworkImage> monthArtworks = (List<ArtworkImage>) request.getAttribute("monthArtworks");
 			%>
-
+		
 			<div class="list2">
+			<div class="list2-sizer"></div>
 				<%
 		        if (monthArtworks != null) {
 				for (int i = 0; i < monthArtworks.size(); i++) {
 				%>
 				
-				<div class="list2-item<%=i + 1%>">
+				<div class="list2-item">
 				<%if(userLogin != null){ %>
 					<a onclick="goPdAc(<%=monthArtworks.get(i).getAw_seq() %>)"><img class="list2-item-img"
 						src="<%=savePath + "/" + monthArtworks.get(i).getImg_filename()%>"
@@ -217,7 +254,6 @@ function closeSearchPopup() {
 
 						</div>
 					</div>
-				</a>
 				<%
 				}
 				}
@@ -315,13 +351,17 @@ function goPdAc(awSeq) {
 			<!-- Bootstrap core JavaScript
     ================================================== -->
 			<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="resources/assets/js/bootstrap.min.js"></script>
-<script src="resources/assets/js/bootstrap-select.min.js"></script>
-<script src="resources/assets/js/jquery.slicknav.min.js"></script>
-<script src="resources/assets/js/jquery.countTo.min.js"></script>
-<script src="resources/assets/js/jquery.shuffle.min.js"></script>
-<script src="resources/assets/js/script.js"></script>
+
+
+<script type="text/javascript">
+$(window).on('load', function(){
+	  $('.list2').masonry({
+	    itemSelector: '.list2-item', // Masonry가 적용될 아이템 선택자
+	    percentPosition: true,        // 수평 순서 유지
+	    columnWidth: '.list2-sizer'         // 각 열의 너비
+	  });
+	});
+</script>
 
 </body>
 </html>
