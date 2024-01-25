@@ -27,7 +27,6 @@
     
     <!-- Favicon
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="resources/assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="15x15" href="resources/assets/img/logo.png">
 
     <!-- Stylesheets
@@ -43,12 +42,6 @@
     <link href="resources/assets/css/mypage1.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/mypage.css">
 
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     <style>
         @font-face {
@@ -169,8 +162,6 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 
     <!-- -------------------------------------------------------------상단---------------------------------------------------------- -->
 
-<!-- 아래 코드를 기존 코드 바로 아래에 추가해주세요 -->
-
 <!-- 메뉴 바 -->
 <div class="menu-bar">
     <ul class="menu-items">
@@ -285,7 +276,6 @@ System.out.println(count);
 
             // 전체 컨테이너를 artworksContainer에 추가
             artworksContainer.appendChild(newArtworkContainer);
-            console.log(containerCount)
     		 }
         });
     
@@ -347,4 +337,4 @@ System.out.println(count);
 <script src="assets/js/script.js"></script>
 
 </body>
-</html>l>
+</html>
