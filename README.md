@@ -63,10 +63,13 @@
 ![image](https://github.com/illhanunjung/Hwado-final/assets/153901490/fd7b2699-2010-40b8-8987-bf0517e65e41)
 <br>
 [코드 확인](https://github.com/illhanunjung/Hwado-final/blob/master/hwado2/src/main/webapp/resources/py/RecommendationAlgorithm.py)
-- VGG16 모델을 활용합니다.
-- VGG16 모델의 최상위 계층을 제외하고 사용하여 이미지의 특징 추출기로 사용합니다.
-- VGG16 모델을 활용하여 추출한 이미지의 특징 벡터를 코사인 유사도를 사용하여 유사한 이미지 5개를 추천합니다.
-- 유클리드 유사도, 맨해튼 유사도 등을 모두 사용한 결과 코사인 유사도의 결과가 가장 유사도가 높아 사용하였습니다.
+- VGG16은 이미지 분류에 널리 사용되는 심층 학습 모델입니다. 여기서는 이미지의 특징을 추출하기 위해 VGG16의 weights='imagenet'와 include_top=False 옵션을 사용하여 모델을 로드합니다.
+- extract_features 함수는 주어진 이미지 경로에서 이미지를 로드하고, VGG16 모델을 사용하여 이미지의 특징 벡터를 추출합니다. 이 벡터는 이미지의 시각적 콘텐츠를 수치화한 것입니다.
+- extract_all_features 함수는 지정된 디렉토리 내의 모든 이미지에 대해 extract_features 함수를 호출하고, 각 이미지의 특징 벡터와 파일 이름을 저장합니다.
+- find_similar_images 함수는 쿼리 이미지의 특징 벡터와 다른 모든 이미지의 특징 벡터 사이의 코사인 유사도를 계산하고, 가장 유사한 이미지들의 인덱스를 반환합니다.
+- Flask를 사용하여 웹 서버를 구성하고, /get_similar_images 엔드포인트를 통해 이미지 추천 기능을 제공합니다. 클라이언트가 이 엔드포인트로 POST 요청을 보내면, 요청된 이미지와 유사한 이미지를 찾아 반환합니다.
+- 서버 측에서 예외가 발생하면, 이를 클라이언트에 전달하여 에러 메시지를 표시할 수 있도록 합니다.
+- 마지막으로, 스크립트는 지정된 IP 주소와 포트에서 Flask 애플리케이션을 실행합니다.
 <br>
 
 ### 4.3. 메이슨리 라이브러리 ( 자유 레이아웃 )
