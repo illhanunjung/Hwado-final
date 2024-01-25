@@ -42,14 +42,13 @@
 
 ## 4. 핵심 기능
 - 추천 알고리즘 ( VGG16 )
+- 메이슨리 라이브러리 ( 자유 레이아웃 )
+- Kakao Login API
 - PortOne API
 - 스마트택배 API
-- Kakao Login API
 - Kakao Map API
 - 좋아요 기능
-- 메이슨리 라이브러리 ( 자유 레이아웃 )
 - 경매 기능
-
 
 
 <details>
@@ -129,6 +128,11 @@ window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); 코드를 사용하여 �
 - likeTF 함수는 좋아요 버튼의 데이터 속성에서 사용자 이메일(data-user_email), 작가 페이지 시퀀스(data-ap_seq), 작가 이메일(data-artist_email)을 가져옵니다.
 이 정보는 서버에 보내지며, 서버는 이를 바탕으로 사용자의 좋아요 목록을 업데이트합니다.
 - AJAX 요청이 성공적으로 처리되면 페이지가 새로고침되어 좋아요 상태가 최신 상태로 반영됩니다.
+
+
+
+
+
 </div>
 </details>
 
