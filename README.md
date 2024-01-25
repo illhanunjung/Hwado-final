@@ -40,8 +40,7 @@
 <div markdown="1">
 
 ### 4.1. 전체 흐름
-![](![사용자 아키텍쳐](https://github.com/illhanunjung/Hwado-final/assets/153901490/f09acef2-19d9-4fdd-bf43-40a86f9983e6)
-)
+(![시스템 아키텍쳐](https://github.com/illhanunjung/Hwado-final/assets/153901490/bae78183-b86a-4ac2-b16a-053209b4b2a2)
 
 ### 4.2. 사용자 요청
 ![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_vue.png)
