@@ -407,8 +407,9 @@ window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초�
 - PPT제작
 - 일정관리
 #### 팀원 이건학
-<summary><b>핵심 기능 설명 펼치기</b></summary>
-<div>
+<details>
+<summary><b>담당 분야 펼치기</b></summary>
+<div markdown="1">
 #### `Front-End`
 - 예술가 승인 페이지
 - 작품관리 페이지
@@ -432,6 +433,7 @@ window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초�
 - 시연페이퍼
 - ppt제작
 </div>
+</details>
 #### 팀원 박지뉴
 -
 -
