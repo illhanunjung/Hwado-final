@@ -405,6 +405,7 @@ window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초�
  - 일정관리
 </div>
 </details> 
+
 #### 팀원 이건학
 
 #### `Front-End`
