@@ -389,8 +389,11 @@ window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초�
 <details>
 <summary><b>팀장 송세림</b></summary>
 <div markdown="1">
-  
+
+#### `Front-End`
  - 포트폴리오 페이지
+
+#### `Back-end`
  - 포트폴리오 기능 
  - 예술가 신청 기능
  - 로그인 기능
@@ -408,7 +411,9 @@ window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초�
 </div>
 </details> 
 
-#### 팀원 이건학
+<details>
+<summary><b>팀원 이건학</b></summary>
+<div markdown="1">
 
 #### `Front-End`
 - 예술가 승인 페이지
@@ -432,17 +437,30 @@ window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초�
 - 화면설계서
 - 시연페이퍼
 - ppt제작
+</div>
+</details>
 
-#### 팀원 박지뉴
+<details>
+<summary><b>팀원 박지뉴</b></summary>
+<div markdown="1">
+  
+#### `Front-End`
 -
+
+#### `Back-end`
 -
--
--
-#### 팀원 지수빈
-프론트엔드
+
+</div>
+</details>
+
+<details>
+<summary><b>팀원 지수빈</b></summary>
+<div markdown="1">
+  
+#### `Front-End`
 - 경매 결과 확인 페이지 제작
 
-백엔드
+#### `Back-end`
 - VGG16 모델과 코사인 유사도를 활용한 추천 알고리즘 구현
 - 일반 상품 등록 페이지 기능 구현
 - 일반 상품 출력 페이지 기능 구현
@@ -464,3 +482,5 @@ window.Kakao.init('사용자 키'); 코드를 사용하여 카카오 SDK를 초�
 - 카테고리 검색 기능 구현
 - 플라스크 서버 연동
 - DB 설계
+</div>
+</details>
