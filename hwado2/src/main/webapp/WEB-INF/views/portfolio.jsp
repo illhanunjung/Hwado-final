@@ -37,7 +37,7 @@
 
     <!-- Custom styles for this template -->
     <link href="resources/assets/css/font_bold.css" rel="stylesheet">
-    <link href="resources/assets/css/bid_reason.css" rel="stylesheet">
+    <link href="resources/assets/css/portfolio.css" rel="stylesheet">
     <link href="resources/assets/css/style.css" rel="stylesheet">
     <link href="resources/assets/css/responsive.css" rel="stylesheet">
     <link href="resources/assets/css/mypage1.css" rel="stylesheet">
@@ -72,7 +72,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 }
 
 .form-title{
- padding-top : 80px;
+ padding-top : 10px;
 }
 .sub-container{
 	margin-bottom: 450px;

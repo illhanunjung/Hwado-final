@@ -189,7 +189,22 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 			data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
 			
 			// 요청 방식
-			type : 'get'
+			type : 'get',
+			
+			// 요청-응답 성공
+			success : function(data){
+				if(data){
+					window.location.href = "product_detail";
+				} else{
+					console.log(data)
+				}
+				
+			},
+			
+			// 요청-응답 실패
+			error : function(){
+				console.log("통신실패")
+			}
 		})
     }
     
@@ -316,6 +331,7 @@ src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf')format('o
 <script type="text/javascript">
 
 function goPdAc(awSeq) {
+	console.log("선택")
 	
 	$.ajax({ //json 형식 -> {key : value, key : value}
 		// 어디로 요청할 것인지(요청 url)
@@ -325,7 +341,17 @@ function goPdAc(awSeq) {
 		data : { 'awSeq' : awSeq },
 		
 		// 요청 방식
-		type : 'get'
+		type : 'get',
+		// 요청-응답 성공
+		success : function(response) {
+		        window.location.href = response+"?aw_seq="+awSeq;
+				
+				
+			},
+		
+		// 요청-응답 실패
+		error : function(){
+		}
 	})
 	
 }

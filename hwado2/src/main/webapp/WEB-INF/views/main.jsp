@@ -261,7 +261,18 @@ function goPdAc(awSeq) {
 		data : { 'awSeq' : awSeq },
 		
 		// 요청 방식
-		type : 'get'
+		type : 'get',
+		
+		// 요청-응답 성공
+		success : function(response) {
+		        window.location.href = response+"?aw_seq="+awSeq;
+				
+				
+			},
+		
+		// 요청-응답 실패
+		error : function(){
+		}
 	})
 	
 }

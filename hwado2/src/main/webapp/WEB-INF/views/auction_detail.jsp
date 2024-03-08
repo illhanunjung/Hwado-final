@@ -305,7 +305,7 @@ List<WISHLIST> wishList = (List<WISHLIST>)session.getAttribute("wishList");
 <script type="text/javascript">
 
 function goPdAc(awSeq) {
-	
+	console.log("선택")
 	$.ajax({ //json 형식 -> {key : value, key : value}
 		// 어디로 요청할 것인지(요청 url)
 		url : 'selectPdAc',

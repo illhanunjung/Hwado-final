@@ -327,7 +327,22 @@
 					data : { 'userEmail' : userEmail, 'awSeq' : awSeq },
 					
 					// 요청 방식
-					type : 'get'
+					type : 'get',
+					
+					// 요청-응답 성공
+					success : function(data){
+						if(data){
+							window.location.href = "wishPage";
+						} else{
+							console.log(data)
+						}
+						
+					},
+					
+					// 요청-응답 실패
+					error : function(){
+						console.log("통신실패")
+					}
 				})
            }
         </script>

@@ -302,7 +302,22 @@ function likeTF(buttonElement) {
 			data : { 'user_email' : user_email, 'ap_seq' : ap_seq },
 			
 			// 요청 방식
-			type : 'get'
+			type : 'get',
+			
+			// 요청-응답 성공
+			success : function(data){
+				if(data){
+					window.location.href = "wishArtistsPage";
+				} else{
+					console.log(data)
+				}
+				
+			},
+			
+			// 요청-응답 실패
+			error : function(){
+				console.log("통신실패")
+			}
 		})
 }
 
