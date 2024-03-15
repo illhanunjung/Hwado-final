@@ -154,7 +154,7 @@
             </script>
             
            <script type="text/javascript">
-            window.Kakao.init('d09b93f458cbb1adee5843b034ac37f4'); // js 앱키
+            window.Kakao.init('123456789'); // js 앱키
 
             var isVerified = false; // 본인인증 완료 여부
 
